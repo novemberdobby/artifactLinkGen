@@ -1,0 +1,12 @@
+
+\.settings/
+
+artifactLinkGen-server/\.classpath
+
+artifactLinkGen-server/\.project
+
+\.project
+
+artifactLinkGen-server/target/
+
+target/
