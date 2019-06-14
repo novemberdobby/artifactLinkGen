@@ -8,28 +8,40 @@
 <script type="text/javascript">
 
   BS.PortableArtifactLinker = {
-    onLinkHover: function(item) {
+    onLinkHover: function(item, isSpan) {
       //TODO: test in all browsers
-      if(!item.hasClassName("FileTreeNode.*") || item.firstChild == undefined || item.firstChild.href == undefined)
+
+      var link = undefined;
+      var childLinks = item.getElementsByTagName('a'); //should get direct children really
+      for(var i = 0; i < childLinks.length; i++)
+      {
+        if(childLinks[i].parentElement == item)
+        {
+          link = childLinks[i];
+          break;
+        }
+      }
+
+      if(link == undefined)
       {
         return;
       }
 
-      var existing = item.firstChild.lastChild;
+      var toAdd = isSpan ? item : link;
+      var existing = toAdd.lastChild;
       if(existing == undefined || !existing.hasClassName("portableArtifactLink"))
       {
-        var artifactLink = item.firstChild.href; //TODO
+        var artifactLink = link.href; //TODO
         
         var btn = document.createElement("a");
         btn.classList.add("portableArtifactLink");
         btn.textContent = "$";
         btn.target = "_blank";
         btn.href = "/";
-        item.firstChild.appendChild(btn);
+        toAdd.appendChild(btn);
       }
 
-      existing = item.firstChild.lastChild;
-
+      existing = toAdd.lastChild;
       var links = document.getElementsByClassName("portableArtifactLink");
       for(var i = 0; i < links.length; i++)
       {
@@ -38,6 +50,7 @@
     },
   };
   
-$(document).on('mouseover', 'li', function(a,b) { BS.PortableArtifactLinker.onLinkHover(b); });
+$(document).on('mouseover', 'li', function(a,b) { BS.PortableArtifactLinker.onLinkHover(b, false); });
+$(document).on('mouseover', 'span', function(a,b) { BS.PortableArtifactLinker.onLinkHover(b, true); });
 
 </script>
