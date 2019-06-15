@@ -1,6 +1,10 @@
 <style type="text/css">
 .portableArtifactLink {
-
+  background: url(${resources}link.png) 0 0 no-repeat;
+     width: 16px;
+     height: 16px;
+     display: inline-block;
+     align-self: center;
 }
 </style>
 
@@ -35,7 +39,7 @@
         
         var btn = document.createElement("a");
         btn.classList.add("portableArtifactLink");
-        btn.textContent = "$";
+        btn.textContent = " ";
         btn.target = "_blank";
         btn.href = "/";
         toAdd.appendChild(btn);

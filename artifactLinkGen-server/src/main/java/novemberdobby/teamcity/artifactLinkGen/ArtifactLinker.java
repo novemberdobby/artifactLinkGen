@@ -12,9 +12,12 @@ import jetbrains.buildServer.web.openapi.PluginDescriptor;
 import jetbrains.buildServer.web.openapi.SimplePageExtension;
 
 public class ArtifactLinker extends SimplePageExtension {
+
+    PluginDescriptor m_descriptor;
   
     public ArtifactLinker(@NotNull PagePlaces pagePlaces, @NotNull PluginDescriptor descriptor) {
       super(pagePlaces, PlaceId.BUILD_ARTIFACTS_FRAGMENT, Constants.LINKER_ID, descriptor.getPluginResourcesPath(Constants.LINKER_JSP));
+      m_descriptor = descriptor;
       register();
     }
   
@@ -25,6 +28,6 @@ public class ArtifactLinker extends SimplePageExtension {
   
     @Override
     public void fillModel(@NotNull Map<String, Object> model, @NotNull HttpServletRequest request) {
-      
+      model.put("resources", m_descriptor.getPluginResourcesPath());
     }
   }
