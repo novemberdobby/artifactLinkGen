@@ -1,3 +1,6 @@
+<%@ taglib prefix="bs" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="forms" tagdir="/WEB-INF/tags/forms" %>
+
 <style type="text/css">
 .portableArtifactLink {
   background: url(${resources}link.png) 0 0 no-repeat;
@@ -7,6 +10,18 @@
      align-self: center;
 }
 </style>
+
+
+<tr class="noBorder">
+  <td colspan="2">
+    <bs:dialog dialogId="generateDialog" title="Generate portable link" closeCommand="BS.PortableArtifactLinker.GenerateDialog.close()">
+      <div id="generateResult" style="overflow-y:auto; height:400px"></div>
+      <div class="popupSaveButtonsBlock">
+        <forms:cancel label="Close" onclick="BS.PortableArtifactLinker.GenerateDialog.close()"/>
+      </div>
+    </bs:dialog>
+  </td>
+</tr>
 
 
 <script type="text/javascript">
@@ -35,13 +50,12 @@
       var existing = toAdd.lastChild;
       if(existing == undefined || !existing.hasClassName("portableArtifactLink"))
       {
-        var artifactLink = link.href; //TODO
-        
         var btn = document.createElement("a");
         btn.classList.add("portableArtifactLink");
         btn.textContent = " ";
-        btn.target = "_blank";
-        btn.href = "/";
+        btn.title = "Generate portable link";
+        btn.href = "#";
+        btn.onclick = function() { BS.PortableArtifactLinker.openGenerateDialog(link.href); }
         toAdd.appendChild(btn);
       }
 
@@ -49,8 +63,24 @@
       var links = document.getElementsByClassName("portableArtifactLink");
       for(var i = 0; i < links.length; i++)
       {
+        //hide the rest
         links[i].style.display = links[i] == existing ? "" : "none";
       }
+    },
+    
+    GenerateDialog: OO.extend(BS.AbstractModalDialog, {
+      getContainer: function () {
+        return $('generateDialog');
+      },
+      
+      init: function(href) {
+        $('generateResult').innerHTML = "";
+      },
+    }),
+
+    openGenerateDialog: function(href) {
+      BS.PortableArtifactLinker.GenerateDialog.init(href);
+      BS.PortableArtifactLinker.GenerateDialog.showCentered();
     },
   };
   
