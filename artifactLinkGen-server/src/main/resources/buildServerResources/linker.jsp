@@ -4,7 +4,7 @@
 
 <%@ page import="novemberdobby.teamcity.artifactLinkGen.Constants" %>
 
-<c:set var="generate_url" value="<%=Constants.GENERATOR_URL%>"/>
+<c:set var="generate_url" value="<%=Constants.CREATE_URL%>"/>
 
 <style type="text/css">
 .portableArtifactLink {
@@ -62,6 +62,10 @@ div#dialog_options table tbody tr td {
     onLinkHover: function(item, isSpan) {
       //TODO: test in all browsers
 
+      if(!$('artifactsTree').contains(item)) {
+        return;
+      }
+
       var link = undefined;
       var childLinks = item.getElementsByTagName('a'); //should get direct children really
       for(var i = 0; i < childLinks.length; i++)
@@ -115,30 +119,25 @@ div#dialog_options table tbody tr td {
         return $('generateDialog');
       },
       
+      //TODO: show artifact path in dialog
       init: function(href) {
         _href = href;
         $('generateResult').innerHTML = "";
         BS.Util.show('dialog_options');
+        BS.Util.show('btnGenerateLink');
         BS.PortableArtifactLinker.onExpiryChange();
       },
 
       result: function(transport) {
         if(transport && transport.responseText)
         {
+          $('generateResult').innerHTML = transport.responseText;
           if(transport.status == 200)
           {
-            BS.PortableArtifactLinker.GenerateDialog.showCentered();
             BS.Util.hide('dialog_options');
-            $('generateResult').textContent = transport.responseText;
+            BS.Util.hide('btnGenerateLink');
           }
-          else if(transport.status == 400) //bad request
-          {
-            $('generateResult').textContent = transport.responseText;
-          }
-          else
-          {
-            alert("Unknown result " + transport.status);
-          }
+          BS.PortableArtifactLinker.GenerateDialog.showCentered();
         }
       },
 
@@ -148,7 +147,8 @@ div#dialog_options table tbody tr td {
         BS.ajaxRequest(window['base_uri'] + '${generate_url}', {
           method: "GET",
           parameters: {
-            'link': _href,
+            'linkTarget': _href,
+            'buildId' : ${portableArtifact_buildId},
             'expiry': $('link_expiry').value,
             'expiry_custom': $('link_expiry_custom').value,
           },
