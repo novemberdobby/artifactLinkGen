@@ -45,7 +45,7 @@ public class LinkServer extends BaseController {
     protected ModelAndView doHandle(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         SUser user = SessionUser.getUser(request);
-        String originator = String.format("%s:%s", request.getRemoteAddr(), request.getRemotePort());
+        String originator = String.format("[%s]:%s", request.getRemoteAddr(), request.getRemotePort());
 
         if(!request.getMethod().equals("GET")) {
             return null;
@@ -87,9 +87,15 @@ public class LinkServer extends BaseController {
                 return Util.sendErrorBody(response, "Build's parent project doesn't exist or user has no access");
             }
 
-            Long expiryMins = Util.parseLong(request.getParameter("expiry"), -2L);
-            if(expiryMins == -1) {
-                expiryMins = Util.parseLong(request.getParameter("expiry_custom"), -1L);
+            Long expiryMins = -1L;
+            String expiryStr = request.getParameter("expiry");
+
+            if("none".equals(expiryStr)) {
+                expiryMins = -1L;
+            } else if("custom".equals(expiryStr)) {
+                expiryMins = Util.parseLong(request.getParameter("expiry_custom"), 15L);
+            } else {
+                expiryMins = Util.parseLong(expiryStr, 15L);
             }
 
             LinkData link = new LinkData(user, expiryMins, buildId, artifact);
@@ -129,7 +135,7 @@ public class LinkServer extends BaseController {
                 data = m_links.get(uid);
 
                 //expired? delete it now
-                if(data != null && data.Expiry.after(Date.from(Instant.now()))) {
+                if(data != null && data.Expiry != null && data.Expiry.before(Date.from(Instant.now()))) {
                     m_links.remove(uid);
                     data = null;
                     save();
