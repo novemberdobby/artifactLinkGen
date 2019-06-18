@@ -160,9 +160,8 @@ public class LinkServer extends BaseController {
             InputStream inStream = null;
             SBuild build = m_server.findBuildInstanceById(link.BuildID);
             if(build != null) {
-                BuildArtifacts arts = build.getArtifacts(BuildArtifactsViewMode.VIEW_ALL);
+                BuildArtifacts arts = build.getArtifacts(BuildArtifactsViewMode.VIEW_ALL_WITH_ARCHIVES_CONTENT);
                 BuildArtifact artifact = arts.getArtifact(link.ArtifactPath);
-                //TODO: fix files inside archives
 
                 if(artifact != null) {
                     inStream = artifact.getInputStream();
@@ -173,8 +172,18 @@ public class LinkServer extends BaseController {
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "Build or artifact no longer exists");
                 return null;
             } else {
+
+                String fileName = link.ArtifactPath;
+
+                //normalise to final path name if it's inside an archive
+                int lastSlash = fileName.lastIndexOf('/');
+                if(lastSlash != -1) {
+                    fileName = fileName.substring(lastSlash + 1);
+                }
+
+                response.setHeader("Content-disposition", String.format("attachment; filename=%s", fileName));
+
                 try {
-                    response.setHeader("Content-disposition", String.format("attachment; filename=%s", link.ArtifactPath));
                     ServletOutputStream outStream = response.getOutputStream();
 
                     byte[] output = new byte[2048];
