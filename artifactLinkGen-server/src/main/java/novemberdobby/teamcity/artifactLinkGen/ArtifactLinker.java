@@ -9,10 +9,13 @@ import org.jetbrains.annotations.NotNull;
 import jetbrains.buildServer.controllers.BuildDataExtensionUtil;
 import jetbrains.buildServer.serverSide.SBuild;
 import jetbrains.buildServer.serverSide.SBuildServer;
+import jetbrains.buildServer.serverSide.auth.Permission;
+import jetbrains.buildServer.users.SUser;
 import jetbrains.buildServer.web.openapi.PagePlaces;
 import jetbrains.buildServer.web.openapi.PlaceId;
 import jetbrains.buildServer.web.openapi.PluginDescriptor;
 import jetbrains.buildServer.web.openapi.SimplePageExtension;
+import jetbrains.buildServer.web.util.SessionUser;
 
 public class ArtifactLinker extends SimplePageExtension {
 
@@ -36,9 +39,13 @@ public class ArtifactLinker extends SimplePageExtension {
       model.put("resources", m_descriptor.getPluginResourcesPath());
 
       SBuild build = BuildDataExtensionUtil.retrieveBuild(request, m_server);
+      model.put("isAdmin", false);
 
       if(build != null) {
         model.put("portableArtifact_buildId", build.getBuildId());
+
+        SUser user = SessionUser.getUser(request);
+        model.put("isAdmin", user != null && user.isPermissionGrantedForProject(build.getProjectId(), Permission.EDIT_PROJECT)); //project admin (developer doesn't count)
       }
     }
   }

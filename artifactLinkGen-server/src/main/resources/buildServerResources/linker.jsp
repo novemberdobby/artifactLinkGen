@@ -5,6 +5,9 @@
 <%@ page import="novemberdobby.teamcity.artifactLinkGen.Constants" %>
 
 <c:set var="generate_url" value="<%=Constants.CREATE_URL%>"/>
+<c:set var="manage_tab_id" value="<%=Constants.MANAGE_TAB_ID%>"/>
+<c:set var="non_admin_min_time" value="<%=Constants.NON_ADMIN_MIN_TIME%>"/>
+<c:set var="non_admin_max_time" value="<%=Constants.NON_ADMIN_MAX_TIME%>"/>
 
 <style type="text/css">
 .portableArtifactLink {
@@ -28,16 +31,25 @@ div#dialog_options table tbody tr td {
         <td>Link expiry:</td>
         <td>
           <select id="link_expiry" onchange="BS.PortableArtifactLinker.onExpiryChange()">
-            <option value="5" >5 minutes</option>
-            <option value="15" selected="true">15 minutes</option>
+            <option value="${non_admin_min_time}" >${non_admin_min_time} minutes</option>
+            <option value="${non_admin_max_time}" selected="true">${non_admin_max_time} minutes</option>
+            <c:if test='${isAdmin}'>
             <option value="custom">Custom</option>
             <option value="-1">None*</option>
+            </c:if>
           </select>
           <div id="link_expiry_none_warning" style="color:#FF0000">
-            *Note: this link should be manually removed when no longer needed!
+            *Note: this link should be <a href='/admin/admin.html?item=${manage_tab_id}'>manually removed</a> when no longer needed!
           </div>
         </td>
       </tr>
+      <c:if test='${not isAdmin}'>
+      <tr>
+        <td colspan="2">
+          <div>Project administrators can create links with longer expiries.</div>
+        </td>
+      </tr>
+      </c:if>
       <tr>
         <td id="link_expiry_custom_label">Expiry time (minutes):</td>
         <td>

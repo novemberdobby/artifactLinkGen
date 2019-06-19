@@ -48,15 +48,21 @@ public class LinkServer extends BaseController {
     private SBuildServer m_server;
     private ServerPaths m_serverPaths;
     private ReentrantLock m_lock = new ReentrantLock();
-    private Map<UUID, LinkData> m_links = new HashMap<UUID, LinkData>(); //TODO: some way to view & manage links
+    private Map<String, LinkData> m_links = new HashMap<String, LinkData>(); //TODO: some way to view & manage links
 
     public LinkServer(SBuildServer server, ServerPaths serverPaths, WebControllerManager web, AuthorizationInterceptor authIntercept) {
         m_server = server;
         m_serverPaths = serverPaths;
+
+        //generating links
         web.registerController(Constants.CREATE_URL, this);
         
+        //serving artifacts via a link
         web.registerController(Constants.GET_URL, this);
         authIntercept.addPathNotRequiringAuth(Constants.GET_URL);
+
+        //managing links
+        web.registerController(Constants.MANAGE_URL, this);
     }
 
     @Override
@@ -116,8 +122,12 @@ public class LinkServer extends BaseController {
                 expiryMins = Util.parseLong(expiryStr, 15L);
             }
 
+            if(!user.isPermissionGrantedForProject(parentProj.getProjectId(), Permission.EDIT_PROJECT)) {
+                expiryMins = Math.max(Math.min(expiryMins, 15), 5);
+            }
+
             LinkData link = new LinkData(user, expiryMins, buildId, artifact);
-            UUID uid = UUID.randomUUID();
+            String uid = UUID.randomUUID().toString();
 
             m_lock.lock();
             try {
@@ -133,19 +143,17 @@ public class LinkServer extends BaseController {
             response.setStatus(HttpServletResponse.SC_OK);
             response.getWriter().write(String.format("<a href='%s'>%s</a>", finalLink, finalLink));
 
-        } else {
+        } else if(request.getRequestURI().equals(Constants.MANAGE_URL)) {
+            
+        } else if(request.getRequestURI().equals(Constants.GET_URL)) {
+
             //TODO test on https
             //if(!request.isSecure()) {
             //    response.sendError(HttpServletResponse.SC_FORBIDDEN, "Insecure request");
             //    return null;
             //}
 
-            String uidStr = request.getParameter("guid");
-            UUID uid = null;
-            try {
-                uid = UUID.fromString(uidStr);
-            } catch(IllegalArgumentException e) { }
-            
+            String uid = request.getParameter("guid");
             LinkData link = null;
 
             m_lock.lock();
@@ -163,12 +171,12 @@ public class LinkServer extends BaseController {
             }
 
             if(link == null) {
-                Loggers.SERVER.error(String.format("[PortableArtifacts] Unknown ID for portable artifact link with ID '%s'. Source: %s", uidStr, originator));
+                Loggers.SERVER.error(String.format("[PortableArtifacts] Unknown ID for portable artifact link with ID '%s'. Source: %s", uid, originator));
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "Unknown ID for portable artifact link");
                 return null;
             }
 
-            Loggers.SERVER.info(String.format("[PortableArtifacts] Serving artifact %s to %s: %s", uidStr, originator, link));
+            Loggers.SERVER.info(String.format("[PortableArtifacts] Serving artifact %s to %s: %s", uid, originator, link));
 
             InputStream inStream = null;
             SBuild build = m_server.findBuildInstanceById(link.BuildID);
