@@ -1,8 +1,15 @@
 package novemberdobby.teamcity.artifactLinkGen;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.io.Writer;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,6 +22,9 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import org.springframework.web.servlet.ModelAndView;
 
 import jetbrains.buildServer.controllers.AuthorizationInterceptor;
@@ -24,6 +34,7 @@ import jetbrains.buildServer.serverSide.SBuild;
 import jetbrains.buildServer.serverSide.SBuildServer;
 import jetbrains.buildServer.serverSide.SBuildType;
 import jetbrains.buildServer.serverSide.SProject;
+import jetbrains.buildServer.serverSide.ServerPaths;
 import jetbrains.buildServer.serverSide.artifacts.BuildArtifact;
 import jetbrains.buildServer.serverSide.artifacts.BuildArtifacts;
 import jetbrains.buildServer.serverSide.artifacts.BuildArtifactsViewMode;
@@ -35,11 +46,13 @@ import jetbrains.buildServer.web.util.SessionUser;
 public class LinkServer extends BaseController {
 
     private SBuildServer m_server;
+    private ServerPaths m_serverPaths;
     private ReentrantLock m_lock = new ReentrantLock();
     private Map<UUID, LinkData> m_links = new HashMap<UUID, LinkData>(); //TODO: some way to view & manage links
 
-    public LinkServer(SBuildServer server, WebControllerManager web, AuthorizationInterceptor authIntercept) {
+    public LinkServer(SBuildServer server, ServerPaths serverPaths, WebControllerManager web, AuthorizationInterceptor authIntercept) {
         m_server = server;
+        m_serverPaths = serverPaths;
         web.registerController(Constants.CREATE_URL, this);
         
         web.registerController(Constants.GET_URL, this);
@@ -235,19 +248,36 @@ public class LinkServer extends BaseController {
     public void save() {
         m_lock.lock();
         try {
-            //TODO
+            Writer writer = new OutputStreamWriter(new FileOutputStream(getSavePath()) , "UTF-8");
+            Gson gson = new GsonBuilder().create();
+
+            gson.toJson(m_links, writer);
+            writer.close();
+        } catch(Exception ex) {
+            Loggers.SERVER.error("Failed to save portable artifact link data: " + ex.toString());
         } finally {
             m_lock.unlock();
         }
     }
 
-    //TODO on server start
+    @SuppressWarnings("unchecked")
     public void load() {
         m_lock.lock();
         try {
-            //TODO
+            Reader reader = new InputStreamReader(new FileInputStream(getSavePath()) , "UTF-8");
+            Gson gson = new GsonBuilder().create();
+
+            m_links = gson.fromJson(reader, Map.class);
+            reader.close();
+        }
+        catch(Exception ex) {
+            Loggers.SERVER.error("Failed to load portable artifact link data: " + ex.toString());
         } finally {
             m_lock.unlock();
         }
+    }
+
+    private String getSavePath() {
+        return Paths.get(m_serverPaths.getConfigDir(), "portable_artifact_links.json").toString();
     }
 }

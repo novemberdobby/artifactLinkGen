@@ -4,5 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
        default-autowire="constructor">
     <bean class="novemberdobby.teamcity.artifactLinkGen.ArtifactLinker" />
+    <bean class="novemberdobby.teamcity.artifactLinkGen.LinkManager" />
     <bean class="novemberdobby.teamcity.artifactLinkGen.LinkServer" />
+    <bean class="novemberdobby.teamcity.artifactLinkGen.ServerListener" />
 </beans>
