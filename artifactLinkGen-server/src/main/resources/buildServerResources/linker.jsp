@@ -27,35 +27,37 @@ div#dialog_options table tbody tr td {
 
   <div id="dialog_options">
     <table>
-      <tr>
-        <td>Link expiry:</td>
-        <td>
-          <select id="link_expiry" onchange="BS.PortableArtifactLinker.onExpiryChange()">
-            <option value="${non_admin_min_time}" >${non_admin_min_time} minutes</option>
-            <option value="${non_admin_max_time}" selected="true">${non_admin_max_time} minutes</option>
-            <c:if test='${isAdmin}'>
-            <option value="custom">Custom</option>
-            <option value="-1">None*</option>
-            </c:if>
-          </select>
-          <div id="link_expiry_none_warning" style="color:#FF0000">
-            *Note: this link should be <a href='/admin/admin.html?item=${manage_tab_id}'>manually removed</a> when no longer needed!
-          </div>
-        </td>
-      </tr>
-      <c:if test='${not isAdmin}'>
-      <tr>
-        <td colspan="2">
-          <div>Project administrators can create links with longer expiries.</div>
-        </td>
-      </tr>
-      </c:if>
-      <tr>
-        <td id="link_expiry_custom_label">Expiry time (minutes):</td>
-        <td>
-          <input type="number" min="1" id="link_expiry_custom" value="" class="textProperty">
-        </td>
-      </tr>
+      <tbody>
+        <tr>
+          <td>Link expiry:</td>
+          <td>
+            <select id="link_expiry" onchange="BS.PortableArtifactLinker.onExpiryChange()">
+              <option value="${non_admin_min_time}" >${non_admin_min_time} minutes</option>
+              <option value="${non_admin_max_time}" selected="true">${non_admin_max_time} minutes</option>
+              <c:if test='${isAdmin}'>
+              <option value="custom">Custom</option>
+              <option value="-1">Never*</option>
+              </c:if>
+            </select>
+            <div id="link_expiry_never_warning" style="color:#FF0000">
+              *Note: this link should be <a target="_blank" href="/admin/admin.html?item=${manage_tab_id}">manually removed</a> when no longer needed!
+            </div>
+          </td>
+        </tr>
+        <c:if test='${not isAdmin}'>
+        <tr>
+          <td colspan="2">
+            <div>Project administrators can create links with longer expiries.</div>
+          </td>
+        </tr>
+        </c:if>
+        <tr>
+          <td id="link_expiry_custom_label">Expiry time (minutes):</td>
+          <td>
+            <input type="number" min="1" id="link_expiry_custom" value="" class="textProperty">
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
 
@@ -120,7 +122,7 @@ div#dialog_options table tbody tr td {
     onExpiryChange: function() {
       var expValue = $('link_expiry').value;
       $('link_expiry_custom').style.display = $('link_expiry_custom_label').style.display = (expValue == "custom" ? "" : "none");
-      $('link_expiry_none_warning').style.display = expValue == "-1" ? "" : "none";
+      $('link_expiry_never_warning').style.display = expValue == "-1" ? "" : "none";
     },
     
     GenerateDialog: OO.extend(BS.AbstractModalDialog, {
@@ -157,7 +159,7 @@ div#dialog_options table tbody tr td {
         BS.Util.show('generateProgress');
 
         BS.ajaxRequest(window['base_uri'] + '${generate_url}', {
-          method: "GET",
+          method: "POST",
           parameters: {
             'linkTarget': _href,
             'buildId' : ${portableArtifact_buildId},

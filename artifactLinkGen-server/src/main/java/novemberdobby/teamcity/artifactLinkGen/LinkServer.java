@@ -7,11 +7,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
+import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Paths;
-import java.time.Instant;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -24,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import org.springframework.web.servlet.ModelAndView;
 
@@ -71,11 +71,7 @@ public class LinkServer extends BaseController {
         SUser user = SessionUser.getUser(request);
         String originator = String.format("[%s]:%s", request.getRemoteAddr(), request.getRemotePort());
 
-        if(!request.getMethod().equals("GET")) {
-            return null;
-        }
-
-        if(request.getRequestURI().equals(Constants.CREATE_URL)) {
+        if(request.getRequestURI().equals(Constants.CREATE_URL) && request.getMethod().equals("POST")) {
             
             //only logged-in users can get to this point
             String repoLink = request.getParameter("linkTarget");
@@ -143,15 +139,29 @@ public class LinkServer extends BaseController {
             response.setStatus(HttpServletResponse.SC_OK);
             response.getWriter().write(String.format("<a href='%s'>%s</a>", finalLink, finalLink));
 
-        } else if(request.getRequestURI().equals(Constants.MANAGE_URL)) {
-            
-        } else if(request.getRequestURI().equals(Constants.GET_URL)) {
+        } else if(request.getRequestURI().equals(Constants.MANAGE_URL) && request.getMethod().equals("POST")) {
+
+            //TODO: check admin (at least of owning project or on server), log the deletion
+            String uid = request.getParameter("guid");
+
+            m_lock.lock();
+            try {
+                m_links.remove(uid);
+                save();
+            } finally {
+                m_lock.unlock();
+            }
+
+        } else if(request.getRequestURI().equals(Constants.GET_URL) && request.getMethod().equals("GET")) {
 
             //TODO test on https
             //if(!request.isSecure()) {
             //    response.sendError(HttpServletResponse.SC_FORBIDDEN, "Insecure request");
             //    return null;
             //}
+
+            //report the logged-in user if they exist
+            String getOriginator = user != null ? user.getUsername() : originator;
 
             String uid = request.getParameter("guid");
             LinkData link = null;
@@ -160,8 +170,7 @@ public class LinkServer extends BaseController {
             try {
                 link = m_links.get(uid);
 
-                //expired? delete it now
-                if(link != null && link.Expiry != null && link.Expiry.before(Date.from(Instant.now()))) {
+                if(link != null && link.hasExpired()) {
                     m_links.remove(uid);
                     link = null;
                     save();
@@ -171,18 +180,18 @@ public class LinkServer extends BaseController {
             }
 
             if(link == null) {
-                Loggers.SERVER.error(String.format("[PortableArtifacts] Unknown ID for portable artifact link with ID '%s'. Source: %s", uid, originator));
+                Loggers.SERVER.error(String.format("[PortableArtifacts] Unknown ID for portable artifact link with ID '%s'. Source: %s", uid, getOriginator));
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "Unknown ID for portable artifact link");
                 return null;
             }
 
-            Loggers.SERVER.info(String.format("[PortableArtifacts] Serving artifact %s to %s: %s", uid, originator, link));
+            Loggers.SERVER.info(String.format("[PortableArtifacts] Serving artifact %s to %s: %s", uid, getOriginator, link));
 
             InputStream inStream = null;
-            SBuild build = m_server.findBuildInstanceById(link.BuildID);
+            SBuild build = m_server.findBuildInstanceById(link.getBuildID());
             if(build != null) {
                 BuildArtifacts arts = build.getArtifacts(BuildArtifactsViewMode.VIEW_ALL_WITH_ARCHIVES_CONTENT);
-                BuildArtifact artifact = arts.getArtifact(link.ArtifactPath);
+                BuildArtifact artifact = arts.getArtifact(link.getArtifactPath());
 
                 if(artifact != null) {
                     inStream = artifact.getInputStream();
@@ -194,7 +203,7 @@ public class LinkServer extends BaseController {
                 return null;
             } else {
 
-                String fileName = link.ArtifactPath;
+                String fileName = link.getArtifactPath();
 
                 //normalise to final path name if it's inside an archive
                 int lastSlash = fileName.lastIndexOf('/');
@@ -219,37 +228,13 @@ public class LinkServer extends BaseController {
                 }
             }
 
-            //TODO: support single use token - remove & save on download start
+            //TODO: support single use token - remove & save on download start. don't remove on coming from admin page (check perms)
+            /*if("1".equals(request.getParameter("fromAdminPage")) && user != null && ) {
+
+            }*/
         }
 
         return null;
-    }
-
-    private class LinkData {
-        Date Generated;
-        Long GeneratedByUserID;
-        
-        Date Expiry;
-
-        Long BuildID;
-        String ArtifactPath;
-
-        public LinkData(SUser user, Long expiryMins, Long buildId, String artifactPath) {
-            Generated = Date.from(Instant.now());
-            GeneratedByUserID = user.getId();
-
-            if(expiryMins > 0) {
-                Expiry = Date.from(Generated.toInstant().plusSeconds(expiryMins * 60)); //hmm
-            }
-
-            BuildID = buildId;
-            ArtifactPath = artifactPath;
-        }
-
-        @Override
-        public String toString() {
-            return String.format("Generated by user %s at %s, expires after %s. %s: %s", GeneratedByUserID, Generated, Expiry == null ? "<never>" : Expiry, BuildID, ArtifactPath);
-        }
     }
 
     //TODO on manual delete
@@ -268,14 +253,14 @@ public class LinkServer extends BaseController {
         }
     }
 
-    @SuppressWarnings("unchecked")
     public void load() {
         m_lock.lock();
         try {
             Reader reader = new InputStreamReader(new FileInputStream(getSavePath()) , "UTF-8");
             Gson gson = new GsonBuilder().create();
 
-            m_links = gson.fromJson(reader, Map.class);
+            Type type = new TypeToken<Map<String, LinkData>>(){}.getType();
+            m_links = gson.fromJson(reader, type);
             reader.close();
         }
         catch(Exception ex) {
@@ -287,5 +272,18 @@ public class LinkServer extends BaseController {
 
     private String getSavePath() {
         return Paths.get(m_serverPaths.getConfigDir(), "portable_artifact_links.json").toString();
+    }
+
+    public Map<String, LinkData> getLinks() {
+        m_lock.lock();
+        try {
+            if(m_links.entrySet().removeIf(link -> link.getValue().hasExpired())) {
+                save();
+            }
+
+            return new HashMap<String, LinkData>(m_links);
+        } finally {
+            m_lock.unlock();
+        }
     }
 }

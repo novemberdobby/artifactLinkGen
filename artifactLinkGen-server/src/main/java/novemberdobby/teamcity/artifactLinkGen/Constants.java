@@ -16,6 +16,6 @@ public class Constants {
     public static final Pattern LINK_PATTERN = Pattern.compile("/(?<id>\\d+):id/(?<path>.*)");
     
     public static final String MANAGE_TAB_ID = "manage_portable_artifacts";
-	public static final String MANAGE_TAB_NAME = "Portable Artifacts";
+	public static final String MANAGE_TAB_NAME = "Portable Artifact Links";
 	public static final String MANAGE_TAB_JSP = "manage_links.jsp";
 }
