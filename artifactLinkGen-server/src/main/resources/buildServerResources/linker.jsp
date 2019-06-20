@@ -74,10 +74,14 @@ div#dialog_options table tbody tr td {
 
   BS.PortableArtifactLinker = {
     onLinkHover: function(item, isSpan) {
-      //TODO: test in all browsers
-
       if(!$('artifactsTree').contains(item)) {
         return;
+      }
+
+      //hack for hovering over an 'N kb' text element which sometimes won't work otherwise
+      if(item.childNodes.length == 1 && item.childNodes[0].nodeName == "#text")
+      {
+        item = item.parentElement;
       }
 
       var link = undefined;
@@ -105,8 +109,11 @@ div#dialog_options table tbody tr td {
         btn.textContent = " ";
         btn.title = "Generate portable link";
         btn.href = "#";
-        //TODO: can we stop these clicks propagating further? or trees can get toggled
-        btn.onclick = function() { BS.PortableArtifactLinker.openGenerateDialog(link.href); }
+        
+        btn.onclick = function() {
+          event.stopPropagation();
+          BS.PortableArtifactLinker.openGenerateDialog(link.href);
+        }
         toAdd.appendChild(btn);
       }
 
@@ -133,7 +140,6 @@ div#dialog_options table tbody tr td {
         return $('generateDialog');
       },
       
-      //TODO: show artifact path in dialog
       init: function(href) {
         _href = href;
         $('generateResult').innerHTML = "";
