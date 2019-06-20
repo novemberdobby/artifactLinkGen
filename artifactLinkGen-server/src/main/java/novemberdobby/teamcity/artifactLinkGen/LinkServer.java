@@ -2,6 +2,7 @@ package novemberdobby.teamcity.artifactLinkGen;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -68,173 +69,190 @@ public class LinkServer extends BaseController {
     @Override
     protected ModelAndView doHandle(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        SUser user = SessionUser.getUser(request);
         String originator = String.format("[%s]:%s", request.getRemoteAddr(), request.getRemotePort());
 
-        if(request.getRequestURI().equals(Constants.CREATE_URL) && request.getMethod().equals("POST")) {
-            
-            //only logged-in users can get to this point
-            String repoLink = request.getParameter("linkTarget");
-            URL url = null;
-            try {
-                url = new URL(repoLink);
-            } catch (MalformedURLException e) {
-                return Util.sendErrorBody(response, "Malformed url: %s", repoLink);
-            }
-
-            //extract the build ID & artifact path
-            Matcher mtch = Constants.LINK_PATTERN.matcher(url.getPath());
-            if(!mtch.find()) {
-                return Util.sendErrorBody(response, "Malformed path: %s", url.getPath());
-            }
-        
-            String buildIdStr = request.getParameter("buildId");
-            Long buildId = Util.parseLong(buildIdStr, -1L);
-
-            String buildIdStrLink = mtch.group("id");
-            String artifact = mtch.group("path");
-            
-            //check the target build exists
-            SBuild build = m_server.findBuildInstanceById(buildId);
-            SBuildType buildType = build == null ? null : build.getBuildType();
-
-            if(buildType == null || !buildIdStrLink.equals(buildIdStr)) { //second comparison is just a safety check
-                return Util.sendErrorBody(response, "Build ID or type ID was invalid (%s, %s)", buildIdStr, buildIdStrLink);
-            }
-
-            SProject parentProj = buildType.getProject();
-            if(parentProj == null || !user.isPermissionGrantedForProject(parentProj.getProjectId(), Permission.VIEW_PROJECT)) {
-                return Util.sendErrorBody(response, "Build's parent project doesn't exist or user has no access");
-            }
-
-            Long expiryMins = -1L;
-            String expiryStr = request.getParameter("expiry");
-
-            if("none".equals(expiryStr)) {
-                expiryMins = -1L;
-            } else if("custom".equals(expiryStr)) {
-                expiryMins = Util.parseLong(request.getParameter("expiry_custom"), 15L);
-            } else {
-                expiryMins = Util.parseLong(expiryStr, 15L);
-            }
-
-            if(!user.isPermissionGrantedForProject(parentProj.getProjectId(), Permission.EDIT_PROJECT)) {
-                expiryMins = Math.max(Math.min(expiryMins, 15), 5);
-            }
-
-            LinkData link = new LinkData(user, expiryMins, buildId, artifact);
-            String uid = UUID.randomUUID().toString();
-
-            m_lock.lock();
-            try {
-                m_links.put(uid, link);
-                save();
-            } finally {
-                m_lock.unlock();
-            }
-
-            Loggers.SERVER.info(String.format("[PortableArtifacts] User %s generated link %s: %s", user.getUsername(), uid, link));
-            String finalLink = String.format("%s%s?guid=%s", m_server.getRootUrl(), Constants.GET_URL, uid);
-
-            response.setStatus(HttpServletResponse.SC_OK);
-            response.getWriter().write(String.format("<a href='%s'>%s</a>", finalLink, finalLink));
-
-        } else if(request.getRequestURI().equals(Constants.MANAGE_URL) && request.getMethod().equals("POST")) {
-
-            //TODO: check admin (at least of owning project or on server), log the deletion
-            String uid = request.getParameter("guid");
-
-            m_lock.lock();
-            try {
-                m_links.remove(uid);
-                save();
-            } finally {
-                m_lock.unlock();
-            }
-
-        } else if(request.getRequestURI().equals(Constants.GET_URL) && request.getMethod().equals("GET")) {
-
-            //TODO test on https
-            //if(!request.isSecure()) {
-            //    response.sendError(HttpServletResponse.SC_FORBIDDEN, "Insecure request");
-            //    return null;
-            //}
-
-            //report the logged-in user if they exist
-            String getOriginator = user != null ? user.getUsername() : originator;
-
-            String uid = request.getParameter("guid");
-            LinkData link = null;
-
-            m_lock.lock();
-            try {
-                link = m_links.get(uid);
-
-                if(link != null && link.hasExpired()) {
-                    m_links.remove(uid);
-                    link = null;
-                    save();
-                }
-            } finally {
-                m_lock.unlock();
-            }
-
-            if(link == null) {
-                Loggers.SERVER.error(String.format("[PortableArtifacts] Unknown ID for portable artifact link with ID '%s'. Source: %s", uid, getOriginator));
-                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Unknown ID for portable artifact link");
-                return null;
-            }
-
-            Loggers.SERVER.info(String.format("[PortableArtifacts] Serving artifact %s to %s: %s", uid, getOriginator, link));
-
-            InputStream inStream = null;
-            SBuild build = m_server.findBuildInstanceById(link.getBuildID());
-            if(build != null) {
-                BuildArtifacts arts = build.getArtifacts(BuildArtifactsViewMode.VIEW_ALL_WITH_ARCHIVES_CONTENT);
-                BuildArtifact artifact = arts.getArtifact(link.getArtifactPath());
-
-                if(artifact != null) {
-                    inStream = artifact.getInputStream();
-                }
-            }
-
-            if(inStream == null) {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Build or artifact no longer exists");
-                return null;
-            } else {
-
-                String fileName = link.getArtifactPath();
-
-                //normalise to final path name if it's inside an archive
-                int lastSlash = fileName.lastIndexOf('/');
-                if(lastSlash != -1) {
-                    fileName = fileName.substring(lastSlash + 1);
-                }
-
-                response.setHeader("Content-disposition", String.format("attachment; filename=%s", fileName));
-
-                try {
-                    ServletOutputStream outStream = response.getOutputStream();
-
-                    byte[] output = new byte[2048];
-                    int read = 0;
-                    while((read = inStream.read(output, 0, output.length)) > 0)
-                    {
-                        outStream.write(output, 0, read);
-                    }
-                    outStream.close();
-                } finally {
-                    inStream.close();
-                }
-            }
-
-            //TODO: support single use token - remove & save on download start. don't remove on coming from admin page (check perms)
-            /*if("1".equals(request.getParameter("fromAdminPage")) && user != null && ) {
-
-            }*/
+        //report the logged-in user if they exist
+        SUser user = SessionUser.getUser(request);
+        if(user != null) {
+            originator = user.getUsername();
         }
 
-        return null;
+        if(request.getRequestURI().equals(Constants.CREATE_URL) && request.getMethod().equals("POST")) {
+            handleLinkCreate(user, originator, request, response);
+
+        } else if(request.getRequestURI().equals(Constants.GET_URL) && request.getMethod().equals("GET")) {
+            handleArtifactServe(user, originator, request, response);
+
+        } else if(request.getRequestURI().equals(Constants.MANAGE_URL) && request.getMethod().equals("POST")) {
+            handleLinkDelete(user, originator, request, response);
+        } 
+
+        return new ModelAndView();
+    }
+
+    private void handleLinkCreate(SUser user, String originator, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        
+        //only logged-in users can get to this point
+        String repoLink = request.getParameter("linkTarget");
+        URL url = null;
+        try {
+            url = new URL(repoLink);
+        } catch (MalformedURLException e) {
+            Util.sendErrorBody(response, "Malformed url: %s", repoLink);
+            return;
+        }
+
+        //extract the build ID & artifact path
+        Matcher mtch = Constants.LINK_PATTERN.matcher(url.getPath());
+        if(!mtch.find()) {
+            Util.sendErrorBody(response, "Malformed path: %s", url.getPath());
+            return;
+        }
+    
+        String buildIdStr = request.getParameter("buildId");
+        Long buildId = Util.parseLong(buildIdStr, -1L);
+
+        String buildIdStrLink = mtch.group("id");
+        String artifact = mtch.group("path");
+        
+        //check the target build exists
+        SBuild build = m_server.findBuildInstanceById(buildId);
+        SBuildType buildType = build == null ? null : build.getBuildType();
+
+        if(buildType == null || !buildIdStrLink.equals(buildIdStr)) { //second comparison is just a safety check
+            Util.sendErrorBody(response, "Build ID or type ID was invalid (%s, %s)", buildIdStr, buildIdStrLink);
+            return;
+        }
+
+        SProject parentProj = buildType.getProject();
+        if(parentProj == null || !user.isPermissionGrantedForProject(parentProj.getProjectId(), Permission.VIEW_PROJECT)) {
+            Util.sendErrorBody(response, "Build's parent project doesn't exist or user has no access");
+            return;
+        }
+
+        Long expiryMins = -1L;
+        String expiryStr = request.getParameter("expiry");
+
+        if("none".equals(expiryStr)) {
+            expiryMins = -1L;
+        } else if("custom".equals(expiryStr)) {
+            expiryMins = Util.parseLong(request.getParameter("expiry_custom"), 15L);
+        } else {
+            expiryMins = Util.parseLong(expiryStr, 15L);
+        }
+
+        //only projects admins can make long-lasting links
+        if(!user.isPermissionGrantedForProject(parentProj.getProjectId(), Permission.EDIT_PROJECT)) {
+            expiryMins = Math.max(Math.min(expiryMins, 15), 5);
+        }
+
+        LinkData link = new LinkData(user, expiryMins, buildId, artifact);
+        String uid = UUID.randomUUID().toString();
+
+        m_lock.lock();
+        try {
+            m_links.put(uid, link);
+            save();
+        } finally {
+            m_lock.unlock();
+        }
+
+        Loggers.SERVER.info(String.format("[PortableArtifacts] User %s generated link %s: %s", user.getUsername(), uid, link));
+        String finalLink = String.format("%s%s?guid=%s", m_server.getRootUrl(), Constants.GET_URL, uid);
+
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.getWriter().write(String.format("<a href='%s'>%s</a>", finalLink, finalLink));
+    }
+
+    private void handleArtifactServe(SUser user, String originator, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //TODO test on https
+        //if(!request.isSecure()) {
+        //    response.sendError(HttpServletResponse.SC_FORBIDDEN, "Insecure request");
+        //    return null;
+        //}
+
+        String uid = request.getParameter("guid");
+        LinkData link = null;
+
+        m_lock.lock();
+        try {
+            link = m_links.get(uid);
+
+            if(link != null && link.hasExpired()) {
+                m_links.remove(uid);
+                link = null;
+                save();
+            }
+        } finally {
+            m_lock.unlock();
+        }
+
+        if(link == null) {
+            Loggers.SERVER.error(String.format("[PortableArtifacts] Unknown ID for portable artifact link with ID '%s'. Source: %s", uid, originator));
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Unknown ID for portable artifact link");
+            return;
+        }
+
+        Loggers.SERVER.info(String.format("[PortableArtifacts] Serving artifact %s to %s: %s", uid, originator, link));
+
+        InputStream inStream = null;
+        SBuild build = m_server.findBuildInstanceById(link.getBuildID());
+        if(build != null) {
+            BuildArtifacts arts = build.getArtifacts(BuildArtifactsViewMode.VIEW_ALL_WITH_ARCHIVES_CONTENT);
+            BuildArtifact artifact = arts.getArtifact(link.getArtifactPath());
+
+            if(artifact != null) {
+                inStream = artifact.getInputStream();
+            }
+        }
+
+        if(inStream == null) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Build or artifact no longer exists");
+            return;
+        } else {
+
+            String fileName = link.getArtifactPath();
+
+            //normalise to final path name if it's inside an archive
+            int lastSlash = fileName.lastIndexOf('/');
+            if(lastSlash != -1) {
+                fileName = fileName.substring(lastSlash + 1);
+            }
+
+            response.setHeader("Content-disposition", String.format("attachment; filename=%s", fileName));
+
+            try {
+                ServletOutputStream outStream = response.getOutputStream();
+
+                byte[] output = new byte[2048];
+                int read = 0;
+                while((read = inStream.read(output, 0, output.length)) > 0)
+                {
+                    outStream.write(output, 0, read);
+                }
+                outStream.close();
+            } finally {
+                inStream.close();
+            }
+        }
+
+        //TODO: support single use token - remove & save on download start. don't remove on coming from admin page (check perms)
+        /*if("1".equals(request.getParameter("fromAdminPage")) && user != null && ) {
+
+        }*/
+    }
+    
+    private void handleLinkDelete(SUser user, String originator, HttpServletRequest request, HttpServletResponse response) {
+        //TODO: check admin (at least of owning project or on server), log the deletion
+        String uid = request.getParameter("guid");
+
+        m_lock.lock();
+        try {
+            m_links.remove(uid);
+            save();
+        } finally {
+            m_lock.unlock();
+        }
     }
 
     public void save() {
