@@ -87,7 +87,7 @@ public class LinkServer extends BaseController {
             handleLinkDelete(user, originator, request, response);
         } 
 
-        return new ModelAndView();
+        return null;
     }
 
     private void handleLinkCreate(SUser user, String originator, HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -161,7 +161,7 @@ public class LinkServer extends BaseController {
         String finalLink = String.format("%s%s?guid=%s", m_server.getRootUrl(), Constants.GET_URL, uid);
 
         response.setStatus(HttpServletResponse.SC_OK);
-        response.getWriter().write(String.format("<a href='%s'>%s</a>", finalLink, finalLink));
+        response.getWriter().write(String.format("Link generated:<br><a href='%s'>%s</a>", finalLink, finalLink));
     }
 
     private void handleArtifactServe(SUser user, String originator, HttpServletRequest request, HttpServletResponse response) throws IOException {
