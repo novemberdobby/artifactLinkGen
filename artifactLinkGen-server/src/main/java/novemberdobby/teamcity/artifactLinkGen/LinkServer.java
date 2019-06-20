@@ -49,7 +49,7 @@ public class LinkServer extends BaseController {
     private SBuildServer m_server;
     private ServerPaths m_serverPaths;
     private ReentrantLock m_lock = new ReentrantLock();
-    private Map<String, LinkData> m_links = new HashMap<String, LinkData>(); //TODO: some way to view & manage links
+    private Map<String, LinkData> m_links = new HashMap<String, LinkData>();
 
     public LinkServer(SBuildServer server, ServerPaths serverPaths, WebControllerManager web, AuthorizationInterceptor authIntercept) {
         m_server = server;
@@ -242,12 +242,26 @@ public class LinkServer extends BaseController {
         }*/
     }
     
-    private void handleLinkDelete(SUser user, String originator, HttpServletRequest request, HttpServletResponse response) {
-        //TODO: check admin (at least of owning project or on server), log the deletion
-        String uid = request.getParameter("guid");
+    private void handleLinkDelete(SUser user, String originator, HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         m_lock.lock();
         try {
+            String uid = request.getParameter("guid");
+            LinkData link = m_links.get(uid);
+            if(link == null) {
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Unknown link guid");
+                return;
+            }
+
+            if(!user.isSystemAdministratorRoleGranted()) {
+                SBuild build = m_server.findBuildInstanceById(link.getBuildID());
+                if(build == null || !user.isPermissionGrantedForProject(build.getProjectId(), Permission.EDIT_PROJECT)) {
+                    response.sendError(HttpServletResponse.SC_FORBIDDEN, "Insufficient permissions");
+                    return;
+                }
+            }
+
+            Loggers.SERVER.info(String.format("Link %s deleted by %s", uid, originator));
             m_links.remove(uid);
             save();
         } finally {
