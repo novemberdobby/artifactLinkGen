@@ -237,7 +237,6 @@ public class LinkServer extends BaseController {
         return null;
     }
 
-    //TODO on manual delete
     public void save() {
         m_lock.lock();
         try {
