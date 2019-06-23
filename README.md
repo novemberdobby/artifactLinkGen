@@ -4,7 +4,6 @@
 Any artifact can be linked, including those within archives. Users don't need to be logged in to download them!
 
 Project/server adminis can manage links through the server administration page:
-![link_manager](/images/link_manager.png)
 
 ![link_manager_page](/images/link_manager_page.png)
 
