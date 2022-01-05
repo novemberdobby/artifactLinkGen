@@ -1,35 +1,25 @@
-﻿using System.Text.Json;
-using Cv2 = OpenCvSharp.Cv2;
-using OCV = OpenCvSharp;
-
-namespace HadesBoonBot
+﻿namespace HadesBoonBot
 {
     class Program
     {
         static int Main(string[] args)
         {
-            TrainingData inputData;
-            using (StreamReader data = new(args[0]))
+            if(args.Length == 0)
             {
-                inputData = JsonSerializer.Deserialize<TrainingData>(data.ReadToEnd())!;
+                Console.WriteLine($"Invalid arguments");
+                return 1;
             }
 
-            foreach (TrainingData.Screen screen in inputData.Screens)
+            switch(args[0])
             {
-                if(!File.Exists(screen.FileName))
-                {
-                    Console.WriteLine($"Skipping {screen.FileName} due to missing file");
-                    continue;
-                }
-                else
-                {
-                    Console.WriteLine($"Reading {screen.FileName}");
-                }
+                case "trainprep":
+                    TrainPrep tp = new();
+                    return tp.Run(args);
 
-                OCV.Mat image = Cv2.ImRead(screen.FileName);
+                default:
+                    Console.WriteLine($"Unknown mode {args[0]}");
+                    return 1;
             }
-
-            return 0;
         }
     }
 }

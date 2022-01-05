@@ -1,4 +1,6 @@
-﻿namespace HadesBoonBot
+﻿using System.Text.Json;
+
+namespace HadesBoonBot
 {
     internal class TrainingData
     {
@@ -20,6 +22,18 @@
                     return $"{Col}_{Row}: {Name}";
                 }
             }
+        }
+
+        internal static TrainingData? Load(string filename)
+        {
+            using StreamReader dataFile = new(filename);
+            return JsonSerializer.Deserialize<TrainingData>(dataFile.ReadToEnd());
+        }
+
+        internal void Save(string filename)
+        {
+            using StreamWriter file = new(filename);
+            file.Write(JsonSerializer.Serialize(this, new JsonSerializerOptions() { WriteIndented = true }));
         }
     }
 }

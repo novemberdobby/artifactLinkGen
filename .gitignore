@@ -2,3 +2,5 @@ obj/
 bin/
 .vs/
 Properties/launchSettings.json
+training_data/
+tests/
