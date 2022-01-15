@@ -1,4 +1,4 @@
-﻿namespace HadesBoonBot
+namespace HadesBoonBot
 {
     class Program
     {
@@ -12,8 +12,8 @@
 
             switch(args[0])
             {
-                case "trainprep":
-                    TrainPrep tp = new();
+                case "trainingdatagen":
+                    TrainingDataGen tp = new();
                     return tp.Run(args);
 
                 default:
