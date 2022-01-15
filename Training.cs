@@ -38,11 +38,13 @@ namespace HadesBoonBot
                     if (!File.Exists(targetFile))
                     {
                         Dimensions dim = new(image.Value.Width);
-                        OCV.Rect traitRect = dim.FindTrait(trait.Col, trait.Row);
+                        if(dim.FindTrait(trait.Col, trait.Row, out OCV.Rect? traitRect))
+                        {
+                            OCV.Mat traitImg = image.Value.SubMat(traitRect!.Value);
+                            traitImg = CVUtil.MakeComparable(traitImg);
+                            traitImg.SaveImage(targetFile);
+                        }
 
-                        OCV.Mat traitImg = image.Value.SubMat(traitRect);
-                        traitImg = CVUtil.MakeComparable(traitImg);
-                        traitImg.SaveImage(targetFile);
                     }
                 }
             }

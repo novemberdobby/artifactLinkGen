@@ -29,24 +29,40 @@ namespace HadesBoonBot
         public static float BoonColumnsMax => 6; //the highest number of columns that can be visible
         public static float BoonRowsMax => 7; //only the first column contains this many rows
 
-        internal Rect FindTrait(int col, int row)
+        /// <summary>
+        /// Find a rectangle containing the position of a trait in the image
+        /// </summary>
+        /// <param name="column">Trait column</param>
+        /// <param name="row">Trait row</param>
+        /// <param name="result">Rectangle containing trait</param>
+        /// <returns>Whether a valid trait location was provided</returns>
+        internal bool FindTrait(int column, int row, out Rect? result)
         {
-            Point2f startPoint = col == 0 //the distance between columns 0&1 is unique
+            result = null;
+
+            Point2f startPoint = column == 0 //the distance between columns 0&1 is unique
                 ? new(FirstBoonIconX, FirstBoonIconY)
                 : new(SecondBoonIconX - BoonColumnSep, FirstBoonIconY);
 
-            if (col % 2 == 1)
+            if (column % 2 == 1)
             {
+                if (row == BoonRowsMax - 1)
+                {
+                    //odd columns have 1 less item
+                    return false;
+                }
+
                 startPoint.Y += BoonColumnYoffset;
             }
 
             Point2f separation = new(BoonColumnSep, BoonRowSep);
 
             //find the middle of the trait
-            Point middle = new(startPoint.X + col * separation.X, startPoint.Y + row * separation.Y);
+            Point middle = new(startPoint.X + column * separation.X, startPoint.Y + row * separation.Y);
 
             float halfSize = BoonWidth / 2.0f;
-            return new((int)(middle.X - halfSize), (int)(middle.Y - halfSize), (int)BoonWidth, (int)BoonWidth);
+            result = new((int)(middle.X - halfSize), (int)(middle.Y - halfSize), (int)BoonWidth, (int)BoonWidth);
+            return true;
         }
     }
 }
