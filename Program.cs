@@ -10,7 +10,9 @@ namespace HadesBoonBot
                 return 1;
             }
 
-            switch(args[0])
+            var codex = new Lazy<Codex>(() => Codex.FromFile("codex.json", false));
+
+            switch (args[0])
             {
                 case "trainingdatagen":
                     TrainingDataGen tp = new();

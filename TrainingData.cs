@@ -4,16 +4,16 @@ namespace HadesBoonBot
 {
     internal class TrainingData
     {
-        public List<Screen> Screens { get; set; }
+        public List<Screen>? Screens { get; set; }
 
         public class Screen
         {
-            public string FileName { get; set; }
-            public List<Trait> Traits { get; set; }
+            public string? FileName { get; set; }
+            public List<Trait>? Traits { get; set; }
 
             public class Trait
             {
-                public string Name { get; set; }
+                public string? Name { get; set; }
                 public int Col { get; set; }
                 public int Row { get; set; }
 

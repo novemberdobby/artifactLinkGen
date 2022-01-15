@@ -11,7 +11,7 @@ namespace HadesBoonBot
             string outputDataDir = args[2];
 
             //save out sample data from manually classified victory screens
-            foreach (TrainingData.Screen screen in inputData.Screens)
+            foreach (TrainingData.Screen screen in inputData.Screens!)
             {
                 if (!File.Exists(screen.FileName))
                 {
@@ -25,9 +25,9 @@ namespace HadesBoonBot
                     return Cv2.ImRead(screen.FileName);
                 });
 
-                foreach (var trait in screen.Traits)
+                foreach (var trait in screen.Traits!)
                 {
-                    string targetDir = Path.Combine(outputDataDir, trait.Name);
+                    string targetDir = Path.Combine(outputDataDir, trait.Name!);
                     if (!Directory.Exists(targetDir))
                     {
                         Directory.CreateDirectory(targetDir);

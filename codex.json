@@ -1,0 +1,2437 @@
+[
+    {
+        "category": "gods",
+        "name": "Aphrodite",
+        "equips": [
+            {
+                "name": "Heartbreak Strike",
+                "desc": "Your Attack deals more damage and inflicts Weak.",
+                "icon": "icons\\Aphrodite\\Heartbreak_Strike.png",
+                "singleton": "attack"
+            },
+            {
+                "name": "Heartbreak Flourish",
+                "desc": "Your Special deals more damage and inflicts Weak.",
+                "icon": "icons\\Aphrodite\\Heartbreak_Flourish.png",
+                "singleton": "special"
+            },
+            {
+                "name": "Crush Shot",
+                "desc": "Your Cast is a wide, short-range blast that inflicts Weak.",
+                "icon": "icons\\Aphrodite\\Crush_Shot.png",
+                "singleton": "cast"
+            },
+            {
+                "name": "Passion Flare",
+                "desc": "Your Cast damages foes around you and inflicts Weak.",
+                "icon": "icons\\Aphrodite\\Passion_Flare.png",
+                "singleton": "cast"
+            },
+            {
+                "name": "Passion Dash",
+                "desc": "Your Dash inflicts damage where you end up, inflicting Weak.",
+                "icon": "icons\\Aphrodite\\Passion_Dash.png",
+                "singleton": "dash"
+            },
+            {
+                "name": "Aphrodite's Aid",
+                "desc": "Your Call fires a seeking projectile that inflicts Charm.\nFull Gauge Bonus: 2500 damage",
+                "icon": "icons\\Aphrodite\\Aphrodite's_Aid.png",
+                "singleton": "call"
+            },
+            {
+                "name": "Dying Lament",
+                "desc": "When foes are slain, they damage nearby foes and inflict Weak.",
+                "icon": "icons\\Aphrodite\\Dying_Lament.png"
+            },
+            {
+                "name": "Wave of Despair",
+                "desc": "After you take damage, damage nearby foes and inflict Weak.",
+                "icon": "icons\\Aphrodite\\Wave_of_Despair.png"
+            },
+            {
+                "name": "Different League",
+                "desc": "Resist some damage from nearby foes' attacks.",
+                "icon": "icons\\Aphrodite\\Different_League.png"
+            },
+            {
+                "name": "Life Affirmation",
+                "desc": "Any  or  chamber rewards are worth more.",
+                "icon": "icons\\Aphrodite\\Life_Affirmation.png"
+            },
+            {
+                "name": "Empty Inside",
+                "desc": "Your Weak effects have a longer duration.",
+                "icon": "icons\\Aphrodite\\Empty_Inside.png"
+            },
+            {
+                "name": "Sweet Surrender",
+                "desc": "Weak-afflicted foes are also more susceptible to damage.",
+                "icon": "icons\\Aphrodite\\Sweet_Surrender.png"
+            },
+            {
+                "name": "Broken Resolve",
+                "desc": "Your Weak effects are more potent.",
+                "icon": "icons\\Aphrodite\\Broken_Resolve.png"
+            },
+            {
+                "name": "Blown Kiss",
+                "desc": "Your Cast shoots farther and is stronger against undamaged foes.",
+                "icon": "icons\\Aphrodite\\Blown_Kiss.png"
+            },
+            {
+                "name": "Unhealthy Fixation",
+                "desc": "Your Weak effects also have a 15% chance to Charm foes.\nCharm Duration: 4 Sec.",
+                "icon": "icons\\Aphrodite\\Unhealthy_Fixation.png"
+            },
+            {
+                "name": "Curse of Longing",
+                "desc": "Your Doom effects continuously strike Weak foes.\nSuccessive Hit Damage: 50%",
+                "icon": "icons\\Aphrodite\\Curse_of_Longing.png"
+            },
+            {
+                "name": "Heart Rend",
+                "desc": "Your Critical effects deal even more damage to Weak foes.\nBonus Critical Damage vs. Weak: +150%",
+                "icon": "icons\\Aphrodite\\Heart_Rend.png"
+            },
+            {
+                "name": "Parting Shot",
+                "desc": "Your Cast gains any bonuses you have for striking foes from behind.\nBonus Backstab Damage: +35%",
+                "icon": "icons\\Aphrodite\\Parting_Shot.png"
+            },
+            {
+                "name": "Cold Embrace",
+                "desc": "Your Cast crystal fires its beam directly at you for 4 seconds.\nBonus Cast Damage: +30%",
+                "icon": "icons\\Aphrodite\\Cold_Embrace.png"
+            },
+            {
+                "name": "Low Tolerance",
+                "desc": "Your Hangover effects stack even more times against Weak foes.\nBonus Hangover Stacks: 3",
+                "icon": "icons\\Aphrodite\\Low_Tolerance.png"
+            },
+            {
+                "name": "Sweet Nectar",
+                "desc": "Any Poms of Power you find are more effective.\nBonus Lv. from Poms: +1",
+                "icon": "icons\\Aphrodite\\Sweet_Nectar.png"
+            },
+            {
+                "name": "Smoldering Air",
+                "desc": "Your Call charges up automatically, but is capped at 25%.\nAuto Gauge Gain: 1% every .2 seconds",
+                "icon": "icons\\Aphrodite\\Smoldering_Air.png"
+            }
+        ]
+    },
+    {
+        "category": "gods",
+        "name": "Ares",
+        "equips": [
+            {
+                "name": "Curse of Agony",
+                "desc": "Your Attack inflicts Doom.",
+                "icon": "icons\\Ares\\Curse_of_Agony.png",
+                "singleton": "attack"
+            },
+            {
+                "name": "Curse of Pain",
+                "desc": "Your Special inflicts Doom.",
+                "icon": "icons\\Ares\\Curse_of_Pain.png",
+                "singleton": "special"
+            },
+            {
+                "name": "Slicing Shot",
+                "desc": "Your Cast sends a Blade Rift hurling ahead.",
+                "icon": "icons\\Ares\\Slicing_Shot.png",
+                "singleton": "cast"
+            },
+            {
+                "name": "Slicing Flare",
+                "desc": "Your Cast sends a large Blade Rift hurling ahead for a brief time.",
+                "icon": "icons\\Ares\\Slicing_Flare.png",
+                "singleton": "cast"
+            },
+            {
+                "name": "Blade Dash",
+                "desc": "Your Dash creates a Blade Rift where you started.",
+                "icon": "icons\\Ares\\Blade_Dash.png",
+                "singleton": "dash"
+            },
+            {
+                "name": "Ares' Aid",
+                "desc": "Your Call turns you into an Impervious Blade Rift for 1.2 Sec.",
+                "icon": "icons\\Ares\\Ares'_Aid.png",
+                "singleton": "call"
+            },
+            {
+                "name": "Curse of Vengeance",
+                "desc": "After you take damage, inflict Doom on surrounding foes.",
+                "icon": "icons\\Ares\\Curse_of_Vengeance.png"
+            },
+            {
+                "name": "Urge to Kill",
+                "desc": "Your Attack, Special, and Cast deal more damage.",
+                "icon": "icons\\Ares\\Urge_to_Kill.png"
+            },
+            {
+                "name": "Battle Rage",
+                "desc": "After slaying a foe, your next Attack or Special deals more damage.",
+                "icon": "icons\\Ares\\Battle_Rage.png"
+            },
+            {
+                "name": "Blood Frenzy",
+                "desc": "After using Death Defiance, deal more damage that encounter.",
+                "icon": "icons\\Ares\\Blood_Frenzy.png"
+            },
+            {
+                "name": "Black Metal",
+                "desc": "Your Blade Rift powers deal damage in a wider area.",
+                "icon": "icons\\Ares\\Black_Metal.png"
+            },
+            {
+                "name": "Engulfing Vortex",
+                "desc": "Your Blade Rift effects last longer and pull foes in.",
+                "icon": "icons\\Ares\\Engulfing_Vortex.png"
+            },
+            {
+                "name": "Dire Misfortune",
+                "desc": "Your Doom effects deal more damage when applied multiple times.",
+                "icon": "icons\\Ares\\Dire_Misfortune.png"
+            },
+            {
+                "name": "Impending Doom",
+                "desc": "Your Doom effects deal more damage, after +0.5 Sec.",
+                "icon": "icons\\Ares\\Impending_Doom.png"
+            },
+            {
+                "name": "Vicious Cycle",
+                "desc": "Your Blade Rift effects deal more damage for each consecutive hit.\nDamage Increase per Hit: +2",
+                "icon": "icons\\Ares\\Vicious_Cycle.png"
+            },
+            {
+                "name": "Curse of Longing",
+                "desc": "Your Doom effects continuously strike Weak foes.\nSuccessive Hit Damage: 50%",
+                "icon": "icons\\Ares\\Curse_of_Longing.png"
+            },
+            {
+                "name": "Hunting Blades",
+                "desc": "Your Cast creates a faster Blade Rift that seeks the nearest foe.\nSeek Duration: 3.3 Sec.",
+                "icon": "icons\\Ares\\Hunting_Blades.png"
+            },
+            {
+                "name": "Merciful End",
+                "desc": "Your attacks that can Deflect immediately activate Doom effects.\nDoom Combo Damage: 40",
+                "icon": "icons\\Ares\\Merciful_End.png"
+            },
+            {
+                "name": "Freezing Vortex",
+                "desc": "Your Cast inflicts Chill, but is smaller and moves slower.\nBlade Rift size -15%",
+                "icon": "icons\\Ares\\Freezing_Vortex.png"
+            },
+            {
+                "name": "Curse of Nausea",
+                "desc": "Your Hangover effects deal damage faster.\nDamage Rate: .5 sec -> .35 sec",
+                "icon": "icons\\Ares\\Curse_of_Nausea.png"
+            },
+            {
+                "name": "Curse of Drowning",
+                "desc": "Your Cast is a pulse that deals damage to foes around you.\nPulses per Cast: 3",
+                "icon": "icons\\Ares\\Curse_of_Drowning.png"
+            },
+            {
+                "name": "Vengeful Mood",
+                "desc": "Your Revenge attacks sometimes occur without taking damage.\nAuto-Revenge Rate: 3 Sec.",
+                "icon": "icons\\Ares\\Vengeful_Mood.png"
+            }
+        ]
+    },
+    {
+        "category": "gods",
+        "name": "Artemis",
+        "equips": [
+            {
+                "name": "Deadly Strike",
+                "desc": "Your Attack is stronger, with +15% chance to deal Critical damage.",
+                "icon": "icons\\Artemis\\Deadly_Strike.png",
+                "singleton": "attack"
+            },
+            {
+                "name": "Deadly Flourish",
+                "desc": "Your Special is stronger, with +20% chance to deal Critical Damage.",
+                "icon": "icons\\Artemis\\Deadly_Flourish.png",
+                "singleton": "special"
+            },
+            {
+                "name": "True Shot",
+                "desc": "Your Cast seeks foes, with a 10% chance to deal Critical damage.",
+                "icon": "icons\\Artemis\\True_Shot.png",
+                "singleton": "cast"
+            },
+            {
+                "name": "Hunter's Flare",
+                "desc": "Your Cast damages foes around you, with a 10% Critical chance.",
+                "icon": "icons\\Artemis\\Hunter's_Flare.png",
+                "singleton": "cast"
+            },
+            {
+                "name": "Hunter Dash",
+                "desc": "Your Dash-Strike deals more damage.",
+                "icon": "icons\\Artemis\\Hunter_Dash.png",
+                "singleton": "dash"
+            },
+            {
+                "name": "Artemis' Aid",
+                "desc": "Your Call fires a seeking arrow with +35% Critical chance.",
+                "icon": "icons\\Artemis\\Artemis'_Aid.png",
+                "singleton": "call"
+            },
+            {
+                "name": "Pressure Points",
+                "desc": "Any damage you deal has a chance to be Critical.",
+                "icon": "icons\\Artemis\\Pressure_Points.png"
+            },
+            {
+                "name": "Exit Wounds",
+                "desc": "Your foes take damage when your  stuck in them is dislodged.",
+                "icon": "icons\\Artemis\\Exit_Wounds.png"
+            },
+            {
+                "name": "Hide Breaker",
+                "desc": "Your Critical effects deal even more damage to Armor.",
+                "icon": "icons\\Artemis\\Hide_Breaker.png"
+            },
+            {
+                "name": "Clean Kill",
+                "desc": "Your Critical effects deal even more damage.",
+                "icon": "icons\\Artemis\\Clean_Kill.png"
+            },
+            {
+                "name": "Hunter Instinct",
+                "desc": "Your God Gauge charges faster when you deal Critical damage.",
+                "icon": "icons\\Artemis\\Hunter_Instinct.png"
+            },
+            {
+                "name": "Hunter's Mark",
+                "desc": "After you deal Critical damage to a foe, a foe near it is Marked.",
+                "icon": "icons\\Artemis\\Hunter's_Mark.png"
+            },
+            {
+                "name": "Support Fire",
+                "desc": "After you Cast, or hit with an Attack or Special, fire a seeking arrow.",
+                "icon": "icons\\Artemis\\Support_Fire.png"
+            },
+            {
+                "name": "Fully Loaded",
+                "desc": "Gain extra  for your Cast.\nMax Ammo: +2  ",
+                "icon": "icons\\Artemis\\Fully_Loaded.png"
+            },
+            {
+                "name": "Heart Rend",
+                "desc": "Your Critical effects deal even more damage to Weak foes.\nBonus Critical Damage vs. Weak: +150%",
+                "icon": "icons\\Artemis\\Heart_Rend.png"
+            },
+            {
+                "name": "Hunting Blades",
+                "desc": "Your Cast creates a faster Blade Rift that seeks the nearest foe.\nSeek Duration: 3.3 Sec.",
+                "icon": "icons\\Artemis\\Hunting_Blades.png"
+            },
+            {
+                "name": "Deadly Reversal",
+                "desc": "After you Deflect, briefly gain +20% chance to deal Critical damage.\nCritical Duration: 2 Sec.",
+                "icon": "icons\\Artemis\\Deadly_Reversal.png"
+            },
+            {
+                "name": "Crystal Clarity",
+                "desc": "Your Cast is stronger and tracks foes more effectively.\nBeam Damage: +10%",
+                "icon": "icons\\Artemis\\Crystal_Clarity.png"
+            },
+            {
+                "name": "Splitting Headache",
+                "desc": "Hangover-afflicted foes are more likely to take Critical damage.\nBonus Critical Chance per Hangover Stack: +1.5%",
+                "icon": "icons\\Artemis\\Splitting_Headache.png"
+            },
+            {
+                "name": "Mirage Shot",
+                "desc": "Your Cast fires a second projectile, though it has reduced damage.\nSecondary Shot Damage: 30%",
+                "icon": "icons\\Artemis\\Mirage_Shot.png"
+            },
+            {
+                "name": "Lightning Rod",
+                "desc": "Your collectible  strike nearby foes with lightning every 1 Sec.\nLightning Damage: 70",
+                "icon": "icons\\Artemis\\Lightning_Rod.png"
+            }
+        ]
+    },
+    {
+        "category": "gods",
+        "name": "Athena",
+        "equips": [
+            {
+                "name": "Divine Strike",
+                "desc": "Your Attack is stronger, and can Deflect.",
+                "icon": "icons\\Athena\\Divine_Strike.png",
+                "singleton": "attack"
+            },
+            {
+                "name": "Divine Flourish",
+                "desc": "Your Special is stronger, and can Deflect.",
+                "icon": "icons\\Athena\\Divine_Flourish.png",
+                "singleton": "special"
+            },
+            {
+                "name": "Phalanx Shot",
+                "desc": "Your Cast damages foes in a small area, and can Deflect.",
+                "icon": "icons\\Athena\\Phalanx_Shot.png",
+                "singleton": "cast"
+            },
+            {
+                "name": "Phalanx Flare",
+                "desc": "Your Cast damages foes around you, and can Deflect.",
+                "icon": "icons\\Athena\\Phalanx_Flare.png",
+                "singleton": "cast"
+            },
+            {
+                "name": "Divine Dash",
+                "desc": "Your Dash deals damage and can Deflect.",
+                "icon": "icons\\Athena\\Divine_Dash.png",
+                "singleton": "dash"
+            },
+            {
+                "name": "Athena's Aid",
+                "desc": "Your Call briefly makes you Invulnerable and Deflect all attacks.",
+                "icon": "icons\\Athena\\Athena's_Aid.png",
+                "singleton": "call"
+            },
+            {
+                "name": "Holy Shield",
+                "desc": "After you take damage, damage nearby foes and briefly Deflect.",
+                "icon": "icons\\Athena\\Holy_Shield.png"
+            },
+            {
+                "name": "Bronze Skin",
+                "desc": "Resist damage from foes' attacks.",
+                "icon": "icons\\Athena\\Bronze_Skin.png"
+            },
+            {
+                "name": "Sure Footing",
+                "desc": "Resist damage from Traps.",
+                "icon": "icons\\Athena\\Sure_Footing.png"
+            },
+            {
+                "name": "Proud Bearing",
+                "desc": "You begin each Encounter with your God Gauge partly full.",
+                "icon": "icons\\Athena\\Proud_Bearing.png"
+            },
+            {
+                "name": "Blinding Flash",
+                "desc": "Your abilities that can Deflect also make foes Exposed for 5 Sec.",
+                "icon": "icons\\Athena\\Blinding_Flash.png"
+            },
+            {
+                "name": "Brilliant Riposte",
+                "desc": "When you Deflect attacks, they deal more damage.",
+                "icon": "icons\\Athena\\Brilliant_Riposte.png"
+            },
+            {
+                "name": "Deathless Stand",
+                "desc": "Death Defiance makes you Impervious longer. Replenish 1 charge now.",
+                "icon": "icons\\Athena\\Deathless_Stand.png"
+            },
+            {
+                "name": "Last Stand",
+                "desc": "Death Defiance restores more  than usual. Replenish 1 charge now.",
+                "icon": "icons\\Athena\\Last_Stand.png"
+            },
+            {
+                "name": "Divine Protection",
+                "desc": "You have a barrier that negates incoming damage.\nBarrier Cooldown: 20 Sec.",
+                "icon": "icons\\Athena\\Divine_Protection.png"
+            },
+            {
+                "name": "Parting Shot",
+                "desc": "Your Cast gains any bonuses you have for striking foes from behind.\nBonus Backstab Damage: +35%",
+                "icon": "icons\\Athena\\Parting_Shot.png"
+            },
+            {
+                "name": "Merciful End",
+                "desc": "Your attacks that can Deflect immediately activate Doom effects.\nDoom Combo Damage: 40",
+                "icon": "icons\\Athena\\Merciful_End.png"
+            },
+            {
+                "name": "Deadly Reversal",
+                "desc": "After you Deflect, briefly gain +20% chance to deal Critical damage.\nCritical Duration: 2 Sec.",
+                "icon": "icons\\Athena\\Deadly_Reversal.png"
+            },
+            {
+                "name": "Stubborn Roots",
+                "desc": "While you have no Death/Stubborn Defiance your  slowly recovers.\nLife Regeneration: 1  (every 0.8 Sec.)",
+                "icon": "icons\\Athena\\Stubborn_Roots.png"
+            },
+            {
+                "name": "Calculated Risk",
+                "desc": "Your foes' ranged-attack projectiles are slower.\nFoe Projectile Speed Reduction: +50%",
+                "icon": "icons\\Athena\\Calculated_Risk.png"
+            },
+            {
+                "name": "Unshakable Mettle",
+                "desc": "You cannot be stunned, and resist some damage from Bosses.\nBoss Damage Reduction: +10%",
+                "icon": "icons\\Athena\\Unshakable_Mettle.png"
+            },
+            {
+                "name": "Lightning Phalanx",
+                "desc": "Your Phalanx Shot Cast bounces between nearby foes.\nMax Bounces: 3",
+                "icon": "icons\\Athena\\Lightning_Phalanx.png"
+            }
+        ]
+    },
+    {
+        "category": "gods",
+        "name": "Chaos",
+        "equips": [
+            {
+                "name": "Affluence",
+                "desc": "Any  you find is worth +X%.",
+                "icon": "icons\\Chaos\\Affluence.png"
+            },
+            {
+                "name": "Ambush",
+                "desc": "You deal +X% damage striking foes from behind.",
+                "icon": "icons\\Chaos\\Ambush.png"
+            },
+            {
+                "name": "Assault",
+                "desc": "You deal +X% damage striking undamaged foes.",
+                "icon": "icons\\Chaos\\Assault.png"
+            },
+            {
+                "name": "Eclipse",
+                "desc": "Any  and  you find are worth +X%.",
+                "icon": "icons\\Chaos\\Eclipse.png"
+            },
+            {
+                "name": "Favor",
+                "desc": "Boons have +X% chance to be Rare or better.",
+                "icon": "icons\\Chaos\\Favor.png"
+            },
+            {
+                "name": "Flourish",
+                "desc": "Your Special deals +X% damage.",
+                "icon": "icons\\Chaos\\Flourish.png"
+            },
+            {
+                "name": "Grasp",
+                "desc": "Gain +X .",
+                "icon": "icons\\Chaos\\Grasp.png"
+            },
+            {
+                "name": "Lunge",
+                "desc": "Your Dash Attack deals +X% damage.",
+                "icon": "icons\\Chaos\\Lunge.png"
+            },
+            {
+                "name": "Shot",
+                "desc": "Your Cast deals +X% damage.",
+                "icon": "icons\\Chaos\\Shot.png"
+            },
+            {
+                "name": "Soul",
+                "desc": "Gain +X .",
+                "icon": "icons\\Chaos\\Soul.png"
+            },
+            {
+                "name": "Strike",
+                "desc": "Your Attack deals +X% damage.",
+                "icon": "icons\\Chaos\\Strike.png"
+            },
+            {
+                "name": "Defiance",
+                "desc": "You have +1 use of Death Defiance (this escape attempt).",
+                "icon": "icons\\Chaos\\Defiance.png"
+            },
+            {
+                "name": "Abyssal",
+                "desc": "For the next 3–4 encounters, you take +300%–500% damage from traps.",
+                "icon": "icons\\Chaos\\Abyssal.png"
+            },
+            {
+                "name": "Addled",
+                "desc": "For the next 3–4 encounters, each time you Cast, get hit for 3–5 .",
+                "icon": "icons\\Chaos\\Addled.png"
+            },
+            {
+                "name": "Atrophic",
+                "desc": "For the next 3-4 encounters, your Life Total is reduced by 25–49 .",
+                "icon": "icons\\Chaos\\Atrophic.png"
+            },
+            {
+                "name": "Caustic",
+                "desc": "For the next 3–4 encounters, slain foes toss an Inferno-Bomb at you.",
+                "icon": "icons\\Chaos\\Caustic.png"
+            },
+            {
+                "name": "Enshrouded",
+                "desc": "For the next 4–5 chambers, chamber reward previews are hidden.",
+                "icon": "icons\\Chaos\\Enshrouded.png"
+            },
+            {
+                "name": "Excruciating",
+                "desc": "For the next 3–4 encounters, you take +20%–50% damage.",
+                "icon": "icons\\Chaos\\Excruciating.png"
+            },
+            {
+                "name": "Flayed",
+                "desc": "For the next 3–4 encounters, each time you Special, get hit for 3–5 .",
+                "icon": "icons\\Chaos\\Flayed.png"
+            },
+            {
+                "name": "Halting",
+                "desc": "For the next 3–4 encounters, your Dash has -20%–50% reduced range.",
+                "icon": "icons\\Chaos\\Halting.png"
+            },
+            {
+                "name": "Maimed",
+                "desc": "For the next 3–4 encounters, each time you Attack, get hit for 3–5 .",
+                "icon": "icons\\Chaos\\Maimed.png"
+            },
+            {
+                "name": "Pauper's",
+                "desc": "For the next 3–4 encounters, you cannot earn .",
+                "icon": "icons\\Chaos\\Pauper's.png"
+            },
+            {
+                "name": "Roiling",
+                "desc": "For the next 3–4 encounters, you face +30%–80% more foes.",
+                "icon": "icons\\Chaos\\Roiling.png"
+            },
+            {
+                "name": "Slippery",
+                "desc": "For the next 3–4 encounters, you cannot collect  for 10–15 seconds.",
+                "icon": "icons\\Chaos\\Slippery.png"
+            },
+            {
+                "name": "Slothful",
+                "desc": "For the next 3–4 encounters, you have -40%–-60% move speed.",
+                "icon": "icons\\Chaos\\Slothful.png"
+            }
+        ]
+    },
+    {
+        "category": "gods",
+        "name": "Demeter",
+        "equips": [
+            {
+                "name": "Frost Strike",
+                "desc": "Your Attack is stronger and inflicts Chill.",
+                "icon": "icons\\Demeter\\Frost_Strike.png",
+                "singleton": "attack"
+            },
+            {
+                "name": "Frost Flourish",
+                "desc": "Your Special is stronger and inflicts Chill.",
+                "icon": "icons\\Demeter\\Frost_Flourish.png",
+                "singleton": "special"
+            },
+            {
+                "name": "Crystal Beam",
+                "desc": "Your Cast drops a crystal that fires a beam straight ahead for 5 sec.",
+                "icon": "icons\\Demeter\\Crystal_Beam.png",
+                "singleton": "cast"
+            },
+            {
+                "name": "Icy Flare",
+                "desc": "Your Cast damages foes around you and inflicts Chill.",
+                "icon": "icons\\Demeter\\Icy_Flare.png",
+                "singleton": "cast"
+            },
+            {
+                "name": "Mistral Dash",
+                "desc": "Your Dash shoots a gust ahead that inflicts Chill.",
+                "icon": "icons\\Demeter\\Mistral_Dash.png",
+                "singleton": "dash"
+            },
+            {
+                "name": "Demeter's Aid",
+                "desc": "Your Call creates a winter vortex for 5 Sec., deals damage every 0.25 Sec inflicting Chill.",
+                "icon": "icons\\Demeter\\Demeter's_Aid.png",
+                "singleton": "call"
+            },
+            {
+                "name": "Frozen Touch",
+                "desc": "After you take damage, damage and completely Chill your foe.",
+                "icon": "icons\\Demeter\\Frozen_Touch.png"
+            },
+            {
+                "name": "Rare Crop",
+                "desc": "Your Boons become Common, then gain Rarity every 3 Encounter(s).",
+                "icon": "icons\\Demeter\\Rare_Crop.png"
+            },
+            {
+                "name": "Ravenous Will",
+                "desc": "While you have no , take 10% less damage and deal more.",
+                "icon": "icons\\Demeter\\Ravenous_Will.png"
+            },
+            {
+                "name": "Nourished Soul",
+                "desc": "Any Health effects are more potent. Restore +30% now.",
+                "icon": "icons\\Demeter\\Nourished_Soul.png"
+            },
+            {
+                "name": "Snow Burst",
+                "desc": "Whenever you Cast, damage nearby foes and inflict Chill.",
+                "icon": "icons\\Demeter\\Snow_Burst.png"
+            },
+            {
+                "name": "Arctic Blast",
+                "desc": "Applying 10 stacks of Chill causes a blast, clearing the effect.",
+                "icon": "icons\\Demeter\\Arctic_Blast.png"
+            },
+            {
+                "name": "Killing Freeze",
+                "desc": "When all foes are Chill afflicted, they become Slow and Decay.",
+                "icon": "icons\\Demeter\\Killing_Freeze.png"
+            },
+            {
+                "name": "Glacial Glare",
+                "desc": "Your Cast fires longer and inflicts Chill.",
+                "icon": "icons\\Demeter\\Glacial_Glare.png"
+            },
+            {
+                "name": "Winter Harvest",
+                "desc": "Chill-affected foes shatter at 10% hp, inflicting Chill nearby.\nShatter Area Damage: 50",
+                "icon": "icons\\Demeter\\Winter_Harvest.png"
+            },
+            {
+                "name": "Cold Embrace",
+                "desc": "Your Cast crystal fires its beam directly at you for 4 seconds.\nBonus Cast Damage: +30%",
+                "icon": "icons\\Demeter\\Cold_Embrace.png"
+            },
+            {
+                "name": "Freezing Vortex",
+                "desc": "Your Cast inflicts Chill, but is smaller and moves slower.\nBlade Rift size -15%",
+                "icon": "icons\\Demeter\\Freezing_Vortex.png"
+            },
+            {
+                "name": "Crystal Clarity",
+                "desc": "Your Cast is stronger and tracks foes more effectively.\nBeam Damage: +10%",
+                "icon": "icons\\Demeter\\Crystal_Clarity.png"
+            },
+            {
+                "name": "Stubborn Roots",
+                "desc": "While you have no Death/Stubborn Defiance your  slowly recovers.\nLife Regeneration: 1  (every 0.8 Sec.)",
+                "icon": "icons\\Demeter\\Stubborn_Roots.png"
+            },
+            {
+                "name": "Ice Wine",
+                "desc": "Your Cast blasts an area with freezing Festive Fog that inflicts Chill.\nBlast Damage: +30%",
+                "icon": "icons\\Demeter\\Ice_Wine.png"
+            },
+            {
+                "name": "Blizzard Shot",
+                "desc": "Your Cast moves slowly, piercing foes and firing shards around it.\nShard Damage: 20",
+                "icon": "icons\\Demeter\\Blizzard_Shot.png"
+            },
+            {
+                "name": "Cold Fusion",
+                "desc": "Jolted status does not expire on your enemies' attacks.\nJolted duration: 10 Sec.",
+                "icon": "icons\\Demeter\\Cold_Fusion.png"
+            }
+        ]
+    },
+    {
+        "category": "gods",
+        "name": "Dionysus",
+        "equips": [
+            {
+                "name": "Drunken Strike",
+                "desc": "Your Attack inflicts Hangover.",
+                "icon": "icons\\Dionysus\\Drunken_Strike.png",
+                "singleton": "attack"
+            },
+            {
+                "name": "Drunken Flourish",
+                "desc": "Your Special inflicts Hangover.",
+                "icon": "icons\\Dionysus\\Drunken_Flourish.png",
+                "singleton": "special"
+            },
+            {
+                "name": "Trippy Shot",
+                "desc": "Your Cast lobs a projectile that bursts into Festive Fog.",
+                "icon": "icons\\Dionysus\\Trippy_Shot.png",
+                "singleton": "cast"
+            },
+            {
+                "name": "Trippy Flare",
+                "desc": "Your Cast damages foes around you, leaving behind Festive Fog.",
+                "icon": "icons\\Dionysus\\Trippy_Flare.png",
+                "singleton": "cast"
+            },
+            {
+                "name": "Drunken Dash",
+                "desc": "Your Dash inflicts foes near you with Hangover.",
+                "icon": "icons\\Dionysus\\Drunken_Dash.png",
+                "singleton": "dash"
+            },
+            {
+                "name": "Dionysus' Aid",
+                "desc": "Your Call inflicts Hangover to foes all around you for 1.5 Sec.",
+                "icon": "icons\\Dionysus\\Dionysus'_Aid.png",
+                "singleton": "call"
+            },
+            {
+                "name": "After Party",
+                "desc": "If your  is low after Encounters, restore to the threshold.",
+                "icon": "icons\\Dionysus\\After_Party.png"
+            },
+            {
+                "name": "Positive Outlook",
+                "desc": "Take less damage while at 40%  or below.",
+                "icon": "icons\\Dionysus\\Positive_Outlook.png"
+            },
+            {
+                "name": "Premium Vintage",
+                "desc": "Gain  when you pick up Nectar. Receive 1 Nectar now.",
+                "icon": "icons\\Dionysus\\Premium_Vintage.png"
+            },
+            {
+                "name": "Strong Drink",
+                "desc": "Using a Fountain restores all  and gives you bonus damage.",
+                "icon": "icons\\Dionysus\\Strong_Drink.png"
+            },
+            {
+                "name": "Bad Influence",
+                "desc": "Deal more damage while 3 foes are Hangover-afflicted.",
+                "icon": "icons\\Dionysus\\Bad_Influence.png"
+            },
+            {
+                "name": "Numbing Sensation",
+                "desc": "Your Hangover effects also make foes move slower.",
+                "icon": "icons\\Dionysus\\Numbing_Sensation.png"
+            },
+            {
+                "name": "Peer Pressure",
+                "desc": "Hangover-afflicted foes contaminate other nearby foes every 4 Sec.",
+                "icon": "icons\\Dionysus\\Peer_Pressure.png"
+            },
+            {
+                "name": "High Tolerance",
+                "desc": "Take less damage while standing in Festive Fog.",
+                "icon": "icons\\Dionysus\\High_Tolerance.png"
+            },
+            {
+                "name": "Black Out",
+                "desc": "Hangover-afflicted foes take bonus damage in Festive Fog.\nFog Combo Damage: +60%",
+                "icon": "icons\\Dionysus\\Black_Out.png"
+            },
+            {
+                "name": "Low Tolerance",
+                "desc": "Your Hangover effects stack even more times against Weak foes.\nBonus Hangover Stacks: 3",
+                "icon": "icons\\Dionysus\\Low_Tolerance.png"
+            },
+            {
+                "name": "Curse of Nausea",
+                "desc": "Your Hangover effects deal damage faster.\nDamage Rate: .5 sec -> .35 sec",
+                "icon": "icons\\Dionysus\\Curse_of_Nausea.png"
+            },
+            {
+                "name": "Splitting Headache",
+                "desc": "Hangover-afflicted foes are more likely to take Critical damage.\nBonus Critical Chance per Hangover Stack: +1.5%",
+                "icon": "icons\\Dionysus\\Splitting_Headache.png"
+            },
+            {
+                "name": "Calculated Risk",
+                "desc": "Your foes' ranged-attack projectiles are slower.\nFoe Projectile Speed Reduction: +50%",
+                "icon": "icons\\Dionysus\\Calculated_Risk.png"
+            },
+            {
+                "name": "Ice Wine",
+                "desc": "Your Cast blasts an area with freezing Festive Fog that inflicts Chill.\nBlast Damage: +30%",
+                "icon": "icons\\Dionysus\\Ice_Wine.png"
+            },
+            {
+                "name": "Exclusive Access",
+                "desc": "Any Boons you find have superior effects.\nMinimum Boon Rarity: Epic",
+                "icon": "icons\\Dionysus\\Exclusive_Access.png"
+            },
+            {
+                "name": "Scintillating Feast",
+                "desc": "Your Festive Fog effects also deal lightning damage periodically.\nLightning Damage: 60",
+                "icon": "icons\\Dionysus\\Scintillating_Feast.png"
+            }
+        ]
+    },
+    {
+        "category": "gods",
+        "name": "Hermes",
+        "equips": [
+            {
+                "name": "Swift Strike",
+                "desc": "Your Attack is +X% faster.",
+                "icon": "icons\\Hermes\\Swift_Strike.png"
+            },
+            {
+                "name": "Swift Flourish",
+                "desc": "Your Special is +X% faster.",
+                "icon": "icons\\Hermes\\Swift_Flourish.png"
+            },
+            {
+                "name": "Flurry Cast",
+                "desc": "Your Cast is +X%  faster and fully automatic.",
+                "icon": "icons\\Hermes\\Flurry_Cast.png"
+            },
+            {
+                "name": "Quick Favor",
+                "desc": "Your Call charges up automatically.",
+                "icon": "icons\\Hermes\\Quick_Favor.png"
+            },
+            {
+                "name": "Hyper Sprint",
+                "desc": "For X seconds after you Dash, become Sturdy and run +100% faster.",
+                "icon": "icons\\Hermes\\Hyper_Sprint.png"
+            },
+            {
+                "name": "Greater Haste",
+                "desc": "You move X% faster.",
+                "icon": "icons\\Hermes\\Greater_Haste.png"
+            },
+            {
+                "name": "Quick Recovery",
+                "desc": "After you take damage, quickly Dash to recover up to X%  lost.",
+                "icon": "icons\\Hermes\\Quick_Recovery.png"
+            },
+            {
+                "name": "Greater Evasion",
+                "desc": "You have +X% chance to Dodge.",
+                "icon": "icons\\Hermes\\Greater_Evasion.png"
+            },
+            {
+                "name": "Greatest Reflex",
+                "desc": "You can Dash +X more time(s) in a row.",
+                "icon": "icons\\Hermes\\Greatest_Reflex.png"
+            },
+            {
+                "name": "Second Wind",
+                "desc": "After using Call, gain Dodge chance and move speed for 6 Sec.",
+                "icon": "icons\\Hermes\\Second_Wind.png"
+            },
+            {
+                "name": "Quick Reload",
+                "desc": "Foes drop  stuck in them faster.",
+                "icon": "icons\\Hermes\\Quick_Reload.png"
+            },
+            {
+                "name": "Side Hustle",
+                "desc": "Each time you enter a Chamber, gain a bit wealth.",
+                "icon": "icons\\Hermes\\Side_Hustle.png"
+            },
+            {
+                "name": "Rush Delivery",
+                "desc": "You deal bonus damage based on any bonus move speed.",
+                "icon": "icons\\Hermes\\Rush_Delivery.png"
+            },
+            {
+                "name": "Auto Reload",
+                "desc": "You regenerate  faster.",
+                "icon": "icons\\Hermes\\Auto_Reload.png"
+            },
+            {
+                "name": "Greater Recall",
+                "desc": "Your  automatically return to you.",
+                "icon": "icons\\Hermes\\Greater_Recall.png"
+            },
+            {
+                "name": "Bad News",
+                "desc": "Your cast deals more damage to foes without  on them.\nFirst shot damage: +50%",
+                "icon": "icons\\Hermes\\Bad_News.png"
+            }
+        ]
+    },
+    {
+        "category": "gods",
+        "name": "Poseidon",
+        "equips": [
+            {
+                "name": "Tempest Strike",
+                "desc": "Your Attack deals more damage and knocks foes away.",
+                "icon": "icons\\Poseidon\\Tempest_Strike.png",
+                "singleton": "attack"
+            },
+            {
+                "name": "Tempest Flourish",
+                "desc": "Your Special deals more damage and knocks foes away.",
+                "icon": "icons\\Poseidon\\Tempest_Flourish.png",
+                "singleton": "special"
+            },
+            {
+                "name": "Flood Shot",
+                "desc": "Your Cast damages foes in an area and knocks them away.",
+                "icon": "icons\\Poseidon\\Flood_Shot.png",
+                "singleton": "cast"
+            },
+            {
+                "name": "Flood Flare",
+                "desc": "Your Cast damages foes around you and knocks them away.",
+                "icon": "icons\\Poseidon\\Flood_Flare.png",
+                "singleton": "cast"
+            },
+            {
+                "name": "Tidal Dash",
+                "desc": "Your Dash damages foes in an area and knocks them away.",
+                "icon": "icons\\Poseidon\\Tidal_Dash.png",
+                "singleton": "dash"
+            },
+            {
+                "name": "Poseidon's Aid",
+                "desc": "Your Call makes you surge into foes while Impervious for 1.2 Sec.",
+                "icon": "icons\\Poseidon\\Poseidon's_Aid.png",
+                "singleton": "call"
+            },
+            {
+                "name": "Typhoon's Fury",
+                "desc": "You deal more damage when slamming foes into barriers.",
+                "icon": "icons\\Poseidon\\Typhoon's_Fury.png"
+            },
+            {
+                "name": "Hydraulic Might",
+                "desc": "Your Attack and Special are stronger the first 10 Sec. in Encounter(s).",
+                "icon": "icons\\Poseidon\\Hydraulic_Might.png"
+            },
+            {
+                "name": "Ocean's Bounty",
+                "desc": "Any ,  or  chamber rewards are worth more.",
+                "icon": "icons\\Poseidon\\Ocean's_Bounty.png"
+            },
+            {
+                "name": "Sunken Treasure",
+                "desc": "Gain an assortment of , ,  and .",
+                "icon": "icons\\Poseidon\\Sunken_Treasure.png"
+            },
+            {
+                "name": "Razor Shoals",
+                "desc": "Using knock-away effects also Rupture foes.",
+                "icon": "icons\\Poseidon\\Razor_Shoals.png"
+            },
+            {
+                "name": "Boiling Point",
+                "desc": "Your God Gauge charges faster when you take damage.",
+                "icon": "icons\\Poseidon\\Boiling_Point.png"
+            },
+            {
+                "name": "Breaking Wave",
+                "desc": "Slamming foes into walls or corners creates a watery blast in the area.",
+                "icon": "icons\\Poseidon\\Breaking_Wave.png"
+            },
+            {
+                "name": "Wave Pounding",
+                "desc": "Your boons with Knock-Away effects deal bonus damage to bosses.",
+                "icon": "icons\\Poseidon\\Wave_Pounding.png"
+            },
+            {
+                "name": "Rip Current",
+                "desc": "Your Call pulls in foes and the effect lasts longer.",
+                "icon": "icons\\Poseidon\\Rip_Current.png"
+            },
+            {
+                "name": "Huge Catch",
+                "desc": "You have a greater chance to find Fishing Point in each Chamber.",
+                "icon": "icons\\Poseidon\\Huge_Catch.png"
+            },
+            {
+                "name": "Second Wave",
+                "desc": "Your knock-away effects shove foes a second time after the first.",
+                "icon": "icons\\Poseidon\\Second_Wave.png"
+            },
+            {
+                "name": "Sweet Nectar",
+                "desc": "Any Poms of Power you find are more effective.\nBonus Lv. from Poms: +1",
+                "icon": "icons\\Poseidon\\Sweet_Nectar.png"
+            },
+            {
+                "name": "Curse of Drowning",
+                "desc": "Your Cast is a pulse that deals damage to foes around you.\nPulses per Cast: 3",
+                "icon": "icons\\Poseidon\\Curse_of_Drowning.png"
+            },
+            {
+                "name": "Mirage Shot",
+                "desc": "Your Cast fires a second projectile, though it has reduced damage.\nSecondary Shot Damage: 30%",
+                "icon": "icons\\Poseidon\\Mirage_Shot.png"
+            },
+            {
+                "name": "Unshakable Mettle",
+                "desc": "You cannot be stunned, and resist some damage from Bosses.\nBoss Damage Reduction: +10%",
+                "icon": "icons\\Poseidon\\Unshakable_Mettle.png"
+            },
+            {
+                "name": "Blizzard Shot",
+                "desc": "Your Cast moves slowly, piercing foes and firing shards around it.\nShard Damage: 20",
+                "icon": "icons\\Poseidon\\Blizzard_Shot.png"
+            },
+            {
+                "name": "Exclusive Access",
+                "desc": "Any Boons you find have superior effects.\nMinimum Boon Rarity: Epic",
+                "icon": "icons\\Poseidon\\Exclusive_Access.png"
+            },
+            {
+                "name": "Sea Storm",
+                "desc": "Your knock-away effects also cause foes to be struck by lightning.\nLightning Damage 40",
+                "icon": "icons\\Poseidon\\Sea_Storm.png"
+            }
+        ]
+    },
+    {
+        "category": "gods",
+        "name": "Zeus",
+        "equips": [
+            {
+                "name": "Lightning Strike",
+                "desc": "Your Attack emits chain-lightning when you damage a foe.",
+                "icon": "icons\\Zeus\\Lightning_Strike.png",
+                "singleton": "attack"
+            },
+            {
+                "name": "Thunder Flourish",
+                "desc": "Your Special causes a lightning bolt to strike nearby foes.",
+                "icon": "icons\\Zeus\\Thunder_Flourish.png",
+                "singleton": "special"
+            },
+            {
+                "name": "Electric Shot",
+                "desc": "Your Cast is a burst of chain-lightning that bounces between foes.",
+                "icon": "icons\\Zeus\\Electric_Shot.png",
+                "singleton": "cast"
+            },
+            {
+                "name": "Thunder Flare",
+                "desc": "Your Cast causes a lightning bolt to strike nearby foes.",
+                "icon": "icons\\Zeus\\Thunder_Flare.png",
+                "singleton": "cast"
+            },
+            {
+                "name": "Thunder Dash",
+                "desc": "Your Dash causes a lightning bolt to strike nearby foes.",
+                "icon": "icons\\Zeus\\Thunder_Dash.png",
+                "singleton": "dash"
+            },
+            {
+                "name": "Zeus' Aid",
+                "desc": "Your Call makes lightning strike nearby foes repeatedly for 1.5 Sec.",
+                "icon": "icons\\Zeus\\Zeus'_Aid.png",
+                "singleton": "call"
+            },
+            {
+                "name": "Heaven's Vengeance",
+                "desc": "After you take damage, your foe is struck by lightning.",
+                "icon": "icons\\Zeus\\Heaven's_Vengeance.png"
+            },
+            {
+                "name": "Lightning Reflexes",
+                "desc": "After you Dash just before getting hit, a bolt strikes a nearby foes.",
+                "icon": "icons\\Zeus\\Lightning_Reflexes.png"
+            },
+            {
+                "name": "Storm Lightning",
+                "desc": "Your chain-lightning effects bounce more times before expiring.",
+                "icon": "icons\\Zeus\\Storm_Lightning.png"
+            },
+            {
+                "name": "High Voltage",
+                "desc": "Your lightning bolt effects deal damage in a larger area.",
+                "icon": "icons\\Zeus\\High_Voltage.png"
+            },
+            {
+                "name": "Double Strike",
+                "desc": "Your lightning bolt effects have a chance to strike twice.",
+                "icon": "icons\\Zeus\\Double_Strike.png"
+            },
+            {
+                "name": "Static Discharge",
+                "desc": "Your lightning effects also make foes Jolted.",
+                "icon": "icons\\Zeus\\Static_Discharge.png"
+            },
+            {
+                "name": "Clouded Judgment",
+                "desc": "Your God Gauge charges faster when you deal or take damage.",
+                "icon": "icons\\Zeus\\Clouded_Judgment.png"
+            },
+            {
+                "name": "Billowing Strength",
+                "desc": "After using Call, you deal more damage for 15 Sec.",
+                "icon": "icons\\Zeus\\Billowing_Strength.png"
+            },
+            {
+                "name": "Splitting Bolt",
+                "desc": "All your lightning effects create an additional burst.\nLightning Damage: 40",
+                "icon": "icons\\Zeus\\Splitting_Bolt.png"
+            },
+            {
+                "name": "Smoldering Air",
+                "desc": "Your Call charges up automatically, but is capped at 25%.\nAuto Gauge Gain: 1% every .2 seconds",
+                "icon": "icons\\Zeus\\Smoldering_Air.png"
+            },
+            {
+                "name": "Vengeful Mood",
+                "desc": "Your Revenge attacks sometimes occur without taking damage.\nAuto-Revenge Rate: 3 Sec.",
+                "icon": "icons\\Zeus\\Vengeful_Mood.png"
+            },
+            {
+                "name": "Lightning Rod",
+                "desc": "Your collectible  strike nearby foes with lightning every 1 Sec.\nLightning Damage: 70",
+                "icon": "icons\\Zeus\\Lightning_Rod.png"
+            },
+            {
+                "name": "Lightning Phalanx",
+                "desc": "Your Phalanx Shot Cast bounces between nearby foes.\nMax Bounces: 3",
+                "icon": "icons\\Zeus\\Lightning_Phalanx.png"
+            },
+            {
+                "name": "Cold Fusion",
+                "desc": "Jolted status does not expire on your enemies' attacks.\nJolted duration: 10 Sec.",
+                "icon": "icons\\Zeus\\Cold_Fusion.png"
+            },
+            {
+                "name": "Scintillating Feast",
+                "desc": "Your Festive Fog effects also deal lightning damage periodically.\nLightning Damage: 60",
+                "icon": "icons\\Zeus\\Scintillating_Feast.png"
+            },
+            {
+                "name": "Sea Storm",
+                "desc": "Your knock-away effects also cause foes to be struck by lightning.\nLightning Damage 40",
+                "icon": "icons\\Zeus\\Sea_Storm.png"
+            }
+        ]
+    },
+    {
+        "category": "arm_aspects",
+        "name": "Stygian_Blade",
+        "equips": [
+            {
+                "name": "Aspect of Zagreus (Stygian Blade)",
+                "desc": "The form in which the blade of the underworld first revealed itself.\nA blade such as this seeks not to remain idle for more than an aeon or two.",
+                "icon": "icons\\Stygian_Blade\\Aspect\\Aspect_of_Zagreus.png"
+            },
+            {
+                "name": "Aspect of Nemesis",
+                "desc": "For 3 Sec. after you Special, your Attack may deal Critical damage.\nOne of Nyx's daughters once brandished the blade against the arrogant.",
+                "icon": "icons\\Stygian_Blade\\Aspect\\Aspect_of_Nemesis.png"
+            },
+            {
+                "name": "Aspect of Poseidon",
+                "desc": "Your Special dislodges  from foes.\nEven before he ruled the seas, the blade's first bearer liked making a splash.",
+                "icon": "icons\\Stygian_Blade\\Aspect\\Aspect_of_Poseidon.png"
+            },
+            {
+                "name": "Aspect of Arthur",
+                "desc": "You have Holy Excalibur*, and +50  to your Life Total.\nPeace and destruction await a kingdom governed by the rule of might.",
+                "icon": "icons\\Stygian_Blade\\Aspect\\Aspect_of_Arthur.png"
+            }
+        ]
+    },
+    {
+        "category": "arm_upgrades",
+        "name": "Stygian_Blade",
+        "equips": [
+            {
+                "name": "Breaching Slash",
+                "desc": "Your Attack deals +300% damage to Armor.",
+                "icon": "icons\\Stygian_Blade\\Upgrade\\Breaching_Slash.png"
+            },
+            {
+                "name": "Cruel Thrust",
+                "desc": "Your Thrust deals +200% damage and has a +40% Critical chance.",
+                "icon": "icons\\Stygian_Blade\\Upgrade\\Cruel_Thrust.png"
+            },
+            {
+                "name": "Cursed Slash",
+                "desc": "Your Attack restores 2 , but you have -60% .",
+                "icon": "icons\\Stygian_Blade\\Upgrade\\Cursed_Slash.png"
+            },
+            {
+                "name": "Dash Nova",
+                "desc": "Your Special makes you lunge ahead, then become Sturdy for 0.8 Sec.",
+                "icon": "icons\\Stygian_Blade\\Upgrade\\Dash_Nova.png"
+            },
+            {
+                "name": "Double Edge",
+                "desc": "Your Dash-Strike hits twice and deals +20% damage.",
+                "icon": "icons\\Stygian_Blade\\Upgrade\\Double_Edge.png"
+            },
+            {
+                "name": "Double Nova",
+                "desc": "Your Special hits twice but no longer knocks foes away.",
+                "icon": "icons\\Stygian_Blade\\Upgrade\\Double_Nova.png"
+            },
+            {
+                "name": "Flurry Slash",
+                "desc": "Hold Attack to strike rapidly, dealing 25 base damage per hit.",
+                "icon": "icons\\Stygian_Blade\\Upgrade\\Flurry_Slash.png"
+            },
+            {
+                "name": "Hoarding Slash",
+                "desc": "Your Attack deals bonus damage equal to 5% of your current .",
+                "icon": "icons\\Stygian_Blade\\Upgrade\\Hoarding_Slash.png"
+            },
+            {
+                "name": "Piercing Wave",
+                "desc": "Your Attack fires a wave that pierces foes, dealing 30 damage.",
+                "icon": "icons\\Stygian_Blade\\Upgrade\\Piercing_Wave.png"
+            },
+            {
+                "name": "Shadow Slash",
+                "desc": "Your Attack deals +200% damage when striking foes from behind.",
+                "icon": "icons\\Stygian_Blade\\Upgrade\\Shadow_Slash.png"
+            },
+            {
+                "name": "Super Nova",
+                "desc": "Your Special hits a wider area and deals +20% damage.",
+                "icon": "icons\\Stygian_Blade\\Upgrade\\Super_Nova.png"
+            },
+            {
+                "name": "World Splitter",
+                "desc": "Your Attack is replaced with a big chop that deals 90 base damage.",
+                "icon": "icons\\Stygian_Blade\\Upgrade\\World_Splitter.png"
+            },
+            {
+                "name": "Greater Consecration",
+                "desc": "Your Holy Excalibur aura is +45% larger; makes foes +10% slower",
+                "icon": "icons\\Stygian_Blade\\Upgrade\\Greater_Consecration.png"
+            }
+        ]
+    },
+    {
+        "category": "arm_aspects",
+        "name": "Eternal_Spear",
+        "equips": [
+            {
+                "name": "Aspect of Zagreus (Eternal Spear)",
+                "desc": "The form in which the eternal spear first revealed itself.\nIts shape reflects its bearer's true self, hiding its own all the while.",
+                "icon": "icons\\Eternal_Spear\\Aspect\\Aspect_of_Zagreus.png"
+            },
+            {
+                "name": "Aspect of Achilles",
+                "desc": "After your Special, you can retrieve your Spear with Raging Rush.\nThe greatest of the Greeks was peerless in battle, up close and from afar.",
+                "icon": "icons\\Eternal_Spear\\Aspect\\Aspect_of_Achilles.png"
+            },
+            {
+                "name": "Aspect of Hades",
+                "desc": "Your Spin Attack becomes Punishing Sweep.\nThe god of the dead discarded the eternal spear for a larger counterpart.",
+                "icon": "icons\\Eternal_Spear\\Aspect\\Aspect_of_Hades.png"
+            },
+            {
+                "name": "Aspect of Guan Yu",
+                "desc": "You have the Frost Fair Blade*, but your life and healing are reduced.\nA mighty general shall battle with unmatched ferocity to unite his people.",
+                "icon": "icons\\Eternal_Spear\\Aspect\\Aspect_of_Guan_Yu.png"
+            }
+        ]
+    },
+    {
+        "category": "arm_upgrades",
+        "name": "Eternal_Spear",
+        "equips": [
+            {
+                "name": "Extending Jab",
+                "desc": "Your Attack has more range and deals +40% damage to distant foes.",
+                "icon": "icons\\Eternal_Spear\\Upgrade\\Extending_Jab.png"
+            },
+            {
+                "name": "Chain Skewer",
+                "desc": "Your Special bounces to up to 7 foes, dealing +30% damage for each.",
+                "icon": "icons\\Eternal_Spear\\Upgrade\\Chain_Skewer.png"
+            },
+            {
+                "name": "Breaching Skewer",
+                "desc": "Your Special deals +400% damage to Armor.",
+                "icon": "icons\\Eternal_Spear\\Upgrade\\Breaching_Skewer.png"
+            },
+            {
+                "name": "Vicious Skewer",
+                "desc": "Your Special deals +50% damage; +50% Critical chance on recovery.",
+                "icon": "icons\\Eternal_Spear\\Upgrade\\Vicious_Skewer.png"
+            },
+            {
+                "name": "Exploding Launcher",
+                "desc": "Your Special is replaced with a shot that deals 50 damage in an area.",
+                "icon": "icons\\Eternal_Spear\\Upgrade\\Exploding_Launcher.png"
+            },
+            {
+                "name": "Massive Spin",
+                "desc": "Your Spin Attack deals +125% damage and hits a larger area.",
+                "icon": "icons\\Eternal_Spear\\Upgrade\\Massive_Spin.png"
+            },
+            {
+                "name": "Quick Spin",
+                "desc": "Your Spin Attack charges and recovers much faster.",
+                "icon": "icons\\Eternal_Spear\\Upgrade\\Quick_Spin.png"
+            },
+            {
+                "name": "Flurry Jab",
+                "desc": "Hold Attack to strike rapidly, but you cannot Spin Attack.",
+                "icon": "icons\\Eternal_Spear\\Upgrade\\Flurry_Jab.png"
+            },
+            {
+                "name": "Charged Skewer",
+                "desc": "Hold Special to charge your skewer for up to +200% base damage.",
+                "icon": "icons\\Eternal_Spear\\Upgrade\\Charged_Skewer.png"
+            },
+            {
+                "name": "Serrated Point",
+                "desc": "Your Dash-Strike hits 3 times, but your dash has -25% range.",
+                "icon": "icons\\Eternal_Spear\\Upgrade\\Serrated_Point.png"
+            },
+            {
+                "name": "Flaring Spin",
+                "desc": "Charging your Spin Attack makes you Sturdy and pulse 40 damage.",
+                "icon": "icons\\Eternal_Spear\\Upgrade\\Flaring_Spin.png"
+            },
+            {
+                "name": "Triple Jab",
+                "desc": "Your Attack strikes 3 times in a spread pattern.",
+                "icon": "icons\\Eternal_Spear\\Upgrade\\Triple_Jab.png"
+            },
+            {
+                "name": "Winged Serpent",
+                "desc": "Your Frost Fair Blade Spin Attack travels for +80% longer.",
+                "icon": "icons\\Eternal_Spear\\Upgrade\\Winged_Serpent.png"
+            }
+        ]
+    },
+    {
+        "category": "arm_aspects",
+        "name": "Shield_of_Chaos",
+        "equips": [
+            {
+                "name": "Aspect of Zagreus (Shield of Chaos)",
+                "desc": "The form in which the shield of chaos first revealed itself.\nSometimes the bone-etched visage shudders as though it means to speak.",
+                "icon": "icons\\Shield_of_Chaos\\Aspect\\Aspect_of_Zagreus.png"
+            },
+            {
+                "name": "Aspect of Chaos",
+                "desc": "After you Bull Rush, your next Special throws multiple shields.\nAll sprang from the primordial depths; only one artifact bore witness.",
+                "icon": "icons\\Shield_of_Chaos\\Aspect\\Aspect_of_Chaos.png"
+            },
+            {
+                "name": "Aspect of Zeus",
+                "desc": "Your Special is replaced with the Blitz Disc*.\nOnce he became king of the Olympians, he truly had nothing left to fear.",
+                "icon": "icons\\Shield_of_Chaos\\Aspect\\Aspect_of_Zeus.png"
+            },
+            {
+                "name": "Aspect of Beowulf",
+                "desc": "You have Naegling's Board** but take +10% damage\nWould that the stalwart warrior-king's sword offered similar protection.",
+                "icon": "icons\\Shield_of_Chaos\\Aspect\\Aspect_of_Beowulf.png"
+            }
+        ]
+    },
+    {
+        "category": "arm_upgrades",
+        "name": "Shield_of_Chaos",
+        "equips": [
+            {
+                "name": "Dread Flight",
+                "desc": "Your Special can strike up to 4 additional foes before returning.",
+                "icon": "icons\\Shield_of_Chaos\\Upgrade\\Dread_Flight.png"
+            },
+            {
+                "name": "Sudden Rush",
+                "desc": "Your Bull Rush charges much faster.",
+                "icon": "icons\\Shield_of_Chaos\\Upgrade\\Sudden_Rush.png"
+            },
+            {
+                "name": "Pulverizing Blow",
+                "desc": "Your Attack hits twice, but does not knock foes away.",
+                "icon": "icons\\Shield_of_Chaos\\Upgrade\\Pulverizing_Blow.png"
+            },
+            {
+                "name": "Dashing Wallop",
+                "desc": "Your Dash Attack deals +50% damage in a larger area.",
+                "icon": "icons\\Shield_of_Chaos\\Upgrade\\Dashing_Wallop.png"
+            },
+            {
+                "name": "Explosive Return",
+                "desc": "Your Special deals 50 damage to nearby foes when you catch it.",
+                "icon": "icons\\Shield_of_Chaos\\Upgrade\\Explosive_Return.png"
+            },
+            {
+                "name": "Minotaur Rush",
+                "desc": "Your Bull Rush gains a Power Rush that does +500% damage.",
+                "icon": "icons\\Shield_of_Chaos\\Upgrade\\Minotaur_Rush.png"
+            },
+            {
+                "name": "Breaching Rush",
+                "desc": "Your Bull Rush deals +400% damage to Armor.",
+                "icon": "icons\\Shield_of_Chaos\\Upgrade\\Breaching_Rush.png"
+            },
+            {
+                "name": "Charged Shot",
+                "desc": "Your Bull Rush instead fires a piercing shot that deals 80 base damage.",
+                "icon": "icons\\Shield_of_Chaos\\Upgrade\\Charged_Shot.png"
+            },
+            {
+                "name": "Charged Flight",
+                "desc": "Hold Special to charge your throw for up to +200% base damage.",
+                "icon": "icons\\Shield_of_Chaos\\Upgrade\\Charged_Flight.png"
+            },
+            {
+                "name": "Empowering Flight",
+                "desc": "After your Special hits, your next 2 Attacks deal +80% damage.",
+                "icon": "icons\\Shield_of_Chaos\\Upgrade\\Empowering_Flight.png"
+            },
+            {
+                "name": "Dashing Flight",
+                "desc": "While you Dash, your Special is faster and deals +200% damage.",
+                "icon": "icons\\Shield_of_Chaos\\Upgrade\\Dashing_Flight.png"
+            },
+            {
+                "name": "Ferocious Guard",
+                "desc": "After blocking a foe, gain +20% damage and move speed for 10 Sec.",
+                "icon": "icons\\Shield_of_Chaos\\Upgrade\\Ferocious_Guard.png"
+            },
+            {
+                "name": "Unyielding Defense",
+                "desc": "After using your Naegling's Board Cast, you are Sturdy for 3 Sec.",
+                "icon": "icons\\Shield_of_Chaos\\Upgrade\\Unyielding_Defense.png"
+            }
+        ]
+    },
+    {
+        "category": "arm_aspects",
+        "name": "Heart-Seeking_Bow",
+        "equips": [
+            {
+                "name": "Aspect of Zagreus (Heart Seeking Bow)",
+                "desc": "The form in which the heart-seeking bow first revealed itself.\nIt senses stalwart hearts, mostly to stop them but occasionally to be used.",
+                "icon": "icons\\Heart-Seeking_Bow\\Aspect\\Aspect_of_Zagreus.png"
+            },
+            {
+                "name": "Aspect of Chiron",
+                "desc": "Your Special automatically seeks the foe last struck by your Attack.\nWhen first it was fashioned, the centaur lord himself affirmed its might.",
+                "icon": "icons\\Heart-Seeking_Bow\\Aspect\\Aspect_of_Chiron.png"
+            },
+            {
+                "name": "Aspect of Hera",
+                "desc": "Your Cast loads into your next Attack, firing on impact.\nNone dared approach the queen of the gods, a reputation she cultivated.",
+                "icon": "icons\\Heart-Seeking_Bow\\Aspect\\Aspect_of_Hera.png"
+            },
+            {
+                "name": "Aspect of Rama",
+                "desc": "You have Celestial Sharanga*, which can cause Shared Suffering.\nThe preserver's marksmanship is one of his many unequaled qualities",
+                "icon": "icons\\Heart-Seeking_Bow\\Aspect\\Aspect_of_Rama.png"
+            }
+        ]
+    },
+    {
+        "category": "arm_upgrades",
+        "name": "Heart-Seeking_Bow",
+        "equips": [
+            {
+                "name": "Twin Shot",
+                "desc": "Your Attack fires 2 shots side-by-side, but has reduced range.",
+                "icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Twin_Shot.png"
+            },
+            {
+                "name": "Sniper Shot",
+                "desc": "Your Attack deals +200% damage to distant foes.",
+                "icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Sniper_Shot.png"
+            },
+            {
+                "name": "Explosive Shot",
+                "desc": "Your Attack deals +300% damage in an area, but charges slower.",
+                "icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Explosive_Shot.png"
+            },
+            {
+                "name": "Flurry Shot",
+                "desc": "Hold Attack to shoot rapidly, but you cannot Power Shot.",
+                "icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Flurry_Shot.png"
+            },
+            {
+                "name": "Piercing Volley",
+                "desc": "Your Special pierces foes and deals +400% damage to Armor.",
+                "icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Piercing_Volley.png"
+            },
+            {
+                "name": "Perfect Shot",
+                "desc": "Your Power Shot is easier to execute and deals +150% damage.",
+                "icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Perfect_Shot.png"
+            },
+            {
+                "name": "Relentless Volley",
+                "desc": "Your Special shoots +4 shots.",
+                "icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Relentless_Volley.png"
+            },
+            {
+                "name": "Triple Shot",
+                "desc": "Your Attack fires 3 shots in a spread pattern.",
+                "icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Triple_Shot.png"
+            },
+            {
+                "name": "Charged Volley",
+                "desc": "Hold Special for up to 250% base damage; minimum range is reduced.",
+                "icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Charged_Volley.png"
+            },
+            {
+                "name": "Chain Shot",
+                "desc": "Your Attack bounces to up to 3 foes, dealing +15% damage for each.",
+                "icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Chain_Shot.png"
+            },
+            {
+                "name": "Point-Blank Shot",
+                "desc": "Your Attack deals +150% damage to nearby foes.",
+                "icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Point-Blank_Shot.png"
+            },
+            {
+                "name": "Concentrated Volley",
+                "desc": "Your Special deals  +3 base damage for each consecutive hit to a foe.",
+                "icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Concentrated_Volley.png"
+            },
+            {
+                "name": "Repulse Shot",
+                "desc": "Your Celestial Sharanga Attack creates a Blast Wave around you.",
+                "icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Repulse_Shot.png"
+            }
+        ]
+    },
+    {
+        "category": "arm_aspects",
+        "name": "Twin_Fists",
+        "equips": [
+            {
+                "name": "Aspect of Zagreus (Twin Fists)",
+                "desc": "The form in which the Twin Fists first revealed themselves.\nThe twin fists are bound to their bearer, but most fiercely to each other.",
+                "icon": "icons\\Twin_Fists\\Aspect\\Aspect_of_Zagreus.png"
+            },
+            {
+                "name": "Aspect of Talos",
+                "desc": "Your Special becomes Magnetic Cutter; its pull deals 20 damage.\nThey filled the bronze giant with power, conforming to its massive frame.",
+                "icon": "icons\\Twin_Fists\\Aspect\\Aspect_of_Talos.png"
+            },
+            {
+                "name": "Aspect of Demeter",
+                "desc": "After landing 12 strikes, your next Special* hits more times.\nThey were a natural fit; her power to bring life, their power to take it.",
+                "icon": "icons\\Twin_Fists\\Aspect\\Aspect_of_Demeter.png"
+            },
+            {
+                "name": "Aspect of Gilgamesh",
+                "desc": "You have the Claws of Enkidu, whose Dash-Upper can Maim** foes.\nThe god-king inherited the furry-man's savage strength and stout heart.",
+                "icon": "icons\\Twin_Fists\\Aspect\\Aspect_of_Gilgamesh.png"
+            }
+        ]
+    },
+    {
+        "category": "arm_upgrades",
+        "name": "Twin_Fists",
+        "equips": [
+            {
+                "name": "Breaching Cross",
+                "desc": "Your Dash-Strike pierces foes and deals +900% damage to Armor",
+                "icon": "icons\\Twin_Fists\\Upgrade\\Breaching_Cross.png"
+            },
+            {
+                "name": "Rolling Knuckle",
+                "desc": "Your Dash-Strike deals +60% damage; added to Attack sequence.",
+                "icon": "icons\\Twin_Fists\\Upgrade\\Rolling_Knuckle.png"
+            },
+            {
+                "name": "Long Knuckle",
+                "desc": "Your Attack has more range and deals +10% damage",
+                "icon": "icons\\Twin_Fists\\Upgrade\\Long_Knuckle.png"
+            },
+            {
+                "name": "Draining Cutter",
+                "desc": "Whenever your Special slays foes, restore 2% life",
+                "icon": "icons\\Twin_Fists\\Upgrade\\Draining_Cutter.png"
+            },
+            {
+                "name": "Concentrated Knuckle",
+                "desc": "Your Attack deals +5 base damage for each uninterrupted hit to a foe.",
+                "icon": "icons\\Twin_Fists\\Upgrade\\Concentrated_Knuckle.png"
+            },
+            {
+                "name": "Explosive Upper",
+                "desc": "Your Dash-Upper deals +100% damage in an area",
+                "icon": "icons\\Twin_Fists\\Upgrade\\Explosive_Upper.png"
+            },
+            {
+                "name": "Flying Cutter",
+                "desc": "Hold Special for longer range and up to +100% base damage",
+                "icon": "icons\\Twin_Fists\\Upgrade\\Flying_Cutter.png"
+            },
+            {
+                "name": "Rush Kick",
+                "desc": "Your Special becomes an advancing kick that also deals 40 base damage twice",
+                "icon": "icons\\Twin_Fists\\Upgrade\\Rush_Kick.png"
+            },
+            {
+                "name": "Quake Cutter",
+                "desc": "After using your Special, deal 90 damage in an area where you land",
+                "icon": "icons\\Twin_Fists\\Upgrade\\Quake_Cutter.png"
+            },
+            {
+                "name": "Kinetic Launcher",
+                "desc": "Your Special becomes a charged ranged attack that deals 50 base damage.",
+                "icon": "icons\\Twin_Fists\\Upgrade\\Kinetic_Launcher.png"
+            },
+            {
+                "name": "Heavy Knuckle",
+                "desc": "Your Attack becomes a slower 3-hit sequence, each deals 40 base damage.",
+                "icon": "icons\\Twin_Fists\\Upgrade\\Heavy_Knuckle.png"
+            },
+            {
+                "name": "Colossus Knuckle",
+                "desc": "While using your Attack or Special, you are Sturdy",
+                "icon": "icons\\Twin_Fists\\Upgrade\\Colossus_Knuckle.png"
+            },
+            {
+                "name": "Rending Claws",
+                "desc": "Maim-afflicted foes take +25% damage and move 30% slower",
+                "icon": "icons\\Twin_Fists\\Upgrade\\Rending_Claws.png"
+            }
+        ]
+    },
+    {
+        "category": "arm_aspects",
+        "name": "Adamant_Rail",
+        "equips": [
+            {
+                "name": "Aspect of Zagreus (Adamant Rail)",
+                "desc": "The form in which the Adamant Rail first revealed itself.\nThe image of the noble gryphon belies its true intent but not its power.",
+                "icon": "icons\\Adamant_Rail\\Aspect\\Aspect_of_Zagreus.png"
+            },
+            {
+                "name": "Aspect of Eris",
+                "desc": "For 4 seconds after absorbing your Special's blast, deal more damage.\nStrife herself once stole away with it, such was its destructive allure.",
+                "icon": "icons\\Adamant_Rail\\Aspect\\Aspect_of_Eris.png"
+            },
+            {
+                "name": "Aspect of Hestia",
+                "desc": "After you manually Reload, your next shot is empowered.\nBefore she was goddess of the hearth, she specialized in another type of fire.",
+                "icon": "icons\\Adamant_Rail\\Aspect\\Aspect_of_Hestia.png"
+            },
+            {
+                "name": "Aspect of Lucifer",
+                "desc": "You have Igneus Eden*, which launches volatile Hellfire.\nAs he fell from grace, he nonetheless fought back in all his defiant fury.",
+                "icon": "icons\\Adamant_Rail\\Aspect\\Aspect_of_Lucifer.png"
+            }
+        ]
+    },
+    {
+        "category": "arm_upgrades",
+        "name": "Adamant_Rail",
+        "equips": [
+            {
+                "name": "Flurry Fire",
+                "desc": "Your Attack is faster and more accurate; gain +6 ammo capacity.",
+                "icon": "icons\\Adamant_Rail\\Upgrade\\Flurry_Fire.png"
+            },
+            {
+                "name": "Ricochet Fire",
+                "desc": "Your attack bounces to +1 other foe",
+                "icon": "icons\\Adamant_Rail\\Upgrade\\Ricochet_Fire.png"
+            },
+            {
+                "name": "Spread Fire",
+                "desc": "Your Attack becomes a short spread that deals 40 base damage; lose -6 ammo capacity.",
+                "icon": "icons\\Adamant_Rail\\Upgrade\\Spread_Fire.png"
+            },
+            {
+                "name": "Explosive Fire",
+                "desc": "Your Attack deals damage in an area and briefly slows foes.",
+                "icon": "icons\\Adamant_Rail\\Upgrade\\Explosive_Fire.png"
+            },
+            {
+                "name": "Delta Chamber",
+                "desc": "Your Attack is a 3-round burst; you never have to Reload.",
+                "icon": "icons\\Adamant_Rail\\Upgrade\\Delta_Chamber.png"
+            },
+            {
+                "name": "Piercing Fire",
+                "desc": "Your Attack pierces foes and deals +50% damage to Armor.",
+                "icon": "icons\\Adamant_Rail\\Upgrade\\Piercing_Fire.png"
+            },
+            {
+                "name": "Triple Bomb",
+                "desc": "You can use your Special 3 times in rapid succession.",
+                "icon": "icons\\Adamant_Rail\\Upgrade\\Triple_Bomb.png"
+            },
+            {
+                "name": "Rocket Bomb",
+                "desc": "Your Special is replaced with a rocket that deals 80 base damage.",
+                "icon": "icons\\Adamant_Rail\\Upgrade\\Rocket_Bomb.png"
+            },
+            {
+                "name": "Targeting System",
+                "desc": "Foes targeted by your Special move slower and take +30% damage.",
+                "icon": "icons\\Adamant_Rail\\Upgrade\\Targeting_System.png"
+            },
+            {
+                "name": "Hazard Bomb",
+                "desc": "Your Special deals +300% base damage in a large area, but can hurt you.",
+                "icon": "icons\\Adamant_Rail\\Upgrade\\Hazard_Bomb.png"
+            },
+            {
+                "name": "Cluster Bomb",
+                "desc": "Your Special fires a spread of 5 bombs, but each deals -30% damage.",
+                "icon": "icons\\Adamant_Rail\\Upgrade\\Cluster_Bomb.png"
+            },
+            {
+                "name": "Seeking Fire",
+                "desc": "Your Attack seeks the nearest foe and deals +10% damage.",
+                "icon": "icons\\Adamant_Rail\\Upgrade\\Seeking_Fire.png"
+            },
+            {
+                "name": "Concentrated Beam",
+                "desc": "Your Igneus Eden Attack damage to a foe ramps up +100% faster.",
+                "icon": "icons\\Adamant_Rail\\Upgrade\\Concentrated_Beam.png"
+            },
+            {
+                "name": "Flash Fire",
+                "desc": "Your Igneus Eden Attack starts firing and fires +50% faster with +15% range.",
+                "icon": "icons\\Adamant_Rail\\Upgrade\\Flash_Fire.png"
+            },
+            {
+                "name": "Triple Beam",
+                "desc": "Your Igneus Eden Attack fires 3 beams in a spread pattern.",
+                "icon": "icons\\Adamant_Rail\\Upgrade\\Triple_Beam.png"
+            },
+            {
+                "name": "Eternal Chamber",
+                "desc": "Your Igneus Eden has ∞ ammo, but its damage no longer ramps.",
+                "icon": "icons\\Adamant_Rail\\Upgrade\\Eternal_Chamber.png"
+            },
+            {
+                "name": "Greater Inferno",
+                "desc": "Your Igneus Eden Hellfire radiates +250% damage in a larger area.",
+                "icon": "icons\\Adamant_Rail\\Upgrade\\Greater_Inferno.png"
+            }
+        ]
+    },
+    {
+        "category": "keepsakes",
+        "name": "Cerberus",
+        "equips": [
+            {
+                "name": "Old Spiked Collar",
+                "desc": "Gain +25/38/50 .\n",
+                "icon": "icons\\keepsakes\\Old_Spiked_Collar.png"
+            }
+        ]
+    },
+    {
+        "category": "keepsakes",
+        "name": "Achilles",
+        "equips": [
+            {
+                "name": "Myrmidon Bracer",
+                "desc": "Take 20/25/30% less damage from the front, but 10% more from the back.\n",
+                "icon": "icons\\keepsakes\\Myrmidon_Bracer.png"
+            }
+        ]
+    },
+    {
+        "category": "keepsakes",
+        "name": "Nyx",
+        "equips": [
+            {
+                "name": "Black Shawl",
+                "desc": "Deal 10/15/20% damage striking undamaged foes; also striking foes from behind.\n",
+                "icon": "icons\\keepsakes\\Black_Shawl.png"
+            }
+        ]
+    },
+    {
+        "category": "keepsakes",
+        "name": "Thanatos",
+        "equips": [
+            {
+                "name": "Pierced Butterfly",
+                "desc": "Gain +1/1.5/2% damage for each Encounter you clear without taking damage.\n",
+                "icon": "icons\\keepsakes\\Pierced_Butterfly.png"
+            }
+        ]
+    },
+    {
+        "category": "keepsakes",
+        "name": "Charon",
+        "equips": [
+            {
+                "name": "Bone Hourglass",
+                "desc": "Items from the Well of Charon have durations increased by +4/6/8 Encounters.\n",
+                "icon": "icons\\keepsakes\\Bone_Hourglass.png"
+            }
+        ]
+    },
+    {
+        "category": "keepsakes",
+        "name": "Hypnos",
+        "equips": [
+            {
+                "name": "Chthonic Coin Purse",
+                "desc": "Receive 100/125/150  to spend as you please (once per escape attempt).\n",
+                "icon": "icons\\keepsakes\\Chthonic_Coin_Purse.png"
+            }
+        ]
+    },
+    {
+        "category": "keepsakes",
+        "name": "Megaera",
+        "equips": [
+            {
+                "name": "Skull Earring",
+                "desc": "Deal 20/30/40%  more damage while at 35%  or less.\n",
+                "icon": "icons\\keepsakes\\Skull_Earring.png"
+            }
+        ]
+    },
+    {
+        "category": "keepsakes",
+        "name": "Orpheus",
+        "equips": [
+            {
+                "name": "Distant Memory",
+                "desc": "Deal 10/20/30% more damage to distant foes (at least 500 units away).\n",
+                "icon": "icons\\keepsakes\\Distant_Memory.png"
+            }
+        ]
+    },
+    {
+        "category": "keepsakes",
+        "name": "Dusa",
+        "equips": [
+            {
+                "name": "Harpy Feather Duster",
+                "desc": "Broken urns have a 3/5/6% chance to contain healing items.\n",
+                "icon": "icons\\keepsakes\\Harpy_Feather_Duster.png"
+            }
+        ]
+    },
+    {
+        "category": "keepsakes",
+        "name": "Skelly",
+        "equips": [
+            {
+                "name": "Lucky Tooth",
+                "desc": "Automatically restore up to 50/75/100  when your Life Total is depleted (once per escape attempt).\n",
+                "icon": "icons\\keepsakes\\Lucky_Tooth.png"
+            }
+        ]
+    },
+    {
+        "category": "keepsakes",
+        "name": "Zeus",
+        "equips": [
+            {
+                "name": "Thunder Signet",
+                "desc": "The next Boon you find will be from Zeus. His blessings have +10/15/20% chance to be Rare or better.\n",
+                "icon": "icons\\keepsakes\\Thunder_Signet.png"
+            }
+        ]
+    },
+    {
+        "category": "keepsakes",
+        "name": "Poseidon",
+        "equips": [
+            {
+                "name": "Conch Shell",
+                "desc": "The next Boon you find will be from Poseidon. His blessings have +10/15/20% chance to be Rare or better.\n",
+                "icon": "icons\\keepsakes\\Conch_Shell.png"
+            }
+        ]
+    },
+    {
+        "category": "keepsakes",
+        "name": "Athena",
+        "equips": [
+            {
+                "name": "Owl Pendant",
+                "desc": "The next Boon you find will be from Athena. Her blessings have +10/15/20% chance to be Rare or better.\n",
+                "icon": "icons\\keepsakes\\Owl_Pendant.png"
+            }
+        ]
+    },
+    {
+        "category": "keepsakes",
+        "name": "Aphrodite",
+        "equips": [
+            {
+                "name": "Eternal Rose",
+                "desc": "The next Boon you find will be from Aphrodite. Her blessings have +10/15/20% chance to be Rare or better.\n",
+                "icon": "icons\\keepsakes\\Eternal_Rose.png"
+            }
+        ]
+    },
+    {
+        "category": "keepsakes",
+        "name": "Ares",
+        "equips": [
+            {
+                "name": "Blood-Filled Vial",
+                "desc": "The next Boon you find will be from Ares. His blessings have +10/15/20% chance to be Rare or better.\n",
+                "icon": "icons\\keepsakes\\Blood-Filled_Vial.png"
+            }
+        ]
+    },
+    {
+        "category": "keepsakes",
+        "name": "Artemis",
+        "equips": [
+            {
+                "name": "Adamant Arrowhead",
+                "desc": "The next Boon you find will be from Artemis. Her blessings have +10/15/20% chance to be Rare or better.\n",
+                "icon": "icons\\keepsakes\\Adamant_Arrowhead.png"
+            }
+        ]
+    },
+    {
+        "category": "keepsakes",
+        "name": "Dionysus",
+        "equips": [
+            {
+                "name": "Overflowing Cup",
+                "desc": "The next Boon you find will be from Dionysus. His blessings have +10/15/20% chance to be Rare or better.\n",
+                "icon": "icons\\keepsakes\\Overflowing_Cup.png"
+            }
+        ]
+    },
+    {
+        "category": "keepsakes",
+        "name": "Hermes",
+        "equips": [
+            {
+                "name": "Lambent Plume",
+                "desc": "Gain +1.0/1.1/1.2% Dodge chance and move speed for each Encounter you clear quickly.\n(\"Quickly\" varies based on the encounter type and biome. More time will be offered in higher biomes, and in special encounters, such as bosses, mini-bosses, and Thanatos Encounters.)\n\n",
+                "icon": "icons\\keepsakes\\Lambent_Plume.png"
+            }
+        ]
+    },
+    {
+        "category": "keepsakes",
+        "name": "Demeter",
+        "equips": [
+            {
+                "name": "Frostbitten Horn",
+                "desc": "The next Boon you find will be from Demeter. Her blessings have +10/15/20% chance to be Rare or better.\n",
+                "icon": "icons\\keepsakes\\Frostbitten_Horn.png"
+            }
+        ]
+    },
+    {
+        "category": "keepsakes",
+        "name": "Chaos",
+        "equips": [
+            {
+                "name": "Cosmic Egg",
+                "desc": "Enter Chaos Gates without losing . Blessings from Chaos have +20/30/40% chance to be Rare or better.\n",
+                "icon": "icons\\keepsakes\\Cosmic_Egg.png"
+            }
+        ]
+    },
+    {
+        "category": "keepsakes",
+        "name": "Sisyphus",
+        "equips": [
+            {
+                "name": "Shattered Shackle",
+                "desc": "Your Attack, Special, and Cast each deal +50/75/100% damage while not empowered by a Boon.\n",
+                "icon": "icons\\keepsakes\\Shattered_Shackle.png"
+            }
+        ]
+    },
+    {
+        "category": "keepsakes",
+        "name": "Eurydice",
+        "equips": [
+            {
+                "name": "Evergreen Acorn",
+                "desc": "In the final encounter in each underworld region, take 0 damage the first 3/4/5 times foes hit you.\n",
+                "icon": "icons\\keepsakes\\Evergreen_Acorn.png"
+            }
+        ]
+    },
+    {
+        "category": "keepsakes",
+        "name": "Patroclus",
+        "equips": [
+            {
+                "name": "Broken Spearpoint",
+                "desc": "After taking damage, become invulnerable for 1/1.25/1.5 sec. Refreshes after 7 Sec.\n",
+                "icon": "icons\\keepsakes\\Broken_Spearpoint.png"
+            }
+        ]
+    },
+    {
+        "category": "keepsakes",
+        "name": "Persephone",
+        "equips": [
+            {
+                "name": "Pom Blossom",
+                "desc": "After every 6/5/4 Encounters, gain +1 Lv. (a random Boon grows stronger).\n",
+                "icon": "icons\\keepsakes\\Pom_Blossom.png"
+            }
+        ]
+    },
+    {
+        "category": "keepsakes",
+        "name": "Hades",
+        "equips": [
+            {
+                "name": "Sigil of the Dead",
+                "desc": "Your Call becomes Hades' Aid, which briefly makes you Invisible; your God Gauge starts 10/20/30% full.\n",
+                "icon": "icons\\keepsakes\\Sigil_of_the_Dead.png"
+            }
+        ]
+    },
+    {
+        "category": "companions",
+        "name": "Megaera",
+        "equips": [
+            {
+                "name": "Companion Battie",
+                "desc": "Your Summon deals 2500 damage in an area near your closest foe, then continually down the line.\n** Cannot be used against any Fury Sisters\n\n",
+                "icon": "icons\\companions\\Companion_Battie.png"
+            }
+        ]
+    },
+    {
+        "category": "companions",
+        "name": "Thanatos",
+        "equips": [
+            {
+                "name": "Companion Mort",
+                "desc": "Your Summon deals 3500 damage in an area in front of you, after a brief delay.\n** Cannot be used in Thanatos's encounters\n\n",
+                "icon": "icons\\companions\\Companion_Mort.png"
+            }
+        ]
+    },
+    {
+        "category": "companions",
+        "name": "Skelly",
+        "equips": [
+            {
+                "name": "Companion Rib",
+                "desc": "Your Summon creates a distraction with 250, provoking your foes to attack it until it dies.\n** Cannot be used against Charon\n\n",
+                "icon": "icons\\companions\\Companion_Rib.png"
+            }
+        ]
+    },
+    {
+        "category": "companions",
+        "name": "Sisyphus",
+        "equips": [
+            {
+                "name": "Companion Shady",
+                "desc": "Your Summon deals 1000 damage in an area and drops a smattering of , , and .\nDrops per use:\n\n1  pickup worth 10 \n1  pickup, worth 30 \n4  pickups, each healing 10 \n",
+                "icon": "icons\\companions\\Companion_Shady.png"
+            }
+        ]
+    },
+    {
+        "category": "companions",
+        "name": "Dusa",
+        "equips": [
+            {
+                "name": "Companion Fidi",
+                "desc": "Your Summon joins you for 30 sec, repeatedly firing shots that petrify foes and deal 70 damage.\n",
+                "icon": "icons\\companions\\Companion_Fidi.png"
+            }
+        ]
+    },
+    {
+        "category": "companions",
+        "name": "Achilles",
+        "equips": [
+            {
+                "name": "Companion Antos",
+                "desc": "Your Summon deals 1500 damage to 2 foes one after another.\n",
+                "icon": "icons\\companions\\Companion_Antos.png"
+            }
+        ]
+    },
+    {
+        "category": "empty_ability",
+        "name": "attack",
+        "equips": [
+            {
+                "name": "attack",
+                "desc": "",
+                "icon": "icons\\empty\\attack.png",
+                "singleton": "attack"
+            }
+        ]
+    },
+    {
+        "category": "empty_ability",
+        "name": "boon",
+        "equips": [
+            {
+                "name": "boon",
+                "desc": "",
+                "icon": "icons\\empty\\boon.png"
+            }
+        ]
+    },
+    {
+        "category": "empty_ability",
+        "name": "call",
+        "equips": [
+            {
+                "name": "call",
+                "desc": "",
+                "icon": "icons\\empty\\call.png",
+                "singleton": "call"
+            }
+        ]
+    },
+    {
+        "category": "empty_ability",
+        "name": "cast",
+        "equips": [
+            {
+                "name": "cast",
+                "desc": "",
+                "icon": "icons\\empty\\cast.png",
+                "singleton": "cast"
+            }
+        ]
+    },
+    {
+        "category": "empty_ability",
+        "name": "dash",
+        "equips": [
+            {
+                "name": "dash",
+                "desc": "",
+                "icon": "icons\\empty\\dash.png",
+                "singleton": "dash"
+            }
+        ]
+    },
+    {
+        "category": "empty_ability",
+        "name": "special",
+        "equips": [
+            {
+                "name": "special",
+                "desc": "",
+                "icon": "icons\\empty\\special.png",
+                "singleton": "special"
+            }
+        ]
+    },
+    {
+        "category": "charons_well",
+        "name": "charon",
+        "equips": [
+            {
+                "name": "Aether Net",
+                "desc": "You start Encounter(s) with your God Gauge 15% full.",
+                "icon": "icons\\charons_well\\Aether_Net.png"
+            },
+            {
+                "name": "Braid of Atlas",
+                "desc": "Your Cast deals +50% damage.",
+                "icon": "icons\\charons_well\\Braid_of_Atlas.png"
+            },
+            {
+                "name": "Centaur Soul",
+                "desc": "Gain +25 (without restoring ).",
+                "icon": "icons\\charons_well\\Centaur_Soul.png"
+            },
+            {
+                "name": "Chimaera Jerky",
+                "desc": "Your Special deals +40% damage.",
+                "icon": "icons\\charons_well\\Chimaera_Jerky.png"
+            },
+            {
+                "name": "Cyclops Jerky",
+                "desc": "Your Attack deals +30% damage.",
+                "icon": "icons\\charons_well\\Cyclops_Jerky.png"
+            },
+            {
+                "name": "Eris Bangle",
+                "desc": "You deal +50% damage striking undamaged foes.",
+                "icon": "icons\\charons_well\\Eris_Bangle.png"
+            },
+            {
+                "name": "Eye of Lamia",
+                "desc": "Slain foes have a 15% chance to drop healing items.",
+                "icon": "icons\\charons_well\\Eye_of_Lamia.png"
+            },
+            {
+                "name": "Fateful Twist",
+                "desc": "Gain a random item offered from the Well of Charon.",
+                "icon": "icons\\charons_well\\Fateful_Twist.png"
+            },
+            {
+                "name": "Flame Wheels Release",
+                "desc": "Prevent Flame Wheel foes from appearing in Encounter(s).",
+                "icon": "icons\\charons_well\\Flame_Wheels_Release.png"
+            },
+            {
+                "name": "Gaea's Treasure",
+                "desc": "Gain 11-14  (WIP)",
+                "icon": "icons\\charons_well\\Gaea's_Treasure.png"
+            },
+            {
+                "name": "HydraLite",
+                "desc": "You recover 10%  when you enter a chamber.",
+                "icon": "icons\\charons_well\\HydraLite.png"
+            },
+            {
+                "name": "Ignited Ichor",
+                "desc": "Gain 20% move speed.",
+                "icon": "icons\\charons_well\\Ignited_Ichor.png"
+            },
+            {
+                "name": "Kiss of Styx",
+                "desc": "Replenish 1 use of Death Defiance.",
+                "icon": "icons\\charons_well\\Kiss_of_Styx.png"
+            },
+            {
+                "name": "Life Essence",
+                "desc": "Restore up to 22-38%  (rounded up).",
+                "icon": "icons\\charons_well\\Life_Essence.png"
+            },
+            {
+                "name": "Light of Ixion",
+                "desc": "Ensure a Chaos Gate will spawn ahead (where possible).",
+                "icon": "icons\\charons_well\\Light_of_Ixion.png"
+            },
+            {
+                "name": "Nail of Talos",
+                "desc": "You deal +50% damage to Armor.",
+                "icon": "icons\\charons_well\\Nail_of_Talos.png"
+            },
+            {
+                "name": "Nemesis Crest",
+                "desc": "You deal +50% damage striking foes from behind.",
+                "icon": "icons\\charons_well\\Nemesis_Crest.png"
+            },
+            {
+                "name": "Night Spindle",
+                "desc": "Gain +1 use of your Chthonic Companion's Summon.",
+                "icon": "icons\\charons_well\\Night_Spindle.png"
+            },
+            {
+                "name": "Price of Midas",
+                "desc": "Gain   = 1.1 - 1.8x  cost (for a blood price) (WIP)",
+                "icon": "icons\\charons_well\\Price_of_Midas.png"
+            },
+            {
+                "name": "Prometheus Stone",
+                "desc": "Gain +1  for your Cast.",
+                "icon": "icons\\charons_well\\Prometheus_Stone.png"
+            },
+            {
+                "name": "Skeletal Lure",
+                "desc": "Ensure a Fishing Point will spawn ahead (where possible).",
+                "icon": "icons\\charons_well\\Skeletal_Lure.png"
+            },
+            {
+                "name": "Stygian Shard",
+                "desc": "Traps deal +500% damage to your foes.",
+                "icon": "icons\\charons_well\\Stygian_Shard.png"
+            },
+            {
+                "name": "Tinge of Erebus",
+                "desc": "Gain 12-26",
+                "icon": "icons\\charons_well\\Tinge_of_Erebus.png"
+            },
+            {
+                "name": "Touch of Styx",
+                "desc": "Your Stubborn Defiance restores +10% . <temp>",
+                "icon": "icons\\charons_well\\Touch_of_Styx.png"
+            },
+            {
+                "name": "Trove Tracker",
+                "desc": "Ensure a Infernal Trove will spawn ahead (where possible).",
+                "icon": "icons\\charons_well\\Trove_Tracker.png"
+            },
+            {
+                "name": "Yarn of Ariadne",
+                "desc": "The next Boon you find has upgraded Rarity.",
+                "icon": "icons\\charons_well\\Yarn_of_Ariadne.png"
+            }
+        ]
+    },
+    {
+        "category": "eurydice",
+        "name": "eurydice",
+        "equips": [
+            {
+                "name": "Ambrosia Delight",
+                "desc": "Loved by the gods. up to 2 random Boons of yours are upgraded to the next Rarity.",
+                "icon": "icons\\eurydice\\Ambrosia_Delight.png"
+            },
+            {
+                "name": "Pom Porridge",
+                "desc": "An Underworld delicacy; up to 4 random Boons of yours gain +1 Lv.",
+                "icon": "icons\\eurydice\\Pom_Porridge.png"
+            },
+            {
+                "name": "Refreshing Nectar",
+                "desc": "A rare and fragrant beverage; the next 3 Boons you find have upgraded Rarity.",
+                "icon": "icons\\eurydice\\Refreshing_Nectar.png"
+            }
+        ]
+    },
+    {
+        "category": "special_item",
+        "name": "bouldy_blessing",
+        "equips": [
+            {
+                "name": "bouldy_blessing",
+                "desc": "TODO",
+                "icon": "icons\\special\\bouldy_blessing.png"
+            }
+        ]
+    },
+    {
+        "category": "special_item",
+        "name": "godmode",
+        "equips": [
+            {
+                "name": "godmode",
+                "desc": "TODO",
+                "icon": "icons\\special\\godmode.png"
+            }
+        ]
+    },
+    {
+        "category": "special_item",
+        "name": "membership_card_large",
+        "equips": [
+            {
+                "name": "membership_card_large",
+                "desc": "TODO",
+                "icon": "icons\\special\\membership_card_large.png"
+            }
+        ]
+    },
+    {
+        "category": "special_item",
+        "name": "meta_gathered_darkerness_large",
+        "equips": [
+            {
+                "name": "meta_gathered_darkerness_large",
+                "desc": "TODO",
+                "icon": "icons\\special\\meta_gathered_darkerness_large.png"
+            }
+        ]
+    },
+    {
+        "category": "special_item",
+        "name": "meta_gathered_darkness_large",
+        "equips": [
+            {
+                "name": "meta_gathered_darkness_large",
+                "desc": "TODO",
+                "icon": "icons\\special\\meta_gathered_darkness_large.png"
+            }
+        ]
+    },
+    {
+        "category": "special_item",
+        "name": "meta_second_change_large",
+        "equips": [
+            {
+                "name": "meta_second_change_large",
+                "desc": "TODO",
+                "icon": "icons\\special\\meta_second_change_large.png"
+            }
+        ]
+    }
+]
