@@ -238,8 +238,8 @@ namespace HadesBoonBot
             {
                 foreach (Provider.Equippable item in this.Distinct())
                 {
-                    item.MakeComparable();
                     item.LoadIcon();
+                    item.MakeComparable();
                 }
             }
         }
