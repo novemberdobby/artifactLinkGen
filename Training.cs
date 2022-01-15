@@ -38,26 +38,11 @@ namespace HadesBoonBot
                     if (!File.Exists(targetFile))
                     {
                         Dimensions dim = new(image.Value.Width);
-                        OCV.Point2f startPoint = trait.Col == 0 //the distance between columns 0&1 is unique
-                            ? new(dim.FirstBoonIconX, dim.FirstBoonIconY)
-                            : new(dim.SecondBoonIconX - dim.BoonColumnSep, dim.FirstBoonIconY);
+                        OCV.Rect traitRect = dim.FindTrait(trait.Col, trait.Row);
 
-                        if (trait.Col % 2 == 1)
-                        {
-                            startPoint.Y += dim.BoonColumnYoffset;
-                        }
-
-                        OCV.Point2f separation = new(dim.BoonColumnSep, dim.BoonRowSep);
-
-                        //find the middle of the trait
-                        OCV.Point middle = new(startPoint.X + trait.Col * separation.X, startPoint.Y + trait.Row * separation.Y);
-
-                        //chop out a sub-image
-                        float halfSize = dim.BoonWidth / 2.0f;
-
-                        OCV.Mat unknownTrait = image.Value.SubMat((int)(middle.Y - halfSize), (int)(middle.Y + halfSize), (int)(middle.X - halfSize), (int)(middle.X + halfSize));
-                        unknownTrait = CVUtil.MakeComparable(unknownTrait);
-                        unknownTrait.SaveImage(targetFile);
+                        OCV.Mat traitImg = image.Value.SubMat(traitRect);
+                        traitImg = CVUtil.MakeComparable(traitImg);
+                        traitImg.SaveImage(targetFile);
                     }
                 }
             }
