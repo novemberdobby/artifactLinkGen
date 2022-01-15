@@ -35,12 +35,6 @@ namespace HadesBoonBot
 
                     if (trait.Col % 2 == 1)
                     {
-                        if (trait.Row == Dimensions.BoonRowsMax - 1)
-                        {
-                            //odd columns have 1 less item
-                            continue;
-                        }
-
                         startPoint.Y += dim.BoonColumnYoffset;
                     }
 
