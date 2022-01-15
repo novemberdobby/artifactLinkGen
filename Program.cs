@@ -1,4 +1,4 @@
-namespace HadesBoonBot
+﻿namespace HadesBoonBot
 {
     class Program
     {
@@ -17,6 +17,10 @@ namespace HadesBoonBot
                 case "trainingdatagen":
                     TrainingDataGen tp = new();
                     return tp.Run(args);
+
+                case "classify_psnr":
+                    ClassifierPSNR classifier = new();
+                    return classifier.Run(args, codex);
 
                 default:
                     Console.WriteLine($"Unknown mode {args[0]}");

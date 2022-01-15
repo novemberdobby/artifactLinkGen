@@ -37,8 +37,8 @@ namespace HadesBoonBot
                     string targetFile = Path.Combine(targetDir, $"{Path.GetFileName(screen.FileName)}_{trait.Col}_{trait.Row}.png");
                     if (!File.Exists(targetFile))
                     {
-                        Dimensions dim = new(image.Value.Width);
-                        if(dim.FindTrait(trait.Col, trait.Row, out OCV.Rect? traitRect))
+                        ScreenMetadata dim = new(image.Value.Width);
+                        if(dim.GetTraitRect(trait.Col, trait.Row, out OCV.Rect? traitRect))
                         {
                             OCV.Mat traitImg = image.Value.SubMat(traitRect!.Value);
                             traitImg = CVUtil.MakeComparable(traitImg);
