@@ -5,7 +5,7 @@ namespace HadesBoonBot
 {
     internal class TrainingDataGen
     {
-        internal int Run(string[] args)
+        internal int Run(string[] args, Lazy<Codex> codex)
         {
             TrainingData inputData = TrainingData.Load(args[1])!;
             string outputDataDir = args[2];
@@ -44,8 +44,23 @@ namespace HadesBoonBot
                             traitImg = CVUtil.MakeComparable(traitImg);
                             traitImg.SaveImage(targetFile);
                         }
-
                     }
+                }
+            }
+
+            //also save out the raw boon icons (TODO: expand this with mutations)
+            foreach (var trait in codex.Value)
+            {
+                string targetDir = Path.Combine(outputDataDir, trait.Name!);
+                if (!Directory.Exists(targetDir))
+                {
+                    Directory.CreateDirectory(targetDir);
+                }
+
+                string targetFile = Path.Combine(targetDir, "normal.png");
+                if (!File.Exists(targetFile))
+                {
+                    trait.Icon!.SaveImage(targetFile);
                 }
             }
 
