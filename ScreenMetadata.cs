@@ -80,7 +80,7 @@ namespace HadesBoonBot
         /// <summary>
         /// Restrict some slots to categories/empty
         /// </summary>
-        private static Dictionary<Point, Category> SlotsForCategories = new()
+        private static readonly Dictionary<Point, Category> SlotsForCategories = new()
         {
             { new(0, 0), Category.Companions },
             { new(0, BoonRowsMax - 1), Category.Keepsakes },
@@ -89,7 +89,7 @@ namespace HadesBoonBot
         /// <summary>
         /// Restrict other slots to subcategories/empty
         /// </summary>
-        private static Dictionary<Point, Subcategory> SlotsForSubcategories = new()
+        private static readonly Dictionary<Point, Subcategory> SlotsForSubcategories = new()
         {
             { new(0, 1), Subcategory.Attack },
             { new(0, 2), Subcategory.Special },
