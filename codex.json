@@ -1197,7 +1197,6 @@
             }
         ]
     },
-    
     {
         "category": "gods",
         "name": "Hades",
@@ -1205,7 +1204,7 @@
             {
                 "name": "Hades' Aid",
                 "desc": "Your Call becomes Hades' Aid, which briefly makes you Invisible; your God Gauge starts 10/20/30% full.\n",
-                "icon": "icons\\Hades\\Hades'_Aid.png"
+                "icon": "icons\\Hades\\Hades'_Aid.png",
                 "singleton": "call"
             }
         ]
