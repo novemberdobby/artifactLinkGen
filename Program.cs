@@ -1,4 +1,4 @@
-﻿namespace HadesBoonBot
+namespace HadesBoonBot
 {
     class Program
     {
@@ -10,22 +10,33 @@
                 return 1;
             }
 
-            var codex = new Lazy<Codex>(() => Codex.FromFile("codex.json", true));
-
-            switch (args[0])
+            try
             {
-                case "trainingdatagen":
-                    TrainingDataGen tp = new();
-                    return tp.Run(args, codex);
+                var codex = new Lazy<Codex>(() => Codex.FromFile("codex.json", Codex.IconLoadMode.Raw));
 
-                case "classify_psnr":
-                    ClassifierPSNR classifier = new();
-                    return classifier.Run(args, codex);
+                switch (args[0])
+                {
+                    case "trainingdatagen":
+                        TrainingDataGen tp = new();
+                        tp.Run(args, codex);
+                        break;
 
-                default:
-                    Console.WriteLine($"Unknown mode {args[0]}");
-                    return 1;
+                    case "classify_psnr":
+                        ClassifierPSNR classifier = new();
+                        return classifier.Run(args, codex);
+
+                    default:
+                        Console.WriteLine($"Unknown mode {args[0]}");
+                        return 1;
+                }
             }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine("Exception during execution: {0}", ex);
+                return 2;
+            }
+
+            return 0;
         }
     }
 }

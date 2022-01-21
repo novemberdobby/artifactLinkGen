@@ -7,6 +7,13 @@ namespace HadesBoonBot
 {
     class Codex : IEnumerable<Codex.Provider.Equippable>
     {
+        public enum IconLoadMode
+        {
+            None,
+            Standard,
+            Raw,
+        }
+
         public List<Provider> Providers { get; set; }
 
         public class Provider
@@ -152,9 +159,16 @@ namespace HadesBoonBot
                 /// <summary>
                 /// Read icon data, throws if it fails
                 /// </summary>
-                public void LoadIcon()
+                public void LoadIcon(IconLoadMode mode)
                 {
-                    Icon = OCV.Cv2.ImRead(IconFile!)!;
+                    if(mode == IconLoadMode.Raw)
+                    {
+                        Icon = OCV.Cv2.ImRead(IconFile!, OCV.ImreadModes.Unchanged)!;
+                    }
+                    else
+                    {
+                        Icon = OCV.Cv2.ImRead(IconFile!)!;
+                    }
                 }
 
                 public override string ToString()
@@ -197,7 +211,7 @@ namespace HadesBoonBot
         /// </summary>
         /// <param name="provs">Deserialised provider data</param>
         /// <param name="loadIcons">Whether to load icon data</param>
-        private Codex(List<Provider> provs, bool loadIcons)
+        private Codex(List<Provider> provs, IconLoadMode iconMode)
         {
             Providers = provs;
 
@@ -234,11 +248,11 @@ namespace HadesBoonBot
             }
 
             //only get images if requested
-            if (loadIcons)
+            if (iconMode != IconLoadMode.None)
             {
                 foreach (Provider.Equippable item in this.Distinct())
                 {
-                    item.LoadIcon();
+                    item.LoadIcon(iconMode);
                     item.MakeComparable();
                 }
             }
@@ -249,7 +263,7 @@ namespace HadesBoonBot
         /// </summary>
         /// <param name="inputFile"></param>
         /// <returns></returns>
-        public static Codex FromFile(string inputFile, bool loadIcons)
+        public static Codex FromFile(string inputFile, IconLoadMode iconMode)
         {
             string data = File.ReadAllText(inputFile);
             return new(JsonConvert.DeserializeObject<List<Provider>>(data), loadIcons);
