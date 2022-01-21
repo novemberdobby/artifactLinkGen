@@ -266,7 +266,38 @@ namespace HadesBoonBot
         public static Codex FromFile(string inputFile, IconLoadMode iconMode)
         {
             string data = File.ReadAllText(inputFile);
-            return new(JsonConvert.DeserializeObject<List<Provider>>(data), loadIcons);
+            return new(JsonConvert.DeserializeObject<List<Provider>>(data), iconMode);
+        }
+
+        /// <summary>
+        /// Deduce the weapon being used from a list of traits on a victory screen
+        /// </summary>
+        /// <param name="traits">Known traits</param>
+        /// <returns>Weapon name</returns>
+        /// <exception cref="Exception">Throws if we don't find any weapons or more than one</exception>
+        public static string DetermineWeapon(List<Provider.Equippable> traits)
+        {
+            HashSet<string> weaponsByTrait = new();
+            foreach (var trait in traits)
+            {
+                switch (trait.Category)
+                {
+                    case Provider.Category.Arm_Aspects:
+                    case Provider.Category.Arm_Upgrades:
+                        weaponsByTrait.Add(trait.Providers.First().Name!);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+            if (weaponsByTrait.Count != 1)
+            {
+                throw new Exception("Unable to determine active weapon from traits");
+            }
+
+            return weaponsByTrait.First();
         }
 
         public IEnumerator<Provider.Equippable> GetEnumerator()
