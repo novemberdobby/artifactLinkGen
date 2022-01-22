@@ -274,7 +274,7 @@ namespace HadesBoonBot
         /// </summary>
         /// <param name="traits">Known traits</param>
         /// <returns>Weapon name</returns>
-        /// <exception cref="Exception">Throws if we don't find any weapons or more than one</exception>
+        /// <exception cref="Exception">Throws if we don't find exactly one weapon</exception>
         public static string DetermineWeapon(List<Provider.Equippable> traits)
         {
             HashSet<string> weaponsByTrait = new();
