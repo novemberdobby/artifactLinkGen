@@ -2382,67 +2382,67 @@
     },
     {
         "category": "special_item",
-        "name": "bouldy_blessing",
+        "name": "Heart of Stone",
         "equips": [
             {
-                "name": "bouldy_blessing",
-                "desc": "TODO",
+                "name": "Heart of Stone",
+                "desc": "You believe in Bouldy, and Bouldy believes in you.",
                 "icon": "icons\\special\\bouldy_blessing.png"
             }
         ]
     },
     {
         "category": "special_item",
-        "name": "godmode",
+        "name": "God Mode",
         "equips": [
             {
-                "name": "godmode",
-                "desc": "TODO",
+                "name": "God Mode",
+                "desc": "Instantly makes you tougher, more so whenever you die. Death is not a big deal in the underworld. Try this if you find you're struggling, want focus on the story, or any reason.",
                 "icon": "icons\\special\\godmode.png"
             }
         ]
     },
     {
         "category": "special_item",
-        "name": "membership_card_large",
+        "name": "Loyalty Card",
         "equips": [
             {
-                "name": "membership_card_large",
-                "desc": "TODO",
+                "name": "Loyalty Card",
+                "desc": "Reduce the price of Charon's items by 20%",
                 "icon": "icons\\special\\membership_card_large.png"
             }
         ]
     },
     {
         "category": "special_item",
-        "name": "meta_gathered_darkerness_large",
+        "name": "Darker Thirst",
         "equips": [
             {
-                "name": "meta_gathered_darkerness_large",
-                "desc": "TODO",
+                "name": "Darker Thirst",
+                "desc": "Whenever you find {!Icons.MetaPoint_Small} or {!Icons.GemSmall}, gain {#AltUpgradeFormat}+{$TooltipData.TooltipBonus}%{#PreviousFormat}.",
                 "icon": "icons\\special\\meta_gathered_darkerness_large.png"
             }
         ]
     },
     {
         "category": "special_item",
-        "name": "meta_gathered_darkness_large",
+        "name": "Dark Thirst",
         "equips": [
             {
-                "name": "meta_gathered_darkness_large",
-                "desc": "TODO",
+                "name": "Dark Thirst",
+                "desc": "Whenever you find {!Icons.MetaPoint_Small}, gain {#AltUpgradeFormat}+{$TooltipData.TooltipBonus}%{#PreviousFormat}.",
                 "icon": "icons\\special\\meta_gathered_darkness_large.png"
             }
         ]
     },
     {
         "category": "special_item",
-        "name": "meta_second_change_large",
+        "name": "meta_second_chance_large",
         "equips": [
             {
-                "name": "meta_second_change_large",
+                "name": "meta_second_chance_large",
                 "desc": "TODO",
-                "icon": "icons\\special\\meta_second_change_large.png"
+                "icon": "icons\\special\\meta_second_chance_large.png"
             }
         ]
     }
