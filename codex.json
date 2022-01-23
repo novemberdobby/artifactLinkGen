@@ -2,7 +2,7 @@
     {
         "category": "gods",
         "name": "Aphrodite",
-        "equips": [
+        "traits": [
             {
                 "name": "Heartbreak Strike",
                 "desc": "Your Attack deals more damage and inflicts Weak.",
@@ -18,14 +18,15 @@
             {
                 "name": "Crush Shot",
                 "desc": "Your Cast is a wide, short-range blast that inflicts Weak.",
-                "icon": "icons\\Aphrodite\\Crush_Shot.png",
-                "singleton": "cast"
+                "icon": "icons\\Aphrodite\\Crush_Shot__Passion_Flare.png",
+                "singleton": "cast",
             },
             {
                 "name": "Passion Flare",
                 "desc": "Your Cast damages foes around you and inflicts Weak.",
-                "icon": "icons\\Aphrodite\\Passion_Flare.png",
-                "singleton": "cast"
+                "icon": "icons\\Aphrodite\\Crush_Shot__Passion_Flare.png",
+                "singleton": "cast",
+                "requires": [ "Aspect of Beowulf" ]
             },
             {
                 "name": "Passion Dash",
@@ -124,7 +125,7 @@
     {
         "category": "gods",
         "name": "Ares",
-        "equips": [
+        "traits": [
             {
                 "name": "Curse of Agony",
                 "desc": "Your Attack inflicts Doom.",
@@ -140,14 +141,15 @@
             {
                 "name": "Slicing Shot",
                 "desc": "Your Cast sends a Blade Rift hurling ahead.",
-                "icon": "icons\\Ares\\Slicing_Shot.png",
+                "icon": "icons\\Ares\\Slicing_Flare__Slicing_Shot.png",
                 "singleton": "cast"
             },
             {
                 "name": "Slicing Flare",
                 "desc": "Your Cast sends a large Blade Rift hurling ahead for a brief time.",
-                "icon": "icons\\Ares\\Slicing_Flare.png",
-                "singleton": "cast"
+                "icon": "icons\\Ares\\Slicing_Flare__Slicing_Shot.png",
+                "singleton": "cast",
+                "requires": [ "Aspect of Beowulf" ]
             },
             {
                 "name": "Blade Dash",
@@ -246,7 +248,7 @@
     {
         "category": "gods",
         "name": "Artemis",
-        "equips": [
+        "traits": [
             {
                 "name": "Deadly Strike",
                 "desc": "Your Attack is stronger, with +15% chance to deal Critical damage.",
@@ -262,14 +264,15 @@
             {
                 "name": "True Shot",
                 "desc": "Your Cast seeks foes, with a 10% chance to deal Critical damage.",
-                "icon": "icons\\Artemis\\True_Shot.png",
+                "icon": "icons\\Artemis\\Hunter's_Flare__True_Shot.png",
                 "singleton": "cast"
             },
             {
                 "name": "Hunter's Flare",
                 "desc": "Your Cast damages foes around you, with a 10% Critical chance.",
-                "icon": "icons\\Artemis\\Hunter's_Flare.png",
-                "singleton": "cast"
+                "icon": "icons\\Artemis\\Hunter's_Flare__True_Shot.png",
+                "singleton": "cast",
+                "requires": [ "Aspect of Beowulf" ]
             },
             {
                 "name": "Hunter Dash",
@@ -363,7 +366,7 @@
     {
         "category": "gods",
         "name": "Athena",
-        "equips": [
+        "traits": [
             {
                 "name": "Divine Strike",
                 "desc": "Your Attack is stronger, and can Deflect.",
@@ -379,14 +382,15 @@
             {
                 "name": "Phalanx Shot",
                 "desc": "Your Cast damages foes in a small area, and can Deflect.",
-                "icon": "icons\\Athena\\Phalanx_Shot.png",
+                "icon": "icons\\Athena\\Phalanx_Flare__Phalanx_Shot.png",
                 "singleton": "cast"
             },
             {
                 "name": "Phalanx Flare",
                 "desc": "Your Cast damages foes around you, and can Deflect.",
-                "icon": "icons\\Athena\\Phalanx_Flare.png",
-                "singleton": "cast"
+                "icon": "icons\\Athena\\Phalanx_Flare__Phalanx_Shot.png",
+                "singleton": "cast",
+                "requires": [ "Aspect of Beowulf" ]
             },
             {
                 "name": "Divine Dash",
@@ -485,7 +489,7 @@
     {
         "category": "gods",
         "name": "Chaos",
-        "equips": [
+        "traits": [
             {
                 "name": "Affluence",
                 "desc": "Any  you find is worth +X%.",
@@ -616,7 +620,7 @@
     {
         "category": "gods",
         "name": "Demeter",
-        "equips": [
+        "traits": [
             {
                 "name": "Frost Strike",
                 "desc": "Your Attack is stronger and inflicts Chill.",
@@ -632,14 +636,15 @@
             {
                 "name": "Crystal Beam",
                 "desc": "Your Cast drops a crystal that fires a beam straight ahead for 5 sec.",
-                "icon": "icons\\Demeter\\Crystal_Beam.png",
+                "icon": "icons\\Demeter\\Crystal_Beam__Icy_Flare.png",
                 "singleton": "cast"
             },
             {
                 "name": "Icy Flare",
                 "desc": "Your Cast damages foes around you and inflicts Chill.",
-                "icon": "icons\\Demeter\\Icy_Flare.png",
-                "singleton": "cast"
+                "icon": "icons\\Demeter\\Crystal_Beam__Icy_Flare.png",
+                "singleton": "cast",
+                "requires": [ "Aspect of Beowulf" ]
             },
             {
                 "name": "Mistral Dash",
@@ -738,7 +743,7 @@
     {
         "category": "gods",
         "name": "Dionysus",
-        "equips": [
+        "traits": [
             {
                 "name": "Drunken Strike",
                 "desc": "Your Attack inflicts Hangover.",
@@ -754,14 +759,15 @@
             {
                 "name": "Trippy Shot",
                 "desc": "Your Cast lobs a projectile that bursts into Festive Fog.",
-                "icon": "icons\\Dionysus\\Trippy_Shot.png",
+                "icon": "icons\\Dionysus\\Trippy_Flare__Trippy_Shot.png",
                 "singleton": "cast"
             },
             {
                 "name": "Trippy Flare",
                 "desc": "Your Cast damages foes around you, leaving behind Festive Fog.",
-                "icon": "icons\\Dionysus\\Trippy_Flare.png",
-                "singleton": "cast"
+                "icon": "icons\\Dionysus\\Trippy_Flare__Trippy_Shot.png",
+                "singleton": "cast",
+                "requires_any": [ "Aspect of Beowulf", "Aspect of Hera" ]
             },
             {
                 "name": "Drunken Dash",
@@ -860,7 +866,7 @@
     {
         "category": "gods",
         "name": "Hermes",
-        "equips": [
+        "traits": [
             {
                 "name": "Swift Strike",
                 "desc": "Your Attack is +X% faster.",
@@ -946,7 +952,7 @@
     {
         "category": "gods",
         "name": "Poseidon",
-        "equips": [
+        "traits": [
             {
                 "name": "Tempest Strike",
                 "desc": "Your Attack deals more damage and knocks foes away.",
@@ -962,14 +968,15 @@
             {
                 "name": "Flood Shot",
                 "desc": "Your Cast damages foes in an area and knocks them away.",
-                "icon": "icons\\Poseidon\\Flood_Shot.png",
+                "icon": "icons\\Poseidon\\Flood_Flare__Flood_Shot.png",
                 "singleton": "cast"
             },
             {
                 "name": "Flood Flare",
                 "desc": "Your Cast damages foes around you and knocks them away.",
-                "icon": "icons\\Poseidon\\Flood_Flare.png",
-                "singleton": "cast"
+                "icon": "icons\\Poseidon\\Flood_Flare__Flood_Shot.png",
+                "singleton": "cast",
+                "requires": [ "Aspect of Beowulf" ]
             },
             {
                 "name": "Tidal Dash",
@@ -1078,7 +1085,7 @@
     {
         "category": "gods",
         "name": "Zeus",
-        "equips": [
+        "traits": [
             {
                 "name": "Lightning Strike",
                 "desc": "Your Attack emits chain-lightning when you damage a foe.",
@@ -1094,14 +1101,15 @@
             {
                 "name": "Electric Shot",
                 "desc": "Your Cast is a burst of chain-lightning that bounces between foes.",
-                "icon": "icons\\Zeus\\Electric_Shot.png",
+                "icon": "icons\\Zeus\\Thunder_Flare__Electric_Shot.png",
                 "singleton": "cast"
             },
             {
                 "name": "Thunder Flare",
                 "desc": "Your Cast causes a lightning bolt to strike nearby foes.",
-                "icon": "icons\\Zeus\\Thunder_Flare.png",
-                "singleton": "cast"
+                "icon": "icons\\Zeus\\Thunder_Flare__Electric_Shot.png",
+                "singleton": "cast",
+                "requires": [ "Aspect of Beowulf" ]
             },
             {
                 "name": "Thunder Dash",
@@ -1200,7 +1208,7 @@
     {
         "category": "gods",
         "name": "Hades",
-        "equips": [
+        "traits": [
             {
                 "name": "Hades' Aid",
                 "desc": "Your Call becomes Hades' Aid, which briefly makes you Invisible; your God Gauge starts 10/20/30% full.\n",
@@ -1212,7 +1220,7 @@
     {
         "category": "arm_aspects",
         "name": "Stygian_Blade",
-        "equips": [
+        "traits": [
             {
                 "name": "Aspect of Zagreus (Stygian Blade)",
                 "desc": "The form in which the blade of the underworld first revealed itself.\nA blade such as this seeks not to remain idle for more than an aeon or two.",
@@ -1238,7 +1246,7 @@
     {
         "category": "arm_upgrades",
         "name": "Stygian_Blade",
-        "equips": [
+        "traits": [
             {
                 "name": "Breaching Slash",
                 "desc": "Your Attack deals +300% damage to Armor.",
@@ -1309,7 +1317,7 @@
     {
         "category": "arm_aspects",
         "name": "Eternal_Spear",
-        "equips": [
+        "traits": [
             {
                 "name": "Aspect of Zagreus (Eternal Spear)",
                 "desc": "The form in which the eternal spear first revealed itself.\nIts shape reflects its bearer's true self, hiding its own all the while.",
@@ -1335,7 +1343,7 @@
     {
         "category": "arm_upgrades",
         "name": "Eternal_Spear",
-        "equips": [
+        "traits": [
             {
                 "name": "Extending Jab",
                 "desc": "Your Attack has more range and deals +40% damage to distant foes.",
@@ -1406,7 +1414,7 @@
     {
         "category": "arm_aspects",
         "name": "Shield_of_Chaos",
-        "equips": [
+        "traits": [
             {
                 "name": "Aspect of Zagreus (Shield of Chaos)",
                 "desc": "The form in which the shield of chaos first revealed itself.\nSometimes the bone-etched visage shudders as though it means to speak.",
@@ -1432,7 +1440,7 @@
     {
         "category": "arm_upgrades",
         "name": "Shield_of_Chaos",
-        "equips": [
+        "traits": [
             {
                 "name": "Dread Flight",
                 "desc": "Your Special can strike up to 4 additional foes before returning.",
@@ -1503,7 +1511,7 @@
     {
         "category": "arm_aspects",
         "name": "Heart-Seeking_Bow",
-        "equips": [
+        "traits": [
             {
                 "name": "Aspect of Zagreus (Heart Seeking Bow)",
                 "desc": "The form in which the heart-seeking bow first revealed itself.\nIt senses stalwart hearts, mostly to stop them but occasionally to be used.",
@@ -1529,7 +1537,7 @@
     {
         "category": "arm_upgrades",
         "name": "Heart-Seeking_Bow",
-        "equips": [
+        "traits": [
             {
                 "name": "Twin Shot",
                 "desc": "Your Attack fires 2 shots side-by-side, but has reduced range.",
@@ -1600,7 +1608,7 @@
     {
         "category": "arm_aspects",
         "name": "Twin_Fists",
-        "equips": [
+        "traits": [
             {
                 "name": "Aspect of Zagreus (Twin Fists)",
                 "desc": "The form in which the Twin Fists first revealed themselves.\nThe twin fists are bound to their bearer, but most fiercely to each other.",
@@ -1626,7 +1634,7 @@
     {
         "category": "arm_upgrades",
         "name": "Twin_Fists",
-        "equips": [
+        "traits": [
             {
                 "name": "Breaching Cross",
                 "desc": "Your Dash-Strike pierces foes and deals +900% damage to Armor",
@@ -1697,7 +1705,7 @@
     {
         "category": "arm_aspects",
         "name": "Adamant_Rail",
-        "equips": [
+        "traits": [
             {
                 "name": "Aspect of Zagreus (Adamant Rail)",
                 "desc": "The form in which the Adamant Rail first revealed itself.\nThe image of the noble gryphon belies its true intent but not its power.",
@@ -1723,7 +1731,7 @@
     {
         "category": "arm_upgrades",
         "name": "Adamant_Rail",
-        "equips": [
+        "traits": [
             {
                 "name": "Flurry Fire",
                 "desc": "Your Attack is faster and more accurate; gain +6 ammo capacity.",
@@ -1814,7 +1822,7 @@
     {
         "category": "keepsakes",
         "name": "Cerberus",
-        "equips": [
+        "traits": [
             {
                 "name": "Old Spiked Collar",
                 "desc": "Gain +25/38/50 .\n",
@@ -1825,7 +1833,7 @@
     {
         "category": "keepsakes",
         "name": "Achilles",
-        "equips": [
+        "traits": [
             {
                 "name": "Myrmidon Bracer",
                 "desc": "Take 20/25/30% less damage from the front, but 10% more from the back.\n",
@@ -1836,7 +1844,7 @@
     {
         "category": "keepsakes",
         "name": "Nyx",
-        "equips": [
+        "traits": [
             {
                 "name": "Black Shawl",
                 "desc": "Deal 10/15/20% damage striking undamaged foes; also striking foes from behind.\n",
@@ -1847,7 +1855,7 @@
     {
         "category": "keepsakes",
         "name": "Thanatos",
-        "equips": [
+        "traits": [
             {
                 "name": "Pierced Butterfly",
                 "desc": "Gain +1/1.5/2% damage for each Encounter you clear without taking damage.\n",
@@ -1858,7 +1866,7 @@
     {
         "category": "keepsakes",
         "name": "Charon",
-        "equips": [
+        "traits": [
             {
                 "name": "Bone Hourglass",
                 "desc": "Items from the Well of Charon have durations increased by +4/6/8 Encounters.\n",
@@ -1869,7 +1877,7 @@
     {
         "category": "keepsakes",
         "name": "Hypnos",
-        "equips": [
+        "traits": [
             {
                 "name": "Chthonic Coin Purse",
                 "desc": "Receive 100/125/150  to spend as you please (once per escape attempt).\n",
@@ -1880,7 +1888,7 @@
     {
         "category": "keepsakes",
         "name": "Megaera",
-        "equips": [
+        "traits": [
             {
                 "name": "Skull Earring",
                 "desc": "Deal 20/30/40%  more damage while at 35%  or less.\n",
@@ -1891,7 +1899,7 @@
     {
         "category": "keepsakes",
         "name": "Orpheus",
-        "equips": [
+        "traits": [
             {
                 "name": "Distant Memory",
                 "desc": "Deal 10/20/30% more damage to distant foes (at least 500 units away).\n",
@@ -1902,7 +1910,7 @@
     {
         "category": "keepsakes",
         "name": "Dusa",
-        "equips": [
+        "traits": [
             {
                 "name": "Harpy Feather Duster",
                 "desc": "Broken urns have a 3/5/6% chance to contain healing items.\n",
@@ -1913,7 +1921,7 @@
     {
         "category": "keepsakes",
         "name": "Skelly",
-        "equips": [
+        "traits": [
             {
                 "name": "Lucky Tooth",
                 "desc": "Automatically restore up to 50/75/100  when your Life Total is depleted (once per escape attempt).\n",
@@ -1924,7 +1932,7 @@
     {
         "category": "keepsakes",
         "name": "Zeus",
-        "equips": [
+        "traits": [
             {
                 "name": "Thunder Signet",
                 "desc": "The next Boon you find will be from Zeus. His blessings have +10/15/20% chance to be Rare or better.\n",
@@ -1935,7 +1943,7 @@
     {
         "category": "keepsakes",
         "name": "Poseidon",
-        "equips": [
+        "traits": [
             {
                 "name": "Conch Shell",
                 "desc": "The next Boon you find will be from Poseidon. His blessings have +10/15/20% chance to be Rare or better.\n",
@@ -1946,7 +1954,7 @@
     {
         "category": "keepsakes",
         "name": "Athena",
-        "equips": [
+        "traits": [
             {
                 "name": "Owl Pendant",
                 "desc": "The next Boon you find will be from Athena. Her blessings have +10/15/20% chance to be Rare or better.\n",
@@ -1957,7 +1965,7 @@
     {
         "category": "keepsakes",
         "name": "Aphrodite",
-        "equips": [
+        "traits": [
             {
                 "name": "Eternal Rose",
                 "desc": "The next Boon you find will be from Aphrodite. Her blessings have +10/15/20% chance to be Rare or better.\n",
@@ -1968,7 +1976,7 @@
     {
         "category": "keepsakes",
         "name": "Ares",
-        "equips": [
+        "traits": [
             {
                 "name": "Blood-Filled Vial",
                 "desc": "The next Boon you find will be from Ares. His blessings have +10/15/20% chance to be Rare or better.\n",
@@ -1979,7 +1987,7 @@
     {
         "category": "keepsakes",
         "name": "Artemis",
-        "equips": [
+        "traits": [
             {
                 "name": "Adamant Arrowhead",
                 "desc": "The next Boon you find will be from Artemis. Her blessings have +10/15/20% chance to be Rare or better.\n",
@@ -1990,7 +1998,7 @@
     {
         "category": "keepsakes",
         "name": "Dionysus",
-        "equips": [
+        "traits": [
             {
                 "name": "Overflowing Cup",
                 "desc": "The next Boon you find will be from Dionysus. His blessings have +10/15/20% chance to be Rare or better.\n",
@@ -2001,7 +2009,7 @@
     {
         "category": "keepsakes",
         "name": "Hermes",
-        "equips": [
+        "traits": [
             {
                 "name": "Lambent Plume",
                 "desc": "Gain +1.0/1.1/1.2% Dodge chance and move speed for each Encounter you clear quickly.\n(\"Quickly\" varies based on the encounter type and biome. More time will be offered in higher biomes, and in special encounters, such as bosses, mini-bosses, and Thanatos Encounters.)\n\n",
@@ -2012,7 +2020,7 @@
     {
         "category": "keepsakes",
         "name": "Demeter",
-        "equips": [
+        "traits": [
             {
                 "name": "Frostbitten Horn",
                 "desc": "The next Boon you find will be from Demeter. Her blessings have +10/15/20% chance to be Rare or better.\n",
@@ -2023,7 +2031,7 @@
     {
         "category": "keepsakes",
         "name": "Chaos",
-        "equips": [
+        "traits": [
             {
                 "name": "Cosmic Egg",
                 "desc": "Enter Chaos Gates without losing . Blessings from Chaos have +20/30/40% chance to be Rare or better.\n",
@@ -2034,7 +2042,7 @@
     {
         "category": "keepsakes",
         "name": "Sisyphus",
-        "equips": [
+        "traits": [
             {
                 "name": "Shattered Shackle",
                 "desc": "Your Attack, Special, and Cast each deal +50/75/100% damage while not empowered by a Boon.\n",
@@ -2045,7 +2053,7 @@
     {
         "category": "keepsakes",
         "name": "Eurydice",
-        "equips": [
+        "traits": [
             {
                 "name": "Evergreen Acorn",
                 "desc": "In the final encounter in each underworld region, take 0 damage the first 3/4/5 times foes hit you.\n",
@@ -2056,7 +2064,7 @@
     {
         "category": "keepsakes",
         "name": "Patroclus",
-        "equips": [
+        "traits": [
             {
                 "name": "Broken Spearpoint",
                 "desc": "After taking damage, become invulnerable for 1/1.25/1.5 sec. Refreshes after 7 Sec.\n",
@@ -2067,7 +2075,7 @@
     {
         "category": "keepsakes",
         "name": "Persephone",
-        "equips": [
+        "traits": [
             {
                 "name": "Pom Blossom",
                 "desc": "After every 6/5/4 Encounters, gain +1 Lv. (a random Boon grows stronger).\n",
@@ -2078,7 +2086,7 @@
     {
         "category": "keepsakes",
         "name": "Hades",
-        "equips": [
+        "traits": [
             {
                 "name": "Sigil of the Dead",
                 "desc": "Your Call becomes Hades' Aid, which briefly makes you Invisible; your God Gauge starts 10/20/30% full.\n",
@@ -2089,7 +2097,7 @@
     {
         "category": "companions",
         "name": "Megaera",
-        "equips": [
+        "traits": [
             {
                 "name": "Companion Battie",
                 "desc": "Your Summon deals 2500 damage in an area near your closest foe, then continually down the line.\n** Cannot be used against any Fury Sisters\n\n",
@@ -2100,7 +2108,7 @@
     {
         "category": "companions",
         "name": "Thanatos",
-        "equips": [
+        "traits": [
             {
                 "name": "Companion Mort",
                 "desc": "Your Summon deals 3500 damage in an area in front of you, after a brief delay.\n** Cannot be used in Thanatos's encounters\n\n",
@@ -2111,7 +2119,7 @@
     {
         "category": "companions",
         "name": "Skelly",
-        "equips": [
+        "traits": [
             {
                 "name": "Companion Rib",
                 "desc": "Your Summon creates a distraction with 250, provoking your foes to attack it until it dies.\n** Cannot be used against Charon\n\n",
@@ -2122,7 +2130,7 @@
     {
         "category": "companions",
         "name": "Sisyphus",
-        "equips": [
+        "traits": [
             {
                 "name": "Companion Shady",
                 "desc": "Your Summon deals 1000 damage in an area and drops a smattering of , , and .\nDrops per use:\n\n1  pickup worth 10 \n1  pickup, worth 30 \n4  pickups, each healing 10 \n",
@@ -2133,7 +2141,7 @@
     {
         "category": "companions",
         "name": "Dusa",
-        "equips": [
+        "traits": [
             {
                 "name": "Companion Fidi",
                 "desc": "Your Summon joins you for 30 sec, repeatedly firing shots that petrify foes and deal 70 damage.\n",
@@ -2144,7 +2152,7 @@
     {
         "category": "companions",
         "name": "Achilles",
-        "equips": [
+        "traits": [
             {
                 "name": "Companion Antos",
                 "desc": "Your Summon deals 1500 damage to 2 foes one after another.\n",
@@ -2155,7 +2163,7 @@
     {
         "category": "empty_ability",
         "name": "attack",
-        "equips": [
+        "traits": [
             {
                 "name": "attack",
                 "desc": "",
@@ -2167,7 +2175,7 @@
     {
         "category": "empty_ability",
         "name": "boon",
-        "equips": [
+        "traits": [
             {
                 "name": "boon",
                 "desc": "",
@@ -2178,7 +2186,7 @@
     {
         "category": "empty_ability",
         "name": "call",
-        "equips": [
+        "traits": [
             {
                 "name": "call",
                 "desc": "",
@@ -2190,7 +2198,7 @@
     {
         "category": "empty_ability",
         "name": "cast",
-        "equips": [
+        "traits": [
             {
                 "name": "cast",
                 "desc": "",
@@ -2202,7 +2210,7 @@
     {
         "category": "empty_ability",
         "name": "dash",
-        "equips": [
+        "traits": [
             {
                 "name": "dash",
                 "desc": "",
@@ -2214,7 +2222,7 @@
     {
         "category": "empty_ability",
         "name": "special",
-        "equips": [
+        "traits": [
             {
                 "name": "special",
                 "desc": "",
@@ -2226,7 +2234,7 @@
     {
         "category": "charons_well",
         "name": "charon",
-        "equips": [
+        "traits": [
             {
                 "name": "Aether Net",
                 "desc": "You start Encounter(s) with your God Gauge 15% full.",
@@ -2362,7 +2370,7 @@
     {
         "category": "eurydice",
         "name": "eurydice",
-        "equips": [
+        "traits": [
             {
                 "name": "Ambrosia Delight",
                 "desc": "Loved by the gods. up to 2 random Boons of yours are upgraded to the next Rarity.",
@@ -2383,66 +2391,66 @@
     {
         "category": "special_item",
         "name": "Heart of Stone",
-        "equips": [
+        "traits": [
             {
                 "name": "Heart of Stone",
                 "desc": "You believe in Bouldy, and Bouldy believes in you.",
-                "icon": "icons\\special\\bouldy_blessing.png"
+                "icon": "icons_special\\bouldy_blessing.png"
             }
         ]
     },
     {
         "category": "special_item",
         "name": "God Mode",
-        "equips": [
+        "traits": [
             {
                 "name": "God Mode",
                 "desc": "Instantly makes you tougher, more so whenever you die. Death is not a big deal in the underworld. Try this if you find you're struggling, want focus on the story, or any reason.",
-                "icon": "icons\\special\\godmode.png"
+                "icon": "icons_special\\godmode.png"
             }
         ]
     },
     {
         "category": "special_item",
         "name": "Loyalty Card",
-        "equips": [
+        "traits": [
             {
                 "name": "Loyalty Card",
                 "desc": "Reduce the price of Charon's items by 20%",
-                "icon": "icons\\special\\membership_card_large.png"
+                "icon": "icons_special\\membership_card_large.png"
             }
         ]
     },
     {
         "category": "special_item",
         "name": "Darker Thirst",
-        "equips": [
+        "traits": [
             {
                 "name": "Darker Thirst",
                 "desc": "Whenever you find {!Icons.MetaPoint_Small} or {!Icons.GemSmall}, gain {#AltUpgradeFormat}+{$TooltipData.TooltipBonus}%{#PreviousFormat}.",
-                "icon": "icons\\special\\meta_gathered_darkerness_large.png"
+                "icon": "icons_special\\meta_gathered_darkerness_large.png"
             }
         ]
     },
     {
         "category": "special_item",
         "name": "Dark Thirst",
-        "equips": [
+        "traits": [
             {
                 "name": "Dark Thirst",
                 "desc": "Whenever you find {!Icons.MetaPoint_Small}, gain {#AltUpgradeFormat}+{$TooltipData.TooltipBonus}%{#PreviousFormat}.",
-                "icon": "icons\\special\\meta_gathered_darkness_large.png"
+                "icon": "icons_special\\meta_gathered_darkness_large.png"
             }
         ]
     },
     {
         "category": "special_item",
         "name": "meta_second_chance_large",
-        "equips": [
+        "traits": [
             {
                 "name": "meta_second_chance_large",
-                "desc": "TODO",
-                "icon": "icons\\special\\meta_second_chance_large.png"
+                "desc": "TODO is this death defiance??????",
+                "icon": "icons_special\\meta_second_chance_large.png"
             }
         ]
     }

@@ -5,5 +5,3 @@ Properties/launchSettings.json
 training_data/
 tests/
 *.csproj.user
-
-icons*/

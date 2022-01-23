@@ -5,7 +5,7 @@ using OCV = OpenCvSharp;
 
 namespace HadesBoonBot
 {
-    class Codex : IEnumerable<Codex.Provider.Equippable>
+    class Codex : IEnumerable<Codex.Provider.Trait>
     {
         public enum IconLoadMode
         {
@@ -32,7 +32,7 @@ namespace HadesBoonBot
             /// <summary>
             /// List of traits
             /// </summary>
-            public List<Equippable>? Equips { get; set; }
+            public List<Trait>? Traits { get; set; }
 
             /// <summary>
             /// Various types of trait
@@ -115,7 +115,7 @@ namespace HadesBoonBot
             /// <summary>
             /// Main trait class
             /// </summary>
-            public class Equippable
+            public class Trait
             {
                 public string? Name { get; set; }
 
@@ -138,6 +138,17 @@ namespace HadesBoonBot
                 /// </summary>
                 [JsonProperty("singleton")]
                 public Subcategory SingletonType { get; set; } = Subcategory.None;
+
+                /// <summary>
+                /// List of prerequisite traits from which all are required
+                /// </summary>
+                public List<string>? Requires { get; set; }
+
+                /// <summary>
+                /// List of prerequisite traits from which any will suffice
+                /// </summary>
+                [JsonProperty("requires_any")]
+                public List<string>? RequiresAny { get; set; }
 
                 /// <summary>
                 /// Icon data
@@ -194,7 +205,7 @@ namespace HadesBoonBot
             [OnDeserialized]
             void OnDeserialized(StreamingContext context)
             {
-                foreach (Equippable item in Equips!)
+                foreach (Trait item in Traits!)
                 {
                     item.Providers.Add(this);
                 }
@@ -202,7 +213,7 @@ namespace HadesBoonBot
 
             public override string ToString()
             {
-                return $"{Name} ({Equips!.Count} items)";
+                return $"{Name} ({Traits!.Count} items)";
             }
         }
 
@@ -216,12 +227,12 @@ namespace HadesBoonBot
             Providers = provs;
 
             //once loaded, do a pass and resolve duo boons (by boon name which is unique)
-            Dictionary<string, List<Provider.Equippable>> boonsByName = new();
+            Dictionary<string, List<Provider.Trait>> boonsByName = new();
             foreach (Provider god in Providers.Where(p => p.ProviderCategory == Provider.Category.Gods))
             {
-                foreach (var boon in god.Equips!)
+                foreach (var boon in god.Traits!)
                 {
-                    if (boonsByName.TryGetValue(boon.Name!, out List<Provider.Equippable>? existing))
+                    if (boonsByName.TryGetValue(boon.Name!, out List<Provider.Trait>? existing))
                     {
                         existing.Add(boon);
                     }
@@ -250,7 +261,7 @@ namespace HadesBoonBot
             //only get images if requested
             if (iconMode != IconLoadMode.None)
             {
-                foreach (Provider.Equippable item in this.Distinct())
+                foreach (Provider.Trait item in this.Distinct())
                 {
                     item.LoadIcon(iconMode);
                     item.MakeComparable();
@@ -275,7 +286,7 @@ namespace HadesBoonBot
         /// <param name="traits">Known traits</param>
         /// <returns>Weapon name</returns>
         /// <exception cref="Exception">Throws if we don't find exactly one weapon</exception>
-        public static string DetermineWeapon(List<Provider.Equippable> traits)
+        public static string DetermineWeapon(IEnumerable<Provider.Trait> traits)
         {
             HashSet<string> weaponsByTrait = new();
             foreach (var trait in traits)
@@ -300,11 +311,11 @@ namespace HadesBoonBot
             return weaponsByTrait.First();
         }
 
-        public IEnumerator<Provider.Equippable> GetEnumerator()
+        public IEnumerator<Provider.Trait> GetEnumerator()
         {
             foreach (Provider prov in Providers)
             {
-                foreach (Provider.Equippable item in prov.Equips!)
+                foreach (Provider.Trait item in prov.Traits!)
                 {
                     yield return item;
                 }

@@ -1,4 +1,4 @@
-﻿using OpenCvSharp;
+﻿using OCV = OpenCvSharp;
 using static HadesBoonBot.Codex.Provider;
 
 namespace HadesBoonBot
@@ -35,6 +35,15 @@ namespace HadesBoonBot
         public static float BoonColumnsMax => 6; //the highest number of columns that can be visible
         public static float BoonRowsMax => 7; //only the first column contains this many rows
 
+        OCV.Point VerificationPos => new(517 * Multiplier, 994 * Multiplier);
+        OCV.Size VerificationSize => new(29 * Multiplier, 41 * Multiplier);
+        static readonly OCV.Mat IconCast;
+
+        static ScreenMetadata()
+        {
+            IconCast = OCV.Cv2.ImRead(@"icons_overlay\icon_cast.png", OCV.ImreadModes.Unchanged);
+        }
+
         /// <summary>
         /// Find a rectangle containing the position of a trait in the image
         /// </summary>
@@ -42,11 +51,11 @@ namespace HadesBoonBot
         /// <param name="row">Trait row</param>
         /// <param name="result">Rectangle containing trait</param>
         /// <returns>Whether a valid trait location was provided</returns>
-        internal bool GetTraitRect(int column, int row, out Rect? result)
+        internal bool GetTraitRect(int column, int row, out OCV.Rect? result)
         {
             result = null;
 
-            Point2f startPoint = column == 0 //the distance between columns 0&1 is unique
+            OCV.Point2f startPoint = column == 0 //the distance between columns 0&1 is unique
                 ? new(FirstBoonIconX, FirstBoonIconY)
                 : new(SecondBoonIconX - BoonColumnSep, FirstBoonIconY);
 
@@ -67,10 +76,10 @@ namespace HadesBoonBot
                 startPoint.Y += BoonColumnYoffset;
             }
 
-            Point2f separation = new(BoonColumnSep, BoonRowSep);
+            OCV.Point2f separation = new(BoonColumnSep, BoonRowSep);
 
             //find the middle of the trait
-            Point middle = new(startPoint.X + column * separation.X, startPoint.Y + row * separation.Y);
+            OCV.Point middle = new(startPoint.X + column * separation.X, startPoint.Y + row * separation.Y);
 
             float halfSize = BoonWidth / 2.0f;
             result = new((int)(middle.X - halfSize), (int)(middle.Y - halfSize), (int)BoonWidth, (int)BoonWidth);
@@ -80,7 +89,7 @@ namespace HadesBoonBot
         /// <summary>
         /// Restrict some slots to categories/empty
         /// </summary>
-        private static readonly Dictionary<Point, Category> SlotsForCategories = new()
+        private static readonly Dictionary<OCV.Point, Category> SlotsForCategories = new()
         {
             { new(0, 0), Category.Companions },
             { new(0, BoonRowsMax - 1), Category.Keepsakes },
@@ -89,7 +98,7 @@ namespace HadesBoonBot
         /// <summary>
         /// Restrict other slots to subcategories/empty
         /// </summary>
-        private static readonly Dictionary<Point, Subcategory> SlotsForSubcategories = new()
+        private static readonly Dictionary<OCV.Point, Subcategory> SlotsForSubcategories = new()
         {
             { new(0, 1), Subcategory.Attack },
             { new(0, 2), Subcategory.Special },
@@ -105,9 +114,9 @@ namespace HadesBoonBot
         /// <param name="column">Trait column</param>
         /// <param name="row">Trait row</param>
         /// <returns>List of possible traits</returns>
-        internal IEnumerable<Equippable> FindPossibleTraits(Codex codex, int column, int row)
+        internal IEnumerable<Trait> FindPossibleTraits(Codex codex, int column, int row)
         {
-            IEnumerable<Equippable> possibleTraits = codex;
+            IEnumerable<Trait> possibleTraits = codex;
 
             bool isCategory = SlotsForCategories.TryGetValue(new(column, row), out Category filterCat);
             bool isSubCategory = SlotsForSubcategories.TryGetValue(new(column, row), out Subcategory filterSubCat);
