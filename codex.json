@@ -19,7 +19,7 @@
                 "name": "Crush Shot",
                 "desc": "Your Cast is a wide, short-range blast that inflicts Weak.",
                 "icon": "icons\\Aphrodite\\Crush_Shot__Passion_Flare.png",
-                "singleton": "cast",
+                "singleton": "cast"
             },
             {
                 "name": "Passion Flare",
