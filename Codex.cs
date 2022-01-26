@@ -5,7 +5,7 @@ using OCV = OpenCvSharp;
 
 namespace HadesBoonBot
 {
-    class Codex : IEnumerable<Codex.Provider.Trait>
+    class Codex : IEnumerable<Codex.Provider.Trait>, IDisposable
     {
         public enum IconLoadMode
         {
@@ -14,6 +14,8 @@ namespace HadesBoonBot
             Raw,
         }
 
+        public Dictionary<string, Provider.Trait> ByName { get; } = new();
+        public Dictionary<string, List<Provider.Trait>> ByIcon { get; } = new();
         public List<Provider> Providers { get; set; }
 
         public class Provider
@@ -194,7 +196,9 @@ namespace HadesBoonBot
                 {
                     if(NeedsPreprocess(Providers.First().ProviderCategory))
                     {
-                        Icon = CVUtil.MakeComparable(Icon!);
+                        var newIcon = CVUtil.MakeComparable(Icon!);
+                        Icon!.Dispose();
+                        Icon = newIcon;
                     }
                 }
             }
@@ -261,11 +265,25 @@ namespace HadesBoonBot
             //only get images if requested
             if (iconMode != IconLoadMode.None)
             {
-                foreach (Provider.Trait item in this.Distinct())
+                Parallel.ForEach(this.Distinct(), item =>
                 {
                     item.LoadIcon(iconMode);
                     item.MakeComparable();
+                });
+            }
+
+            //map names to traits, map icon paths too so we know when one is used for several traits
+            foreach (var trait in this)
+            {
+                ByName[trait.Name!] = trait;
+
+                string iconFile = trait.IconFile!;
+                if(!ByIcon.ContainsKey(iconFile))
+                {
+                    ByIcon.Add(iconFile, new());
                 }
+
+                ByIcon[iconFile].Add(trait);
             }
         }
 
@@ -286,7 +304,7 @@ namespace HadesBoonBot
         /// <param name="traits">Known traits</param>
         /// <returns>Weapon name</returns>
         /// <exception cref="Exception">Throws if we don't find exactly one weapon</exception>
-        public static string DetermineWeapon(IEnumerable<Provider.Trait> traits)
+        public static string? DetermineWeapon(IEnumerable<Provider.Trait> traits)
         {
             HashSet<string> weaponsByTrait = new();
             foreach (var trait in traits)
@@ -305,7 +323,8 @@ namespace HadesBoonBot
 
             if (weaponsByTrait.Count != 1)
             {
-                throw new Exception("Unable to determine active weapon from traits");
+                Console.Error.WriteLine("Unable to determine active weapon from traits");
+                return null;
             }
 
             return weaponsByTrait.First();
@@ -325,6 +344,18 @@ namespace HadesBoonBot
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        public void Dispose()
+        {
+            foreach (Provider.Trait trait in this)
+            {
+                if(trait.Icon != null)
+                {
+                    trait.Icon.Dispose();
+                    trait.Icon = null;
+                }
+            }
         }
     }
 }

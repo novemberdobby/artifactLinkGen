@@ -10,9 +10,10 @@ namespace HadesBoonBot
                 return 1;
             }
 
+            Lazy<Codex>? codex = null;
             try
             {
-                var codex = new Lazy<Codex>(() => Codex.FromFile("codex.json", Codex.IconLoadMode.Raw));
+                codex = new(() => Codex.FromFile("codex.json", Codex.IconLoadMode.Raw));
 
                 switch (args[0])
                 {
@@ -34,6 +35,13 @@ namespace HadesBoonBot
             {
                 Console.Error.WriteLine("Exception during execution: {0}", ex);
                 return 2;
+            }
+            finally
+            {
+                if(codex != null && codex.IsValueCreated)
+                {
+                    codex.Value.Dispose();
+                }
             }
 
             return 0;
