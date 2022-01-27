@@ -330,6 +330,17 @@ namespace HadesBoonBot
             return weaponsByTrait.First();
         }
 
+        /// <summary>
+        /// Find a list of all traits that share icons with this one
+        /// </summary>
+        /// <param name="traitName">Trait to find matches for</param>
+        /// <returns>A list of traits including the one that was passed in</returns>
+        public IEnumerable<Provider.Trait> GetIconSharingTraits(string traitName)
+        {
+            string iconFile = ByName[traitName].IconFile!;
+            return ByIcon[iconFile].OrderBy(t => t.Name);
+        }
+
         public IEnumerator<Provider.Trait> GetEnumerator()
         {
             foreach (Provider prov in Providers)
