@@ -2246,11 +2246,6 @@
                 "icon": "icons\\charons_well\\Braid_of_Atlas.png"
             },
             {
-                "name": "Centaur Soul",
-                "desc": "Gain +25 (without restoring ).",
-                "icon": "icons\\charons_well\\Centaur_Soul.png"
-            },
-            {
                 "name": "Chimaera Jerky",
                 "desc": "Your Special deals +40% damage.",
                 "icon": "icons\\charons_well\\Chimaera_Jerky.png"
@@ -2271,19 +2266,9 @@
                 "icon": "icons\\charons_well\\Eye_of_Lamia.png"
             },
             {
-                "name": "Fateful Twist",
-                "desc": "Gain a random item offered from the Well of Charon.",
-                "icon": "icons\\charons_well\\Fateful_Twist.png"
-            },
-            {
                 "name": "Flame Wheels Release",
                 "desc": "Prevent Flame Wheel foes from appearing in Encounter(s).",
                 "icon": "icons\\charons_well\\Flame_Wheels_Release.png"
-            },
-            {
-                "name": "Gaea's Treasure",
-                "desc": "Gain 11-14  (WIP)",
-                "icon": "icons\\charons_well\\Gaea's_Treasure.png"
             },
             {
                 "name": "HydraLite",
@@ -2294,11 +2279,6 @@
                 "name": "Ignited Ichor",
                 "desc": "Gain 20% move speed.",
                 "icon": "icons\\charons_well\\Ignited_Ichor.png"
-            },
-            {
-                "name": "Life Essence",
-                "desc": "Restore up to 22-38%  (rounded up).",
-                "icon": "icons\\charons_well\\Life_Essence.png"
             },
             {
                 "name": "Light of Ixion",
@@ -2316,16 +2296,6 @@
                 "icon": "icons\\charons_well\\Nemesis_Crest.png"
             },
             {
-                "name": "Night Spindle",
-                "desc": "Gain +1 use of your Chthonic Companion's Summon.",
-                "icon": "icons\\charons_well\\Night_Spindle.png"
-            },
-            {
-                "name": "Price of Midas",
-                "desc": "Gain   = 1.1 - 1.8x  cost (for a blood price) (WIP)",
-                "icon": "icons\\charons_well\\Price_of_Midas.png"
-            },
-            {
                 "name": "Prometheus Stone",
                 "desc": "Gain +1  for your Cast.",
                 "icon": "icons\\charons_well\\Prometheus_Stone.png"
@@ -2339,11 +2309,6 @@
                 "name": "Stygian Shard",
                 "desc": "Traps deal +500% damage to your foes.",
                 "icon": "icons\\charons_well\\Stygian_Shard.png"
-            },
-            {
-                "name": "Tinge of Erebus",
-                "desc": "Gain 12-26",
-                "icon": "icons\\charons_well\\Tinge_of_Erebus.png"
             },
             {
                 "name": "Touch of Styx",
