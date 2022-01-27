@@ -2296,11 +2296,6 @@
                 "icon": "icons\\charons_well\\Ignited_Ichor.png"
             },
             {
-                "name": "Kiss of Styx",
-                "desc": "Replenish 1 use of Death Defiance.",
-                "icon": "icons\\charons_well\\Kiss_of_Styx.png"
-            },
-            {
                 "name": "Life Essence",
                 "desc": "Restore up to 22-38%  (rounded up).",
                 "icon": "icons\\charons_well\\Life_Essence.png"
