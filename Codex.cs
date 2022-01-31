@@ -14,6 +14,11 @@ namespace HadesBoonBot
             Raw,
         }
 
+        /// <summary>
+        /// Empty/invalid slot, almost anything can be this
+        /// </summary>
+        public Provider.Trait EmptyBoon;
+
         public Dictionary<string, Provider.Trait> ByName { get; } = new();
         public Dictionary<string, List<Provider.Trait>> ByIcon { get; } = new();
         public List<Provider> Providers { get; set; }
@@ -117,7 +122,7 @@ namespace HadesBoonBot
             /// <summary>
             /// Main trait class
             /// </summary>
-            public class Trait
+            public sealed class Trait : IDisposable
             {
                 public string? Name { get; set; }
 
@@ -134,6 +139,12 @@ namespace HadesBoonBot
                 [JsonRequired]
                 [JsonProperty("icon")]
                 public string? IconFile { get; set; }
+
+                /// <summary>
+                /// Icon data
+                /// </summary>
+                [JsonIgnore]
+                public OCV.Mat? Icon { get; set; }
 
                 /// <summary>
                 /// See Subcategory enum
@@ -153,12 +164,6 @@ namespace HadesBoonBot
                 public List<string>? RequiresAny { get; set; }
 
                 /// <summary>
-                /// Icon data
-                /// </summary>
-                [JsonIgnore]
-                public OCV.Mat? Icon { get; set; }
-
-                /// <summary>
                 /// List of providers, normally one but duo boons have two
                 /// </summary>
                 [JsonIgnore]
@@ -168,19 +173,32 @@ namespace HadesBoonBot
                 /// Trait category, if more than one provider exists they'll all be of the same category
                 /// </summary>
                 public Category Category => Providers.First().ProviderCategory;
-                
+
                 /// <summary>
                 /// Read icon data, throws if it fails
                 /// </summary>
                 public void LoadIcon(IconLoadMode mode)
                 {
-                    if(mode == IconLoadMode.Raw)
+                    if (mode == IconLoadMode.Raw)
                     {
                         Icon = OCV.Cv2.ImRead(IconFile!, OCV.ImreadModes.Unchanged)!;
                     }
                     else
                     {
                         Icon = OCV.Cv2.ImRead(IconFile!)!;
+                    }
+
+                    if (Icon == null || Icon.Empty())
+                    {
+                        throw new Exception($"Failed to load icon: {IconFile}");
+                    }
+
+                    //edit the icon so as to make it more easily comparable with others
+                    if (NeedsPreprocess(Category))
+                    {
+                        var newIcon = CVUtil.MakeComparable(Icon);
+                        Icon.Dispose();
+                        Icon = newIcon;
                     }
                 }
 
@@ -189,16 +207,11 @@ namespace HadesBoonBot
                     return Name!;
                 }
 
-                /// <summary>
-                /// Edit the trait icon so as to make it more easily comparable with others
-                /// </summary>
-                public void MakeComparable()
+                public void Dispose()
                 {
-                    if(NeedsPreprocess(Providers.First().ProviderCategory))
+                    if (Icon != null)
                     {
-                        var newIcon = CVUtil.MakeComparable(Icon!);
-                        Icon!.Dispose();
-                        Icon = newIcon;
+                        Icon.Dispose();
                     }
                 }
             }
@@ -229,6 +242,7 @@ namespace HadesBoonBot
         private Codex(List<Provider> provs, IconLoadMode iconMode)
         {
             Providers = provs;
+            EmptyBoon = this.First(t => t.Name == "boon");
 
             //once loaded, do a pass and resolve duo boons (by boon name which is unique)
             Dictionary<string, List<Provider.Trait>> boonsByName = new();
@@ -265,10 +279,9 @@ namespace HadesBoonBot
             //only get images if requested
             if (iconMode != IconLoadMode.None)
             {
-                Parallel.ForEach(this.Distinct(), item =>
+                Parallel.ForEach(this, item =>
                 {
                     item.LoadIcon(iconMode);
-                    item.MakeComparable();
                 });
             }
 
@@ -341,6 +354,40 @@ namespace HadesBoonBot
             return ByIcon[iconFile].OrderBy(t => t.Name);
         }
 
+        /// <summary>
+        /// Does this look like an empty slot, or an invalid one (i.e. outside the tray)?
+        /// </summary>
+        public static bool IsSlotFilled(Provider.Trait? trait)
+        {
+            return trait != null && trait.Category != Provider.Category.Empty_Ability;
+        }
+
+        /// <summary>
+        /// Compare trait equality by name; don't use if both instances of Duo boons are desired
+        /// </summary>
+        public class TraitEqualityComparer : IEqualityComparer<Provider.Trait>
+        {
+            public bool Equals(Provider.Trait? left, Provider.Trait? right)
+            {
+                if (ReferenceEquals(left, right))
+                {
+                    return true;
+                }
+
+                if(left == null || right == null)
+                {
+                    return false;
+                }
+
+                return left.Name == right.Name;
+            }
+
+            public int GetHashCode(Provider.Trait? trait)
+            {
+                return (trait?.Name == null ? 0 : trait.Name.GetHashCode());
+            }
+        }
+
         public IEnumerator<Provider.Trait> GetEnumerator()
         {
             foreach (Provider prov in Providers)
@@ -361,11 +408,7 @@ namespace HadesBoonBot
         {
             foreach (Provider.Trait trait in this)
             {
-                if(trait.Icon != null)
-                {
-                    trait.Icon.Dispose();
-                    trait.Icon = null;
-                }
+                trait.Dispose();
             }
         }
     }

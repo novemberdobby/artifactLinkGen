@@ -114,7 +114,7 @@ namespace HadesBoonBot
         /// <param name="column">Trait column</param>
         /// <param name="row">Trait row</param>
         /// <returns>List of possible traits</returns>
-        internal IEnumerable<Trait> FindPossibleTraits(Codex codex, int column, int row)
+        internal static IEnumerable<Trait> GetSlotTraits(Codex codex, int column, int row)
         {
             IEnumerable<Trait> possibleTraits = codex;
 
@@ -134,8 +134,10 @@ namespace HadesBoonBot
                 possibleTraits = codex.Where(e => !SlotsForCategories.Values.Any(v => e.Category == v) && !SlotsForSubcategories.Values.Any(v => e.SingletonType == v));
             }
 
-            possibleTraits = possibleTraits.Concat(codex.Where(t => t.Name == "boon")); //"boon" is an empty slot, anything can be this
-            possibleTraits = possibleTraits.Distinct();
+            //TODO: actually, EmptyBoon can't appear in the 5abils slots
+            possibleTraits = possibleTraits.Concat(new[] { codex.EmptyBoon }); //any slot can be empty (also used as "invalid" where we're not in the tray any more)
+
+            possibleTraits = possibleTraits.Distinct(new Codex.TraitEqualityComparer());
             return possibleTraits;
         }
     }

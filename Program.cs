@@ -1,30 +1,43 @@
+﻿using OCV = OpenCvSharp;
+using Cv2 = OpenCvSharp.Cv2;
+
 namespace HadesBoonBot
 {
     class Program
     {
         static int Main(string[] args)
         {
-            if(args.Length == 0)
+            //TODO this should really be an argument
+#if DEBUG
+            const bool debugOutput = true;
+#else
+            const bool debugOutput = false;
+#endif
+
+            if (args.Length == 0)
             {
                 Console.WriteLine($"Invalid arguments");
                 return 1;
             }
 
-            Lazy<Codex>? codex = null;
+            using var codex = Codex.FromFile("codex.json", Codex.IconLoadMode.Raw);
             try
             {
-                codex = new(() => Codex.FromFile("codex.json", Codex.IconLoadMode.Raw));
-
+                string[] cmdArgs = args.Skip(1).ToArray();
                 switch (args[0])
                 {
                     case "trainingdatagen":
-                        TrainingDataGen tp = new();
-                        tp.Run(args, codex);
+                        {
+                            TrainingDataGen tp = new();
+                            tp.Run(args, codex);
+                        }
                         break;
 
                     case "classify_psnr":
-                        ClassifierPSNR classifier = new();
-                        return classifier.Run(args, codex);
+                        {
+                            using IClassifier classifier = new ClassifierPSNR(cmdArgs, codex);
+                            return Classifiers.Run(cmdArgs, debugOutput, codex, classifier);
+                        }
 
                     default:
                         Console.WriteLine($"Unknown mode {args[0]}");
@@ -35,13 +48,6 @@ namespace HadesBoonBot
             {
                 Console.Error.WriteLine("Exception during execution: {0}", ex);
                 return 2;
-            }
-            finally
-            {
-                if(codex != null && codex.IsValueCreated)
-                {
-                    codex.Value.Dispose();
-                }
             }
 
             return 0;
