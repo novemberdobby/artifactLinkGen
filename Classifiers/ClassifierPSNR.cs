@@ -66,19 +66,20 @@ namespace HadesBoonBot
 
             //build list of potential trait locations on the screen
             List<(int Column, int Row, OCV.Rect traitRect)> slots = new();
-            for (int row = 0; row < ScreenMetadata.BoonRowsMax; row++)
+            for (int column = 0; column < ScreenMetadata.BoonColumnsMax; column++)
             {
-                for (int column = 0; column < ScreenMetadata.BoonColumnsMax; column++)
+                for (int row = 0; row < ScreenMetadata.BoonRowsMax; row++)
                 {
                     if (meta.GetTraitRect(column, row, out OCV.Rect? traitRect))
                     {
                         slots.Add((column, row, traitRect!.Value));
+                        slotResults.Add(new());
                     }
                 }
             }
 
             //classify each one
-            Parallel.ForEach(slots, slot =>
+            Parallel.ForEach(slots, (slot, _, iter) =>
             {
                 (int column, int row, OCV.Rect traitRect) = slot;
 
@@ -144,10 +145,7 @@ namespace HadesBoonBot
 
                 //store results
                 var ordered = matches.OrderByDescending(p => matchValues[p.Filename]).ToList();
-                lock (slotResults)
-                {
-                    slotResults.Add((column, row, ordered));
-                }
+                slotResults[(int)iter] = (column, row, ordered);
 
                 //save "source" vs "best guess" thumbs
                 if (debugPath != null)
@@ -173,6 +171,49 @@ namespace HadesBoonBot
                     }
                 }
             });
+
+            //detect when we run out of traits, otherwise we might start picking up pinned items/random other bits of the screen
+            {
+                bool emptySlotsFound = false;
+                int emptySlotRun = 0;
+                const int maxEmptySlotRun = 3;
+                string shortFile = Path.GetFileName(filePath);
+
+                for (int i = 0; i < slotResults.Count; i++)
+                {
+                    var slot = slotResults[i];
+
+                    //skip first column as people may choose to leave their base upgrades empty (weird tbh)
+                    if (slot.Column == 0)
+                    {
+                        continue;
+                    }
+
+                    var bestMatch = slot.Matches.First();
+                    if (!Codex.IsSlotFilled(bestMatch.Trait))
+                    {
+                        emptySlotRun++;
+                    }
+                    else
+                    {
+                        emptySlotRun = 0;
+                    }
+
+                    if (emptySlotRun >= maxEmptySlotRun)
+                    {
+                        int removeFrom = i - maxEmptySlotRun;
+                        Console.WriteLine($"Detected empty slots after #{removeFrom} in {shortFile}");
+                        slotResults.RemoveRange(removeFrom, slotResults.Count - removeFrom);
+                        emptySlotsFound = true;
+                        break;
+                    }
+                }
+
+                if (!emptySlotsFound)
+                {
+                    Console.WriteLine($"Failed to detect a run of empty slots in {shortFile}. This could be suspicious but doesn't necessarily indicate an invalid screen.");
+                }
+            }
 
             if (debugPath != null)
             {
