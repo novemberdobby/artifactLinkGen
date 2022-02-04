@@ -2332,16 +2332,6 @@
         "name": "eurydice",
         "traits": [
             {
-                "name": "Ambrosia Delight",
-                "desc": "Loved by the gods. up to 2 random Boons of yours are upgraded to the next Rarity.",
-                "icon": "icons\\eurydice\\Ambrosia_Delight.png"
-            },
-            {
-                "name": "Pom Porridge",
-                "desc": "An Underworld delicacy; up to 4 random Boons of yours gain +1 Lv.",
-                "icon": "icons\\eurydice\\Pom_Porridge.png"
-            },
-            {
                 "name": "Refreshing Nectar",
                 "desc": "A rare and fragrant beverage; the next 3 Boons you find have upgraded Rarity.",
                 "icon": "icons\\eurydice\\Refreshing_Nectar.png"
