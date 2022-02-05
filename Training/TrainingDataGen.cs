@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using Cv2 = OpenCvSharp.Cv2;
 using OCV = OpenCvSharp;
 
@@ -27,7 +27,14 @@ namespace HadesBoonBot
                 Lazy<OCV.Mat> image = new(() =>
                 {
                     Console.WriteLine($"Reading {screen.FileName}");
-                    return Cv2.ImRead(screen.FileName);
+                    using var loaded = Cv2.ImRead(screen.FileName, OCV.ImreadModes.Unchanged);
+                    var validated = ScreenMetadata.TryMakeValidScreen(loaded);
+                    if(validated == null)
+                    {
+                        throw new Exception($"Screen is no longer valid: {screen.FileName}");
+                    }
+
+                    return validated;
                 });
 
                 foreach (var trait in screen.Traits!)
