@@ -1,4 +1,4 @@
-﻿using OCV = OpenCvSharp;
+using OCV = OpenCvSharp;
 using static HadesBoonBot.Codex.Provider;
 
 namespace HadesBoonBot
@@ -10,7 +10,7 @@ namespace HadesBoonBot
     {
         public ScreenMetadata(int imageWidth)
         {
-            if(imageWidth <= 0)
+            if (imageWidth <= 0)
             {
                 throw new ArgumentException("Image width must be > 0", nameof(imageWidth));
             }
@@ -35,9 +35,12 @@ namespace HadesBoonBot
         public static float BoonColumnsMax => 6; //the highest number of columns that can be visible
         public static float BoonRowsMax => 7; //only the first column contains this many rows
 
-        OCV.Point VerificationPos => new(517 * Multiplier, 994 * Multiplier);
-        OCV.Size VerificationSize => new(29 * Multiplier, 41 * Multiplier);
+        OCV.Point CastCheckPos => new(517 * Multiplier, 994 * Multiplier);
+        OCV.Size CastCheckSize => new(29 * Multiplier, 41 * Multiplier);
         static readonly OCV.Mat IconCast;
+
+        OCV.Point HealthCheckPos => new(62 * Multiplier, 1009 * Multiplier);
+        OCV.Size HealthCheckSize => new(300 * Multiplier, 17 * Multiplier);
 
         static ScreenMetadata()
         {
@@ -139,6 +142,84 @@ namespace HadesBoonBot
 
             possibleTraits = possibleTraits.Distinct(new Codex.TraitEqualityComparer());
             return possibleTraits;
+        }
+
+        /// <summary>
+        /// Determine whether this image looks like a valid victory screen
+        /// </summary>
+        /// <param name="screen">Screenshot</param>
+        /// <returns>Validity score</returns>
+        internal static int IsValidScreenML(OCV.Mat screen)
+        {
+            ScreenMetadata meta = new(screen.Width);
+
+            //TODO predict without having to use any temp files
+            string tempDir = Path.Combine(Path.GetTempPath(), $"hbb_{Guid.NewGuid()}");
+            Directory.CreateDirectory(tempDir);
+
+            List<Task<ML.ModelOutput>> tasks = new();
+            try
+            {
+                //look for a cast icon which is always present at this location
+                {
+                    using OCV.Mat? chopped = GetRect(screen, meta.CastCheckPos, meta.CastCheckSize);
+                    if(chopped == null)
+                    {
+                        return 0;
+                    }
+
+                    using OCV.Mat resized = chopped.Resize(IconCast.Size(), 0, 0, OCV.InterpolationFlags.Cubic);
+                    using OCV.Mat withAlpha = resized.CvtColor(OCV.ColorConversionCodes.BGR2BGRA);
+
+                    //stomp alpha
+                    OCV.Cv2.MixChannels(new[] { IconCast }, new[] { withAlpha }, new[] { 3, 3 });
+
+                    string tempFile = Path.Combine(tempDir, "cast.png");
+                    withAlpha.SaveImage(tempFile);
+                    var sampleData = new ML.ModelInput(tempFile);
+                    tasks.Add(Task.Factory.StartNew(() => ML.CastCheckModel.Predict(sampleData)));
+                }
+
+                //check healthbar area
+                {
+                    using OCV.Mat? chopped = GetRect(screen, meta.HealthCheckPos, meta.HealthCheckSize);
+                    if (chopped == null)
+                    {
+                        return 0;
+                    }
+
+                    string tempFile = Path.Combine(tempDir, "health.png");
+                    chopped.SaveImage(tempFile);
+                    var sampleData = new ML.ModelInput(tempFile);
+                    tasks.Add(Task.Factory.StartNew(() => ML.HealthCheckModel.Predict(sampleData)));
+                }
+            }
+            finally
+            {
+                Task.WaitAll(tasks.ToArray());
+                Directory.Delete(tempDir, true);
+            }
+
+            //calculate score
+            return tasks.Sum(t => ML.Util.IsGood(t.Result) ? 1 : 0);
+        }
+
+        /// <summary>
+        /// Try to extract a submat from an image
+        /// </summary>
+        /// <param name="image">Image to extract from</param>
+        /// <param name="pos">Rectangle top left</param>
+        /// <param name="size">Rectangle size</param>
+        /// <returns>Material, or null if the bounds weren't valid</returns>
+        private static OCV.Mat? GetRect(OCV.Mat image, OCV.Point pos, OCV.Size size)
+        {
+            OCV.Rect rect = new(pos, size);
+            if (rect.Left < 0 || rect.Top < 0 || rect.Right > image.Width || rect.Bottom > image.Height)
+            {
+                return null;
+            }
+
+            return image.SubMat(rect);
         }
     }
 }
