@@ -1,4 +1,4 @@
-using OCV = OpenCvSharp;
+﻿using OCV = OpenCvSharp;
 using static HadesBoonBot.Codex.Provider;
 
 namespace HadesBoonBot
@@ -144,6 +144,87 @@ namespace HadesBoonBot
             return possibleTraits;
         }
 
+        #region Screen validation
+
+        /// <summary>
+        /// Perform initial checks on a victory screen, determine whether it's a supported resolution/aspect ratio
+        /// </summary>
+        /// <param name="original">Victory screen</param>
+        /// <param name="debugFilename">Filename for debug purposes</param>
+        /// <returns>Corrected image if checks pass, otherwise null</returns>
+        internal static OCV.Mat? TryMakeValidScreen(OCV.Mat original, string? debugFilename = null)
+        {
+            OCV.Mat image = original.Clone();
+
+            //some images have a strange <255 alpha border (???), remove that
+            if (image.Channels() == 4)
+            {
+                using var alpha = image.ExtractChannel(3);
+                using var alphaThresh = alpha.Threshold(254, 255, OCV.ThresholdTypes.Binary);
+
+                //compute hull
+                alphaThresh.FindContours(out OCV.Point[][] alphaContours, out _, OCV.RetrievalModes.External, OCV.ContourApproximationModes.ApproxSimple);
+                var alphaBound = OCV.Cv2.BoundingRect(alphaContours.SelectMany(c => c));
+
+                if (alphaBound.Width < image.Width || alphaBound.Height < image.Height)
+                {
+                    //crop it out
+                    var cropped = image.SubMat(alphaBound);
+                    image.Dispose();
+                    image = cropped;
+
+                    if(debugFilename != null)
+                    {
+                        Console.WriteLine($"Found alpha channel letterboxing in {debugFilename}");
+                    }
+                }
+
+                //always convert to bgr for later operations (including those beyond this function)
+                var bgr = image.CvtColor(OCV.ColorConversionCodes.BGRA2BGR);
+                image.Dispose();
+                image = bgr;
+            }
+
+            //then undo any normal letterboxing
+            using var grey = image.CvtColor(OCV.ColorConversionCodes.BGR2GRAY);
+            using var thresh = grey.Threshold(0, 255, OCV.ThresholdTypes.Binary);
+            thresh.FindContours(out OCV.Point[][] contours, out _, OCV.RetrievalModes.External, OCV.ContourApproximationModes.ApproxSimple);
+
+            var bounding = OCV.Cv2.BoundingRect(contours.SelectMany(c => c));
+            if (bounding.Width < image.Width || bounding.Height < image.Height)
+            {
+                var cropped = image.SubMat(bounding);
+                image.Dispose();
+                image = cropped;
+
+                if (debugFilename != null)
+                {
+                    Console.WriteLine($"Found rgb letterboxing in {debugFilename}");
+                }
+            }
+
+            var aspect = AspectRatio.Measure(image.Size());
+            if (aspect == AspectRatio.Ratio._16_9)
+            {
+                //send it back, this is what we expect. if it's the right size but isn't not a victory screen (e.g. FHD camera picture), the ML pass *should* notice
+                return image;
+            }
+            else if (aspect == AspectRatio.Ratio._21_9)
+            {
+                //the game adds "letterboxes" (padding images) at the sides for widescreen, so chop those off to make it 16:9
+                int widthForHeight = (int)(image.Height * AspectRatio.Values[AspectRatio.Ratio._16_9]);
+
+                OCV.Rect subArea = new(image.Width / 2 - widthForHeight / 2, 0, widthForHeight, image.Height);
+                var cropped = image.SubMat(subArea);
+                image.Dispose();
+                return cropped;
+            }
+
+            //invalid, clean up
+            image.Dispose();
+            return null;
+        }
+
         /// <summary>
         /// Determine whether this image looks like a valid victory screen
         /// </summary>
@@ -203,6 +284,8 @@ namespace HadesBoonBot
             //calculate score
             return tasks.Sum(t => ML.Util.IsGood(t.Result) ? 1 : 0);
         }
+
+        #endregion
 
         /// <summary>
         /// Try to extract a submat from an image
