@@ -2351,10 +2351,10 @@
     },
     {
         "category": "special_item",
-        "name": "God Mode",
+        "name": "Deus Ex Machina",
         "traits": [
             {
-                "name": "God Mode",
+                "name": "Deus Ex Machina",
                 "desc": "Instantly makes you tougher, more so whenever you die. Death is not a big deal in the underworld. Try this if you find you're struggling, want focus on the story, or any reason.",
                 "icon": "icons_special\\godmode.png"
             }
