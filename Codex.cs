@@ -34,12 +34,18 @@ namespace HadesBoonBot
             /// <summary>
             /// Provider pool/name, e.g. a god, weapon, etc
             /// </summary>
-            public string? Name { get; set; }
+            public string Name { get; set; }
             
             /// <summary>
             /// List of traits
             /// </summary>
-            public List<Trait>? Traits { get; set; }
+            public List<Trait> Traits { get; set; }
+
+            public Provider()
+            {
+                Name = string.Empty;
+                Traits = new();
+            }
 
             /// <summary>
             /// Various types of trait
@@ -124,21 +130,21 @@ namespace HadesBoonBot
             /// </summary>
             public sealed class Trait : IDisposable
             {
-                public string? Name { get; set; }
+                public string Name { get; set; }
 
                 /// <summary>
                 /// Textual description of trait with no image data (i.e. "any X you collect is worth..." currently has no info on what X is)
                 /// </summary>
                 [JsonRequired]
                 [JsonProperty("desc")]
-                public string? Description { get; set; }
+                public string Description { get; set; }
 
                 /// <summary>
                 /// Path to icon file
                 /// </summary>
                 [JsonRequired]
                 [JsonProperty("icon")]
-                public string? IconFile { get; set; }
+                public string IconFile { get; set; }
 
                 /// <summary>
                 /// Icon data
@@ -174,6 +180,13 @@ namespace HadesBoonBot
                 /// </summary>
                 public Category Category => Providers.First().ProviderCategory;
 
+                public Trait(string name, string description, string iconFile)
+                {
+                    Name = name;
+                    Description = description;
+                    IconFile = iconFile;
+                }
+
                 /// <summary>
                 /// Read icon data, throws if it fails
                 /// </summary>
@@ -181,11 +194,11 @@ namespace HadesBoonBot
                 {
                     if (mode == IconLoadMode.Raw)
                     {
-                        Icon = OCV.Cv2.ImRead(IconFile!, OCV.ImreadModes.Unchanged)!;
+                        Icon = OCV.Cv2.ImRead(IconFile, OCV.ImreadModes.Unchanged);
                     }
                     else
                     {
-                        Icon = OCV.Cv2.ImRead(IconFile!)!;
+                        Icon = OCV.Cv2.ImRead(IconFile);
                     }
 
                     if (Icon == null || Icon.Empty())
@@ -204,7 +217,7 @@ namespace HadesBoonBot
 
                 public override string ToString()
                 {
-                    return Name!;
+                    return Name;
                 }
 
                 public void Dispose()
@@ -222,7 +235,7 @@ namespace HadesBoonBot
             [OnDeserialized]
             void OnDeserialized(StreamingContext context)
             {
-                foreach (Trait item in Traits!)
+                foreach (Trait item in Traits)
                 {
                     item.Providers.Add(this);
                 }
@@ -230,7 +243,7 @@ namespace HadesBoonBot
 
             public override string ToString()
             {
-                return $"{Name} ({Traits!.Count} items)";
+                return $"{Name} ({Traits.Count} items)";
             }
         }
 
@@ -248,15 +261,15 @@ namespace HadesBoonBot
             Dictionary<string, List<Provider.Trait>> boonsByName = new();
             foreach (Provider god in Providers.Where(p => p.ProviderCategory == Provider.Category.Gods))
             {
-                foreach (var boon in god.Traits!)
+                foreach (var boon in god.Traits)
                 {
-                    if (boonsByName.TryGetValue(boon.Name!, out List<Provider.Trait>? existing))
+                    if (boonsByName.TryGetValue(boon.Name, out List<Provider.Trait>? existing))
                     {
                         existing.Add(boon);
                     }
                     else
                     {
-                        boonsByName.Add(boon.Name!, new() { boon });
+                        boonsByName.Add(boon.Name, new() { boon });
                     }
                 }
             }
@@ -288,9 +301,9 @@ namespace HadesBoonBot
             //map names to traits, map icon paths too so we know when one is used for several traits
             foreach (var trait in this)
             {
-                ByName[trait.Name!] = trait;
+                ByName[trait.Name] = trait;
 
-                string iconFile = trait.IconFile!;
+                string iconFile = trait.IconFile;
                 if(!ByIcon.ContainsKey(iconFile))
                 {
                     ByIcon.Add(iconFile, new());
@@ -326,7 +339,7 @@ namespace HadesBoonBot
                 {
                     case Provider.Category.Arm_Aspects:
                     case Provider.Category.Arm_Upgrades:
-                        weaponsByTrait.Add(trait.Providers.First().Name!);
+                        weaponsByTrait.Add(trait.Providers.First().Name);
                         break;
 
                     default:
@@ -350,7 +363,7 @@ namespace HadesBoonBot
         /// <returns>A list of traits including the one that was passed in</returns>
         public IEnumerable<Provider.Trait> GetIconSharingTraits(string traitName)
         {
-            string iconFile = ByName[traitName].IconFile!;
+            string iconFile = ByName[traitName].IconFile;
             return ByIcon[iconFile].OrderBy(t => t.Name);
         }
 
@@ -392,7 +405,7 @@ namespace HadesBoonBot
         {
             foreach (Provider prov in Providers)
             {
-                foreach (Provider.Trait item in prov.Traits!)
+                foreach (Provider.Trait item in prov.Traits)
                 {
                     yield return item;
                 }

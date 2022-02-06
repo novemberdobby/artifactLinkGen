@@ -1,14 +1,14 @@
-using System.Reflection;
+﻿using System.Reflection;
 using Cv2 = OpenCvSharp.Cv2;
 using OCV = OpenCvSharp;
 
 namespace HadesBoonBot
 {
-    internal class TrainingDataGen
+    internal class TrainingTraitDataGen
     {
         internal void Run(string[] args, Codex codex)
         {
-            TrainingData inputData = TrainingData.Load(args[1])!;
+            TrainingData inputData = TrainingData.Load(args[1]);
             string outputDataDir = args[2];
 
             //track how many real/artificial examples we're creating
@@ -16,11 +16,17 @@ namespace HadesBoonBot
             int fakeSamples = 0;
 
             //save out sample data from manually classified victory screens
-            foreach (TrainingData.Screen screen in inputData.Screens!)
+            foreach (TrainingData.Screen screen in inputData.Screens)
             {
                 if (!File.Exists(screen.FileName))
                 {
-                    Console.WriteLine($"Skipping {screen.FileName} due to missing file");
+                    Console.Error.WriteLine($"Skipping {screen.FileName} due to missing file");
+                    continue;
+                }
+
+                if(screen.IsValid != true)
+                {
+                    Console.WriteLine($"Skipping screen as it's invalid: {screen.FileName}");
                     continue;
                 }
 
@@ -37,18 +43,26 @@ namespace HadesBoonBot
                     return validated;
                 });
 
-                foreach (var trait in screen.Traits!)
+                Lazy<ScreenMetadata> meta = new(() => new(image.Value.Width));
+
+                //save trait diamonds
+                foreach (var trait in screen.Traits)
                 {
-                    string traitName = trait.Name!;
-                    var sharedIcons = codex.GetIconSharingTraits(traitName);
-                    traitName = sharedIcons.First().Name!;
+                    if(trait.Name == null)
+                    {
+                        Console.Error.WriteLine($"Found a null trait name in {screen.FileName}");
+                        continue;
+                    }
+
+                    var sharedIcons = codex.GetIconSharingTraits(trait.Name);
+                    string traitName = sharedIcons.First().Name;
 
                     //for traits that share icons, always use the first name alphabetically
                     foreach (var sharer in sharedIcons)
                     {
-                        if (!realSamples.ContainsKey(sharer.Name!))
+                        if (!realSamples.ContainsKey(sharer.Name))
                         {
-                            realSamples[sharer.Name!] = 0;
+                            realSamples[sharer.Name] = 0;
                         }
                     }
 
@@ -64,8 +78,7 @@ namespace HadesBoonBot
                             Directory.CreateDirectory(targetDir);
                         }
 
-                        ScreenMetadata dim = new(image.Value.Width);
-                        if (dim.GetTraitRect(trait.Col, trait.Row, out OCV.Rect? traitRect))
+                        if (meta.Value.GetTraitRect(trait.Col, trait.Row, out OCV.Rect? traitRect))
                         {
                             using OCV.Mat traitImg = image.Value.SubMat(traitRect!.Value);
                             using var comparable = CVUtil.MakeComparable(traitImg);
@@ -81,7 +94,7 @@ namespace HadesBoonBot
             }
 
             //are there any traits we don't have any real-world samples of?
-            var missingSamples = codex.Where(t => !realSamples.ContainsKey(t.Name!));
+            var missingSamples = codex.Where(t => !realSamples.ContainsKey(t.Name));
             foreach (var trait in missingSamples)
             {
                 Console.WriteLine($"Warning: no real-world sample data for trait \"{trait.Name}\"");
@@ -103,9 +116,14 @@ namespace HadesBoonBot
                 throw new Exception("Failed to find one method for each mutation type");
             }
 
+            if (codex.Any(t => t.Icon == null))
+            {
+                throw new Exception("One or more trait icons are null when generating fake sample data");
+            }
+
             foreach (var trait in codex)
             {
-                string targetDir = Path.Combine(outputDataDir, trait.Name!);
+                string targetDir = Path.Combine(outputDataDir, trait.Name);
                 if (!Directory.Exists(targetDir))
                 {
                     Directory.CreateDirectory(targetDir);

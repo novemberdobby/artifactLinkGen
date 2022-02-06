@@ -40,7 +40,7 @@ namespace HadesBoonBot
             }
 
             //does every trait have at least one sample image?
-            var missingTraits = m_codex.Where(t => !m_preclassifiedTraits.ContainsKey(t.Name!));
+            var missingTraits = m_codex.Where(t => !m_preclassifiedTraits.ContainsKey(t.Name));
             if (missingTraits.Any())
             {
                 string missingStr = string.Join(Environment.NewLine, missingTraits.Select(t => t.Name));
@@ -96,7 +96,7 @@ namespace HadesBoonBot
                 List<TraitMatch> possibleTraits = new();
                 foreach (var filtered in filteredTraits)
                 {
-                    possibleTraits.AddRange(m_preclassifiedTraits[filtered.Name!]);
+                    possibleTraits.AddRange(m_preclassifiedTraits[filtered.Name]);
                 }
 
                 //make the trait comparable with the various categories
@@ -138,7 +138,7 @@ namespace HadesBoonBot
                         else
                         {
                             toCompare = toCompare.Resize(mySize, 0, 0, OCV.InterpolationFlags.Cubic);
-                            resized[possTrait.Trait.Category][mySize] = toCompare!;
+                            resized[possTrait.Trait.Category][mySize] = toCompare;
                         }
                     }
 
