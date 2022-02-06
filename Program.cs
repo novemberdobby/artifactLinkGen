@@ -1,4 +1,4 @@
-﻿using OCV = OpenCvSharp;
+using OCV = OpenCvSharp;
 using Cv2 = OpenCvSharp.Cv2;
 
 namespace HadesBoonBot
@@ -21,6 +21,8 @@ namespace HadesBoonBot
             }
 
             using var codex = Codex.FromFile("codex.json", Codex.IconLoadMode.Raw);
+            var MLmodels = ML.Model.CreateModels();
+
             try
             {
                 string[] cmdArgs = args.Skip(1).ToArray();

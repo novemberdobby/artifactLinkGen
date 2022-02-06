@@ -230,7 +230,7 @@ namespace HadesBoonBot
         /// </summary>
         /// <param name="screen">Screenshot</param>
         /// <returns>Validity score</returns>
-        internal static int IsValidScreenML(OCV.Mat screen)
+        internal int IsValidScreenML(OCV.Mat screen, Dictionary<string, ML.Model> models)
         {
             ScreenMetadata meta = new(screen.Width);
 
@@ -241,38 +241,16 @@ namespace HadesBoonBot
             List<Task<ML.ModelOutput>> tasks = new();
             try
             {
-                //look for a cast icon which is always present at this location
+                foreach (ML.Model model in models.Values)
                 {
-                    using OCV.Mat? chopped = GetRect(screen, meta.CastCheckPos, meta.CastCheckSize);
-                    if(chopped == null)
+                    string tempFile = Path.Combine(tempDir, $"{model.Name}.png");
+                    if (!model.Extract(this, screen, tempFile))
                     {
                         return 0;
                     }
 
-                    using OCV.Mat resized = chopped.Resize(IconCast.Size(), 0, 0, OCV.InterpolationFlags.Cubic);
-                    using OCV.Mat withAlpha = resized.CvtColor(OCV.ColorConversionCodes.BGR2BGRA);
-
-                    //stomp alpha
-                    OCV.Cv2.MixChannels(new[] { IconCast }, new[] { withAlpha }, new[] { 3, 3 });
-
-                    string tempFile = Path.Combine(tempDir, "cast.png");
-                    withAlpha.SaveImage(tempFile);
                     var sampleData = new ML.ModelInput(tempFile);
-                    tasks.Add(Task.Factory.StartNew(() => ML.CastCheckModel.Predict(sampleData)));
-                }
-
-                //check healthbar area
-                {
-                    using OCV.Mat? chopped = GetRect(screen, meta.HealthCheckPos, meta.HealthCheckSize);
-                    if (chopped == null)
-                    {
-                        return 0;
-                    }
-
-                    string tempFile = Path.Combine(tempDir, "health.png");
-                    chopped.SaveImage(tempFile);
-                    var sampleData = new ML.ModelInput(tempFile);
-                    tasks.Add(Task.Factory.StartNew(() => ML.HealthCheckModel.Predict(sampleData)));
+                    tasks.Add(Task.Factory.StartNew(() => model.Predict(sampleData)));
                 }
             }
             finally
@@ -283,6 +261,36 @@ namespace HadesBoonBot
 
             //calculate score
             return tasks.Sum(t => ML.Util.IsGood(t.Result) ? 1 : 0);
+        }
+
+        internal static bool ExtractML_CastCheck(ScreenMetadata meta, OCV.Mat screen, string filename)
+        {
+            //look for a cast icon which is always present at this location
+            using OCV.Mat? chopped = GetRect(screen, meta.CastCheckPos, meta.CastCheckSize);
+            if (chopped != null)
+            {
+                using OCV.Mat resized = chopped.Resize(IconCast.Size(), 0, 0, OCV.InterpolationFlags.Cubic);
+                using OCV.Mat withAlpha = resized.CvtColor(OCV.ColorConversionCodes.BGR2BGRA);
+
+                //stomp alpha
+                OCV.Cv2.MixChannels(new[] { IconCast }, new[] { withAlpha }, new[] { 3, 3 });
+                withAlpha.SaveImage(filename);
+            }
+
+            return false;
+        }
+
+        internal static bool ExtractML_HealthCheck(ScreenMetadata meta, OCV.Mat screen, string filename)
+        {
+            //check healthbar area
+            using OCV.Mat? chopped = GetRect(screen, meta.HealthCheckPos, meta.HealthCheckSize);
+            if (chopped != null)
+            {
+                chopped.SaveImage(filename);
+                return true;
+            }
+
+            return false;
         }
 
         #endregion
