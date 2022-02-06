@@ -13,12 +13,24 @@ namespace HadesBoonBot
             Stopwatch timer = new();
             foreach (var imagePath in Directory.EnumerateFiles(inputImageDir))
             {
-                using var image = Cv2.ImRead(imagePath);
+                string shortFile = Path.GetFileName(imagePath);
+                using var image = Cv2.ImRead(imagePath, ImreadModes.Unchanged);
                 foreach (IClassifier classer in classifiers)
                 {
                     timer.Restart();
-                    ClassifiedScreen result = classer.Classify(image, imagePath, debugOutput);
-                    Console.WriteLine($"Classified {Path.GetFileName(imagePath)} with {classer} in {timer.Elapsed.TotalSeconds:N2}s. Valid: {result.IsValid}");
+
+                    //TODO use TryMakeValidScreen's result and invoke IsValidScreenML before attempting to classify
+                    ClassifiedScreen? result = classer.Classify(image, imagePath, debugOutput);
+
+                    //if it's null something went very wrong
+                    if (result == null)
+                    {
+                        Console.WriteLine($"Failed to classify {shortFile} with {classer}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Classified {shortFile} with {classer} in {timer.Elapsed.TotalSeconds:N2}s. Valid: {result.IsValid}");
+                    }
 
                     //TODO: optionally verify against The Database
                 }

@@ -48,7 +48,7 @@ namespace HadesBoonBot
             }
         }
 
-        public ClassifiedScreen Classify(OCV.Mat screen, string filePath, bool debugOutput)
+        public ClassifiedScreen? Classify(OCV.Mat screen, string filePath, bool debugOutput)
         {
             string? debugPath = null;
             if (debugOutput)
@@ -62,26 +62,30 @@ namespace HadesBoonBot
             }
 
             ScreenMetadata meta = new(screen.Width);
-            List<(int Column, int Row, List<TraitMatch> Matches)> slotResults = new();
+            List<(int Column, int Row, OCV.Rect traitRect, List<TraitMatch> Matches)> slots = new();
 
             //build list of potential trait locations on the screen
-            List<(int Column, int Row, OCV.Rect traitRect)> slots = new();
             for (int column = 0; column < ScreenMetadata.BoonColumnsMax; column++)
             {
                 for (int row = 0; row < ScreenMetadata.BoonRowsMax; row++)
                 {
                     if (meta.GetTraitRect(column, row, out OCV.Rect? traitRect))
                     {
-                        slots.Add((column, row, traitRect!.Value));
-                        slotResults.Add(new());
+                        slots.Add((column, row, traitRect!.Value, new()));
                     }
                 }
             }
 
             //classify each one
-            Parallel.ForEach(slots, (slot, _, iter) =>
+            Parallel.ForEach(slots, slot =>
             {
-                (int column, int row, OCV.Rect traitRect) = slot;
+                (int column, int row, OCV.Rect traitRect, List<TraitMatch> finalMatches) = slot;
+
+                //must be a problematic image (wrong dimensions, photo of a screen etc)
+                if (traitRect.Left < 0 || traitRect.Top < 0 || traitRect.Right > screen.Width || traitRect.Bottom > screen.Height)
+                {
+                    return;
+                }
 
                 //grab the image
                 using OCV.Mat traitImg = screen.SubMat(traitRect);
@@ -145,7 +149,7 @@ namespace HadesBoonBot
 
                 //store results
                 var ordered = matches.OrderByDescending(p => matchValues[p.Filename]).ToList();
-                slotResults[(int)iter] = (column, row, ordered);
+                finalMatches.AddRange(ordered);
 
                 //save "source" vs "best guess" thumbs
                 if (debugPath != null)
@@ -172,6 +176,16 @@ namespace HadesBoonBot
                 }
             });
 
+            //any missing results?
+            {
+                var failedSlots = slots.Where(s => !s.Matches.Any());
+                if (failedSlots.Any())
+                {
+                    Console.WriteLine($"Found missing slots in {filePath}, classification failed");
+                    return null;
+                }
+            }
+
             //detect when we run out of traits, otherwise we might start picking up pinned items/random other bits of the screen
             {
                 bool emptySlotsFound = false;
@@ -179,17 +193,17 @@ namespace HadesBoonBot
                 const int maxEmptySlotRun = 3;
                 string shortFile = Path.GetFileName(filePath);
 
-                for (int i = 0; i < slotResults.Count; i++)
+                for (int i = 0; i < slots.Count; i++)
                 {
-                    var slot = slotResults[i];
+                    var (Column, _, _, Matches) = slots[i];
 
                     //skip first column as people may choose to leave their base upgrades empty (weird tbh)
-                    if (slot.Column == 0)
+                    if (Column == 0)
                     {
                         continue;
                     }
 
-                    var bestMatch = slot.Matches.First();
+                    var bestMatch = Matches.First();
                     if (!Codex.IsSlotFilled(bestMatch.Trait))
                     {
                         emptySlotRun++;
@@ -203,7 +217,7 @@ namespace HadesBoonBot
                     {
                         int removeFrom = i - maxEmptySlotRun;
                         Console.WriteLine($"Detected empty slots after #{removeFrom} in {shortFile}");
-                        slotResults.RemoveRange(removeFrom, slotResults.Count - removeFrom);
+                        slots.RemoveRange(removeFrom, slots.Count - removeFrom);
                         emptySlotsFound = true;
                         break;
                     }
@@ -222,10 +236,10 @@ namespace HadesBoonBot
 
                 using StreamWriter sw = new(outInfo);
 
-                int fromSamples = slotResults.Count(s => !Path.GetFileName(s.Matches.First().Filename).StartsWith("_"));
-                sw.WriteLine($"From samples: {fromSamples}, from generated: {slotResults.Count - fromSamples}");
-                
-                foreach (var (column, row, bestMatches) in slotResults)
+                int fromSamples = slots.Count(s => !Path.GetFileName(s.Matches.First().Filename).StartsWith("_"));
+                sw.WriteLine($"From samples: {fromSamples}, from generated: {slots.Count - fromSamples}");
+
+                foreach (var (column, row, _, bestMatches) in slots)
                 {
                     sw.WriteLine($"{column}_{row}:");
                     foreach (var match in bestMatches.Take(10))
@@ -237,7 +251,7 @@ namespace HadesBoonBot
                 }
             }
 
-            return new(m_codex, slotResults.Select(r => new ClassifiedScreen.Slot(r.Matches.First().Trait, r.Column, r.Row)));
+            return new(m_codex, slots.Select(r => new ClassifiedScreen.Slot(r.Matches.First().Trait, r.Column, r.Row)));
         }
 
         public void Dispose()
