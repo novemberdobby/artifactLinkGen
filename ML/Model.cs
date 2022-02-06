@@ -8,13 +8,14 @@ namespace HadesBoonBot.ML
         private readonly MLContext m_context;
         private PredictionEngine<ModelInput, ModelOutput>? m_predictEngine;
         private readonly ModelConfig m_config;
+        private string? m_trainingPath;
 
         public Model(MLContext context, string modelName, ExtractDelegate extractorMethod)
         {
             m_context = context;
             Name = modelName;
             Extract = extractorMethod;
-            m_config = ModelConfig.FromFile(MLNetModelPath);
+            m_config = ModelConfig.FromFile(MLNetConfigPath);
         }
 
         private PredictionEngine<ModelInput, ModelOutput> CreatePredictEngine()
@@ -53,25 +54,28 @@ namespace HadesBoonBot.ML
             return m_predictEngine.Predict(input);
         }
 
-        internal static Dictionary<string, Model> CreateModels()
+        internal static List<Model> CreateModels()
         {
             MLContext mlContext = new();
             return new()
             {
-                { "HealthCheck", new(mlContext, "HealthCheck", ScreenMetadata.ExtractML_HealthCheck) },
-                { "CastCheck", new(mlContext, "CastCheck", ScreenMetadata.ExtractML_CastCheck) },
+                new(mlContext, "HealthCheck", ScreenMetadata.ExtractML_HealthCheck),
+                new(mlContext, "CastCheck", ScreenMetadata.ExtractML_CastCheck),
             };
         }
 
         internal string GetTrainingPath()
         {
-            string? folder = m_config?.Source?.FolderPath;
-            if (folder == null)
+            if (m_trainingPath == null)
             {
-                throw new Exception($"Missing or invalid training folder for model {Name}");
+                m_trainingPath = m_config?.Source?.FolderPath;
+                if (m_trainingPath == null)
+                {
+                    throw new Exception($"Missing or invalid training folder for model {Name}");
+                }
             }
 
-            return folder;
+            return m_trainingPath;
         }
 
         private class ModelConfig

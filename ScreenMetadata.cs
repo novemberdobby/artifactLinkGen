@@ -1,4 +1,4 @@
-﻿using OCV = OpenCvSharp;
+using OCV = OpenCvSharp;
 using static HadesBoonBot.Codex.Provider;
 
 namespace HadesBoonBot
@@ -230,7 +230,7 @@ namespace HadesBoonBot
         /// </summary>
         /// <param name="screen">Screenshot</param>
         /// <returns>Validity score</returns>
-        internal int IsValidScreenML(OCV.Mat screen, Dictionary<string, ML.Model> models)
+        internal int IsValidScreenML(OCV.Mat screen, List<ML.Model> models)
         {
             ScreenMetadata meta = new(screen.Width);
 
@@ -241,7 +241,7 @@ namespace HadesBoonBot
             List<Task<ML.ModelOutput>> tasks = new();
             try
             {
-                foreach (ML.Model model in models.Values)
+                foreach (ML.Model model in models)
                 {
                     string tempFile = Path.Combine(tempDir, $"{model.Name}.png");
                     if (!model.Extract(this, screen, tempFile))
@@ -274,7 +274,7 @@ namespace HadesBoonBot
 
                 //stomp alpha
                 OCV.Cv2.MixChannels(new[] { IconCast }, new[] { withAlpha }, new[] { 3, 3 });
-                withAlpha.SaveImage(filename);
+                return withAlpha.SaveImage(filename);
             }
 
             return false;
@@ -286,8 +286,7 @@ namespace HadesBoonBot
             using OCV.Mat? chopped = GetRect(screen, meta.HealthCheckPos, meta.HealthCheckSize);
             if (chopped != null)
             {
-                chopped.SaveImage(filename);
-                return true;
+                return chopped.SaveImage(filename);
             }
 
             return false;
