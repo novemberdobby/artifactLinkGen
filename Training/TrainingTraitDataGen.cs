@@ -54,10 +54,11 @@ namespace HadesBoonBot
                         continue;
                     }
 
+                    //for traits that share icons, always use the first name alphabetically
                     var sharedIcons = codex.GetIconSharingTraits(trait.Name);
                     string traitName = sharedIcons.First().Name;
 
-                    //for traits that share icons, always use the first name alphabetically
+                    //make sure all sharers have an entry in the dict, so we can check any that have been left out later
                     foreach (var sharer in sharedIcons)
                     {
                         if (!realSamples.ContainsKey(sharer.Name))
