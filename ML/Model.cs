@@ -61,6 +61,7 @@ namespace HadesBoonBot.ML
             {
                 new(mlContext, "HealthCheck", ScreenMetadata.ExtractML_HealthCheck),
                 new(mlContext, "CastCheck", ScreenMetadata.ExtractML_CastCheck),
+                new(mlContext, "BackButtonCheck", ScreenMetadata.ExtractML_BackButtonCheck),
             };
         }
 

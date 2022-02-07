@@ -42,9 +42,14 @@ namespace HadesBoonBot
         OCV.Point HealthCheckPos => new(62 * Multiplier, 1009 * Multiplier);
         OCV.Size HealthCheckSize => new(300 * Multiplier, 17 * Multiplier);
 
+        OCV.Point BackButtonCheckPos => new(1575 * Multiplier, 963 * Multiplier);
+        OCV.Size BackButtonCheckSize => new(52 * Multiplier, 52 * Multiplier);
+        static readonly OCV.Mat IconBackButton;
+
         static ScreenMetadata()
         {
             IconCast = OCV.Cv2.ImRead(@"icons_overlay\icon_cast.png", OCV.ImreadModes.Unchanged);
+            IconBackButton = OCV.Cv2.ImRead(@"icons_overlay\icon_back.png", OCV.ImreadModes.Unchanged);
         }
 
         /// <summary>
@@ -287,6 +292,23 @@ namespace HadesBoonBot
             if (chopped != null)
             {
                 return chopped.SaveImage(filename);
+            }
+
+            return false;
+        }
+
+        internal static bool ExtractML_BackButtonCheck(ScreenMetadata meta, OCV.Mat screen, string filename)
+        {
+            //look for the "back" button under the victory stats panel
+            using OCV.Mat? chopped = GetRect(screen, meta.BackButtonCheckPos, meta.BackButtonCheckSize);
+            if (chopped != null)
+            {
+                using OCV.Mat resized = chopped.Resize(IconBackButton.Size(), 0, 0, OCV.InterpolationFlags.Cubic);
+                using OCV.Mat withAlpha = resized.CvtColor(OCV.ColorConversionCodes.BGR2BGRA);
+
+                //stomp alpha
+                OCV.Cv2.MixChannels(new[] { IconBackButton }, new[] { withAlpha }, new[] { 3, 3 });
+                return withAlpha.SaveImage(filename);
             }
 
             return false;
