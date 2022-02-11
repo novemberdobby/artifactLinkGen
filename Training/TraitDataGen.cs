@@ -2,9 +2,9 @@
 using Cv2 = OpenCvSharp.Cv2;
 using OCV = OpenCvSharp;
 
-namespace HadesBoonBot
+namespace HadesBoonBot.Training
 {
-    internal class TrainingTraitDataGen
+    internal class TraitDataGen
     {
         internal void Run(string[] args, Codex codex)
         {
@@ -24,7 +24,7 @@ namespace HadesBoonBot
                     continue;
                 }
 
-                if(screen.IsValid != true)
+                if(!(screen.IsValid ?? true))
                 {
                     Console.WriteLine($"Skipping screen as it's invalid: {screen.FileName}");
                     continue;

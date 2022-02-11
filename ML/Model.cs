@@ -8,7 +8,6 @@ namespace HadesBoonBot.ML
         private readonly MLContext m_context;
         private PredictionEngine<ModelInput, ModelOutput>? m_predictEngine;
         private readonly ModelConfig m_config;
-        private string? m_trainingPath;
 
         public Model(MLContext context, string modelName, ExtractDelegate extractorMethod)
         {
@@ -16,6 +15,12 @@ namespace HadesBoonBot.ML
             Name = modelName;
             Extract = extractorMethod;
             m_config = ModelConfig.FromFile(MLNetConfigPath);
+
+            TrainingPath = m_config.Source?.FolderPath!;
+            if (TrainingPath == null)
+            {
+                throw new Exception($"Missing or invalid training folder for model {Name}");
+            }
         }
 
         private PredictionEngine<ModelInput, ModelOutput> CreatePredictEngine()
@@ -25,6 +30,8 @@ namespace HadesBoonBot.ML
         }
 
         public readonly string Name; //e.g. HealthCheck
+        public string TrainingPath { get; private set; }
+
         public string MLNetConfigPath => Path.GetFullPath($@"ML\{Name}Model.mbconfig");
         public string MLNetModelPath => Path.GetFullPath($@"ML\{Name}Model.zip");
 
@@ -63,20 +70,6 @@ namespace HadesBoonBot.ML
                 new(mlContext, "CastCheck", ScreenMetadata.ExtractML_CastCheck),
                 new(mlContext, "BackButtonCheck", ScreenMetadata.ExtractML_BackButtonCheck),
             };
-        }
-
-        internal string GetTrainingPath()
-        {
-            if (m_trainingPath == null)
-            {
-                m_trainingPath = m_config?.Source?.FolderPath;
-                if (m_trainingPath == null)
-                {
-                    throw new Exception($"Missing or invalid training folder for model {Name}");
-                }
-            }
-
-            return m_trainingPath;
         }
 
         private class ModelConfig

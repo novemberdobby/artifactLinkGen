@@ -30,7 +30,7 @@ namespace HadesBoonBot
                 {
                     case "trainingdatagen":
                         {
-                            TrainingTraitDataGen tp = new();
+                            Training.TraitDataGen tp = new();
                             tp.Run(args, codex);
                         }
                         break;
