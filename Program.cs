@@ -1,7 +1,4 @@
-﻿using OCV = OpenCvSharp;
-using Cv2 = OpenCvSharp.Cv2;
 using CommandLine;
-using HadesBoonBot.Training;
 
 namespace HadesBoonBot
 {
@@ -14,27 +11,41 @@ namespace HadesBoonBot
 
             try
             {
-                return Parser.Default.ParseArguments<GenerateTraitsOptions, GenerateScreensOptions, ClassifierPSNROptions>(args)
+                return Parser.Default.ParseArguments<Training.GenerateTraitsOptions, Training.GenerateScreensOptions, Classifiers.ClassifierPSNROptions>(args)
                 .MapResult(
                     
-                    (GenerateTraitsOptions options) =>
+                    (Training.GenerateTraitsOptions options) =>
                     {
-                        TraitDataGen tp = new();
+                        Training.TraitDataGen tp = new();
                         tp.Run(options, codex);
                         return 0;
                     },
 
-                    (GenerateScreensOptions options) =>
+                    (Training.GenerateScreensOptions options) =>
                     {
-                        ScreenDataGen sdg = new();
+                        Training.ScreenDataGen sdg = new();
                         sdg.Run(options, MLmodels);
                         return 0;
                     },
 
-                    (ClassifierPSNROptions options) =>
+                    (Classifiers.ClassifierPSNROptions options) =>
                     {
-                        using IClassifier classifier = new ClassifierPSNR(options, codex);
-                        return Classifiers.Run(options.ScreensDir, options.DebugOutput, codex, classifier);
+                        using IClassifier classifier = new Classifiers.ClassifierPSNR(options, codex);
+                        TrainingData? trained = options.TrainingData == null ? null : TrainingData.Load(options.TrainingData);
+
+                        if (File.Exists(options.Input))
+                        {
+                            Classifiers.ClassifiedScreen? result = Classifiers.Runner.RunSingle(options, options.Input, MLmodels, codex, trained, classifier);
+                            return 0;
+                        }
+                        else if (Directory.Exists(options.Input))
+                        {
+                            return Classifiers.Runner.RunBatch(options, options.Input, MLmodels, codex, trained, classifier);
+                        }
+                        else
+                        {
+                            throw new ArgumentException($"Path passed to {nameof(Classifiers.ClassifierCommonOptions)} must be a file or directory that exists", nameof(args));
+                        }
                     },
 
                     errors =>

@@ -3,7 +3,7 @@ using static HadesBoonBot.Codex.Provider;
 using Cv2 = OpenCvSharp.Cv2;
 using OCV = OpenCvSharp;
 
-namespace HadesBoonBot
+namespace HadesBoonBot.Classifiers
 {
     [Verb("classify_psnr", HelpText = "Classify traits on a victory screen via PSNR")]
     class ClassifierPSNROptions : ClassifierCommonOptions

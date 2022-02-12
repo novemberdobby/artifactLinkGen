@@ -1,89 +1,170 @@
 ﻿using CommandLine;
-using OpenCvSharp;
+using OCV = OpenCvSharp;
 using System.Diagnostics;
+using System.Text;
 
-namespace HadesBoonBot
+namespace HadesBoonBot.Classifiers
 {
     internal class ClassifierCommonOptions
     {
         [Option('d', "debug", Required = false, Default = false, HelpText = "Save out debugging images")]
         public bool DebugOutput { get; set; }
 
-        [Option('s', "screens_dir", Required = true, HelpText = "Root folder for screens to classify")]
-        public string ScreensDir { get; set; }
+        [Option('i', "input", Required = true, HelpText = "Root folder for screens to classify, or path to single image")]
+        public string Input { get; set; }
+
+        [Option('t', "training_data", Required = false, HelpText = "Training data file, check results against this file if supplied")]
+        public string? TrainingData { get; set; }
 
         protected ClassifierCommonOptions()
         {
-            ScreensDir = string.Empty;
+            Input = string.Empty;
         }
     }
 
-    internal class Classifiers
+    internal class Runner
     {
-        public static int Run(string inputImageDir, bool debugOutput, Codex codex, params IClassifier[] classifiers)
+        /// <summary>
+        /// Run a set of classifiers against a set of images - currently meant for debugging purposes
+        /// </summary>
+        public static int RunBatch(ClassifierCommonOptions options, string screensPath, List<ML.Model> models, Codex codex, TrainingData? trained, params IClassifier[] classifiers)
         {
-            //iterate through victory screens
-            Stopwatch timer = new();
-            foreach (var imagePath in Directory.EnumerateFiles(inputImageDir))
+            int errors = 0;
+
+            foreach (var screenPath in Directory.EnumerateFiles(screensPath))
             {
-                string shortFile = Path.GetFileName(imagePath);
-                using var image = Cv2.ImRead(imagePath, ImreadModes.Unchanged);
                 foreach (IClassifier classer in classifiers)
                 {
-                    timer.Restart();
-
-                    //TODO use TryMakeValidScreen's result and invoke IsValidScreenML before attempting to classify
-                    ClassifiedScreen? result = classer.Classify(image, imagePath, debugOutput);
-
-                    //if it's null something went very wrong
-                    if (result == null)
+                    ClassifiedScreen? result = RunSingle(options, screenPath, models, codex, trained, classer);
+                    if (result == null || !result.IsValid)
                     {
-                        Console.WriteLine($"Failed to classify {shortFile} with {classer}");
+                        errors++;
                     }
-                    else
-                    {
-                        Console.WriteLine($"Classified {shortFile} with {classer} in {timer.Elapsed.TotalSeconds:N2}s. Valid: {result.IsValid}");
-                    }
-
-                    //TODO: optionally verify against The Database
                 }
             }
 
-            return 0;
-        }
-    }
-
-    internal class ClassifiedScreen
-    {
-        public string? WeaponName;
-        public List<Slot> Slots;
-        public bool IsValid { get; private set; }
-
-        public class Slot
-        {
-            public Codex.Provider.Trait Trait;
-            public int Col;
-            public int Row;
-
-            public Slot(Codex.Provider.Trait trait, int col, int row)
-            {
-                Trait = trait;
-                Col = col;
-                Row = row;
-            }
-
-            public override string ToString()
-            {
-                return $"{Col}_{Row}: {Trait}";
-            }
+            return errors;
         }
 
-        public ClassifiedScreen(Codex codex, IEnumerable<Slot> inSlots)
+        /// <summary>
+        /// Run a classifier against an image
+        /// </summary>
+        /// <param name="options">Command options</param>
+        /// <param name="screenPath">Full path to image</param>
+        /// <param name="codex">Codex (to check icon-sharing traits)</param>
+        /// <param name="models">ML models to determine screen validity</param>
+        /// <param name="trained">Training data to verify against when not null</param>
+        /// <param name="classer">Classifier</param>
+        /// <returns>Classified screen (which may or may not be valid) or null</returns>
+        public static ClassifiedScreen? RunSingle(ClassifierCommonOptions options, string screenPath, List<ML.Model> models, Codex codex, TrainingData? trained, IClassifier classer)
         {
-            Slots = inSlots.ToList();
-            WeaponName = Codex.DetermineWeapon(Slots.Select(s => s.Trait));
+            string shortFile = Path.GetFileName(screenPath);
+            string screenPathLower = screenPath.ToLower();
+            using var origImage = OCV.Cv2.ImRead(screenPath, OCV.ImreadModes.Unchanged);
+            bool appearsValid = true;
 
-            IsValid = WeaponName != null;
+            Stopwatch timer = new();
+            timer.Start();
+
+            //is it the right size?
+            using var image = ScreenMetadata.TryMakeValidScreen(origImage, screenPath);
+            if (image == null)
+            {
+                Console.WriteLine($"Failed to make valid image from {screenPath}");
+                appearsValid = false;
+            }
+
+            //does the robot think it's real?
+            if (appearsValid)
+            {
+                ScreenMetadata meta = new(image!.Width);
+                int validityScore = meta.IsValidScreenML(image, models);
+                if (validityScore < 2)
+                {
+                    Console.WriteLine($"ML reports invalid image: {screenPath}");
+                    appearsValid = false;
+                }
+            }
+
+            Console.WriteLine($"Initial validation of {shortFile} took {timer.Elapsed.TotalSeconds:N2}s. Appears valid: {appearsValid}");
+
+            if (trained != null)
+            {
+                if (trained.ScreensByFile.TryGetValue(screenPathLower, out var trainedScreen))
+                {
+                    if (trainedScreen.IsValid != appearsValid)
+                    {
+                        throw new Exception($"Screen validity doesn't match training validity: {screenPath}");
+                    }
+                }
+                else
+                {
+                    throw new Exception($"Verification requested for screen that doesn't exist in the training data: {screenPath}");
+                }
+            }
+
+            if (!appearsValid)
+            {
+                return null;
+            }
+
+            timer.Restart();
+            ClassifiedScreen? result = classer.Classify(image!, screenPath, options.DebugOutput);
+
+            //if it's null something went very wrong
+            if (result == null)
+            {
+                Console.Error.WriteLine($"Failed to classify {shortFile} with {classer}");
+            }
+            else
+            {
+                Console.WriteLine($"Classified {shortFile} with {classer} in {timer.Elapsed.TotalSeconds:N2}s. Valid: {result.IsValid}");
+
+                //optionally verify against The Database
+                if (trained != null)
+                {
+                    if (trained.ScreensByFile.TryGetValue(screenPathLower, out var trainedScreen))
+                    {
+                        int correct = 0;
+                        List<ClassifiedScreen.Slot> incorrect = new();
+
+                        Dictionary<OCV.Point, string> trainedTraits = new();
+                        foreach (var trait in trainedScreen.Traits)
+                        {
+                            trainedTraits.Add(new(trait.Col, trait.Row), trait.Name!);
+                        }
+
+                        foreach (var slot in result.Slots)
+                        {
+                            var knownCorrectName = trainedTraits[new(slot.Col, slot.Row)];
+                            IEnumerable<string> goodNames = codex.GetIconSharingTraits(knownCorrectName).Select(t => t.Name);
+
+                            if (goodNames.Contains(slot.Trait.Name))
+                            {
+                                correct++;
+                            }
+                            else
+                            {
+                                incorrect.Add(slot);
+                            }
+                        }
+
+                        StringBuilder resultText = new($"For {screenPath}, {correct}/{correct + incorrect.Count} were correct");
+                        if (incorrect.Any())
+                        {
+                            resultText.Append($" (incorrect slots: {string.Join(", ", incorrect)})");
+                        }
+
+                        Console.WriteLine(resultText.ToString());
+                    }
+                    else
+                    {
+                        throw new Exception($"Verification requested for screen that doesn't exist in the training data: {screenPath}");
+                    }
+                }
+            }
+
+            return result;
         }
     }
 }
