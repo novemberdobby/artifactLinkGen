@@ -1,6 +1,5 @@
 ﻿using OCV = OpenCvSharp;
 using Cv2 = OpenCvSharp.Cv2;
-using System.Diagnostics;
 
 namespace HadesBoonBot
 {
