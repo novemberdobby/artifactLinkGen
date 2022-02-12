@@ -1,15 +1,39 @@
-﻿using System.Reflection;
+﻿using CommandLine;
+using System.Reflection;
 using Cv2 = OpenCvSharp.Cv2;
 using OCV = OpenCvSharp;
 
 namespace HadesBoonBot.Training
 {
+    [Verb("generate_traits", HelpText = "Create sample data for each trait type, based on raw icons and manually classified victory screens")]
+    internal class GenerateTraitsOptions
+    {
+        [Option('c', "clean", Required = false, Default = false, HelpText = "Clean output directory first")]
+        public bool Clean { get; set; }
+
+        [Option('t', "training_data", Required = true, HelpText = "Training data file")]
+        public string TrainingData { get; set; }
+
+        [Option('o', "output_dir", Required = true, HelpText = "Output data directory")]
+        public string OutputDir { get; set; }
+
+        public GenerateTraitsOptions()
+        {
+            TrainingData = string.Empty;
+            OutputDir = string.Empty;
+        }
+    }
+
     internal class TraitDataGen
     {
-        internal void Run(string[] args, Codex codex)
+        internal void Run(GenerateTraitsOptions options, Codex codex)
         {
-            TrainingData inputData = TrainingData.Load(args[1]);
-            string outputDataDir = args[2];
+            TrainingData inputData = TrainingData.Load(options.TrainingData);
+
+            if (options.Clean)
+            {
+                Directory.Delete(options.OutputDir, true);
+            }
 
             //track how many real/artificial examples we're creating
             Dictionary<string, int> realSamples = new();
@@ -70,7 +94,7 @@ namespace HadesBoonBot.Training
                     realSamples[traitName]++;
 
                     //save it with a name pointing back to the source
-                    string targetDir = Path.Combine(outputDataDir, traitName);
+                    string targetDir = Path.Combine(options.OutputDir, traitName);
                     string targetFile = Path.Combine(targetDir, $"{Path.GetFileName(screen.FileName)}_{trait.Col}_{trait.Row}.png");
                     if (!File.Exists(targetFile))
                     {
@@ -124,7 +148,7 @@ namespace HadesBoonBot.Training
 
             foreach (var trait in codex)
             {
-                string targetDir = Path.Combine(outputDataDir, trait.Name);
+                string targetDir = Path.Combine(options.OutputDir, trait.Name);
                 if (!Directory.Exists(targetDir))
                 {
                     Directory.CreateDirectory(targetDir);

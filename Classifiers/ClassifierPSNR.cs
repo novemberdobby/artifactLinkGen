@@ -1,9 +1,22 @@
+using CommandLine;
 using static HadesBoonBot.Codex.Provider;
 using Cv2 = OpenCvSharp.Cv2;
 using OCV = OpenCvSharp;
 
 namespace HadesBoonBot
 {
+    [Verb("classify_psnr", HelpText = "Classify traits on a victory screen via PSNR")]
+    class ClassifierPSNROptions : ClassifierCommonOptions
+    {
+        [Option('t', "trait_source", Required = true, HelpText = "Root folder for trait images (stored in subfolders corresponding to each trait name)")]
+        public string TraitSource { get; set; }
+
+        public ClassifierPSNROptions()
+        {
+            TraitSource = string.Empty;
+        }
+    }
+
     /// <summary>
     /// Classify traits on a victory screen by running PSNR comparisons against previously-classified training data
     /// </summary>
@@ -15,13 +28,12 @@ namespace HadesBoonBot
         private readonly Dictionary<string, List<TraitMatch>> m_preclassifiedTraits = new();
         private readonly Codex m_codex;
 
-        public ClassifierPSNR(string[] args, Codex codex)
+        public ClassifierPSNR(ClassifierPSNROptions options, Codex codex)
         {
-            string classifiedTraitSource = args[1];
             m_codex = codex;
 
             //load up possible matches
-            foreach (string traitNameFolder in Directory.EnumerateDirectories(classifiedTraitSource))
+            foreach (string traitNameFolder in Directory.EnumerateDirectories(options.TraitSource))
             {
                 string traitName = Path.GetFileName(traitNameFolder);
 

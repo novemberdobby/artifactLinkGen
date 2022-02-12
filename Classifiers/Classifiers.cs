@@ -1,14 +1,27 @@
-﻿using OpenCvSharp;
+﻿using CommandLine;
+using OpenCvSharp;
 using System.Diagnostics;
 
 namespace HadesBoonBot
 {
+    internal class ClassifierCommonOptions
+    {
+        [Option('d', "debug", Required = false, Default = false, HelpText = "Save out debugging images")]
+        public bool DebugOutput { get; set; }
+
+        [Option('s', "screens_dir", Required = true, HelpText = "Root folder for screens to classify")]
+        public string ScreensDir { get; set; }
+
+        protected ClassifierCommonOptions()
+        {
+            ScreensDir = string.Empty;
+        }
+    }
+
     internal class Classifiers
     {
-        public static int Run(string[] args, bool debugOutput, Codex codex, params IClassifier[] classifiers)
+        public static int Run(string inputImageDir, bool debugOutput, Codex codex, params IClassifier[] classifiers)
         {
-            string inputImageDir = args[0];
-
             //iterate through victory screens
             Stopwatch timer = new();
             foreach (var imagePath in Directory.EnumerateFiles(inputImageDir))
