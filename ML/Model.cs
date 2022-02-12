@@ -9,11 +9,12 @@ namespace HadesBoonBot.ML
         private PredictionEngine<ModelInput, ModelOutput>? m_predictEngine;
         private readonly ModelConfig m_config;
 
-        public Model(MLContext context, string modelName, ExtractDelegate extractorMethod)
+        public Model(MLContext context, string modelName, ExtractDelegate extractorMethod, GetIsValidDelegate getIsValidMethod)
         {
             m_context = context;
             Name = modelName;
             Extract = extractorMethod;
+            GetIsValid = getIsValidMethod;
             m_config = ModelConfig.FromFile(MLNetConfigPath);
 
             TrainingPath = m_config.Source?.FolderPath!;
@@ -37,6 +38,9 @@ namespace HadesBoonBot.ML
 
         public delegate bool ExtractDelegate(ScreenMetadata meta, OpenCvSharp.Mat screen, string targetFilename);
         public readonly ExtractDelegate Extract;
+
+        public delegate bool GetIsValidDelegate(TrainingData.Screen screen);
+        public readonly GetIsValidDelegate GetIsValid;
 
         public ITransformer RetrainPipeline(IDataView trainData)
         {
@@ -66,9 +70,9 @@ namespace HadesBoonBot.ML
             MLContext mlContext = new();
             return new()
             {
-                new(mlContext, "HealthCheck", ScreenMetadata.ExtractML_HealthCheck),
-                new(mlContext, "CastCheck", ScreenMetadata.ExtractML_CastCheck),
-                new(mlContext, "BackButtonCheck", ScreenMetadata.ExtractML_BackButtonCheck),
+                new(mlContext, "HealthCheck", ScreenMetadata.ExtractML_HealthCheck, screen => screen.ValidHealth!.Value),
+                new(mlContext, "CastCheck", ScreenMetadata.ExtractML_CastCheck, screen => screen.ValidCast!.Value),
+                new(mlContext, "BackButtonCheck", ScreenMetadata.ExtractML_BackButtonCheck, screen => screen.ValidBackButton!.Value),
             };
         }
 

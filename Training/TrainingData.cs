@@ -14,9 +14,11 @@ namespace HadesBoonBot
         {
             public string FileName { get; set; }
             public List<Trait> Traits { get; set; }
-            
+
             public bool? IsValid { get; set; }
-            public HashSet<string>? ValidMLparts { get; set; }
+            public bool? ValidHealth { get; set; }
+            public bool? ValidCast { get; set; }
+            public bool? ValidBackButton { get; set; }
 
             public Screen(string fileName)
             {
