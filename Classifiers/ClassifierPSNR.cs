@@ -73,7 +73,7 @@ namespace HadesBoonBot.Classifiers
                 }
             }
 
-            ScreenMetadata meta = new(screen.Width);
+            ScreenMetadata meta = new(screen);
             List<(int Column, int Row, OCV.Rect traitRect, List<TraitMatch> Matches)> slots = new();
 
             //build list of potential trait locations on the screen
@@ -81,7 +81,7 @@ namespace HadesBoonBot.Classifiers
             {
                 for (int row = 0; row < ScreenMetadata.BoonRowsMax; row++)
                 {
-                    if (meta.GetTraitRect(column, row, out OCV.Rect? traitRect))
+                    if (meta.TryGetTraitRect(column, row, out OCV.Rect? traitRect))
                     {
                         slots.Add((column, row, traitRect!.Value, new()));
                     }

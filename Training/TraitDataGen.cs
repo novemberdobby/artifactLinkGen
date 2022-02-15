@@ -67,7 +67,7 @@ namespace HadesBoonBot.Training
                     return validated;
                 });
 
-                Lazy<ScreenMetadata> meta = new(() => new(image.Value.Width));
+                Lazy<ScreenMetadata> meta = new(() => new(image.Value));
 
                 //save trait diamonds
                 foreach (var trait in screen.Traits)
@@ -103,7 +103,7 @@ namespace HadesBoonBot.Training
                             Directory.CreateDirectory(targetDir);
                         }
 
-                        if (meta.Value.GetTraitRect(trait.Col, trait.Row, out OCV.Rect? traitRect))
+                        if (meta.Value.TryGetTraitRect(trait.Col, trait.Row, out OCV.Rect? traitRect))
                         {
                             using OCV.Mat traitImg = image.Value.SubMat(traitRect!.Value);
                             using var comparable = CVUtil.MakeComparable(traitImg);

@@ -56,7 +56,7 @@ namespace HadesBoonBot.Training
                 using OCV.Mat? firstValid = ScreenMetadata.TryMakeValidScreen(image, trained.FileName);
                 var useForExtraction = firstValid ?? image;
 
-                ScreenMetadata meta = new(useForExtraction.Width);
+                ScreenMetadata meta = new(useForExtraction);
                 foreach (var model in models)
                 {
                     string trainingDir = Path.Combine(model.TrainingPath, model.GetIsValid(trained) ? "good" : "bad");

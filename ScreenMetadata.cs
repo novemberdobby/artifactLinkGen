@@ -8,15 +8,15 @@ namespace HadesBoonBot
     /// </summary>
     internal class ScreenMetadata
     {
-        public ScreenMetadata(int imageWidth)
+        public ScreenMetadata(OCV.Mat image)
         {
-            if (imageWidth <= 0)
+            if (image.Width <= 0)
             {
-                throw new ArgumentException("Image width must be > 0", nameof(imageWidth));
+                throw new ArgumentException("Image width must be > 0", nameof(image));
             }
 
             //constants below are based on an FHD screenshot
-            Multiplier = imageWidth / 1920.0f;
+            Multiplier = image.Width / 1920.0f;
         }
 
         public float Multiplier { get; private set; }
@@ -59,7 +59,7 @@ namespace HadesBoonBot
         /// <param name="row">Trait row</param>
         /// <param name="result">Rectangle containing trait</param>
         /// <returns>Whether a valid trait location was provided</returns>
-        internal bool GetTraitRect(int column, int row, out OCV.Rect? result)
+        internal bool TryGetTraitRect(int column, int row, out OCV.Rect? result)
         {
             result = null;
 
@@ -237,7 +237,8 @@ namespace HadesBoonBot
         /// <returns>Validity score</returns>
         internal int IsValidScreenML(OCV.Mat screen, List<ML.Model> models)
         {
-            ScreenMetadata meta = new(screen.Width);
+            //TODO once we have => target score, skip other checks. should make it faster
+            ScreenMetadata meta = new(screen);
 
             //TODO predict without having to use any temp files
             string tempDir = Path.Combine(Path.GetTempPath(), $"hbb_{Guid.NewGuid()}");
