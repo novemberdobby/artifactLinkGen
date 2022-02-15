@@ -1,4 +1,4 @@
-using CommandLine;
+﻿using CommandLine;
 using OCV = OpenCvSharp;
 using System.Diagnostics;
 using System.Text;
@@ -89,6 +89,29 @@ namespace HadesBoonBot.Classifiers
 
             Console.WriteLine($"Initial validation of {shortFile} took {timer.Elapsed.TotalSeconds:N2}s. Appears valid: {appearsValid}");
 
+            int columnCount = -1;
+            if (appearsValid)
+            {
+                if (meta!.TryGetTrayColumnCount(image!, out columnCount, out OCV.Rect trayRect))
+                {
+                    //Console.WriteLine($"Detected {columnCount} columns in {shortFile}");
+
+                    if (options.DebugOutput)
+                    {
+                        string dbgPath = ScreenMetadata.GetDebugOutputFolder(screenPath, "tray_rect");
+                        using var trayImg = image!.Clone();
+                        trayImg.Rectangle(trayRect, OCV.Scalar.Purple, 5);
+
+                        string trayImgPath = Path.Combine(dbgPath, Path.ChangeExtension(shortFile, "jpg"));
+                        trayImg.SaveImage(trayImgPath);
+                    }
+                }
+                else
+                {
+                    Console.Error.WriteLine($"Unable to determine number of trait columns in the tray of {shortFile}. This isn't fatal but will frustrate classification");
+                }
+            }
+
             if (trained != null)
             {
                 if (trained.ScreensByFile.TryGetValue(screenPathLower, out var trainedScreen))
@@ -110,7 +133,7 @@ namespace HadesBoonBot.Classifiers
             }
 
             timer.Restart();
-            ClassifiedScreen? result = classer.Classify(image!, screenPath, options.DebugOutput);
+            ClassifiedScreen? result = classer.Classify(image!, screenPath, columnCount, options.DebugOutput);
 
             //if it's null something went very wrong
             if (result == null)

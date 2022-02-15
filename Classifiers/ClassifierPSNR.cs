@@ -60,17 +60,12 @@ namespace HadesBoonBot.Classifiers
             }
         }
 
-        public ClassifiedScreen? Classify(OCV.Mat screen, string filePath, bool debugOutput)
+        public ClassifiedScreen? Classify(OCV.Mat screen, string filePath, int columnCount, bool debugOutput)
         {
             string? debugPath = null;
             if (debugOutput)
             {
-                string parentPath = Path.GetDirectoryName(filePath)!;
-                debugPath = Path.Combine(parentPath, Path.GetFileNameWithoutExtension(filePath) + "_results_psnr");
-                if (!Directory.Exists(debugPath))
-                {
-                    Directory.CreateDirectory(debugPath);
-                }
+                debugPath = ScreenMetadata.GetDebugOutputFolder(filePath, "results_psnr");
             }
 
             ScreenMetadata meta = new(screen);
@@ -79,6 +74,11 @@ namespace HadesBoonBot.Classifiers
             //build list of potential trait locations on the screen
             for (int column = 0; column < ScreenMetadata.BoonColumnsMax; column++)
             {
+                if (columnCount > 0 && column >= columnCount)
+                {
+                    break;
+                }
+
                 for (int row = 0; row < ScreenMetadata.BoonRowsMax; row++)
                 {
                     if (meta.TryGetTraitRect(column, row, out OCV.Rect? traitRect))

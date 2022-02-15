@@ -19,7 +19,7 @@ namespace HadesBoonBot
             Multiplier = image.Width / 1920.0f;
         }
 
-        public float Multiplier { get; private set; }
+        public readonly float Multiplier;
 
         public float FirstBoonIconX => 50 * Multiplier; //X location of the first icon (equipped companion)
         public float FirstBoonIconY => 206 * Multiplier; //Y location of above
@@ -46,10 +46,94 @@ namespace HadesBoonBot
         OCV.Size BackButtonCheckSize => new(52 * Multiplier, 52 * Multiplier);
         static readonly OCV.Mat IconBackButton;
 
+        int TrayMaskTop => (int)(248 * Multiplier);
+        int TrayMaskHeight => (int)(592 * Multiplier);
+
+        OCV.Point[] TrayFillPositions => new[]
+        {
+            new OCV.Point(186 * Multiplier, 822 * Multiplier),
+            new OCV.Point(121 * Multiplier, 815 * Multiplier),
+        };
+
+        /// <summary>
+        /// How many columns the tray contains if the right side of it is near these X co-ordinates. Screens with more than 6 columns are not supported as this bugs out ingame (example: oew3lir35h081)
+        /// </summary>
+        public static readonly Dictionary<int, int> TrayRightToColumnCount = new()
+        {
+            { 232, 3 },
+            { 298, 4 },
+            { 365, 5 },
+            { 432, 6 },
+        };
+
         static ScreenMetadata()
         {
             IconCast = OCV.Cv2.ImRead(@"icons_overlay\icon_cast.png", OCV.ImreadModes.Unchanged);
             IconBackButton = OCV.Cv2.ImRead(@"icons_overlay\icon_back.png", OCV.ImreadModes.Unchanged);
+        }
+
+        internal bool TryGetTrayColumnCount(OCV.Mat image, out int columns, out OCV.Rect trayRect)
+        {
+            /*
+               find the tray area. the only measurement we care about is the right hand side of it, which tells us:
+                a) how many columns we need to search for traits
+                b) where any pinned traits will appear horizontally
+
+                note: the tray expands with the addition of new traits, but doesn't shrink as they're removed (e.g. by purging boons)
+            */
+
+            //mask out the top & bottom of the image where the tray can't appear
+            using OCV.Mat trayMask = new(new OCV.Size(image.Width + 2, image.Height + 2), OCV.MatType.CV_8UC1, OCV.Scalar.Black);
+
+            trayMask.Rectangle(new OCV.Rect(0, 0, trayMask.Width, TrayMaskTop), OCV.Scalar.White, -1);
+            trayMask.Rectangle(new OCV.Rect(0, TrayMaskTop + TrayMaskHeight, trayMask.Width, TrayMaskHeight), OCV.Scalar.White, -1);
+
+            trayRect = new(TrayFillPositions.First(), OCV.Size.Zero);
+            OCV.Scalar tolerance = new(15, 15, 15);
+
+            for (int i = 0; i < TrayFillPositions.Length; i++)
+            {
+                OCV.Mat thisTrayMask = (i == 0 ? trayMask : trayMask.Clone());
+
+                image.FloodFill(thisTrayMask, TrayFillPositions[i], OCV.Scalar.Orange, out var thisTrayRect, tolerance, tolerance, OCV.FloodFillFlags.MaskOnly);
+                trayRect = trayRect.Union(thisTrayRect);
+
+                if (i > 0)
+                {
+                    thisTrayMask.Dispose();
+                }
+            }
+
+            //clean it up
+            trayRect = new(0, TrayMaskTop, trayRect.Right, TrayMaskHeight);
+
+            //find which expected value it's closest to
+            int normalisedRight = (int)(trayRect.Right / Multiplier);
+            int closestRight = -1;
+            int closestRightDist = int.MaxValue;
+
+            foreach (var expectedRight in TrayRightToColumnCount.Keys)
+            {
+                int thisDist = Math.Abs(expectedRight - normalisedRight);
+                if (thisDist < closestRightDist)
+                {
+                    closestRightDist = thisDist;
+                    closestRight = expectedRight;
+                }
+            }
+
+            //is it within a tolerance of that value?
+            int rightDiff = Math.Abs(closestRight - normalisedRight);
+            if (rightDiff <= 15)
+            {
+                columns = TrayRightToColumnCount[closestRight];
+                return true;
+            }
+            else
+            {
+                columns = -1;
+                return false;
+            }
         }
 
         /// <summary>
@@ -92,6 +176,24 @@ namespace HadesBoonBot
             float halfSize = BoonWidth / 2.0f;
             result = new((int)(middle.X - halfSize), (int)(middle.Y - halfSize), (int)BoonWidth, (int)BoonWidth);
             return true;
+        }
+
+        /// <summary>
+        /// Get the full path of a folder we can use to output debug images, living next to filePath and prefixed with its name (without extension)
+        /// </summary>
+        /// <param name="filePath">Full file path</param>
+        /// <param name="debugTypeName">Suffix added to the file's name</param>
+        /// <returns>Debug path</returns>
+        public static string GetDebugOutputFolder(string filePath, string debugTypeName)
+        {
+            string parentPath = Path.GetDirectoryName(filePath)!;
+            string debugPath = Path.Combine(parentPath, $"{Path.GetFileNameWithoutExtension(filePath)}_{debugTypeName}");
+            if (!Directory.Exists(debugPath))
+            {
+                Directory.CreateDirectory(debugPath);
+            }
+
+            return debugPath;
         }
 
         /// <summary>
