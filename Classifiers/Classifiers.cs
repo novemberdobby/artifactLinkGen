@@ -98,11 +98,11 @@ namespace HadesBoonBot.Classifiers
 
                     if (options.DebugOutput)
                     {
-                        string dbgPath = ScreenMetadata.GetDebugOutputFolder(screenPath, "tray_rect");
+                        string dbgPath = ScreenMetadata.GetDebugOutputFolder(screenPath);
                         using var trayImg = image!.Clone();
                         trayImg.Rectangle(trayRect, OCV.Scalar.Purple, 5);
 
-                        string trayImgPath = Path.Combine(dbgPath, Path.ChangeExtension(shortFile, "jpg"));
+                        string trayImgPath = Path.Combine(dbgPath, "tray_rect.jpg");
                         trayImg.SaveImage(trayImgPath);
                     }
                 }

@@ -179,7 +179,7 @@ namespace HadesBoonBot
         }
 
         /// <summary>
-        /// Get the full path of a folder we can use to output debug images, living next to filePath and prefixed with its name (without extension)
+        /// Get the full path of a folder we can use to output debug images, living next to filePath and prefixed with its name (without the extension)
         /// </summary>
         /// <param name="filePath">Full file path</param>
         /// <param name="debugTypeName">Suffix added to the file's name</param>
@@ -188,6 +188,23 @@ namespace HadesBoonBot
         {
             string parentPath = Path.GetDirectoryName(filePath)!;
             string debugPath = Path.Combine(parentPath, $"{Path.GetFileNameWithoutExtension(filePath)}_{debugTypeName}");
+            if (!Directory.Exists(debugPath))
+            {
+                Directory.CreateDirectory(debugPath);
+            }
+
+            return debugPath;
+        }
+
+        /// <summary>
+        /// Get the full path of a folder we can use to output debug images, living next to filePath and based on its name (without the extension)
+        /// </summary>
+        /// <param name="filePath">Full file path</param>
+        /// <returns>Debug path</returns>
+        public static string GetDebugOutputFolder(string filePath)
+        {
+            string parentPath = Path.GetDirectoryName(filePath)!;
+            string debugPath = Path.Combine(parentPath, Path.GetFileNameWithoutExtension(filePath));
             if (!Directory.Exists(debugPath))
             {
                 Directory.CreateDirectory(debugPath);
