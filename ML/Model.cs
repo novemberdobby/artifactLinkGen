@@ -33,8 +33,8 @@ namespace HadesBoonBot.ML
         public readonly string Name; //e.g. HealthCheck
         public string TrainingPath { get; private set; }
 
-        public string MLNetConfigPath => Path.GetFullPath($@"ML\{Name}Model.mbconfig");
-        public string MLNetModelPath => Path.GetFullPath($@"ML\{Name}Model.zip");
+        public string MLNetConfigPath => Path.GetFullPath($@"ML\Models\{Name}Model.mbconfig");
+        public string MLNetModelPath => Path.GetFullPath($@"ML\Models\{Name}Model.zip");
 
         public delegate bool ExtractDelegate(ScreenMetadata meta, OpenCvSharp.Mat screen, string targetFilename);
         public readonly ExtractDelegate Extract;
