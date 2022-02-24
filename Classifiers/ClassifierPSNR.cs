@@ -2,6 +2,7 @@ using CommandLine;
 using static HadesBoonBot.Codex.Provider;
 using Cv2 = OpenCvSharp.Cv2;
 using OCV = OpenCvSharp;
+using System.Linq;
 
 namespace HadesBoonBot.Classifiers
 {
@@ -195,49 +196,6 @@ namespace HadesBoonBot.Classifiers
                 {
                     Console.WriteLine($"Found missing slots in {filePath}, classification failed");
                     return null;
-                }
-            }
-
-            //detect when we run out of traits, otherwise we might start picking up pinned items/random other bits of the screen
-            {
-                bool emptySlotsFound = false;
-                int emptySlotRun = 0;
-                const int maxEmptySlotRun = 3;
-                string shortFile = Path.GetFileName(filePath);
-
-                for (int i = 0; i < slots.Count; i++)
-                {
-                    var (Column, _, _, Matches) = slots[i];
-
-                    //skip first column as people may choose to leave their base upgrades empty (weird tbh)
-                    if (Column == 0)
-                    {
-                        continue;
-                    }
-
-                    var bestMatch = Matches.First();
-                    if (!Codex.IsSlotFilled(bestMatch.Trait))
-                    {
-                        emptySlotRun++;
-                    }
-                    else
-                    {
-                        emptySlotRun = 0;
-                    }
-
-                    if (emptySlotRun >= maxEmptySlotRun)
-                    {
-                        int removeFrom = i - maxEmptySlotRun;
-                        Console.WriteLine($"Detected empty slots after #{removeFrom} in {shortFile}");
-                        slots.RemoveRange(removeFrom, slots.Count - removeFrom);
-                        emptySlotsFound = true;
-                        break;
-                    }
-                }
-
-                if (!emptySlotsFound)
-                {
-                    Console.WriteLine($"Failed to detect a run of empty slots in {shortFile}. This could be suspicious but doesn't necessarily indicate an invalid screen.");
                 }
             }
 

@@ -25,11 +25,22 @@
             }
         }
 
+        /// <summary>
+        /// Construct a classification result from a list of trait slots, do some cleanup etc
+        /// </summary>
+        /// <param name="codex">Trait list</param>
+        /// <param name="inSlots">Classified traits</param>
         public ClassifiedScreen(Codex codex, IEnumerable<Slot> inSlots)
         {
-            Slots = inSlots.ToList();
-            WeaponName = Codex.DetermineWeapon(Slots.Select(s => s.Trait));
+            //detect when we run out of traits and trim them off
+            var backEmpties = inSlots
+                .Reverse()
+                .TakeWhile(s => !Codex.IsSlotFilled(s.Trait))
+                .Count();
 
+            Slots = inSlots.Take(inSlots.Count() - backEmpties).ToList();
+
+            WeaponName = Codex.DetermineWeapon(Slots.Select(s => s.Trait));
             IsValid = WeaponName != null;
         }
     }
