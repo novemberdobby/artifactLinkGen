@@ -1,4 +1,4 @@
-﻿using CommandLine;
+using CommandLine;
 using OCV = OpenCvSharp;
 using System.Diagnostics;
 using System.Text;
@@ -76,11 +76,11 @@ namespace HadesBoonBot.Classifiers
 
             //does the robot think it's real?
             ScreenMetadata? meta = null;
-            if (appearsValid)
+            if (appearsValid && image != null)
             {
-                meta = new(image!);
-                int validityScore = meta.IsValidScreenML(image!, models);
-                if (validityScore < 2)
+                meta = new(image);
+                bool mlSaysValid = meta.IsValidScreenML(image, models, 2);
+                if (!mlSaysValid)
                 {
                     Console.WriteLine($"ML reports invalid image: {screenPath}");
                     appearsValid = false;

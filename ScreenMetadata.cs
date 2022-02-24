@@ -353,39 +353,53 @@ namespace HadesBoonBot
         /// Determine whether this image looks like a valid victory screen
         /// </summary>
         /// <param name="screen">Screenshot</param>
-        /// <returns>Validity score</returns>
-        internal int IsValidScreenML(OCV.Mat screen, List<ML.Model> models)
+        /// <param name="minimumScore">Score a screen must achieve to be considered valid</param>
+        /// <returns>Validity</returns>
+        internal bool IsValidScreenML(OCV.Mat screen, List<ML.Model> models, int minimumScore)
         {
-            //TODO once we have => target score, skip other checks. should make it faster
             ScreenMetadata meta = new(screen);
 
             //TODO predict without having to use any temp files
             string tempDir = Path.Combine(Path.GetTempPath(), $"hbb_{Guid.NewGuid()}");
             Directory.CreateDirectory(tempDir);
 
-            List<Task<ML.ModelOutput>> tasks = new();
+            int score = 0;
             try
             {
+                List<(ML.Model, string)> modelFiles = new();
                 foreach (ML.Model model in models)
                 {
                     string tempFile = Path.Combine(tempDir, $"{model.Name}.png");
+                    modelFiles.Add((model, tempFile));
+
+                    //if any fail to extract then there's no need to run ML at all
                     if (!model.Extract(this, screen, tempFile))
                     {
-                        return 0;
+                        return false;
                     }
+                }
 
+                foreach ((ML.Model model, string tempFile) in modelFiles)
+                {
                     var sampleData = new ML.ModelInput(tempFile);
-                    tasks.Add(Task.Factory.StartNew(() => model.Predict(sampleData)));
+                    var result = model.Predict(sampleData);
+                    if (ML.Util.IsGood(result))
+                    {
+                        //return success as soon as possible
+                        score++;
+                        if (score >= minimumScore)
+                        {
+                            return true;
+                        }
+                    }
                 }
             }
             finally
             {
-                Task.WaitAll(tasks.ToArray());
                 Directory.Delete(tempDir, true);
             }
 
-            //calculate score
-            return tasks.Sum(t => ML.Util.IsGood(t.Result) ? 1 : 0);
+            return false;
         }
 
         internal static bool ExtractML_CastCheck(ScreenMetadata meta, OCV.Mat screen, string filename)
