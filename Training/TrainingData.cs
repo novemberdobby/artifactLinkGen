@@ -19,6 +19,7 @@ namespace HadesBoonBot
             public bool? ValidHealth { get; set; }
             public bool? ValidCast { get; set; }
             public bool? ValidBackButton { get; set; }
+            public int? ColumnCount { get; set; }
 
             public Screen(string fileName)
             {
@@ -31,11 +32,17 @@ namespace HadesBoonBot
                 public string? Name { get; set; }
                 public int Col { get; set; }
                 public int Row { get; set; }
+                public bool IsPinned { get; set; }
 
                 public override string ToString()
                 {
                     return $"{Col}_{Row}: {Name}";
                 }
+            }
+
+            public override string ToString()
+            {
+                return $"{Path.GetFileName(FileName)}, valid: '{IsValid}'";
             }
         }
 
