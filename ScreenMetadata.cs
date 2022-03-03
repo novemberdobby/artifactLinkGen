@@ -4,7 +4,7 @@ using static HadesBoonBot.Codex.Provider;
 namespace HadesBoonBot
 {
     /// <summary>
-    /// Slot info and offset variables adjusted for image size
+    /// Item position and offset variables adjusted for image size
     /// </summary>
     internal class ScreenMetadata
     {
@@ -21,19 +21,25 @@ namespace HadesBoonBot
 
         public readonly float Multiplier;
 
-        public float FirstBoonIconX => 50 * Multiplier; //X location of the first icon (equipped companion)
-        public float FirstBoonIconY => 206 * Multiplier; //Y location of above
-        public float SecondBoonIconX => 122 * Multiplier; //X location of the second column
+        #region Tray icon locations & dimensions
 
-        public float BoonWidth => 77 * Multiplier; //width of the diamond
+        float FirstBoonIconX => 50 * Multiplier; //X location of the first icon (equipped companion)
+        float FirstBoonIconY => 206 * Multiplier; //Y location of above
+        float SecondBoonIconX => 122 * Multiplier; //X location of the second column
 
-        public float BoonColumnSep => 64.25f * Multiplier; //distance between columns (from 2nd column onwards)
-        public float BoonRowSep => 93.6f * Multiplier; //distance between rows
+        float BoonWidth => 77 * Multiplier; //width of the diamond
 
-        public float BoonColumnYoffset => 47 * Multiplier; //vertical offset of every second column
+        float BoonColumnSep => 64.25f * Multiplier; //distance between columns (from 2nd column onwards)
+        float BoonRowSep => 93.6f * Multiplier; //distance between rows
 
-        public static float BoonColumnsMax => 6; //the highest number of columns that can be visible
-        public static float BoonRowsMax => 7; //only the first column contains this many rows
+        float BoonColumnYoffset => 47 * Multiplier; //vertical offset of every second column
+
+        internal static float BoonColumnsMax => 6; //the highest number of columns that can be visible
+        internal static float BoonRowsMax => 7; //only the first column contains this many rows
+
+        #endregion
+
+        #region ML screen validity checks
 
         OCV.Point CastCheckPos => new(517 * Multiplier, 994 * Multiplier);
         OCV.Size CastCheckSize => new(29 * Multiplier, 41 * Multiplier);
@@ -46,9 +52,16 @@ namespace HadesBoonBot
         OCV.Size BackButtonCheckSize => new(52 * Multiplier, 52 * Multiplier);
         static readonly OCV.Mat IconBackButton;
 
-        int TrayMaskTop => (int)(248 * Multiplier);
-        int TrayMaskHeight => (int)(592 * Multiplier);
+        #endregion
 
+        #region Tray size detection
+
+        int TrayMaskTop => (int)(248 * Multiplier); //mask top when deducing tray column count
+        int TrayMaskHeight => (int)(592 * Multiplier); //and the height
+
+        /// <summary>
+        /// Flood fill from these points when deducing tray column count
+        /// </summary>
         OCV.Point[] TrayFillPositions => new[]
         {
             new OCV.Point(186 * Multiplier, 822 * Multiplier),
@@ -66,14 +79,138 @@ namespace HadesBoonBot
             { 432, 6 },
         };
 
+        #endregion
+
+        #region Pinned trait detection
+
+        OCV.Point PinMaskPos => new(0, 147 * Multiplier);
+        OCV.Size PinMaskSize => new(1150 * Multiplier, 839 * Multiplier); //X is chosen to cut off the full length of each pin box, otherwise we get too close to the stats panel which can overlap, breaking the border and allowing the flood fill out
+        OCV.Rect PinMaskRect => new(PinMaskPos, PinMaskSize);
+
+        int PinsStartY => (int)(279 * Multiplier);
+        int PinsSeparationY => (int)(168 * Multiplier);
+        int PinExpectedHeight => (int)(309 * Multiplier);
+        int PinCentreFromLastTrayColumn => (int)(158 * Multiplier);
+        int PinItemLength => (int)(895 * Multiplier);
+        int PinItemFirstY => (int)(231 * Multiplier);
+        float PinnedBoonWidth => 117 * Multiplier; //width of the diamond in a pinned boon
+
+        #endregion
+
         static ScreenMetadata()
         {
             IconCast = OCV.Cv2.ImRead(@"icons_overlay\icon_cast.png", OCV.ImreadModes.Unchanged);
             IconBackButton = OCV.Cv2.ImRead(@"icons_overlay\icon_back.png", OCV.ImreadModes.Unchanged);
         }
 
-        internal bool TryGetTrayColumnCount(OCV.Mat image, out int columns, out OCV.Rect trayRect)
+        internal bool TryGetPinCount(OCV.Mat image, int columnCount, out List<OCV.Rect> pinIcons, bool drawDebugImage, out OCV.Mat? debugImage)
         {
+            pinIcons = new();
+            debugImage = drawDebugImage ? image.Clone() : null;
+
+            using OCV.Mat pinMask = new(new OCV.Size(image.Width + 2, image.Height + 2), OCV.MatType.CV_8UC1, OCV.Scalar.White);
+            pinMask.Rectangle(PinMaskRect, OCV.Scalar.Black, -1);
+
+            //max pinned traits = 5
+            List<OCV.Point> seedPoints = new();
+            for (int i = 0; i < 5; i++)
+            {
+                seedPoints.Add(new OCV.Point(PinMaskSize.Width - 10, PinsStartY + i * PinsSeparationY));
+            }
+
+            OCV.Scalar tolerance = new(10, 10, 10);
+            List<OCV.Rect> pinRects = new();
+            foreach (var seedPoint in seedPoints)
+            {
+                image.FloodFill(pinMask, seedPoint, OCV.Scalar.Purple, out var pinRect, tolerance, tolerance, OCV.FloodFillFlags.MaskOnly);
+                pinRects.Add(pinRect);
+            }
+
+            List<OCV.Rect> goodPinRects = new();
+
+            //make sure none overlap and they're all close to the expected height
+            OCV.Rect union = pinRects.First();
+            for (int i = 0; i < pinRects.Count; i++)
+            {
+                var thisRect = pinRects[i];
+                if ((i > 0 && union.IntersectsWith(thisRect)) || Math.Abs(thisRect.Height - PinExpectedHeight) < PinExpectedHeight / 10.0f)
+                {
+                    break;
+                }
+                else
+                {
+                    union = union.Union(thisRect);
+                    goodPinRects.Add(thisRect);
+                }
+            }
+
+            //left-align; highlighted icons or certain chunky traits like the lambent plume can block the floodfill
+            int leftMost = goodPinRects.Min(r => r.Left);
+            for (int i = 0; i < goodPinRects.Count; i++)
+            {
+                goodPinRects[i] = new(leftMost, goodPinRects[i].Top, goodPinRects[i].Right - leftMost, goodPinRects[i].Height);
+            }
+
+            if (debugImage != null)
+            {
+                foreach (OCV.Rect pinRect in goodPinRects)
+                {
+                    debugImage.Rectangle(pinRect, OCV.Scalar.Yellow, (int)(5 * Multiplier));
+
+                    //also highlight the full item; we don't use the full row but can get it
+                    debugImage.Rectangle(pinRect.TopLeft, new(pinRect.Left + PinItemLength, pinRect.Bottom), OCV.Scalar.Red, (int)(3 * Multiplier));
+                }
+
+                foreach (var seedPoint in seedPoints)
+                {
+                    debugImage.Circle(seedPoint, (int)(10 * Multiplier), OCV.Scalar.Orange, -1);
+                }
+            }
+
+            if (goodPinRects.Any())
+            {
+                //find the right-most trait position
+                if (TryGetTraitRect(columnCount - 1, 1, out var rightmostTrait) && rightmostTrait != null)
+                {
+                    int rightMostCentreX = rightmostTrait.Value.Left + rightmostTrait.Value.Width / 2;
+                    int pinCentreX = rightMostCentreX + PinCentreFromLastTrayColumn;
+
+                    //the pin rects are really only to work out how many pins we have, and may not be super accurate due to compression affecting floodfill etc, so rely on known values
+                    OCV.Size pbw = new(PinnedBoonWidth, PinnedBoonWidth);
+                    for (int p = 0; p < goodPinRects.Count; p++)
+                    {
+                        OCV.Point iconPos = new(pinCentreX, PinItemFirstY + p * PinsSeparationY);
+                        OCV.Rect iconRect = new(new(iconPos.X - pbw.Width / 2, iconPos.Y - pbw.Height / 2), pbw);
+                        pinIcons.Add(iconRect);
+
+                        if (debugImage != null)
+                        {
+                            debugImage.Rectangle(iconRect, OCV.Scalar.White, (int)(2 * Multiplier));
+                        }
+                    }
+
+                    if (debugImage != null)
+                    {
+                        //show how we determined the X position
+                        int showLinkY = rightmostTrait.Value.Top + rightmostTrait.Value.Height / 2;
+                        var lineLeft = new OCV.Point(rightMostCentreX, showLinkY);
+                        var lineRight = new OCV.Point(pinCentreX, showLinkY);
+
+                        debugImage.Line(lineLeft, lineRight, OCV.Scalar.Pink, (int)(4 * Multiplier));
+                        debugImage.Circle(lineLeft, (int)(10 * Multiplier), OCV.Scalar.Pink, -1);
+                        debugImage.Circle(lineRight, (int)(10 * Multiplier), OCV.Scalar.Pink, -1);
+                    }
+                }
+            }
+
+            //0 pins is still a valid result
+            return true;
+        }
+
+        internal bool TryGetTrayColumnCount(OCV.Mat image, out int columns, out OCV.Rect trayRect, bool drawDebugImage, out OCV.Mat? debugImage)
+        {
+            debugImage = drawDebugImage ? image.Clone() : null;
+
             /*
                find the tray area. the only measurement we care about is the right hand side of it, which tells us:
                 a) how many columns we need to search for traits
@@ -83,25 +220,22 @@ namespace HadesBoonBot
             */
 
             //mask out the top & bottom of the image where the tray can't appear
-            using OCV.Mat trayMask = new(new OCV.Size(image.Width + 2, image.Height + 2), OCV.MatType.CV_8UC1, OCV.Scalar.Black);
-
-            trayMask.Rectangle(new OCV.Rect(0, 0, trayMask.Width, TrayMaskTop), OCV.Scalar.White, -1);
-            trayMask.Rectangle(new OCV.Rect(0, TrayMaskTop + TrayMaskHeight, trayMask.Width, TrayMaskHeight), OCV.Scalar.White, -1);
+            using OCV.Mat trayMask = new(new OCV.Size(image.Width + 2, image.Height + 2), OCV.MatType.CV_8UC1, OCV.Scalar.White);
+            trayMask.Rectangle(new OCV.Rect(0, TrayMaskTop, trayMask.Width, TrayMaskHeight), OCV.Scalar.Black, -1);
 
             trayRect = new(TrayFillPositions.First(), OCV.Size.Zero);
-            OCV.Scalar tolerance = new(15, 15, 15);
+            OCV.Scalar tolerance = new(10, 10, 10);
 
             for (int i = 0; i < TrayFillPositions.Length; i++)
             {
-                OCV.Mat thisTrayMask = (i == 0 ? trayMask : trayMask.Clone());
-
+                using OCV.Mat thisTrayMask = trayMask.Clone();
                 image.FloodFill(thisTrayMask, TrayFillPositions[i], OCV.Scalar.Orange, out var thisTrayRect, tolerance, tolerance, OCV.FloodFillFlags.MaskOnly);
                 trayRect = trayRect.Union(thisTrayRect);
+            }
 
-                if (i > 0)
-                {
-                    thisTrayMask.Dispose();
-                }
+            if (debugImage != null)
+            {
+                debugImage.Rectangle(trayRect, OCV.Scalar.Orange, (int)(5 * Multiplier));
             }
 
             //clean it up
@@ -122,10 +256,23 @@ namespace HadesBoonBot
                 }
             }
 
+            if (debugImage != null)
+            {
+                foreach (var fillPos in TrayFillPositions)
+                {
+                    debugImage.Circle(fillPos, (int)(10 * Multiplier), OCV.Scalar.Orange, -1);
+                }
+            }
+
             //is it within a tolerance of that value?
             int rightDiff = Math.Abs(closestRight - normalisedRight);
             if (rightDiff <= 15)
             {
+                if (debugImage != null)
+                {
+                    debugImage.Rectangle(trayRect, OCV.Scalar.Purple, (int)(5 * Multiplier));
+                }
+
                 columns = TrayRightToColumnCount[closestRight];
                 return true;
             }
@@ -297,7 +444,7 @@ namespace HadesBoonBot
                     image.Dispose();
                     image = cropped;
 
-                    if(debugFilename != null)
+                    if (debugFilename != null)
                     {
                         Console.WriteLine($"Found alpha channel letterboxing in {debugFilename}");
                     }

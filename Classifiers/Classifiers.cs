@@ -1,4 +1,4 @@
-using CommandLine;
+﻿using CommandLine;
 using OCV = OpenCvSharp;
 using System.Diagnostics;
 using System.Text;
@@ -15,6 +15,9 @@ namespace HadesBoonBot.Classifiers
 
         [Option('t', "training_data", Required = false, HelpText = "Training data file, check results against this file if supplied")]
         public string? TrainingData { get; set; }
+
+        [Option('v', "training_data_verify", Required = false, HelpText = "Fail if training data is supplied and our results don't match it")]
+        public bool FailOnTrainingMismatch { get; set; }
 
         protected ClassifierCommonOptions()
         {
@@ -90,25 +93,40 @@ namespace HadesBoonBot.Classifiers
             Console.WriteLine($"Initial validation of {shortFile} took {timer.Elapsed.TotalSeconds:N2}s. Appears valid: {appearsValid}");
 
             int columnCount = -1;
-            if (appearsValid)
+            List<OCV.Rect>? pinIconRects = null;
+
+            if (appearsValid && image != null && meta != null)
             {
-                if (meta!.TryGetTrayColumnCount(image!, out columnCount, out OCV.Rect trayRect))
+                if (meta.TryGetTrayColumnCount(image, out columnCount, out OCV.Rect trayRect, options.DebugOutput, out OCV.Mat? debugImgColumns))
                 {
                     //Console.WriteLine($"Detected {columnCount} columns in {shortFile}");
 
-                    if (options.DebugOutput)
+                    if (meta.TryGetPinCount(image, columnCount, out pinIconRects, options.DebugOutput, out OCV.Mat? debugImgPins))
                     {
-                        string dbgPath = ScreenMetadata.GetDebugOutputFolder(screenPath);
-                        using var trayImg = image!.Clone();
-                        trayImg.Rectangle(trayRect, OCV.Scalar.Purple, 5);
+                        //Console.WriteLine($"Detected {pinIconCentres.Count} pinned traits in {shortFile}");
+                    }
+                    else
+                    {
+                        Console.Error.WriteLine($"Unable to determine number of pinned traits in {shortFile}. This isn't fatal but will frustrate classification");
+                    }
 
-                        string trayImgPath = Path.Combine(dbgPath, "tray_rect.jpg");
-                        trayImg.SaveImage(trayImgPath);
+                    if (debugImgPins != null)
+                    {
+                        string pinImgPath = Path.Combine(ScreenMetadata.GetDebugOutputFolder(screenPath), $"pin_search_{shortFile}.jpg");
+                        debugImgPins.SaveImage(pinImgPath);
+                        debugImgPins.Dispose();
                     }
                 }
                 else
                 {
                     Console.Error.WriteLine($"Unable to determine number of trait columns in the tray of {shortFile}. This isn't fatal but will frustrate classification");
+                }
+
+                if (debugImgColumns != null)
+                {
+                    string trayImgPath = Path.Combine(ScreenMetadata.GetDebugOutputFolder(screenPath), $"tray_rect_{shortFile}.jpg");
+                    debugImgColumns.SaveImage(trayImgPath);
+                    debugImgColumns?.Dispose();
                 }
             }
 
@@ -118,12 +136,28 @@ namespace HadesBoonBot.Classifiers
                 {
                     if (trainedScreen.IsValid != appearsValid)
                     {
-                        throw new Exception($"Screen validity doesn't match training validity: {screenPath}");
+                        string err = $"Screen validity doesn't match training validity: {screenPath}";
+                        if (options.FailOnTrainingMismatch)
+                        {
+                            throw new Exception(err);
+                        }
+                        else
+                        {
+                            Console.Error.WriteLine(err);
+                        }
                     }
                 }
                 else
                 {
-                    throw new Exception($"Verification requested for screen that doesn't exist in the training data: {screenPath}");
+                    string err = $"Verification requested for screen that doesn't exist in the training data: {screenPath}";
+                    if (options.FailOnTrainingMismatch)
+                    {
+                        throw new Exception(err);
+                    }
+                    else
+                    {
+                        Console.Error.WriteLine(err);
+                    }
                 }
             }
 
@@ -177,6 +211,11 @@ namespace HadesBoonBot.Classifiers
                         if (incorrect.Any())
                         {
                             resultText.Append($" (incorrect slots: {string.Join(", ", incorrect)})");
+                        }
+
+                        if (trainedScreen.ColumnCount != columnCount)
+                        {
+                            Console.WriteLine($"Column count ({columnCount}) doesn't match training data ({trainedScreen.ColumnCount}) for screen: {screenPath}");
                         }
 
                         Console.WriteLine(resultText.ToString());
