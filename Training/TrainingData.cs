@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
+using System.Linq;
 using System.Runtime.Serialization;
 
 namespace HadesBoonBot
@@ -58,7 +59,14 @@ namespace HadesBoonBot
         internal static TrainingData Load(string filename)
         {
             using StreamReader dataFile = new(filename);
-            return JsonConvert.DeserializeObject<TrainingData>(dataFile.ReadToEnd());
+            var data = JsonConvert.DeserializeObject<TrainingData>(dataFile.ReadToEnd());
+
+            foreach (var screen in data.Screens)
+            {
+                screen.Traits = screen.Traits.OrderBy(t => t.Row).ThenBy(t => t.Col).ToList();
+            }
+
+            return data;
         }
 
         internal void Save(string filename)
