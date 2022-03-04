@@ -815,7 +815,7 @@
             {
                 "name": "Flurry Cast",
                 "desc": "Your Cast is +X%  faster and fully automatic.",
-                "icon": "icons\\Hermes\\Flurry_Cast.png"
+                "icon": "icons\\Hermes\\Bad_News__Flurry_Cast.png"
             },
             {
                 "name": "Quick Favor",
@@ -855,7 +855,7 @@
             {
                 "name": "Quick Reload",
                 "desc": "Foes drop  stuck in them faster.",
-                "icon": "icons\\Hermes\\Quick_Reload.png"
+                "icon": "icons\\Hermes\\Auto_Reload__Quick_Reload.png"
             },
             {
                 "name": "Side Hustle",
@@ -870,7 +870,7 @@
             {
                 "name": "Auto Reload",
                 "desc": "You regenerate  faster.",
-                "icon": "icons\\Hermes\\Auto_Reload.png"
+                "icon": "icons\\Hermes\\Auto_Reload__Quick_Reload.png"
             },
             {
                 "name": "Greater Recall",
@@ -880,7 +880,8 @@
             {
                 "name": "Bad News",
                 "desc": "Your cast deals more damage to foes without  on them.\nFirst shot damage: +50%",
-                "icon": "icons\\Hermes\\Bad_News.png"
+                "icon": "icons\\Hermes\\Bad_News__Flurry_Cast.png",
+                "requires_any": [ "Auto Reload", "Lambent Plume" ]
             }
         ]
     },
