@@ -30,7 +30,7 @@ namespace HadesBoonBot.Training
         {
             TrainingData inputData = TrainingData.Load(options.TrainingData);
 
-            if (options.Clean)
+            if (options.Clean && Directory.Exists(options.OutputDir))
             {
                 Directory.Delete(options.OutputDir, true);
             }
