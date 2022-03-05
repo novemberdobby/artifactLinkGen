@@ -223,64 +223,67 @@ namespace HadesBoonBot
             using OCV.Mat trayMask = new(new OCV.Size(image.Width + 2, image.Height + 2), OCV.MatType.CV_8UC1, OCV.Scalar.White);
             trayMask.Rectangle(new OCV.Rect(0, TrayMaskTop, trayMask.Width, TrayMaskHeight), OCV.Scalar.Black, -1);
 
-            trayRect = new(TrayFillPositions.First(), OCV.Size.Zero);
-            OCV.Scalar tolerance = new(10, 10, 10);
-
-            for (int i = 0; i < TrayFillPositions.Length; i++)
+            int[] tolerances = new[] { 5, 10, 15 };
+            foreach (int tolerance in tolerances)
             {
-                using OCV.Mat thisTrayMask = trayMask.Clone();
-                image.FloodFill(thisTrayMask, TrayFillPositions[i], OCV.Scalar.Orange, out var thisTrayRect, tolerance, tolerance, OCV.FloodFillFlags.MaskOnly);
-                trayRect = trayRect.Union(thisTrayRect);
-            }
+                OCV.Scalar tolScalar = new(tolerance, tolerance, tolerance);
+                trayRect = new(TrayFillPositions.First(), OCV.Size.Zero);
 
-            if (debugImage != null)
-            {
-                debugImage.Rectangle(trayRect, OCV.Scalar.Orange, (int)(5 * Multiplier));
-            }
-
-            //clean it up
-            trayRect = new(0, TrayMaskTop, trayRect.Right, TrayMaskHeight);
-
-            //find which expected value it's closest to
-            int normalisedRight = (int)(trayRect.Right / Multiplier);
-            int closestRight = -1;
-            int closestRightDist = int.MaxValue;
-
-            foreach (var expectedRight in TrayRightToColumnCount.Keys)
-            {
-                int thisDist = Math.Abs(expectedRight - normalisedRight);
-                if (thisDist < closestRightDist)
+                for (int i = 0; i < TrayFillPositions.Length; i++)
                 {
-                    closestRightDist = thisDist;
-                    closestRight = expectedRight;
+                    using OCV.Mat thisTrayMask = trayMask.Clone();
+                    image.FloodFill(thisTrayMask, TrayFillPositions[i], OCV.Scalar.Orange, out var thisTrayRect, tolScalar, tolScalar, OCV.FloodFillFlags.MaskOnly);
+                    trayRect = trayRect.Union(thisTrayRect);
                 }
-            }
 
-            if (debugImage != null)
-            {
-                foreach (var fillPos in TrayFillPositions)
-                {
-                    debugImage.Circle(fillPos, (int)(10 * Multiplier), OCV.Scalar.Orange, -1);
-                }
-            }
-
-            //is it within a tolerance of that value?
-            int rightDiff = Math.Abs(closestRight - normalisedRight);
-            if (rightDiff <= 15)
-            {
                 if (debugImage != null)
                 {
-                    debugImage.Rectangle(trayRect, OCV.Scalar.Purple, (int)(5 * Multiplier));
+                    debugImage.Rectangle(trayRect, OCV.Scalar.Orange, (int)(5 * Multiplier));
                 }
 
-                columns = TrayRightToColumnCount[closestRight];
-                return true;
+                //clean it up
+                trayRect = new(0, TrayMaskTop, trayRect.Right, TrayMaskHeight);
+
+                //find which expected value it's closest to
+                int normalisedRight = (int)(trayRect.Right / Multiplier);
+                int closestRight = -1;
+                int closestRightDist = int.MaxValue;
+
+                foreach (var expectedRight in TrayRightToColumnCount.Keys)
+                {
+                    int thisDist = Math.Abs(expectedRight - normalisedRight);
+                    if (thisDist < closestRightDist)
+                    {
+                        closestRightDist = thisDist;
+                        closestRight = expectedRight;
+                    }
+                }
+
+                if (debugImage != null)
+                {
+                    foreach (var fillPos in TrayFillPositions)
+                    {
+                        debugImage.Circle(fillPos, (int)(10 * Multiplier), OCV.Scalar.Orange, -1);
+                    }
+                }
+
+                //is it within a tolerance of that value?
+                int rightDiff = Math.Abs(closestRight - normalisedRight);
+                if (rightDiff <= 15)
+                {
+                    if (debugImage != null)
+                    {
+                        debugImage.Rectangle(trayRect, OCV.Scalar.Purple, (int)(5 * Multiplier));
+                    }
+
+                    columns = TrayRightToColumnCount[closestRight];
+                    return true;
+                }
             }
-            else
-            {
-                columns = -1;
-                return false;
-            }
+
+            columns = -1;
+            trayRect = OCV.Rect.Empty;
+            return false;
         }
 
         /// <summary>
