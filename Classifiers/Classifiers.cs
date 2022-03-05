@@ -1,4 +1,4 @@
-﻿using CommandLine;
+using CommandLine;
 using OCV = OpenCvSharp;
 using System.Diagnostics;
 using System.Text;
@@ -18,6 +18,9 @@ namespace HadesBoonBot.Classifiers
 
         [Option('v', "training_data_verify", Required = false, HelpText = "Fail if training data is supplied and our results don't match it")]
         public bool FailOnTrainingMismatch { get; set; }
+
+        [Option("validate_only", Required = false, HelpText = "Only perform initial validation (aspect, ML, column count, pin count)")]
+        public bool ValidateOnly { get; set; }
 
         protected ClassifierCommonOptions()
         {
@@ -161,7 +164,7 @@ namespace HadesBoonBot.Classifiers
                 }
             }
 
-            if (!appearsValid)
+            if (options.ValidateOnly || !appearsValid)
             {
                 return null;
             }
