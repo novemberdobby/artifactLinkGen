@@ -75,6 +75,7 @@ namespace HadesBoonBot.Classifiers
             //build list of potential trait locations on the screen
             for (int column = 0; column < ScreenMetadata.BoonColumnsMax; column++)
             {
+                //if we know the column count, respect it
                 if (columnCount > 0 && column >= columnCount)
                 {
                     break;
@@ -250,6 +251,11 @@ namespace HadesBoonBot.Classifiers
                 Trait = trait;
                 Filename = filename;
                 Image = image;
+            }
+
+            public override string ToString()
+            {
+                return Trait.Name;
             }
         }
     }

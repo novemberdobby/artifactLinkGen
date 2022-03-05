@@ -287,20 +287,13 @@ namespace HadesBoonBot
         }
 
         /// <summary>
-        /// Find a rectangle containing the position of a trait in the image
+        /// Determine whether a tray slot position is valid
         /// </summary>
-        /// <param name="column">Trait column</param>
-        /// <param name="row">Trait row</param>
-        /// <param name="result">Rectangle containing trait</param>
-        /// <returns>Whether a valid trait location was provided</returns>
-        internal bool TryGetTraitRect(int column, int row, out OCV.Rect? result)
+        /// <param name="column">Slot column</param>
+        /// <param name="row">Slot row</param>
+        /// <returns>Slot validity</returns>
+        internal static bool IsValidSlotPos(int column, int row)
         {
-            result = null;
-
-            OCV.Point2f startPoint = column == 0 //the distance between columns 0&1 is unique
-                ? new(FirstBoonIconX, FirstBoonIconY)
-                : new(SecondBoonIconX - BoonColumnSep, FirstBoonIconY);
-
             if (row == 0 && column != 0)
             {
                 //the only row-0 item is the companion (in column 0)
@@ -314,7 +307,33 @@ namespace HadesBoonBot
                     //odd columns have 1 less item
                     return false;
                 }
+            }
 
+            return true;
+        }
+
+        /// <summary>
+        /// Find a rectangle containing the position of a trait in the image
+        /// </summary>
+        /// <param name="column">Trait column</param>
+        /// <param name="row">Trait row</param>
+        /// <param name="result">Rectangle containing trait</param>
+        /// <returns>Whether a valid trait location was provided</returns>
+        internal bool TryGetTraitRect(int column, int row, out OCV.Rect? result)
+        {
+            result = null;
+
+            if (!IsValidSlotPos(column, row))
+            {
+                return false;
+            }
+
+            OCV.Point2f startPoint = column == 0 //the distance between columns 0&1 is unique
+                ? new(FirstBoonIconX, FirstBoonIconY)
+                : new(SecondBoonIconX - BoonColumnSep, FirstBoonIconY);
+
+            if (column % 2 == 1)
+            {
                 startPoint.Y += BoonColumnYoffset;
             }
 
