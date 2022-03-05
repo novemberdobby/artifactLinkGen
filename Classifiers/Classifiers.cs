@@ -76,7 +76,7 @@ namespace HadesBoonBot.Classifiers
             using var image = ScreenMetadata.TryMakeValidScreen(origImage, screenPath);
             if (image == null)
             {
-                Console.WriteLine($"Failed to make valid image from {screenPath}");
+                //Console.WriteLine($"Failed to make valid image from {screenPath}");
                 appearsValid = false;
             }
 
@@ -88,7 +88,7 @@ namespace HadesBoonBot.Classifiers
                 bool mlSaysValid = meta.IsValidScreenML(image, models, 2);
                 if (!mlSaysValid)
                 {
-                    Console.WriteLine($"ML reports invalid image: {screenPath}");
+                    //Console.WriteLine($"ML reports invalid image: {screenPath}");
                     appearsValid = false;
                 }
             }

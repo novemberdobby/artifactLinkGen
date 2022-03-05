@@ -282,11 +282,11 @@ namespace HadesBoonBot
                     boon.Providers = providers;
                 }
 
-#if DEBUG
+                /*
                 //i want the names of everyone responsible
                 string providerNames = string.Join("|", providers.Select(p => p.Name));
                 Console.WriteLine($"Found duo ({providerNames}) {duo.Value.First()}");
-#endif
+                */
             }
 
             //only get images if requested
