@@ -1,4 +1,4 @@
-﻿using CommandLine;
+using CommandLine;
 using System.Reflection;
 using Cv2 = OpenCvSharp.Cv2;
 using OCV = OpenCvSharp;
@@ -29,11 +29,7 @@ namespace HadesBoonBot.Training
         internal void Run(GenerateTraitsOptions options, Codex codex)
         {
             TrainingData inputData = TrainingData.Load(options.TrainingData);
-
-            if (options.Clean && Directory.Exists(options.OutputDir))
-            {
-                Directory.Delete(options.OutputDir, true);
-            }
+            Util.CreateDir(options.OutputDir, options.Clean);
 
             //track how many real/artificial examples we're creating
             Dictionary<string, int> realSamples = new();
@@ -176,9 +172,11 @@ namespace HadesBoonBot.Training
                             }
                         }
 
-                        //ditch the alpha channel
+                        //ditch the alpha channel & convert to a boondiamond
                         using var bgr = image.CvtColor(OCV.ColorConversionCodes.BGRA2BGR);
-                        bgr.SaveImage(targetFile);
+                        using var tidied = CVUtil.MakeComparable(bgr);
+
+                        tidied.SaveImage(targetFile);
                         image.Dispose();
                     }
                 });

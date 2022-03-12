@@ -356,13 +356,7 @@ namespace HadesBoonBot
         public static string GetDebugOutputFolder(string filePath, string debugTypeName)
         {
             string parentPath = Path.GetDirectoryName(filePath)!;
-            string debugPath = Path.Combine(parentPath, $"{Path.GetFileNameWithoutExtension(filePath)}_{debugTypeName}");
-            if (!Directory.Exists(debugPath))
-            {
-                Directory.CreateDirectory(debugPath);
-            }
-
-            return debugPath;
+            return Util.CreateDir(Path.Combine(parentPath, $"{Path.GetFileNameWithoutExtension(filePath)}_{debugTypeName}"));
         }
 
         /// <summary>
@@ -373,13 +367,7 @@ namespace HadesBoonBot
         public static string GetDebugOutputFolder(string filePath)
         {
             string parentPath = Path.GetDirectoryName(filePath)!;
-            string debugPath = Path.Combine(parentPath, Path.GetFileNameWithoutExtension(filePath));
-            if (!Directory.Exists(debugPath))
-            {
-                Directory.CreateDirectory(debugPath);
-            }
-
-            return debugPath;
+            return Util.CreateDir(Path.Combine(parentPath, Path.GetFileNameWithoutExtension(filePath)));
         }
 
         /// <summary>

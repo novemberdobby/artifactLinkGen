@@ -31,16 +31,7 @@ namespace HadesBoonBot.Training
             {
                 foreach (var model in models)
                 {
-                    string trainingDir = Path.Combine(model.TrainingPath, validity);
-                    if (options.Clean && Directory.Exists(trainingDir))
-                    {
-                        Directory.Delete(trainingDir, true);
-                    }
-
-                    if (!Directory.Exists(trainingDir))
-                    {
-                        Directory.CreateDirectory(trainingDir);
-                    }
+                    Util.CreateDir(Path.Combine(model.TrainingPath, validity), options.Clean);
                 }
             }
 
