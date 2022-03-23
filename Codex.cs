@@ -311,6 +311,12 @@ namespace HadesBoonBot
 
                 ByIcon[iconFile].Add(trait);
             }
+
+            //sort here so we can use [0] when we only need a representative for this group
+            foreach (var sharers in ByIcon.Values)
+            {
+                sharers.Sort((l, r) => l.Name.CompareTo(r.Name));
+            }
         }
 
         /// <summary>
@@ -364,7 +370,7 @@ namespace HadesBoonBot
         public IEnumerable<Provider.Trait> GetIconSharingTraits(string traitName)
         {
             string iconFile = ByName[traitName].IconFile;
-            return ByIcon[iconFile].OrderBy(t => t.Name);
+            return ByIcon[iconFile];
         }
 
         /// <summary>

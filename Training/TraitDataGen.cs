@@ -1,4 +1,4 @@
-using CommandLine;
+﻿using CommandLine;
 using System.Reflection;
 using Cv2 = OpenCvSharp.Cv2;
 using OCV = OpenCvSharp;
@@ -26,6 +26,29 @@ namespace HadesBoonBot.Training
 
     internal class TraitDataGen
     {
+        internal enum SampleCategory
+        {
+            /// <summary>
+            /// Created from codex icons with mutations (no pin overlays)
+            /// </summary>
+            Autogen,
+
+            /// <summary>
+            /// Created from codex icons with mutations (all pin overlays)
+            /// </summary>
+            AutogenPinned,
+
+            /// <summary>
+            /// Created from classified victory screens (trait tray)
+            /// </summary>
+            TrayIcons,
+
+            /// <summary>
+            /// Created from classified victory screens (pin rows)
+            /// </summary>
+            PinIcons,
+        }
+
         internal void Run(GenerateTraitsOptions options, Codex codex)
         {
             TrainingData inputData = TrainingData.Load(options.TrainingData);
@@ -44,7 +67,7 @@ namespace HadesBoonBot.Training
                     continue;
                 }
 
-                if(!(screen.IsValid ?? true))
+                if (!(screen.IsValid ?? true))
                 {
                     Console.WriteLine($"Skipping screen as it's invalid: {screen.FileName}");
                     continue;
@@ -55,7 +78,7 @@ namespace HadesBoonBot.Training
                     Console.WriteLine($"Reading {screen.FileName}");
                     using var loaded = Cv2.ImRead(screen.FileName, OCV.ImreadModes.Unchanged);
                     var validated = ScreenMetadata.TryMakeValidScreen(loaded);
-                    if(validated == null)
+                    if (validated == null)
                     {
                         throw new Exception($"Screen is no longer valid: {screen.FileName}");
                     }
@@ -65,10 +88,16 @@ namespace HadesBoonBot.Training
 
                 Lazy<ScreenMetadata> meta = new(() => new(image.Value));
 
-                //save trait diamonds
-                foreach (var trait in screen.Traits)
+                IEnumerable<(TrainingData.Screen.Trait trait, bool isPin)> traits = screen.Traits.Select(trait => (trait, false));
+                if (screen.PinnedTraits != null)
                 {
-                    if(trait.Name == null)
+                    traits = traits.Concat(screen.PinnedTraits.Select(trait => (trait, true)));
+                }
+
+                //save tray trait diamonds
+                foreach ((var trait, bool isPin) in traits)
+                {
+                    if (trait.Name == null)
                     {
                         Console.Error.WriteLine($"Found a null trait name in {screen.FileName}");
                         continue;
@@ -90,21 +119,39 @@ namespace HadesBoonBot.Training
                     realSamples[traitName]++;
 
                     //save it with a name pointing back to the source
-                    string targetDir = Path.Combine(options.OutputDir, traitName);
-                    string targetFile = Path.Combine(targetDir, $"{Path.GetFileName(screen.FileName)}_{trait.Col}_{trait.Row}.png");
+                    string targetDir = Path.Combine(options.OutputDir, traitName, (isPin ? SampleCategory.PinIcons : SampleCategory.TrayIcons).ToString());
+                    string targetFile = Path.Combine(targetDir, $"{Path.GetFileName(screen.FileName)}_{trait.GetPos()}.png");
                     if (!File.Exists(targetFile))
                     {
-                        if (!Directory.Exists(targetDir))
+                        Util.CreateDir(targetDir);
+
+                        OCV.Rect? iconRect = null;
+                        if (isPin)
                         {
-                            Directory.CreateDirectory(targetDir);
+                            if (screen.ColumnCount.HasValue)
+                            {
+                                iconRect = meta.Value.GetPinRect(screen.ColumnCount.Value, trait.Row).iconRect;
+                            }
+                            else
+                            {
+                                throw new Exception($"Failed to get pinned trait rect for {trait} in {screen.FileName} - unknown tray column count");
+                            }
+                        }
+                        else
+                        {
+                            if (meta.Value.TryGetTraitRect(trait.Col, trait.Row, out OCV.Rect? traitRect))
+                            {
+                                iconRect = traitRect!.Value;
+                            }
+                            else
+                            {
+                                throw new Exception($"Failed to get tray trait rect for {trait} in {screen.FileName}");
+                            }
                         }
 
-                        if (meta.Value.TryGetTraitRect(trait.Col, trait.Row, out OCV.Rect? traitRect))
-                        {
-                            using OCV.Mat traitImg = image.Value.SubMat(traitRect!.Value);
-                            using var comparable = CVUtil.MakeComparable(traitImg);
-                            comparable.SaveImage(targetFile);
-                        }
+                        using OCV.Mat traitImg = image.Value.SubMat(iconRect.Value);
+                        using var comparable = CVUtil.MakeComparable(traitImg);
+                        comparable.SaveImage(targetFile);
                     }
                 }
 
@@ -137,19 +184,16 @@ namespace HadesBoonBot.Training
                 throw new Exception("Failed to find one method for each mutation type");
             }
 
-            if (codex.Any(t => t.Icon == null))
+            foreach (var trait in codex.ByIcon.Values.Select(bi => bi.First()))
             {
-                throw new Exception("One or more trait icons are null when generating fake sample data");
-            }
-
-            foreach (var trait in codex)
-            {
-                string targetDir = Path.Combine(options.OutputDir, trait.Name);
-                if (!Directory.Exists(targetDir))
+                if (trait.Icon == null)
                 {
-                    Directory.CreateDirectory(targetDir);
+                    throw new Exception("One or more trait icons are null when generating fake sample data");
                 }
 
+                string targetDir = Util.CreateDir(Path.Combine(options.OutputDir, trait.Name, SampleCategory.Autogen.ToString()));
+                string targetDirPinned = Util.CreateDir(Path.Combine(options.OutputDir, trait.Name, SampleCategory.AutogenPinned.ToString()));
+                
                 //go through each combination
                 fakeSamples += Mutation.Max - Mutation.Original;
                 Parallel.For((int)Mutation.Original, (int)Mutation.Max, m =>
@@ -157,7 +201,16 @@ namespace HadesBoonBot.Training
                     Mutation mutate = (Mutation)m;
                     string id = mutate.ToString().Replace(", ", "_");
 
-                    string targetFile = Path.Combine(targetDir, $"_{id}.png"); //prefix with underscore so we know which are real/generated
+                    bool isPinned = (mutate & Mutation.Pinned) == Mutation.Pinned;
+                    if (isPinned && !Codex.IsSlotFilled(trait))
+                    {
+                        //it's not possible to pin empty slots (:
+                        return;
+                    }
+
+                    string thisTargetDir = isPinned ? targetDirPinned : targetDir;
+
+                    string targetFile = Path.Combine(thisTargetDir, $"_{id}.png"); //prefix with underscore so we know which are real/generated
                     if (!File.Exists(targetFile))
                     {
                         OCV.Mat image = trait.Icon!.Clone();

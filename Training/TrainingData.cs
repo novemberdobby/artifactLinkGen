@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.Linq;
 using System.Runtime.Serialization;
 
@@ -15,6 +15,7 @@ namespace HadesBoonBot
         {
             public string FileName { get; set; }
             public List<Trait> Traits { get; set; }
+            public List<Trait> PinnedTraits { get; set; }
 
             public bool? IsValid { get; set; }
             public bool? ValidHealth { get; set; }
@@ -26,6 +27,7 @@ namespace HadesBoonBot
             {
                 FileName = fileName;
                 Traits = new();
+                PinnedTraits = new();
             }
 
             public class Trait
@@ -33,11 +35,16 @@ namespace HadesBoonBot
                 public string? Name { get; set; }
                 public int Col { get; set; }
                 public int Row { get; set; }
-                public bool IsPinned { get; set; }
+                public bool? IsPinned { get; set; }
 
                 public override string ToString()
                 {
-                    return $"{Col}_{Row}: {Name}";
+                    return Col == -1 ? $"Pin {Row}: {Name}" : $"Tray {Col}_{Row}: {Name}";
+                }
+
+                public string GetPos()
+                {
+                    return Col == -1 ? Row.ToString() : $"{Col}_{Row}";
                 }
             }
 
@@ -63,7 +70,7 @@ namespace HadesBoonBot
 
             foreach (var screen in data.Screens)
             {
-                screen.Traits = screen.Traits.OrderBy(t => t.Row).ThenBy(t => t.Col).ToList();
+                OrderTraits(screen);
             }
 
             return data;
@@ -71,8 +78,23 @@ namespace HadesBoonBot
 
         internal void Save(string filename)
         {
+            foreach (var screen in this.Screens)
+            {
+                OrderTraits(screen);
+            }
+
             using StreamWriter file = new(filename);
             file.Write(JsonConvert.SerializeObject(this, Formatting.Indented));
+        }
+
+        private static void OrderTraits(Screen screen)
+        {
+            screen.Traits = screen.Traits.OrderBy(t => t.Row).ThenBy(t => t.Col).ToList();
+
+            if (screen.PinnedTraits != null)
+            {
+                screen.PinnedTraits = screen.PinnedTraits.OrderBy(t => t.Row).ToList();
+            }
         }
     }
 }

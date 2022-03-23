@@ -103,9 +103,27 @@ namespace HadesBoonBot
             IconBackButton = OCV.Cv2.ImRead(@"icons_overlay\icon_back.png", OCV.ImreadModes.Unchanged);
         }
 
-        internal bool TryGetPinCount(OCV.Mat image, int columnCount, out List<OCV.Rect> pinIcons, bool drawDebugImage, out OCV.Mat? debugImage)
+        internal (OCV.Rect iconRect, OCV.Rect rightMostTraitRect) GetPinRect(int columnCount, int row)
         {
-            pinIcons = new();
+            //find the right-most trait position
+            if (TryGetTraitRect(columnCount - 1, 1, out var rightmostTrait) && rightmostTrait != null)
+            {
+                int rightMostCentreX = rightmostTrait.Value.Left + rightmostTrait.Value.Width / 2;
+                int pinCentreX = rightMostCentreX + PinCentreFromLastTrayColumn;
+
+                OCV.Point iconPos = new(pinCentreX, PinItemFirstY + row * PinsSeparationY);
+                OCV.Size pinnedTraitSize = new(PinnedBoonWidth, PinnedBoonWidth);
+                OCV.Rect iconRect = new(new(iconPos.X - pinnedTraitSize.Width / 2, iconPos.Y - pinnedTraitSize.Height / 2), pinnedTraitSize);
+
+                return (iconRect, rightmostTrait.Value);
+            }
+
+            throw new Exception("Failed to get trait rect for <columns-1_1>, this should never happen");
+        }
+
+        internal bool TryGetPinCount(OCV.Mat image, int columnCount, out int pinRowCount, bool drawDebugImage, out OCV.Mat? debugImage)
+        {
+            pinRowCount = -1;
             debugImage = drawDebugImage ? image.Clone() : null;
 
             using OCV.Mat pinMask = new(new OCV.Size(image.Width + 2, image.Height + 2), OCV.MatType.CV_8UC1, OCV.Scalar.White);
@@ -155,6 +173,7 @@ namespace HadesBoonBot
             {
                 foreach (OCV.Rect pinRect in goodPinRects)
                 {
+                    //draw floodfilled rect
                     debugImage.Rectangle(pinRect, OCV.Scalar.Yellow, (int)(5 * Multiplier));
 
                     //also highlight the full item; we don't use the full row but can get it
@@ -169,37 +188,34 @@ namespace HadesBoonBot
 
             if (goodPinRects.Any())
             {
-                //find the right-most trait position
-                if (TryGetTraitRect(columnCount - 1, 1, out var rightmostTrait) && rightmostTrait != null)
+                pinRowCount = goodPinRects.Count;
+                OCV.Rect? rightMostTraitRect = null;
+
+                //the pin rects are really only to work out how many pins we have, and may not be super accurate due to compression affecting floodfill etc, so rely on known values
+                for (int p = 0; p < goodPinRects.Count; p++)
                 {
-                    int rightMostCentreX = rightmostTrait.Value.Left + rightmostTrait.Value.Width / 2;
-                    int pinCentreX = rightMostCentreX + PinCentreFromLastTrayColumn;
-
-                    //the pin rects are really only to work out how many pins we have, and may not be super accurate due to compression affecting floodfill etc, so rely on known values
-                    OCV.Size pbw = new(PinnedBoonWidth, PinnedBoonWidth);
-                    for (int p = 0; p < goodPinRects.Count; p++)
-                    {
-                        OCV.Point iconPos = new(pinCentreX, PinItemFirstY + p * PinsSeparationY);
-                        OCV.Rect iconRect = new(new(iconPos.X - pbw.Width / 2, iconPos.Y - pbw.Height / 2), pbw);
-                        pinIcons.Add(iconRect);
-
-                        if (debugImage != null)
-                        {
-                            debugImage.Rectangle(iconRect, OCV.Scalar.White, (int)(2 * Multiplier));
-                        }
-                    }
+                    (OCV.Rect iconRect, OCV.Rect rightMostTraitRectTemp) = GetPinRect(columnCount, p);
+                    rightMostTraitRect = rightMostTraitRectTemp; //CS8773 :<
 
                     if (debugImage != null)
                     {
-                        //show how we determined the X position
-                        int showLinkY = rightmostTrait.Value.Top + rightmostTrait.Value.Height / 2;
-                        var lineLeft = new OCV.Point(rightMostCentreX, showLinkY);
-                        var lineRight = new OCV.Point(pinCentreX, showLinkY);
-
-                        debugImage.Line(lineLeft, lineRight, OCV.Scalar.Pink, (int)(4 * Multiplier));
-                        debugImage.Circle(lineLeft, (int)(10 * Multiplier), OCV.Scalar.Pink, -1);
-                        debugImage.Circle(lineRight, (int)(10 * Multiplier), OCV.Scalar.Pink, -1);
+                        debugImage.Rectangle(iconRect, OCV.Scalar.White, (int)(2 * Multiplier));
                     }
+                }
+
+                if (debugImage != null && rightMostTraitRect.HasValue)
+                {
+                    int rightMostCentreX = rightMostTraitRect.Value.Left + rightMostTraitRect.Value.Width / 2;
+                    int pinCentreX = rightMostCentreX + PinCentreFromLastTrayColumn;
+
+                    //show how we determined the X position
+                    int showLinkY = rightMostTraitRect.Value.Top + rightMostTraitRect.Value.Height / 2;
+                    var lineLeft = new OCV.Point(rightMostTraitRect.Value.Left + rightMostTraitRect.Value.Width / 2, showLinkY);
+                    var lineRight = new OCV.Point(pinCentreX, showLinkY);
+
+                    debugImage.Line(lineLeft, lineRight, OCV.Scalar.Pink, (int)(4 * Multiplier));
+                    debugImage.Circle(lineLeft, (int)(10 * Multiplier), OCV.Scalar.Pink, -1);
+                    debugImage.Circle(lineRight, (int)(10 * Multiplier), OCV.Scalar.Pink, -1);
                 }
             }
 
@@ -402,24 +418,31 @@ namespace HadesBoonBot
         {
             IEnumerable<Trait> possibleTraits = codex;
 
-            bool isCategory = SlotsForCategories.TryGetValue(new(column, row), out Category filterCat);
-            bool isSubCategory = SlotsForSubcategories.TryGetValue(new(column, row), out Subcategory filterSubCat);
-
-            if (isCategory)
+            if (column == -1) //column -1 = a pinned icon, which can be anything except an empty slot
             {
-                possibleTraits = codex.Where(e => e.Category == filterCat);
-            }
-            else if (isSubCategory)
-            {
-                possibleTraits = codex.Where(e => e.SingletonType == filterSubCat);
+                possibleTraits = possibleTraits.Where(t => Codex.IsSlotFilled(t));
             }
             else
             {
-                possibleTraits = codex.Where(e => !SlotsForCategories.Values.Any(v => e.Category == v) && !SlotsForSubcategories.Values.Any(v => e.SingletonType == v));
-            }
+                bool isCategory = SlotsForCategories.TryGetValue(new(column, row), out Category filterCat);
+                bool isSubCategory = SlotsForSubcategories.TryGetValue(new(column, row), out Subcategory filterSubCat);
 
-            //TODO: actually, EmptyBoon can't appear in the 5abils slots
-            possibleTraits = possibleTraits.Concat(new[] { codex.EmptyBoon }); //any slot can be empty (also used as "invalid" where we're not in the tray any more)
+                if (isCategory)
+                {
+                    possibleTraits = codex.Where(e => e.Category == filterCat);
+                }
+                else if (isSubCategory)
+                {
+                    possibleTraits = codex.Where(e => e.SingletonType == filterSubCat);
+                }
+                else
+                {
+                    possibleTraits = codex.Where(e => !SlotsForCategories.Values.Any(v => e.Category == v) && !SlotsForSubcategories.Values.Any(v => e.SingletonType == v));
+                }
+
+                //TODO: actually, EmptyBoon can't appear in the 5abils slots
+                possibleTraits = possibleTraits.Concat(new[] { codex.EmptyBoon }); //any slot can be empty (also used as "invalid" where we're not in the tray any more)
+            }
 
             possibleTraits = possibleTraits.Distinct(new Codex.TraitEqualityComparer());
             return possibleTraits;

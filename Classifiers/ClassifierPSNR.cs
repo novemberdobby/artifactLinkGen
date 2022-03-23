@@ -2,7 +2,7 @@ using CommandLine;
 using static HadesBoonBot.Codex.Provider;
 using Cv2 = OpenCvSharp.Cv2;
 using OCV = OpenCvSharp;
-using System.Linq;
+using SampleCategory = HadesBoonBot.Training.TraitDataGen.SampleCategory;
 
 namespace HadesBoonBot.Classifiers
 {
@@ -24,9 +24,9 @@ namespace HadesBoonBot.Classifiers
     internal class ClassifierPSNR : IClassifier, IDisposable
     {
         /// <summary>
-        /// List of previously classified images, by trait name
+        /// List of previously classified images, by trait name then sample category
         /// </summary>
-        private readonly Dictionary<string, List<TraitMatch>> m_preclassifiedTraits = new();
+        private readonly Dictionary<string, Dictionary<SampleCategory, List<TraitMatch>>> m_preclassifiedTraits = new();
         private readonly Codex m_codex;
 
         public ClassifierPSNR(ClassifierPSNROptions options, Codex codex)
@@ -37,31 +37,49 @@ namespace HadesBoonBot.Classifiers
             foreach (string traitNameFolder in Directory.EnumerateDirectories(options.TraitSource))
             {
                 string traitName = Path.GetFileName(traitNameFolder);
+                m_preclassifiedTraits.Add(traitName, new());
 
-                List<TraitMatch> imagesForTrait = new();
-                m_preclassifiedTraits.Add(traitName, imagesForTrait);
-
-                Parallel.ForEach(Directory.EnumerateFiles(traitNameFolder), file =>
+                foreach (string categoryFolder in Directory.EnumerateDirectories(traitNameFolder))
                 {
-                    var trait = m_codex.ByName[traitName];
-                    var image = Cv2.ImRead(file);
-                    lock (imagesForTrait)
+                    string categoryName = Path.GetFileName(categoryFolder);
+                    var category = Enum.Parse<SampleCategory>(categoryName);
+
+                    List<TraitMatch> imagesForTrait = new();
+                    m_preclassifiedTraits[traitName].Add(category, imagesForTrait);
+
+                    Parallel.ForEach(Directory.EnumerateFiles(categoryFolder), file =>
                     {
-                        imagesForTrait.Add(new(trait, file, image));
-                    }
-                });
+                        var trait = m_codex.ByName[traitName];
+                        var image = Cv2.ImRead(file);
+                        lock (imagesForTrait)
+                        {
+                            imagesForTrait.Add(new(trait, file, image));
+                        }
+                    });
+                }
             }
 
             //does every trait have at least one sample image?
-            var missingTraits = m_codex.Where(t => !m_preclassifiedTraits.ContainsKey(t.Name));
+            var missingTraits = m_codex.Where(t =>
+            {
+                //todo replace with updated logic
+                string name = m_codex.GetIconSharingTraits(t.Name).First().Name;
+                if (!m_preclassifiedTraits.TryGetValue(name, out var traits))
+                {
+                    return false;
+                }
+
+                return !traits.ContainsKey(SampleCategory.TrayIcons) || !traits[SampleCategory.TrayIcons].Any();
+            });
+
             if (missingTraits.Any())
             {
                 string missingStr = string.Join(Environment.NewLine, missingTraits.Select(t => t.Name));
-                throw new Exception($"Unable to construct {nameof(ClassifierPSNR)}; missing sample data for one or more traits: {missingStr}");
+                Console.WriteLine($"{nameof(ClassifierPSNR)}(); missing sample data for one or more traits:{Environment.NewLine}{missingStr}");
             }
         }
 
-        public ClassifiedScreen? Classify(OCV.Mat screen, string filePath, int columnCount, bool debugOutput)
+        public ClassifiedScreen? Classify(OCV.Mat screen, string filePath, int columnCount, int pinRows, bool debugOutput)
         {
             string? debugPath = null;
             if (debugOutput)
@@ -90,6 +108,12 @@ namespace HadesBoonBot.Classifiers
                 }
             }
 
+            for (int i = 0; i < pinRows; i++)
+            {
+                var pinIconRect = meta.GetPinRect(columnCount, i).iconRect;
+                slots.Add((-1, i, pinIconRect, new()));
+            }
+
             //classify each one
             Parallel.ForEach(slots, slot =>
             {
@@ -107,10 +131,43 @@ namespace HadesBoonBot.Classifiers
                 //first, filter by slot location
                 var filteredTraits = ScreenMetadata.GetSlotTraits(m_codex, column, row);
 
-                List<TraitMatch> possibleTraits = new();
+                //then filter by sample category
+                List<SampleCategory> compareCategories = new();
+                if (column == -1)
+                {
+                    compareCategories.Add(SampleCategory.Autogen);
+                    compareCategories.Add(SampleCategory.PinIcons);
+                }
+                else
+                {
+                    compareCategories.Add(SampleCategory.AutogenPinned);
+                    compareCategories.Add(SampleCategory.TrayIcons);
+                }
+
+                HashSet<string> possibleAdded = new();
+                List<TraitMatch> possibleMatches = new();
                 foreach (var filtered in filteredTraits)
                 {
-                    possibleTraits.AddRange(m_preclassifiedTraits[filtered.Name]);
+                    string sharedName = m_codex.ByIcon[filtered.IconFile].First().Name;
+
+                    if (!possibleAdded.Contains(sharedName))
+                    {
+                        possibleAdded.Add(sharedName);
+                        var classed = m_preclassifiedTraits[sharedName];
+
+                        foreach (var category in compareCategories)
+                        {
+                            if (classed.ContainsKey(category))
+                            {
+                                possibleMatches.AddRange(classed[category]);
+                            }
+                        }
+                    }
+                }
+
+                if (!possibleMatches.Any())
+                {
+                    throw new Exception($"Found 0 possible traits for slot {column}_{row}, this shouldn't happen");
                 }
 
                 //make the trait comparable with the various categories
@@ -137,7 +194,7 @@ namespace HadesBoonBot.Classifiers
                 Dictionary<string, double> matchValues = new();
                 List<TraitMatch> matches = new();
 
-                foreach (var possTrait in possibleTraits)
+                foreach (var possTrait in possibleMatches)
                 {
                     var toCompare = traitComparables[possTrait.Trait.Category];
                     var mySize = possTrait.Image.Size();
@@ -169,8 +226,9 @@ namespace HadesBoonBot.Classifiers
                 if (debugPath != null)
                 {
                     var winner = ordered.First();
-                    traitComparables[winner.Trait.Category].SaveImage(Path.Combine(debugPath, $"{column}_{row}.png"));
-                    winner.Image.SaveImage(Path.Combine(debugPath, $"{column}_{row}_guess.png"));
+                    string columnName = column == -1 ? "pin" : column.ToString();
+                    traitComparables[winner.Trait.Category].SaveImage(Path.Combine(debugPath, $"{columnName}_{row}.png"));
+                    winner.Image.SaveImage(Path.Combine(debugPath, $"{columnName}_{row}_guess.png"));
                 }
 
                 //clean up
@@ -212,7 +270,8 @@ namespace HadesBoonBot.Classifiers
 
                 foreach (var (column, row, _, bestMatches) in slots)
                 {
-                    sw.WriteLine($"{column}_{row}:");
+                    string columnName = column == -1 ? "pin" : column.ToString();
+                    sw.WriteLine($"{columnName}_{row}:");
                     foreach (var match in bestMatches.Take(10))
                     {
                         sw.WriteLine($"{match.Trait} ({match.Filename})");
@@ -227,11 +286,14 @@ namespace HadesBoonBot.Classifiers
 
         public void Dispose()
         {
-            foreach (var classified in m_preclassifiedTraits)
+            foreach (var category in m_preclassifiedTraits)
             {
-                foreach (var item in classified.Value)
+                foreach (var classified in category.Value)
                 {
-                    item.Image.Dispose();
+                    foreach (var traitMatch in classified.Value)
+                    {
+                        traitMatch.Image.Dispose();
+                    }
                 }
             }
         }

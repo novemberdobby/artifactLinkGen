@@ -96,7 +96,7 @@ namespace HadesBoonBot.Classifiers
             Console.WriteLine($"Initial validation of {shortFile} took {timer.Elapsed.TotalSeconds:N2}s. Appears valid: {appearsValid}");
 
             int columnCount = -1;
-            List<OCV.Rect>? pinIconRects = null;
+            int pinRowCount = -1;
 
             if (appearsValid && image != null && meta != null)
             {
@@ -104,7 +104,7 @@ namespace HadesBoonBot.Classifiers
                 {
                     //Console.WriteLine($"Detected {columnCount} columns in {shortFile}");
 
-                    if (meta.TryGetPinCount(image, columnCount, out pinIconRects, options.DebugOutput, out OCV.Mat? debugImgPins))
+                    if (meta.TryGetPinCount(image, columnCount, out pinRowCount, options.DebugOutput, out OCV.Mat? debugImgPins))
                     {
                         //Console.WriteLine($"Detected {pinIconCentres.Count} pinned traits in {shortFile}");
                     }
@@ -170,7 +170,7 @@ namespace HadesBoonBot.Classifiers
             }
 
             timer.Restart();
-            ClassifiedScreen? result = classer.Classify(image!, screenPath, columnCount, options.DebugOutput);
+            ClassifiedScreen? result = classer.Classify(image!, screenPath, columnCount, pinRowCount, options.DebugOutput);
 
             //if it's null something went very wrong
             if (result == null)
@@ -186,42 +186,49 @@ namespace HadesBoonBot.Classifiers
                 {
                     if (trained.ScreensByFile.TryGetValue(screenPathLower, out var trainedScreen))
                     {
-                        int correct = 0;
-                        List<ClassifiedScreen.Slot> incorrect = new();
-
-                        Dictionary<OCV.Point, string> trainedTraits = new();
-                        foreach (var trait in trainedScreen.Traits)
+                        if (trainedScreen.IsValid == true)
                         {
-                            trainedTraits.Add(new(trait.Col, trait.Row), trait.Name!);
-                        }
+                            int correct = 0;
+                            List<ClassifiedScreen.Slot> incorrect = new();
 
-                        foreach (var slot in result.Slots)
-                        {
-                            var knownCorrectName = trainedTraits[new(slot.Col, slot.Row)];
-                            IEnumerable<string> goodNames = codex.GetIconSharingTraits(knownCorrectName).Select(t => t.Name);
-
-                            if (goodNames.Contains(slot.Trait.Name))
+                            Dictionary<OCV.Point, string> trainedTraits = new();
+                            foreach (var trait in trainedScreen.Traits)
                             {
-                                correct++;
+                                trainedTraits.Add(new(trait.Col, trait.Row), trait.Name!);
                             }
-                            else
+
+                            foreach (var slot in result.Slots)
                             {
-                                incorrect.Add(slot);
+                                //TODO compare pin rows against training data
+                                if (slot.Col == -1) continue;
+
+                                var knownCorrectName = trainedTraits[new(slot.Col, slot.Row)];
+                                IEnumerable<string> goodNames = codex.GetIconSharingTraits(knownCorrectName).Select(t => t.Name);
+
+                                if (goodNames.Contains(slot.Trait.Name))
+                                {
+                                    correct++;
+                                }
+                                else
+                                {
+                                    incorrect.Add(slot);
+                                }
                             }
-                        }
 
-                        StringBuilder resultText = new($"For {screenPath}, {correct}/{correct + incorrect.Count} were correct");
-                        if (incorrect.Any())
-                        {
-                            resultText.Append($" (incorrect slots: {string.Join(", ", incorrect)})");
-                        }
+                            StringBuilder resultText = new($"For {screenPath}, {correct}/{correct + incorrect.Count} were correct");
+                            if (incorrect.Any())
+                            {
+                                resultText.Append($" (incorrect slots: {string.Join(", ", incorrect)})");
+                            }
 
-                        if (trainedScreen.ColumnCount != columnCount)
-                        {
-                            Console.WriteLine($"Column count ({columnCount}) doesn't match training data ({trainedScreen.ColumnCount}) for screen: {screenPath}");
-                        }
+                            //todo should be able to validate this while using only_validate, execution doesn't make it here currently
+                            if (trainedScreen.ColumnCount != columnCount)
+                            {
+                                Console.WriteLine($"Column count ({columnCount}) doesn't match training data ({trainedScreen.ColumnCount}) for screen: {screenPath}");
+                            }
 
-                        Console.WriteLine(resultText.ToString());
+                            Console.WriteLine(resultText.ToString());
+                        }
                     }
                     else
                     {

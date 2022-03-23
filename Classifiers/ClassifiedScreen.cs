@@ -1,9 +1,10 @@
-﻿namespace HadesBoonBot.Classifiers
+namespace HadesBoonBot.Classifiers
 {
     internal class ClassifiedScreen
     {
         public string? WeaponName;
         public List<Slot> Slots;
+        public List<Slot> PinSlots; //store pin slots separately so as not to duplicate tray data
         public bool IsValid { get; private set; }
 
         public class Slot
@@ -21,7 +22,12 @@
 
             public override string ToString()
             {
-                return $"{Col}_{Row}: {Trait}";
+                if (Col != -1)
+                {
+                    return $"Tray #{Col}_{Row}: {Trait}";
+                }
+
+                return $"Pinned #{Row}: {Trait}";
             }
         }
 
@@ -32,8 +38,13 @@
         /// <param name="inSlots">Classified traits</param>
         public ClassifiedScreen(Codex codex, IEnumerable<Slot> inSlots)
         {
+            //split into tray & pins
+            Slots = inSlots.Where(s => s.Col != -1).ToList();
+            PinSlots = inSlots.Where(s => s.Col == -1).ToList();
+
             //detect when we run out of traits and trim them off
-            var backEmpties = inSlots
+            var backEmpties = Slots
+                .AsEnumerable()
                 .Reverse()
                 .TakeWhile(s => !Codex.IsSlotFilled(s.Trait))
                 .Count();
