@@ -100,7 +100,7 @@ namespace HadesBoonBot.Classifiers
 
             if (appearsValid && image != null && meta != null)
             {
-                if (meta.TryGetTrayColumnCount(image, out columnCount, out OCV.Rect trayRect, options.DebugOutput, out OCV.Mat? debugImgColumns))
+                if (meta.TryGetTrayColumnCount(image, out columnCount, out _, options.DebugOutput, out OCV.Mat? debugImgColumns))
                 {
                     //Console.WriteLine($"Detected {columnCount} columns in {shortFile}");
 

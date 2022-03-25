@@ -103,10 +103,16 @@ namespace HadesBoonBot
             IconBackButton = OCV.Cv2.ImRead(@"icons_overlay\icon_back.png", OCV.ImreadModes.Unchanged);
         }
 
-        internal (OCV.Rect iconRect, OCV.Rect rightMostTraitRect) GetPinRect(int columnCount, int row)
+        /// <summary>
+        /// Find the rect of a pin icon
+        /// </summary>
+        /// <param name="trayColumnCount">Column count of the trait tray</param>
+        /// <param name="row">Pin row index (0-4)</param>
+        /// <returns>Tuple of rect for the chosen pin icon, and rect for one of the right-most tray icons</returns>
+        internal (OCV.Rect iconRect, OCV.Rect rightMostTraitRect) GetPinRect(int trayColumnCount, int row)
         {
             //find the right-most trait position
-            if (TryGetTraitRect(columnCount - 1, 1, out var rightmostTrait) && rightmostTrait != null)
+            if (TryGetTraitRect(trayColumnCount - 1, 1, out var rightmostTrait) && rightmostTrait != null)
             {
                 int rightMostCentreX = rightmostTrait.Value.Left + rightmostTrait.Value.Width / 2;
                 int pinCentreX = rightMostCentreX + PinCentreFromLastTrayColumn;
@@ -118,10 +124,19 @@ namespace HadesBoonBot
                 return (iconRect, rightmostTrait.Value);
             }
 
-            throw new Exception("Failed to get trait rect for <columns-1_1>, this should never happen");
+            throw new Exception("Failed to get trait rect for <#columns-1_1>, this should never happen");
         }
 
-        internal bool TryGetPinCount(OCV.Mat image, int columnCount, out int pinRowCount, bool drawDebugImage, out OCV.Mat? debugImage)
+        /// <summary>
+        /// Find the number of pinned traits, includes up to one trait that is highlighted/hovered but not pinned
+        /// </summary>
+        /// <param name="image">Victory screen</param>
+        /// <param name="trayColumnCount">Number of columns in the trait tray</param>
+        /// <param name="pinRowCount">Result</param>
+        /// <param name="drawDebugImage">Create a debug image?</param>
+        /// <param name="debugImage">Debug image result</param>
+        /// <returns>Success</returns>
+        internal bool TryGetPinCount(OCV.Mat image, int trayColumnCount, out int pinRowCount, bool drawDebugImage, out OCV.Mat? debugImage)
         {
             pinRowCount = -1;
             debugImage = drawDebugImage ? image.Clone() : null;
@@ -194,7 +209,7 @@ namespace HadesBoonBot
                 //the pin rects are really only to work out how many pins we have, and may not be super accurate due to compression affecting floodfill etc, so rely on known values
                 for (int p = 0; p < goodPinRects.Count; p++)
                 {
-                    (OCV.Rect iconRect, OCV.Rect rightMostTraitRectTemp) = GetPinRect(columnCount, p);
+                    (OCV.Rect iconRect, OCV.Rect rightMostTraitRectTemp) = GetPinRect(trayColumnCount, p);
                     rightMostTraitRect = rightMostTraitRectTemp; //CS8773 :<
 
                     if (debugImage != null)
@@ -223,12 +238,21 @@ namespace HadesBoonBot
             return true;
         }
 
+        /// <summary>
+        /// Determine the number of columns present in the trait tray
+        /// </summary>
+        /// <param name="image">Victory screen</param>
+        /// <param name="columns">Column count result</param>
+        /// <param name="trayRect">Calculated tray area</param>
+        /// <param name="drawDebugImage">Create a debug image?</param>
+        /// <param name="debugImage">Debug image result</param>
+        /// <returns>Success</returns>
         internal bool TryGetTrayColumnCount(OCV.Mat image, out int columns, out OCV.Rect trayRect, bool drawDebugImage, out OCV.Mat? debugImage)
         {
             debugImage = drawDebugImage ? image.Clone() : null;
 
             /*
-               find the tray area. the only measurement we care about is the right hand side of it, which tells us:
+               for the tray area, the only measurement we care about is the right hand side of it- which tells us:
                 a) how many columns we need to search for traits
                 b) where any pinned traits will appear horizontally
 
