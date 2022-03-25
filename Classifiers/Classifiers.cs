@@ -216,6 +216,11 @@ namespace HadesBoonBot.Classifiers
                             if (incorrect.Any())
                             {
                                 resultText.Append($" (incorrect slots: {string.Join(", ", incorrect)})");
+
+                                if (options.FailOnTrainingMismatch)
+                                {
+                                    throw new Exception(resultText.ToString());
+                                }
                             }
 
                             //todo should be able to validate this while using only_validate, execution doesn't make it here currently
