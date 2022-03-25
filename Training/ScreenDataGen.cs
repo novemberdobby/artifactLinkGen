@@ -44,7 +44,7 @@ namespace HadesBoonBot.Training
                 }
 
                 using OCV.Mat image = Cv2.ImRead(trained.FileName, OCV.ImreadModes.Unchanged);
-                using OCV.Mat? firstValid = ScreenMetadata.TryMakeValidScreen(image, trained.FileName);
+                using OCV.Mat? firstValid = ScreenMetadata.TryMakeValidScreen(image);
                 var useForExtraction = firstValid ?? image;
 
                 ScreenMetadata meta = new(useForExtraction);

@@ -73,7 +73,7 @@ namespace HadesBoonBot.Classifiers
             timer.Start();
 
             //is it the right size?
-            using var image = ScreenMetadata.TryMakeValidScreen(origImage, screenPath);
+            using var image = ScreenMetadata.TryMakeValidScreen(origImage);
             if (image == null)
             {
                 //Console.WriteLine($"Failed to make valid image from {screenPath}");
@@ -192,16 +192,13 @@ namespace HadesBoonBot.Classifiers
                             List<ClassifiedScreen.Slot> incorrect = new();
 
                             Dictionary<OCV.Point, string> trainedTraits = new();
-                            foreach (var trait in trainedScreen.Traits)
+                            foreach (var trait in trainedScreen.Traits.Concat(trainedScreen.PinnedTraits))
                             {
                                 trainedTraits.Add(new(trait.Col, trait.Row), trait.Name!);
                             }
 
-                            foreach (var slot in result.Slots)
+                            foreach (var slot in result.Slots.Concat(result.PinSlots))
                             {
-                                //TODO compare pin rows against training data
-                                if (slot.Col == -1) continue;
-
                                 var knownCorrectName = trainedTraits[new(slot.Col, slot.Row)];
                                 IEnumerable<string> goodNames = codex.GetIconSharingTraits(knownCorrectName).Select(t => t.Name);
 
@@ -224,7 +221,15 @@ namespace HadesBoonBot.Classifiers
                             //todo should be able to validate this while using only_validate, execution doesn't make it here currently
                             if (trainedScreen.ColumnCount != columnCount)
                             {
-                                Console.WriteLine($"Column count ({columnCount}) doesn't match training data ({trainedScreen.ColumnCount}) for screen: {screenPath}");
+                                string err = $"Column count ({columnCount}) doesn't match training data ({trainedScreen.ColumnCount}) for screen: {screenPath}";
+                                if (options.FailOnTrainingMismatch)
+                                {
+                                    throw new Exception(err);
+                                }
+                                else
+                                {
+                                    Console.Error.WriteLine(err);
+                                }
                             }
 
                             Console.WriteLine(resultText.ToString());
@@ -232,7 +237,15 @@ namespace HadesBoonBot.Classifiers
                     }
                     else
                     {
-                        throw new Exception($"Verification requested for screen that doesn't exist in the training data: {screenPath}");
+                        string err = $"Verification requested for screen that doesn't exist in the training data: {screenPath}";
+                        if (options.FailOnTrainingMismatch)
+                        {
+                            throw new Exception(err);
+                        }
+                        else
+                        {
+                            Console.Error.WriteLine(err);
+                        }
                     }
                 }
             }

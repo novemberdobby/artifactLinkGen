@@ -477,10 +477,10 @@ namespace HadesBoonBot
                     image.Dispose();
                     image = cropped;
 
-                    /*if (debugFilename != null)
+                    if (debugFilename != null)
                     {
                         Console.WriteLine($"Found alpha channel letterboxing in {debugFilename}");
-                    }*/
+                    }
                 }
 
                 //always convert to bgr for later operations (including those beyond this function)
@@ -501,10 +501,10 @@ namespace HadesBoonBot
                 image.Dispose();
                 image = cropped;
 
-                /*if (debugFilename != null)
+                if (debugFilename != null)
                 {
                     Console.WriteLine($"Found rgb letterboxing in {debugFilename}");
-                }*/
+                }
             }
 
             var aspect = AspectRatio.Measure(image.Size());
