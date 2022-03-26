@@ -606,50 +606,45 @@ namespace HadesBoonBot
             return false;
         }
 
-        internal static bool ExtractML_CastCheck(ScreenMetadata meta, OCV.Mat screen, string filename)
+        internal static bool ExtractML_Check(OCV.Mat screen, OCV.Point pos, OCV.Size size, OCV.Mat? alphaStomp, string toFile)
         {
-            //look for a cast icon which is always present at this location
-            using OCV.Mat? chopped = GetRect(screen, meta.CastCheckPos, meta.CastCheckSize);
+            using OCV.Mat? chopped = GetRect(screen, pos, size);
             if (chopped != null)
             {
-                using OCV.Mat resized = chopped.Resize(IconCast.Size(), 0, 0, OCV.InterpolationFlags.Cubic);
-                using OCV.Mat withAlpha = resized.CvtColor(OCV.ColorConversionCodes.BGR2BGRA);
+                if (alphaStomp == null)
+                {
+                    return chopped.SaveImage(toFile);
+                }
+                else
+                {
+                    using OCV.Mat resized = chopped.Resize(alphaStomp.Size(), 0, 0, OCV.InterpolationFlags.Cubic);
+                    using OCV.Mat withAlpha = resized.CvtColor(OCV.ColorConversionCodes.BGR2BGRA);
 
-                //stomp alpha
-                OCV.Cv2.MixChannels(new[] { IconCast }, new[] { withAlpha }, new[] { 3, 3 });
-                return withAlpha.SaveImage(filename);
+                    //stomp alpha channel
+                    OCV.Cv2.MixChannels(new[] { alphaStomp }, new[] { withAlpha }, new[] { 3, 3 });
+                    return withAlpha.SaveImage(toFile);
+                }
             }
 
             return false;
         }
 
-        internal static bool ExtractML_HealthCheck(ScreenMetadata meta, OCV.Mat screen, string filename)
+        internal static bool ExtractML_HealthCheck(ScreenMetadata meta, OCV.Mat screen, string toFile)
         {
             //check healthbar area
-            using OCV.Mat? chopped = GetRect(screen, meta.HealthCheckPos, meta.HealthCheckSize);
-            if (chopped != null)
-            {
-                return chopped.SaveImage(filename);
-            }
-
-            return false;
+            return ExtractML_Check(screen, meta.HealthCheckPos, meta.HealthCheckSize, null, toFile);
         }
 
-        internal static bool ExtractML_BackButtonCheck(ScreenMetadata meta, OCV.Mat screen, string filename)
+        internal static bool ExtractML_CastCheck(ScreenMetadata meta, OCV.Mat screen, string toFile)
+        {
+            //look for a cast icon which is always present at this location
+            return ExtractML_Check(screen, meta.CastCheckPos, meta.CastCheckSize, IconCast, toFile);
+        }
+
+        internal static bool ExtractML_BackButtonCheck(ScreenMetadata meta, OCV.Mat screen, string toFile)
         {
             //look for the "back" button under the victory stats panel
-            using OCV.Mat? chopped = GetRect(screen, meta.BackButtonCheckPos, meta.BackButtonCheckSize);
-            if (chopped != null)
-            {
-                using OCV.Mat resized = chopped.Resize(IconBackButton.Size(), 0, 0, OCV.InterpolationFlags.Cubic);
-                using OCV.Mat withAlpha = resized.CvtColor(OCV.ColorConversionCodes.BGR2BGRA);
-
-                //stomp alpha
-                OCV.Cv2.MixChannels(new[] { IconBackButton }, new[] { withAlpha }, new[] { 3, 3 });
-                return withAlpha.SaveImage(filename);
-            }
-
-            return false;
+            return ExtractML_Check(screen, meta.BackButtonCheckPos, meta.BackButtonCheckSize, IconBackButton, toFile);
         }
 
         #endregion
