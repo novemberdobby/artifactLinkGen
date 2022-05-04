@@ -90,6 +90,7 @@ namespace HadesBoonBot
         int PinsStartY => (int)(279 * Multiplier);
         int PinsSeparationY => (int)(168 * Multiplier);
         int PinExpectedHeight => (int)(309 * Multiplier);
+        int PinExpectedHeightGap => (int)(15 * Multiplier);
         int PinCentreFromLastTrayColumn => (int)(158 * Multiplier);
         int PinItemLength => (int)(895 * Multiplier);
         int PinItemFirstY => (int)(231 * Multiplier);
@@ -161,12 +162,16 @@ namespace HadesBoonBot
 
             List<OCV.Rect> goodPinRects = new();
 
-            //make sure none overlap and they're all close to the expected height
+            //do a few checks on each rect
             OCV.Rect union = pinRects.First();
             for (int i = 0; i < pinRects.Count; i++)
             {
                 var thisRect = pinRects[i];
-                if ((i > 0 && union.IntersectsWith(thisRect)) || Math.Abs(thisRect.Height - PinExpectedHeight) < PinExpectedHeight / 10.0f)
+                if ((i > 0 && 
+                    (union.IntersectsWith(thisRect) //none should overlap
+                    || Math.Abs(thisRect.Top - union.Bottom - PinExpectedHeightGap) > PinExpectedHeightGap / 5.0f) //is the gap between them around the right size?
+                    || Math.Abs(thisRect.Height - PinExpectedHeight) < PinExpectedHeight / 10.0f //are they close enough to the expected height?
+                    ))
                 {
                     break;
                 }
@@ -186,9 +191,15 @@ namespace HadesBoonBot
 
             if (debugImage != null)
             {
-                foreach (OCV.Rect pinRect in goodPinRects)
+                foreach (OCV.Rect pinRect in pinRects)
                 {
                     //draw floodfilled rect
+                    debugImage.Rectangle(pinRect, OCV.Scalar.Green, (int)(5 * Multiplier));
+                }
+
+                foreach (OCV.Rect pinRect in goodPinRects)
+                {
+                    //draw standardised rect
                     debugImage.Rectangle(pinRect, OCV.Scalar.Yellow, (int)(5 * Multiplier));
 
                     //also highlight the full item; we don't use the full row but can get it
