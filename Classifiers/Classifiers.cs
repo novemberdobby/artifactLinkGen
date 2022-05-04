@@ -35,10 +35,16 @@ namespace HadesBoonBot.Classifiers
         /// </summary>
         public static int RunBatch(ClassifierCommonOptions options, string screensPath, List<ML.Model> models, Codex codex, TrainingData? trained, params IClassifier[] classifiers)
         {
-            int errors = 0;
+            int file = 0, errors = 0;
+            var batchFiles = Directory.GetFiles(screensPath);
 
-            foreach (var screenPath in Directory.EnumerateFiles(screensPath))
+            foreach (var screenPath in batchFiles)
             {
+                if (file % 10 == 0)
+                {
+                    Console.WriteLine($"File {file}/{batchFiles.Length}");
+                }
+
                 foreach (IClassifier classer in classifiers)
                 {
                     ClassifiedScreen? result = RunSingle(options, screenPath, models, codex, trained, classer);
@@ -47,6 +53,8 @@ namespace HadesBoonBot.Classifiers
                         errors++;
                     }
                 }
+
+                file++;
             }
 
             return errors;
