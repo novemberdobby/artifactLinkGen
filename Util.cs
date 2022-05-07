@@ -7,7 +7,7 @@
             bool exists = Directory.Exists(path);
             bool create = !exists || deleteFirst;
 
-            if (deleteFirst)
+            if (deleteFirst && exists)
             {
                 Directory.Delete(path, true);
             }
