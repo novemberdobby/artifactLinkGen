@@ -11,7 +11,7 @@ namespace HadesBoonBot
 
             try
             {
-                return Parser.Default.ParseArguments<Training.GenerateTraitsOptions, Training.GenerateScreensOptions, Classifiers.ClassifierPSNROptions>(args)
+                return Parser.Default.ParseArguments<Training.GenerateTraitsOptions, Training.GenerateScreensOptions, Classifiers.ClassifierPSNROptions, Classifiers.ClassifierMLOptions>(args)
                 .MapResult(
                     
                     (Training.GenerateTraitsOptions options) =>
@@ -31,6 +31,27 @@ namespace HadesBoonBot
                     (Classifiers.ClassifierPSNROptions options) =>
                     {
                         using IClassifier classifier = new Classifiers.ClassifierPSNR(options, codex);
+                        TrainingData? trained = options.TrainingData == null ? null : TrainingData.Load(options.TrainingData);
+
+                        if (File.Exists(options.Input))
+                        {
+                            Classifiers.ClassifiedScreen? result = Classifiers.Runner.RunSingle(options, options.Input, MLmodels, codex, trained, classifier);
+                            return 0;
+                        }
+                        else if (Directory.Exists(options.Input))
+                        {
+                            return Classifiers.Runner.RunBatch(options, options.Input, MLmodels, codex, trained, classifier);
+                        }
+                        else
+                        {
+                            throw new ArgumentException($"Path passed to {nameof(Classifiers.ClassifierCommonOptions)} must be a file or directory that exists", nameof(args));
+                        }
+                    },
+
+                    //TODO: DRY
+                    (Classifiers.ClassifierMLOptions options) =>
+                    {
+                        using IClassifier classifier = new Classifiers.ClassifierML(options, codex);
                         TrainingData? trained = options.TrainingData == null ? null : TrainingData.Load(options.TrainingData);
 
                         if (File.Exists(options.Input))

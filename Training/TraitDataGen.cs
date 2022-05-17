@@ -17,6 +17,9 @@ namespace HadesBoonBot.Training
         [Option('o', "output_dir", Required = true, HelpText = "Output data directory")]
         public string OutputDir { get; set; }
 
+        [Option('f', "flat", Required = false, Default = false, HelpText = "Create all folders at top-level (required for ML.net)")]
+        public bool Flat { get; set; }
+
         public GenerateTraitsOptions()
         {
             TrainingData = string.Empty;
@@ -119,7 +122,10 @@ namespace HadesBoonBot.Training
                     realSamples[traitName]++;
 
                     //save it with a name pointing back to the source
-                    string targetDir = Path.Combine(options.OutputDir, traitName, (isPin ? SampleCategory.PinIcons : SampleCategory.TrayIcons).ToString());
+                    string targetDir = options.Flat
+                        ? Path.Combine(options.OutputDir, $"{traitName}_{(isPin ? SampleCategory.PinIcons : SampleCategory.TrayIcons)}")
+                        : Path.Combine(options.OutputDir, traitName, (isPin ? SampleCategory.PinIcons : SampleCategory.TrayIcons).ToString());
+
                     string targetFile = Path.Combine(targetDir, $"{Path.GetFileName(screen.FileName)}_{trait.GetPos()}.png");
                     if (!File.Exists(targetFile))
                     {
@@ -191,8 +197,13 @@ namespace HadesBoonBot.Training
                     throw new Exception("One or more trait icons are null when generating fake sample data");
                 }
 
-                string targetDir = Util.CreateDir(Path.Combine(options.OutputDir, trait.Name, SampleCategory.Autogen.ToString()));
-                string targetDirPinned = Util.CreateDir(Path.Combine(options.OutputDir, trait.Name, SampleCategory.AutogenPinned.ToString()));
+                string targetDir = Util.CreateDir(options.Flat
+                    ? Path.Combine(options.OutputDir, $"{trait.Name}_{SampleCategory.Autogen}")
+                    : Path.Combine(options.OutputDir, trait.Name, SampleCategory.Autogen.ToString()));
+
+                string targetDirPinned = Util.CreateDir(options.Flat
+                    ? Path.Combine(options.OutputDir, $"{trait.Name}_{SampleCategory.AutogenPinned}")
+                    : Path.Combine(options.OutputDir, trait.Name, SampleCategory.AutogenPinned.ToString()));
                 
                 //go through each combination
                 fakeSamples += Mutation.Max - Mutation.Original;
@@ -233,6 +244,18 @@ namespace HadesBoonBot.Training
                         image.Dispose();
                     }
                 });
+            }
+
+            //clean up any empty dirs or ML.net will complain
+            if (options.Flat)
+            {
+                foreach (var traitDir in Directory.GetDirectories(options.OutputDir))
+                {
+                    if (!Directory.EnumerateFiles(traitDir).Any())
+                    {
+                        Directory.Delete(traitDir);
+                    }
+                }
             }
 
             Console.WriteLine($"Generated {realSamples.Sum(s => s.Value)} real samples and {fakeSamples} artificial");
