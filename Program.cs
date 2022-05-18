@@ -7,7 +7,7 @@ namespace HadesBoonBot
         static int Main(string[] args)
         {
             using var codex = Codex.FromFile("codex.json", Codex.IconLoadMode.Raw);
-            var MLmodels = ML.Model.CreateModels();
+            var commonModels = ML.Model.CreateModels();
 
             try
             {
@@ -24,49 +24,20 @@ namespace HadesBoonBot
                     (Training.GenerateScreensOptions options) =>
                     {
                         Training.ScreenDataGen sdg = new();
-                        sdg.Run(options, MLmodels);
+                        sdg.Run(options, commonModels);
                         return 0;
                     },
 
                     (Classifiers.ClassifierPSNROptions options) =>
                     {
-                        using IClassifier classifier = new Classifiers.ClassifierPSNR(options, codex);
-                        TrainingData? trained = options.TrainingData == null ? null : TrainingData.Load(options.TrainingData);
-
-                        if (File.Exists(options.Input))
-                        {
-                            Classifiers.ClassifiedScreen? result = Classifiers.Runner.RunSingle(options, options.Input, MLmodels, codex, trained, classifier);
-                            return 0;
-                        }
-                        else if (Directory.Exists(options.Input))
-                        {
-                            return Classifiers.Runner.RunBatch(options, options.Input, MLmodels, codex, trained, classifier);
-                        }
-                        else
-                        {
-                            throw new ArgumentException($"Path passed to {nameof(Classifiers.ClassifierCommonOptions)} must be a file or directory that exists", nameof(args));
-                        }
+                        using Classifiers.ClassifierPSNR classifier = new(options, codex);
+                        return classifier.Run(options, commonModels);
                     },
 
-                    //TODO: DRY
                     (Classifiers.ClassifierMLOptions options) =>
                     {
-                        using IClassifier classifier = new Classifiers.ClassifierML(options, codex);
-                        TrainingData? trained = options.TrainingData == null ? null : TrainingData.Load(options.TrainingData);
-
-                        if (File.Exists(options.Input))
-                        {
-                            Classifiers.ClassifiedScreen? result = Classifiers.Runner.RunSingle(options, options.Input, MLmodels, codex, trained, classifier);
-                            return 0;
-                        }
-                        else if (Directory.Exists(options.Input))
-                        {
-                            return Classifiers.Runner.RunBatch(options, options.Input, MLmodels, codex, trained, classifier);
-                        }
-                        else
-                        {
-                            throw new ArgumentException($"Path passed to {nameof(Classifiers.ClassifierCommonOptions)} must be a file or directory that exists", nameof(args));
-                        }
+                        using Classifiers.ClassifierML classifier = new(options, codex);
+                        return classifier.Run(options, commonModels);
                     },
 
                     errors =>

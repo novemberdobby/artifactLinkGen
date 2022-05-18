@@ -7,7 +7,7 @@ using SampleCategory = HadesBoonBot.Training.TraitDataGen.SampleCategory;
 namespace HadesBoonBot.Classifiers
 {
     [Verb("classify_ml", HelpText = "Classify traits on a victory screen via ML.NET")]
-    class ClassifierMLOptions : ClassifierCommonOptions
+    class ClassifierMLOptions : BaseClassifierOptions
     {
 
     }
@@ -15,7 +15,7 @@ namespace HadesBoonBot.Classifiers
     /// <summary>
     /// Classify traits on a victory screen by running predictions against a trained ML model
     /// </summary>
-    internal class ClassifierML : IClassifier, IDisposable
+    internal class ClassifierML : BaseClassifier
     {
         private readonly Codex m_codex;
         private readonly PredictionEngine<ModelInput, ModelOutput> m_predictEngine;
@@ -24,7 +24,7 @@ namespace HadesBoonBot.Classifiers
         private readonly HashSet<string> m_pinNames = new();
         private readonly HashSet<string> m_trayNames = new();
 
-        public ClassifierML(ClassifierMLOptions options, Codex codex)
+        public ClassifierML(ClassifierMLOptions options, Codex codex) : base(codex)
         {
             m_codex = codex;
 
@@ -56,7 +56,7 @@ namespace HadesBoonBot.Classifiers
             }
         }
 
-        public ClassifiedScreen? Classify(OCV.Mat screen, string filePath, int columnCount, int pinRows, bool debugOutput)
+        public override ClassifiedScreen? Classify(OCV.Mat screen, string filePath, int columnCount, int pinRows, bool debugOutput)
         {
             ScreenMetadata meta = new(screen);
             List<(int Column, int Row, OCV.Rect traitRect, List<(string, float)> Matches)> slots = new();
@@ -150,7 +150,7 @@ namespace HadesBoonBot.Classifiers
             }));
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
             m_predictEngine.Dispose();
         }

@@ -7,7 +7,7 @@ using SampleCategory = HadesBoonBot.Training.TraitDataGen.SampleCategory;
 namespace HadesBoonBot.Classifiers
 {
     [Verb("classify_psnr", HelpText = "Classify traits on a victory screen via PSNR")]
-    class ClassifierPSNROptions : ClassifierCommonOptions
+    class ClassifierPSNROptions : BaseClassifierOptions
     {
         [Option('t', "trait_source", Required = true, HelpText = "Root folder for trait images (stored in subfolders corresponding to each trait name)")]
         public string TraitSource { get; set; }
@@ -21,7 +21,7 @@ namespace HadesBoonBot.Classifiers
     /// <summary>
     /// Classify traits on a victory screen by running PSNR comparisons against previously-classified training data
     /// </summary>
-    internal class ClassifierPSNR : IClassifier, IDisposable
+    internal class ClassifierPSNR : BaseClassifier
     {
         /// <summary>
         /// List of previously classified images, by trait name then sample category
@@ -29,7 +29,7 @@ namespace HadesBoonBot.Classifiers
         private readonly Dictionary<string, Dictionary<SampleCategory, List<TraitMatch>>> m_preclassifiedTraits = new();
         private readonly Codex m_codex;
 
-        public ClassifierPSNR(ClassifierPSNROptions options, Codex codex)
+        public ClassifierPSNR(ClassifierPSNROptions options, Codex codex) : base(codex)
         {
             m_codex = codex;
 
@@ -79,7 +79,7 @@ namespace HadesBoonBot.Classifiers
             }
         }
 
-        public ClassifiedScreen? Classify(OCV.Mat screen, string filePath, int columnCount, int pinRows, bool debugOutput)
+        public override ClassifiedScreen? Classify(OCV.Mat screen, string filePath, int columnCount, int pinRows, bool debugOutput)
         {
             string? debugPath = null;
             if (debugOutput)
@@ -284,7 +284,7 @@ namespace HadesBoonBot.Classifiers
             return new(m_codex, slots.Select(r => new ClassifiedScreen.Slot(r.Matches.First().Trait, r.Column, r.Row)));
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
             foreach (var category in m_preclassifiedTraits)
             {

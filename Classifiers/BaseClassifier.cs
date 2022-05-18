@@ -1,11 +1,11 @@
-using CommandLine;
-using OCV = OpenCvSharp;
+﻿using CommandLine;
 using System.Diagnostics;
 using System.Text;
+using OCV = OpenCvSharp;
 
 namespace HadesBoonBot.Classifiers
 {
-    internal class ClassifierCommonOptions
+    internal class BaseClassifierOptions
     {
         [Option('d', "debug", Required = false, Default = false, HelpText = "Save out debugging images")]
         public bool DebugOutput { get; set; }
@@ -22,18 +22,47 @@ namespace HadesBoonBot.Classifiers
         [Option("validate_only", Required = false, HelpText = "Only perform initial validation (aspect, ML, column count, pin count)")]
         public bool ValidateOnly { get; set; }
 
-        protected ClassifierCommonOptions()
+        protected BaseClassifierOptions()
         {
             Input = string.Empty;
         }
     }
 
-    internal class Runner
+    internal abstract class BaseClassifier : IDisposable
     {
+        private readonly Codex m_codex;
+
+        protected BaseClassifier(Codex codex)
+        {
+            m_codex = codex;
+        }
+
+        public abstract ClassifiedScreen? Classify(OCV.Mat screen, string filePath, int columnCount, int pinRows, bool debugOutput);
+        public abstract void Dispose();
+
+        public int Run(BaseClassifierOptions options, List<ML.Model> commonModels)
+        {
+            TrainingData? trained = options.TrainingData == null ? null : TrainingData.Load(options.TrainingData);
+
+            if (File.Exists(options.Input))
+            {
+                ClassifiedScreen? result = RunSingle(options, options.Input, commonModels, trained);
+                return 0;
+            }
+            else if (Directory.Exists(options.Input))
+            {
+                return RunBatch(options, options.Input, commonModels, trained);
+            }
+            else
+            {
+                throw new ArgumentException($"Path passed to {nameof(BaseClassifierOptions)} must be a file or directory that exists", nameof(options));
+            }
+        }
+
         /// <summary>
-        /// Run a set of classifiers against a set of images - currently meant for debugging purposes
+        /// Run a set of classifiers against a set of images
         /// </summary>
-        public static int RunBatch(ClassifierCommonOptions options, string screensPath, List<ML.Model> models, Codex codex, TrainingData? trained, params IClassifier[] classifiers)
+        protected int RunBatch(BaseClassifierOptions options, string screensPath, List<ML.Model> models, TrainingData? trained)
         {
             int file = 0, errors = 0;
             var batchFiles = Directory.GetFiles(screensPath);
@@ -45,13 +74,10 @@ namespace HadesBoonBot.Classifiers
                     Console.WriteLine($"File {file}/{batchFiles.Length}");
                 }
 
-                foreach (IClassifier classer in classifiers)
+                ClassifiedScreen? result = RunSingle(options, screenPath, models, trained);
+                if (result == null || !result.IsValid)
                 {
-                    ClassifiedScreen? result = RunSingle(options, screenPath, models, codex, trained, classer);
-                    if (result == null || !result.IsValid)
-                    {
-                        errors++;
-                    }
+                    errors++;
                 }
 
                 file++;
@@ -65,12 +91,11 @@ namespace HadesBoonBot.Classifiers
         /// </summary>
         /// <param name="options">Command options</param>
         /// <param name="screenPath">Full path to image</param>
-        /// <param name="codex">Codex (to check icon-sharing traits)</param>
         /// <param name="models">ML models to determine screen validity</param>
         /// <param name="trained">Training data to verify against when not null</param>
         /// <param name="classer">Classifier</param>
         /// <returns>Classified screen (which may or may not be valid) or null</returns>
-        public static ClassifiedScreen? RunSingle(ClassifierCommonOptions options, string screenPath, List<ML.Model> models, Codex codex, TrainingData? trained, IClassifier classer)
+        protected ClassifiedScreen? RunSingle(BaseClassifierOptions options, string screenPath, List<ML.Model> models, TrainingData? trained)
         {
             string shortFile = Path.GetFileName(screenPath);
             string screenPathLower = screenPath.ToLower();
@@ -178,16 +203,16 @@ namespace HadesBoonBot.Classifiers
             }
 
             timer.Restart();
-            ClassifiedScreen? result = classer.Classify(image!, screenPath, columnCount, pinRowCount, options.DebugOutput);
+            ClassifiedScreen? result = Classify(image!, screenPath, columnCount, pinRowCount, options.DebugOutput);
 
             //if it's null something went very wrong
             if (result == null)
             {
-                Console.Error.WriteLine($"Failed to classify {shortFile} with {classer}");
+                Console.Error.WriteLine($"Failed to classify {shortFile} with {this}");
             }
             else
             {
-                Console.WriteLine($"Classified {shortFile} with {classer} in {timer.Elapsed.TotalSeconds:N2}s. Valid: {result.IsValid}");
+                Console.WriteLine($"Classified {shortFile} with {this} in {timer.Elapsed.TotalSeconds:N2}s. Valid: {result.IsValid}");
 
                 //optionally verify against The Database
                 if (trained != null)
@@ -208,7 +233,7 @@ namespace HadesBoonBot.Classifiers
                             foreach (var slot in result.Slots.Concat(result.PinSlots))
                             {
                                 var knownCorrectName = trainedTraits[new(slot.Col, slot.Row)];
-                                IEnumerable<string> goodNames = codex.GetIconSharingTraits(knownCorrectName).Select(t => t.Name);
+                                IEnumerable<string> goodNames = m_codex.GetIconSharingTraits(knownCorrectName).Select(t => t.Name);
 
                                 if (goodNames.Contains(slot.Trait.Name))
                                 {
