@@ -19,5 +19,16 @@
 
             return path;
         }
+
+        internal async static void DownloadFile(HttpClient client, string url, string targetFile, bool dontOverwrite = true)
+        {
+            //"asynchronous"
+            if (!(File.Exists(targetFile) && dontOverwrite))
+            {
+                using var stream = await client.GetStreamAsync(url);
+                using var fstream = new FileStream(targetFile, FileMode.CreateNew);
+                await stream.CopyToAsync(fstream);
+            }
+        }
     }
 }

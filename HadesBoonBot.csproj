@@ -5,15 +5,18 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <StartupObject>HadesBoonBot.Program</StartupObject>
+    <UserSecretsId>b1f63e92-6350-4010-afe5-1f28bc60ef70</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.8.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
     <PackageReference Include="Microsoft.ML" Version="1.7.0" />
     <PackageReference Include="Microsoft.ML.ImageAnalytics" Version="1.7.0" />
     <PackageReference Include="Microsoft.ML.TensorFlow" Version="1.7.0" />
     <PackageReference Include="Microsoft.ML.Vision" Version="1.7.0" />
     <PackageReference Include="OpenCvSharp4" Version="4.5.5.20211231" />
     <PackageReference Include="OpenCvSharp4.runtime.win" Version="4.5.5.20211231" />
+    <PackageReference Include="RedditSharp" Version="2.0.0" />
     <PackageReference Include="SciSharp.TensorFlow.Redist" Version="2.3.1" />
   </ItemGroup>
 </Project>
