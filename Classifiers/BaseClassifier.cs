@@ -95,7 +95,7 @@ namespace HadesBoonBot.Classifiers
         /// <param name="trained">Training data to verify against when not null</param>
         /// <param name="classer">Classifier</param>
         /// <returns>Classified screen (which may or may not be valid) or null</returns>
-        protected ClassifiedScreen? RunSingle(BaseClassifierOptions options, string screenPath, List<ML.Model> models, TrainingData? trained)
+        public ClassifiedScreen? RunSingle(BaseClassifierOptions options, string screenPath, List<ML.Model> models, TrainingData? trained)
         {
             string shortFile = Path.GetFileName(screenPath);
             string screenPathLower = screenPath.ToLower();

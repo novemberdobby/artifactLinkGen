@@ -1,5 +1,6 @@
 ﻿using CommandLine;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using RedditSharp;
 using System.Text.RegularExpressions;
 
@@ -8,35 +9,74 @@ namespace HadesBoonBot.Bot
     [Verb("bot", HelpText = "Run bot")]
     internal class BotOptions
     {
+        [Option('c', "config", Required = true, HelpText = "Configuration file containing bot settings")]
+        public string ConfigFile { get; set; }
+
+        public BotOptions()
+        {
+            ConfigFile = string.Empty;
+        }
+    }
+
+    internal class BotConfig
+    {
         [Flags]
         internal enum ProcessMode
         {
             /// <summary>
+            /// Output debug info on local machine
+            /// </summary>
+            LocalDebug = 1,
+
+            /// <summary>
             /// DM the dev with a short summary
             /// </summary>
-            PrivateMessage = 1,
+            PrivateMessage = 2,
 
             /// <summary>
             /// Comment on the post
             /// </summary>
-            Comment = 2,
+            Comment = 4,
 
             /// <summary>
             /// Add to Github repo page
             /// </summary>
-            GitHubPage = 4,
+            GitHubPage = 8,
         }
 
-        [Option('s', "state_file", Required = true, HelpText = "Bot state file for suspend/resume")]
+        /// <summary>
+        /// Bot state file for suspend/resume
+        /// </summary>
         public string StateFile { get; set; }
 
-        [Option('m', "mode", Required = true, HelpText = "Which mode to process posts in")]
+        /// <summary>
+        /// Which mode to process posts in
+        /// </summary>
         public ProcessMode Mode { get; set; }
 
-        [Option('h', "holding_area", Required = false, HelpText = "Local folder for storing post images etc")]
+        /// <summary>
+        /// Local folder for storing post images etc
+        /// </summary>
         public string? HoldingArea { get; set; }
 
-        public BotOptions()
+        /// <summary>
+        /// Classifier details
+        /// </summary>
+        [JsonProperty("Classifier")]
+        public ClassifierInfo? ClassifierOptions { get; set; }
+
+        internal class ClassifierInfo
+        {
+            public string Type { get; set; }
+            public Newtonsoft.Json.Linq.JObject? Options { get; set; }
+
+            public ClassifierInfo()
+            {
+                Type = string.Empty;
+            }
+        }
+
+        public BotConfig()
         {
             StateFile = string.Empty;
         }
@@ -45,16 +85,19 @@ namespace HadesBoonBot.Bot
     internal class Monitor : IDisposable
     {
         readonly HttpClient m_client = new();
-        readonly BotOptions m_runOptions;
+        readonly BotConfig m_runOptions;
         readonly IConfigurationRoot m_config;
+        readonly List<ML.Model> m_models;
 
-        public Monitor(BotOptions runOptions, IConfigurationRoot config)
+        public Monitor(BotOptions runConfig, IConfigurationRoot config, List<ML.Model> models)
         {
-            m_runOptions = runOptions;
+            string runOptions = File.ReadAllText(runConfig.ConfigFile);
+            m_runOptions = JsonConvert.DeserializeObject<BotConfig>(runOptions);
             m_config = config;
+            m_models = models;
         }
 
-        internal async Task<int> Run()
+        internal async Task<int> Run(Codex codex)
         {
             //load creds
             var webAgent = new BotWebAgent(
@@ -68,7 +111,14 @@ namespace HadesBoonBot.Bot
                 UserAgent = $"User-Agent: {m_config["reddit-user-agent"]}"
             };
 
-            var client = new Reddit(webAgent, true);
+            var (classifier, classifierOptions) = Classifiers.ClassifierFactory.Create(
+                m_runOptions.ClassifierOptions!.Type, m_runOptions.ClassifierOptions!.Options, codex);
+
+            var client = new Reddit(webAgent, true)
+            {
+                RateLimit = RateLimitMode.Pace
+            };
+
             BotState state = File.Exists(m_runOptions.StateFile) ? BotState.FromFile(m_runOptions.StateFile) : new();
 
             void postAction(RedditSharp.Things.Post post)
@@ -76,7 +126,7 @@ namespace HadesBoonBot.Bot
                 if (!state.ProcessedPosts.ContainsKey(post.Id))
                 {
                     Console.WriteLine($"Processing {post.Id}");
-                    BotState.ProcessedPost? result = ProcessPost(client, post);
+                    BotState.ProcessedPost? result = ProcessPost(client, post, classifier, classifierOptions);
                     state.ProcessedPosts.Add(post.Id, result);
                     state.Save(m_runOptions.StateFile);
                 }
@@ -100,7 +150,8 @@ namespace HadesBoonBot.Bot
             return 0;
         }
 
-        BotState.ProcessedPost? ProcessPost(Reddit client, RedditSharp.Things.Post post)
+        BotState.ProcessedPost? ProcessPost(Reddit client, RedditSharp.Things.Post post,
+            Classifiers.BaseClassifier classifier, Classifiers.BaseClassifierOptions classifierOptions)
         {
             //is it flaired as an endgame screen?
             if (string.Compare(post.LinkFlairText, "victory screen", true) != 0)
@@ -114,9 +165,10 @@ namespace HadesBoonBot.Bot
                 //TODO check we definitely haven't posted in this thread/already done requested action to avoid over-reliance on the state file
                 //TODO proper logging
 
-                var images = GetImageLinks(post);
+                var imageLinks = GetImageLinks(post);
+                var images = new List<Classifiers.ClassifiedScreenMeta>();
 
-                if (images.Any())
+                if (imageLinks.Any())
                 {
                     string targetFolder = "screens";
                     if (!string.IsNullOrEmpty(m_runOptions.HoldingArea))
@@ -124,20 +176,78 @@ namespace HadesBoonBot.Bot
                         targetFolder = Path.Combine(m_runOptions.HoldingArea, targetFolder);
                     }
 
-                    for (int i = 0; i < images.Count; i++)
+                    for (int i = 0; i < imageLinks.Count; i++)
                     {
-                        string ext = Path.GetExtension(new Uri(images[i]).LocalPath.ToString())[1..];
-                        string targetFile = Path.Combine(targetFolder, $"{post.Id}_{i}.{ext}");
-                        Util.DownloadFile(m_client, images[i], targetFile);
+                        string remotePath = imageLinks[i];
 
-                        //TODO: process here
+                        string ext = Path.GetExtension(new Uri(remotePath).LocalPath.ToString())[1..];
+                        string targetFile = Path.Combine(targetFolder, $"{post.Id}_{i}.{ext}");
+                        Util.DownloadFile(m_client, remotePath, targetFile);
+
+                        images.Add(new(classifier.RunSingle(classifierOptions, targetFile, m_models, null), remotePath, targetFile));
+                    }
+                    
+                    //todo extract method
+                    if ((m_runOptions.Mode & BotConfig.ProcessMode.LocalDebug) == BotConfig.ProcessMode.LocalDebug)
+                    {
+                        int imgIdx = -1;
+                        foreach (var img in images)
+                        {
+                            imgIdx++;
+                            if (img.LocalSource != null && img.RemoteSource != null && img.Screen != null)
+                            {
+                                using OpenCvSharp.Mat screen = OpenCvSharp.Cv2.ImRead(img.LocalSource);
+
+                                string debugFolder = "local_debug";
+                                if (!string.IsNullOrEmpty(m_runOptions.HoldingArea))
+                                {
+                                    debugFolder = Path.Combine(m_runOptions.HoldingArea, debugFolder);
+                                }
+
+                                debugFolder = Util.CreateDir(Path.Combine(debugFolder, post.Id));
+
+                                string ext = Path.GetExtension(img.LocalSource);
+                                screen.SaveImage(Path.Combine(debugFolder, $"{post.Id}_{imgIdx}{ext}"));
+                                ScreenMetadata meta = new(screen);
+
+                                foreach (var slot in img.Screen.Slots)
+                                {
+                                    if (meta.TryGetTraitRect(slot.Col, slot.Row, out var getRect))
+                                    {
+                                        var rect = getRect!.Value;
+                                        screen.DrawMarker(new OpenCvSharp.Point(rect.Left + rect.Width / 2, rect.Top + rect.Height / 2),
+                                            OpenCvSharp.Scalar.White, OpenCvSharp.MarkerTypes.Diamond);
+                                    }
+                                }
+
+                                foreach (var pinSlot in img.Screen.PinSlots)
+                                {
+                                    var rect = meta.GetPinRect(img.Screen.GetColumnCount(), pinSlot.Row).iconRect;
+                                    screen.DrawMarker(new OpenCvSharp.Point(rect.Left + rect.Width / 2, rect.Top + rect.Height / 2),
+                                        OpenCvSharp.Scalar.White, OpenCvSharp.MarkerTypes.Diamond);
+                                }
+
+                                screen.SaveImage(Path.Combine(debugFolder, $"{post.Id}_{imgIdx}_debug{ext}"));
+                                Console.WriteLine($"Ran local debug for image {img.RemoteSource}");
+                            }
+                            else
+                            {
+                                Console.Error.WriteLine("Local debug failed for image");
+                            }
+                        }
                     }
 
-                    if ((m_runOptions.Mode & BotOptions.ProcessMode.PrivateMessage) == BotOptions.ProcessMode.PrivateMessage)
+                    if ((m_runOptions.Mode & BotConfig.ProcessMode.PrivateMessage) == BotConfig.ProcessMode.PrivateMessage)
                     {
+                        List<string> msgLines = new();
+                        foreach (var img in images.OrderBy(i => i.RemoteSource))
+                        {
+                            msgLines.Add($"{img.RemoteSource}, valid: {img.Screen?.IsValid == true}");
+                        }
+
                         client.ComposePrivateMessageAsync(
                             $"Victory screen {post.Id}",
-                            string.Join("\n\n", new[] { $"New victory screen posted by /u/{post.AuthorName}: {post.Permalink}" }.Concat(images)),
+                            string.Join("\n\n", new[] { $"New victory screen posted by /u/{post.AuthorName}: {post.Permalink}" }.Concat(msgLines)),
                             m_config["reddit-dm-user"]).Wait();
                     }
                 }

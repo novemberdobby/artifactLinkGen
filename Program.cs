@@ -54,8 +54,8 @@ namespace HadesBoonBot
 
                     (Bot.BotOptions options) =>
                     {
-                        using Bot.Monitor monitor = new(options, config);
-                        return monitor.Run().Result;
+                        using Bot.Monitor monitor = new(options, config, commonModels);
+                        return monitor.Run(codex).Result;
                     },
 
                     errors =>

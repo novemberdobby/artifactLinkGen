@@ -1,5 +1,19 @@
 namespace HadesBoonBot.Classifiers
 {
+    internal class ClassifiedScreenMeta
+    {
+        public readonly ClassifiedScreen? Screen;
+        public readonly string? RemoteSource;
+        public readonly string? LocalSource;
+
+        public ClassifiedScreenMeta(ClassifiedScreen? screen, string? remoteSource, string? localSource)
+        {
+            Screen = screen;
+            RemoteSource = remoteSource;
+            LocalSource = localSource;
+        }
+    }
+
     internal class ClassifiedScreen
     {
         public string? WeaponName;
@@ -29,6 +43,11 @@ namespace HadesBoonBot.Classifiers
 
                 return $"Pinned #{Row}: {Trait}";
             }
+        }
+
+        public int GetColumnCount()
+        {
+            return Slots.Max(x => x.Col) + 1;
         }
 
         /// <summary>
