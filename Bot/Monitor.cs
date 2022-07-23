@@ -1,7 +1,8 @@
 ﻿using CommandLine;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using RedditSharp;
+using Reddit;
+using Reddit.Controllers;
 using System.Text.RegularExpressions;
 
 namespace HadesBoonBot.Bot
@@ -48,6 +49,11 @@ namespace HadesBoonBot.Bot
         /// Bot state file for suspend/resume
         /// </summary>
         public string StateFile { get; set; }
+
+        /// <summary>
+        /// Process a specific post and do nothing else
+        /// </summary>
+        public string? ForceProcess { get; set; }
 
         /// <summary>
         /// Which mode to process posts in
@@ -97,31 +103,26 @@ namespace HadesBoonBot.Bot
             m_models = models;
         }
 
-        internal async Task<int> Run(Codex codex)
+        internal int Run(Codex codex)
         {
             //load creds
-            var webAgent = new BotWebAgent(
-                m_config["reddit-user"],
-                m_config["reddit-pass"],
-                m_config["reddit-client-id"],
-                m_config["reddit-client-secret"],
-                "http://localhost:8080"
-                )
-            {
-                UserAgent = $"User-Agent: {m_config["reddit-user-agent"]}"
-            };
+            var client = new RedditClient(
+                appId: m_config["reddit-client-id"],
+                refreshToken: m_config["reddit-client-refresh-token"],
+                appSecret: m_config["reddit-client-secret"],
+                userAgent: m_config["reddit-user-agent"]
+                );
 
             var (classifier, classifierOptions) = Classifiers.ClassifierFactory.Create(
                 m_runOptions.ClassifierOptions!.Type, m_runOptions.ClassifierOptions!.Options, codex);
 
-            var client = new Reddit(webAgent, true)
-            {
-                RateLimit = RateLimitMode.Pace
-            };
-
             BotState state = File.Exists(m_runOptions.StateFile) ? BotState.FromFile(m_runOptions.StateFile) : new();
-
-            void postAction(RedditSharp.Things.Post post)
+            if (m_runOptions.ForceProcess != null && state.ProcessedPosts.ContainsKey(m_runOptions.ForceProcess))
+            {
+                state.ProcessedPosts.Remove(m_runOptions.ForceProcess);
+            }
+            
+            void postAction(Post post)
             {
                 if (!state.ProcessedPosts.ContainsKey(post.Id))
                 {
@@ -132,29 +133,59 @@ namespace HadesBoonBot.Bot
                 }
             }
 
-            var subreddit = await client.GetSubredditAsync("/r/HadesTheGame");
+            if (m_runOptions.ForceProcess != null)
+            {
+                var post = client.Post("t3_" + m_runOptions.ForceProcess).About();
+                postAction(post);
+            }
+            else
+            {
+                var subreddit = client.Subreddit("HadesTheGame").About();
 
-            //first catch up on recent posts
-            Console.WriteLine("Checking history...");
-            var recentPosts = subreddit.GetPosts(RedditSharp.Things.Subreddit.Sort.New, 500);
-            await recentPosts.ForEachAsync(postAction);
+                //first catch up on recent posts
+                Console.WriteLine("Checking history...");
 
-            //then subscribe to new ones
-            var postStream = subreddit.GetPosts(RedditSharp.Things.Subreddit.Sort.New).Stream();
-            postStream.Subscribe(postAction);
+                //we have to do a wee bit of pagination ourselves as the API doesn't (fortunately it still rate limits)
+                int checkLatest = 500;
+                List<Post> newestPosts = new(checkLatest);
+                while (newestPosts.Count < checkLatest)
+                {
+                    var recentPosts = subreddit.Posts.GetNew(limit: checkLatest - newestPosts.Count, after: newestPosts.Any() ? newestPosts.Last().Fullname : string.Empty);
+                    newestPosts.AddRange(recentPosts);
+                }
 
-            //TODO maybe support cancellation lol
-            Console.WriteLine("Waiting for posts...");
-            await postStream.Enumerate(CancellationToken.None);
+                foreach (var post in newestPosts)
+                {
+                    postAction(post);
+                }
+
+                //then subscribe to new ones
+                subreddit.Posts.NewUpdated += (_, updateArgs) =>
+                {
+                    foreach (var newPost in updateArgs.Added)
+                    {
+                        postAction(newPost);
+                    }
+                };
+
+                Console.WriteLine("Waiting for posts...");
+                subreddit.Posts.MonitorNew();
+
+                //TODO maybe support cancellation lol
+                while (subreddit.Posts.NewPostsIsMonitored())
+                {
+                    Thread.Sleep(TimeSpan.FromSeconds(10));
+                }
+            }
 
             return 0;
         }
 
-        BotState.ProcessedPost? ProcessPost(Reddit client, RedditSharp.Things.Post post,
+        BotState.ProcessedPost? ProcessPost(RedditClient client, Post post,
             Classifiers.BaseClassifier classifier, Classifiers.BaseClassifierOptions classifierOptions)
         {
             //is it flaired as an endgame screen?
-            if (string.Compare(post.LinkFlairText, "victory screen", true) != 0)
+            if (string.Compare(post.Listing.LinkFlairText, "victory screen", true) != 0)
             {
                 return null;
             }
@@ -232,10 +263,12 @@ namespace HadesBoonBot.Bot
                             }
                             else
                             {
-                                Console.Error.WriteLine("Local debug failed for image");
+                                Console.Error.WriteLine($"Local debug failed for image {img.RemoteSource}");
                             }
                         }
                     }
+
+                    //TODO go back through and see if any fail to find images
 
                     if ((m_runOptions.Mode & BotConfig.ProcessMode.PrivateMessage) == BotConfig.ProcessMode.PrivateMessage)
                     {
@@ -245,10 +278,10 @@ namespace HadesBoonBot.Bot
                             msgLines.Add($"{img.RemoteSource}, valid: {img.Screen?.IsValid == true}");
                         }
 
-                        client.ComposePrivateMessageAsync(
+                        client.Account.Messages.Compose(
+                            m_config["reddit-dm-user"],
                             $"Victory screen {post.Id}",
-                            string.Join("\n\n", new[] { $"New victory screen posted by /u/{post.AuthorName}: {post.Permalink}" }.Concat(msgLines)),
-                            m_config["reddit-dm-user"]).Wait();
+                            string.Join("\n\n", new[] { $"New victory screen posted by /u/{post.Author}: {post.Permalink}" }.Concat(msgLines)));
                     }
                 }
                 else
@@ -286,15 +319,14 @@ namespace HadesBoonBot.Bot
                 ;
         }
 
-        static List<string> GetImageLinks(RedditSharp.Things.Post post)
+        static List<string> GetImageLinks(Post post)
         {
             List<string> links = new();
 
-            //pull out any links from self posts
-            if (post.IsSelfPost && !string.IsNullOrEmpty(post.SelfText))
+            if (post is SelfPost selfPost) //pull out any links from self posts
             {
                 var parseLinks = new Regex(@"\b(?:https?://|www\.)\S+\b", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-                var mtch = parseLinks.Match(post.SelfText);
+                var mtch = parseLinks.Match(selfPost.SelfText);
 
                 while (mtch?.Success == true)
                 {
@@ -306,20 +338,18 @@ namespace HadesBoonBot.Bot
                     mtch = mtch.NextMatch();
                 }
             }
-
-            //use post json to find media links
-            if (!links.Any())
+            else if (post is LinkPost linkPost) //use post json to find media links
             {
                 try
                 {
-                    var parsed = post.RawJson.ToObject<RedditModels.Post>();
-                    if (parsed?.Media?.Values != null)
+                    var parsed = linkPost.Preview.ToObject<RedditModels.Post>();
+                    if (parsed?.PreviewImages?.Any() == true)
                     {
-                        foreach (var item in parsed.Media.Values)
+                        foreach (var item in parsed.PreviewImages)
                         {
-                            if (IsImageFormat(item.Source.Url))
+                            if (IsImageFormat(item.Metadata.Url))
                             {
-                                links.Add(item.Source.Url);
+                                links.Add(item.Metadata.Url);
                             }
                         }
                     }
@@ -329,24 +359,7 @@ namespace HadesBoonBot.Bot
                     Console.Error.WriteLine($"Failed to parse post json: {ex}");
                 }
             }
-
-            //parse the previews too
-            if (!links.Any())
-            {
-                var images = post.Preview?.Images;
-                if (images != null)
-                {
-                    foreach (var image in images)
-                    {
-                        string url = image.Source.Url.ToString();
-                        if (IsImageFormat(url)) //probably safe here though
-                        {
-                            links.Add(url);
-                        }
-                    }
-                }
-            }
-
+            
             for (int i = 0; i < links.Count; i++)
             {
                 links[i] = FixJson(links[i]);

@@ -8,36 +8,18 @@ namespace HadesBoonBot.Bot
     {
         internal class Post
         {
-            [JsonProperty("author_fullname")]
-            public string Username { get; set; }
-
-            [JsonProperty("media_metadata")]
-            public Dictionary<string, MediaMetadata> Media { get; set; }
+            [JsonProperty("images")]
+            public List<PreviewImage> PreviewImages { get; set; }
         }
 
-        internal class MediaMetadata
+        internal class PreviewImage
         {
-            public string Status { get; set; }
-
-            [JsonProperty("m")]
-            public string MediaType { get; set; }
-            
-            [JsonProperty("p")]
-            public List<MediaFile> Previews { get; set; }
-
-            [JsonProperty("s")]
-            public MediaFile Source { get; set; }
+            [JsonProperty("source")]
+            public ImageMetadata Metadata { get; set; }
         }
 
-        internal class MediaFile
+        internal class ImageMetadata
         {
-            [JsonProperty("x")]
-            public int Width { get; set; }
-
-            [JsonProperty("y")]
-            public int Height { get; set; }
-
-            [JsonProperty("u")]
             public string Url { get; set; }
         }
     }
