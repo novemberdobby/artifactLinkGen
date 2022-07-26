@@ -16,7 +16,9 @@
     <PackageReference Include="Microsoft.ML.Vision" Version="1.7.0" />
     <PackageReference Include="OpenCvSharp4" Version="4.5.5.20211231" />
     <PackageReference Include="OpenCvSharp4.runtime.win" Version="4.5.5.20211231" />
-    <PackageReference Include="Reddit" Version="1.5.2" />
     <PackageReference Include="SciSharp.TensorFlow.Redist" Version="2.3.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Reddit.NET-gallery_support\src\Reddit.NET\Reddit.NET.csproj" />
   </ItemGroup>
 </Project>

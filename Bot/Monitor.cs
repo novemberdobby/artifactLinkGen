@@ -342,14 +342,17 @@ namespace HadesBoonBot.Bot
             {
                 try
                 {
-                    var parsed = linkPost.Preview.ToObject<RedditModels.Post>();
-                    if (parsed?.PreviewImages?.Any() == true)
+                    if (linkPost.Preview != null)
                     {
-                        foreach (var item in parsed.PreviewImages)
+                        var parsed = linkPost.Preview.ToObject<RedditModels.Post>();
+                        if (parsed?.PreviewImages?.Any() == true)
                         {
-                            if (IsImageFormat(item.Metadata.Url))
+                            foreach (var item in parsed.PreviewImages)
                             {
-                                links.Add(item.Metadata.Url);
+                                if (IsImageFormat(item.Metadata.Url))
+                                {
+                                    links.Add(item.Metadata.Url);
+                                }
                             }
                         }
                     }
@@ -357,6 +360,22 @@ namespace HadesBoonBot.Bot
                 catch (Exception ex)
                 {
                     Console.Error.WriteLine($"Failed to parse post json: {ex}");
+                }
+
+                if(linkPost.IsGallery) //gallery post (currently requires pull request #151)
+                {
+                    var gallery = linkPost.Listing?.MediaMetadata;
+                    if (gallery != null)
+                    {
+                        foreach (var metadata in gallery.Values)
+                        {
+                            string? source = metadata.s?.u;
+                            if (source != null)
+                            {
+                                links.Add(source);
+                            }
+                        }
+                    }
                 }
             }
             
