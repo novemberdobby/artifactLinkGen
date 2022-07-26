@@ -165,7 +165,15 @@ namespace HadesBoonBot.Training
                 {
                     image.Value.Dispose();
                 }
+
+                if (screen.VerifiedDateUTC == null)
+                {
+                    screen.VerifiedDateUTC = DateTime.UtcNow;
+                }
             }
+
+            //re-save to update verification dates
+            inputData.Save(options.TrainingData);
 
             //are there any traits we don't have any real-world samples of?
             var missingSamples = codex.Where(t => !realSamples.ContainsKey(t.Name));

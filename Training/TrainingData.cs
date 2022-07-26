@@ -22,6 +22,7 @@ namespace HadesBoonBot
             public bool? ValidCast { get; set; }
             public bool? ValidBackButton { get; set; }
             public int? ColumnCount { get; set; }
+            public DateTime? VerifiedDateUTC { get; set; }
 
             public Screen(string fileName)
             {
