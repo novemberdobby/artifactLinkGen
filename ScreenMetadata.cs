@@ -27,7 +27,7 @@ namespace HadesBoonBot
         float FirstBoonIconY => 206 * Multiplier; //Y location of above
         float SecondBoonIconX => 122 * Multiplier; //X location of the second column
 
-        float BoonWidth => 77 * Multiplier; //width of the diamond
+        public float BoonWidth => 77 * Multiplier; //width of the diamond
 
         float BoonColumnSep => 64.25f * Multiplier; //distance between columns (from 2nd column onwards)
         float BoonRowSep => 93.6f * Multiplier; //distance between rows
@@ -94,7 +94,7 @@ namespace HadesBoonBot
         int PinCentreFromLastTrayColumn => (int)(158 * Multiplier);
         int PinItemLength => (int)(895 * Multiplier);
         int PinItemFirstY => (int)(231 * Multiplier);
-        float PinnedBoonWidth => 117 * Multiplier; //width of the diamond in a pinned boon
+        public float PinnedBoonWidth => 117 * Multiplier; //width of the diamond in a pinned boon
 
         #endregion
 

@@ -218,54 +218,10 @@ namespace HadesBoonBot.Bot
                         images.Add(new(classifier.RunSingle(classifierOptions, targetFile, m_models, null), remotePath, targetFile));
                     }
                     
-                    //todo extract method
                     if ((m_runOptions.Mode & BotConfig.ProcessMode.LocalDebug) == BotConfig.ProcessMode.LocalDebug)
                     {
-                        int imgIdx = -1;
-                        foreach (var img in images)
-                        {
-                            imgIdx++;
-                            if (img.LocalSource != null && img.RemoteSource != null && img.Screen != null)
-                            {
-                                using OpenCvSharp.Mat screen = OpenCvSharp.Cv2.ImRead(img.LocalSource);
-
-                                string debugFolder = "local_debug";
-                                if (!string.IsNullOrEmpty(m_runOptions.HoldingArea))
-                                {
-                                    debugFolder = Path.Combine(m_runOptions.HoldingArea, debugFolder);
-                                }
-
-                                debugFolder = Util.CreateDir(Path.Combine(debugFolder, post.Id));
-
-                                string ext = Path.GetExtension(img.LocalSource);
-                                screen.SaveImage(Path.Combine(debugFolder, $"{post.Id}_{imgIdx}{ext}"));
-                                ScreenMetadata meta = new(screen);
-
-                                foreach (var slot in img.Screen.Slots)
-                                {
-                                    if (meta.TryGetTraitRect(slot.Col, slot.Row, out var getRect))
-                                    {
-                                        var rect = getRect!.Value;
-                                        screen.DrawMarker(new OpenCvSharp.Point(rect.Left + rect.Width / 2, rect.Top + rect.Height / 2),
-                                            OpenCvSharp.Scalar.White, OpenCvSharp.MarkerTypes.Diamond);
-                                    }
-                                }
-
-                                foreach (var pinSlot in img.Screen.PinSlots)
-                                {
-                                    var rect = meta.GetPinRect(img.Screen.GetColumnCount(), pinSlot.Row).iconRect;
-                                    screen.DrawMarker(new OpenCvSharp.Point(rect.Left + rect.Width / 2, rect.Top + rect.Height / 2),
-                                        OpenCvSharp.Scalar.White, OpenCvSharp.MarkerTypes.Diamond);
-                                }
-
-                                screen.SaveImage(Path.Combine(debugFolder, $"{post.Id}_{imgIdx}_debug{ext}"));
-                                Console.WriteLine($"Ran local debug for image {img.RemoteSource}");
-                            }
-                            else
-                            {
-                                Console.Error.WriteLine($"Local debug failed for image {img.RemoteSource}");
-                            }
-                        }
+                        var localDebug = new Processors.LocalDebug(post.Id, m_runOptions.HoldingArea);
+                        localDebug.Run(images);
                     }
 
                     //TODO go back through and see if any fail to find images
