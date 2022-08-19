@@ -130,6 +130,7 @@ namespace HadesBoonBot
             /// </summary>
             public sealed class Trait : IDisposable
             {
+                [JsonRequired]
                 public string Name { get; set; }
 
                 /// <summary>
@@ -168,6 +169,12 @@ namespace HadesBoonBot
                 /// </summary>
                 [JsonProperty("requires_any")]
                 public List<string>? RequiresAny { get; set; }
+
+                /// <summary>
+                /// List of traits which can't co-exist with this one
+                /// </summary>
+                [JsonProperty("incompatible_with")]
+                public List<string>? IncompatibleWith { get; set; }
 
                 /// <summary>
                 /// List of providers, normally one but duo boons have two
@@ -310,6 +317,22 @@ namespace HadesBoonBot
                 }
 
                 ByIcon[iconFile].Add(trait);
+            }
+
+            //do a validity check on prerequisite lists
+            foreach (var trait in this)
+            {
+                foreach (var prereqList in new[] { trait.Requires, trait.RequiresAny, trait.IncompatibleWith })
+                {
+                    if (prereqList != null)
+                    {
+                        var unknown = prereqList.Where(tr => !ByName.ContainsKey(tr));
+                        if (unknown.Any())
+                        {
+                            throw new FormatException($"Found unknown trait(s) in prerequisites of {trait}: {string.Join(", ", unknown)}");
+                        }
+                    }
+                }
             }
 
             //sort here so we can use [0] when we only need a representative for this group

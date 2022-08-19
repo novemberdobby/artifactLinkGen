@@ -19,7 +19,8 @@
                 "name": "Crush Shot",
                 "desc": "Your Cast is a wide, short-range blast that inflicts Weak.",
                 "icon": "icons\\Aphrodite\\Crush_Shot__Passion_Flare.png",
-                "singleton": "cast"
+                "singleton": "cast",
+                "incompatible_with": [ "Aspect of Beowulf" ]
             },
             {
                 "name": "Passion Flare",
@@ -142,7 +143,8 @@
                 "name": "Slicing Shot",
                 "desc": "Your Cast sends a Blade Rift hurling ahead.",
                 "icon": "icons\\Ares\\Slicing_Flare__Slicing_Shot.png",
-                "singleton": "cast"
+                "singleton": "cast",
+                "incompatible_with": [ "Aspect of Beowulf" ]
             },
             {
                 "name": "Slicing Flare",
@@ -265,7 +267,8 @@
                 "name": "True Shot",
                 "desc": "Your Cast seeks foes, with a 10% chance to deal Critical damage.",
                 "icon": "icons\\Artemis\\Hunter's_Flare__True_Shot.png",
-                "singleton": "cast"
+                "singleton": "cast",
+                "incompatible_with": [ "Aspect of Beowulf" ]
             },
             {
                 "name": "Hunter's Flare",
@@ -383,7 +386,8 @@
                 "name": "Phalanx Shot",
                 "desc": "Your Cast damages foes in a small area, and can Deflect.",
                 "icon": "icons\\Athena\\Phalanx_Flare__Phalanx_Shot.png",
-                "singleton": "cast"
+                "singleton": "cast",
+                "incompatible_with": [ "Aspect of Beowulf" ]
             },
             {
                 "name": "Phalanx Flare",
@@ -572,7 +576,8 @@
                 "name": "Crystal Beam",
                 "desc": "Your Cast drops a crystal that fires a beam straight ahead for 5 sec.",
                 "icon": "icons\\Demeter\\Crystal_Beam__Icy_Flare.png",
-                "singleton": "cast"
+                "singleton": "cast",
+                "incompatible_with": [ "Aspect of Beowulf" ]
             },
             {
                 "name": "Icy Flare",
@@ -695,7 +700,8 @@
                 "name": "Trippy Shot",
                 "desc": "Your Cast lobs a projectile that bursts into Festive Fog.",
                 "icon": "icons\\Dionysus\\Trippy_Flare__Trippy_Shot.png",
-                "singleton": "cast"
+                "singleton": "cast",
+                "incompatible_with": [ "Aspect of Beowulf" ]
             },
             {
                 "name": "Trippy Flare",
@@ -815,7 +821,8 @@
             {
                 "name": "Flurry Cast",
                 "desc": "Your Cast is +X%  faster and fully automatic.",
-                "icon": "icons\\Hermes\\Bad_News__Flurry_Cast.png"
+                "icon": "icons\\Hermes\\Bad_News__Flurry_Cast.png",
+                "incompatible_with": [ "Aspect of Beowulf", "Aspect of Hera" ]
             },
             {
                 "name": "Quick Favor",
@@ -855,7 +862,8 @@
             {
                 "name": "Quick Reload",
                 "desc": "Foes drop  stuck in them faster.",
-                "icon": "icons\\Hermes\\Auto_Reload__Quick_Reload.png"
+                "icon": "icons\\Hermes\\Auto_Reload__Quick_Reload.png",
+                "incompatible_with": [ "Aspect of Beowulf", "Trippy Shot", "Crystal Beam", "Curse of Drowning", "Slicing Shot" ]
             },
             {
                 "name": "Side Hustle",
@@ -905,7 +913,8 @@
                 "name": "Flood Shot",
                 "desc": "Your Cast damages foes in an area and knocks them away.",
                 "icon": "icons\\Poseidon\\Flood_Flare__Flood_Shot.png",
-                "singleton": "cast"
+                "singleton": "cast",
+                "incompatible_with": [ "Aspect of Beowulf" ]
             },
             {
                 "name": "Flood Flare",
@@ -1038,7 +1047,8 @@
                 "name": "Electric Shot",
                 "desc": "Your Cast is a burst of chain-lightning that bounces between foes.",
                 "icon": "icons\\Zeus\\Thunder_Flare__Electric_Shot.png",
-                "singleton": "cast"
+                "singleton": "cast",
+                "incompatible_with": [ "Aspect of Beowulf" ]
             },
             {
                 "name": "Thunder Flare",
