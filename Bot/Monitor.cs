@@ -127,7 +127,7 @@ namespace HadesBoonBot.Bot
                 if (!state.ProcessedPosts.ContainsKey(post.Id))
                 {
                     Console.WriteLine($"Processing {post.Id}");
-                    BotState.ProcessedPost? result = ProcessPost(client, post, classifier, classifierOptions);
+                    BotState.ProcessedPost? result = ProcessPost(client, post, classifier, classifierOptions, codex);
                     state.ProcessedPosts.Add(post.Id, result);
                     state.Save(m_runOptions.StateFile);
                 }
@@ -182,7 +182,7 @@ namespace HadesBoonBot.Bot
         }
 
         BotState.ProcessedPost? ProcessPost(RedditClient client, Post post,
-            Classifiers.BaseClassifier classifier, Classifiers.BaseClassifierOptions classifierOptions)
+            Classifiers.BaseClassifier classifier, Classifiers.BaseClassifierOptions classifierOptions, Codex codex)
         {
             //is it flaired as an endgame screen?
             if (string.Compare(post.Listing.LinkFlairText, "victory screen", true) != 0)
@@ -221,7 +221,7 @@ namespace HadesBoonBot.Bot
                     if ((m_runOptions.Mode & BotConfig.ProcessMode.LocalDebug) == BotConfig.ProcessMode.LocalDebug)
                     {
                         var localDebug = new Processors.LocalDebug(post.Id, m_runOptions.HoldingArea);
-                        localDebug.Run(images);
+                        localDebug.Run(images, codex);
                     }
 
                     //TODO go back through and see if any fail to find images

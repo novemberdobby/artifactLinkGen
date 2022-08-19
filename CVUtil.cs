@@ -112,4 +112,28 @@ namespace HadesBoonBot
             return background;
         }
     }
+
+    internal static class CVUtilExtensions
+    {
+        /// <summary>
+        /// Draw a string to an image with newline support
+        /// </summary>
+        /// <param name="yPadding">Extra padding pixels between lines</param>
+        public static void PutTextMultiline(this OCV.Mat image, string text, OCV.Point origin, OCV.HersheyFonts fontFace, double fontScale, OCV.Scalar colour, int thickness = 1, OCV.LineTypes lineType = OCV.LineTypes.Link8, bool bottomLeftOrigin = false, int yPadding = 3)
+        {
+            string[] lines = System.Text.RegularExpressions.Regex.Split(text, @"\r?\n");
+
+            int yOffset = 0;
+            foreach (string line in lines)
+            {
+                var size = Cv2.GetTextSize(line, fontFace, fontScale, thickness, out _);
+                image.PutText(line, origin + new OCV.Point(0, yOffset), fontFace, fontScale, colour, thickness, lineType, bottomLeftOrigin);
+
+                if (lines.Length > 1)
+                {
+                    yOffset += size.Height + yPadding;
+                }
+            }
+        }
+    }
 }

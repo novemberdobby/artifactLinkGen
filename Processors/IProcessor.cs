@@ -2,6 +2,6 @@
 {
     interface IProcessor
     {
-        void Run(List<Classifiers.ClassifiedScreenMeta> screens);
+        void Run(List<Classifiers.ClassifiedScreenMeta> screens, Codex codex);
     }
 }

@@ -4,8 +4,8 @@ namespace HadesBoonBot.Processors
 {
     internal class LocalDebug : IProcessor
     {
-        string m_sourceId;
-        string? m_holdingArea;
+        readonly string m_sourceId;
+        readonly string? m_holdingArea;
 
         public LocalDebug(string sourceId, string? holdingArea)
         {
@@ -13,7 +13,7 @@ namespace HadesBoonBot.Processors
             m_holdingArea = holdingArea;
         }
 
-        public void Run(List<Classifiers.ClassifiedScreenMeta> screens)
+        public void Run(List<Classifiers.ClassifiedScreenMeta> screens, Codex codex)
         {
             int imgIdx = -1;
             foreach (var screen in screens)
@@ -35,8 +35,17 @@ namespace HadesBoonBot.Processors
                     image.SaveImage(Path.Combine(debugFolder, $"{m_sourceId}_{imgIdx}{ext}"));
                     ScreenMetadata meta = new(image);
 
+                    var shadowOffset = new OCV.Point(2, 2);
+                    var nameOffset = new OCV.Point(0, 20);
+                    int yPad = (int)(meta.Multiplier * 8);
+
                     foreach (var slot in screen.Screen.Slots)
                     {
+                        if (slot.Trait == codex.EmptyBoon)
+                        {
+                            continue;
+                        }
+
                         if (meta.TryGetTraitRect(slot.Col, slot.Row, out var getRect))
                         {
                             var rect = getRect!.Value;
@@ -45,12 +54,12 @@ namespace HadesBoonBot.Processors
                             image.DrawMarker(middle, OCV.Scalar.Black, OCV.MarkerTypes.Diamond, (int)meta.BoonWidth, (int)(meta.Multiplier * 5));
                             image.DrawMarker(middle, OCV.Scalar.White, OCV.MarkerTypes.Diamond, (int)meta.BoonWidth, (int)(meta.Multiplier * 3));
 
-                            image.PutText($"{slot.Col}_{slot.Row}", rect.Location, OCV.HersheyFonts.HersheyComplexSmall, 1f, OCV.Scalar.Black, (int)(meta.Multiplier * 2));
-                            image.PutText($"{slot.Col}_{slot.Row}", rect.Location, OCV.HersheyFonts.HersheyComplexSmall, 1f, OCV.Scalar.White, (int)(meta.Multiplier * 1));
+                            image.PutText($"{slot.Col}_{slot.Row}", rect.Location + shadowOffset, OCV.HersheyFonts.HersheyPlain, 1.25f, OCV.Scalar.Black, thickness: 2, lineType: OCV.LineTypes.AntiAlias);
+                            image.PutText($"{slot.Col}_{slot.Row}", rect.Location, OCV.HersheyFonts.HersheyPlain, 1.25f, OCV.Scalar.White, thickness: 2, lineType: OCV.LineTypes.AntiAlias);
 
-                            var nameOffset = new OCV.Point(0, 20);
-                            image.PutText(slot.Trait.Name, rect.Location + nameOffset, OCV.HersheyFonts.HersheyComplexSmall, 1f, OCV.Scalar.Black, (int)(meta.Multiplier * 2));
-                            image.PutText(slot.Trait.Name, rect.Location + nameOffset, OCV.HersheyFonts.HersheyComplexSmall, 1f, OCV.Scalar.White, (int)(meta.Multiplier * 1));
+                            string nameLines = slot.Trait.Name.Replace(' ', '\n');
+                            image.PutTextMultiline(nameLines, rect.Location + nameOffset + shadowOffset, OCV.HersheyFonts.HersheyPlain, 1.25f, OCV.Scalar.Black, thickness: 2, yPadding: yPad, lineType: OCV.LineTypes.AntiAlias);
+                            image.PutTextMultiline(nameLines, rect.Location + nameOffset, OCV.HersheyFonts.HersheyPlain, 1.25f, OCV.Scalar.White, thickness: 2, yPadding: yPad, lineType: OCV.LineTypes.AntiAlias);
                         }
                     }
 
@@ -62,12 +71,11 @@ namespace HadesBoonBot.Processors
                         image.DrawMarker(middle, OCV.Scalar.Black, OCV.MarkerTypes.Diamond, (int)meta.PinnedBoonWidth, (int)(meta.Multiplier * 5));
                         image.DrawMarker(middle, OCV.Scalar.White, OCV.MarkerTypes.Diamond, (int)meta.PinnedBoonWidth, (int)(meta.Multiplier * 3));
 
-                        image.PutText($"{pinSlot.Row}", rect.Location, OCV.HersheyFonts.HersheyComplexSmall, 1f, OCV.Scalar.Black, (int)(meta.Multiplier * 2));
-                        image.PutText($"{pinSlot.Row}", rect.Location, OCV.HersheyFonts.HersheyComplexSmall, 1f, OCV.Scalar.White, (int)(meta.Multiplier * 1));
+                        image.PutText($"{pinSlot.Row}", rect.Location + shadowOffset, OCV.HersheyFonts.HersheyPlain, 1.25f, OCV.Scalar.Black, thickness: 2, lineType: OCV.LineTypes.AntiAlias);
+                        image.PutText($"{pinSlot.Row}", rect.Location, OCV.HersheyFonts.HersheyPlain, 1.25f, OCV.Scalar.White, thickness: 2, lineType: OCV.LineTypes.AntiAlias);
 
-                        var nameOffset = new OCV.Point(0, 20);
-                        image.PutText(pinSlot.Trait.Name, rect.Location + nameOffset, OCV.HersheyFonts.HersheyComplexSmall, 1f, OCV.Scalar.Black, (int)(meta.Multiplier * 2));
-                        image.PutText(pinSlot.Trait.Name, rect.Location + nameOffset, OCV.HersheyFonts.HersheyComplexSmall, 1f, OCV.Scalar.White, (int)(meta.Multiplier * 1));
+                        image.PutTextMultiline(pinSlot.Trait.Name, rect.Location + nameOffset + shadowOffset, OCV.HersheyFonts.HersheyPlain, 1.25f, OCV.Scalar.Black, thickness: 2, lineType: OCV.LineTypes.AntiAlias);
+                        image.PutTextMultiline(pinSlot.Trait.Name, rect.Location + nameOffset, OCV.HersheyFonts.HersheyPlain, 1.25f, OCV.Scalar.White, thickness: 2, lineType: OCV.LineTypes.AntiAlias);
                     }
 
                     image.SaveImage(Path.Combine(debugFolder, $"{m_sourceId}_{imgIdx}_debug{ext}"));
