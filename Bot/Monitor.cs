@@ -1,4 +1,5 @@
 ﻿using CommandLine;
+using HadesBoonBot.Classifiers;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Reddit;
@@ -21,30 +22,6 @@ namespace HadesBoonBot.Bot
 
     internal class BotConfig
     {
-        [Flags]
-        internal enum ProcessMode
-        {
-            /// <summary>
-            /// Output debug info on local machine
-            /// </summary>
-            LocalDebug = 1,
-
-            /// <summary>
-            /// DM the dev with a short summary
-            /// </summary>
-            PrivateMessage = 2,
-
-            /// <summary>
-            /// Comment on the post
-            /// </summary>
-            Comment = 4,
-
-            /// <summary>
-            /// Add to Github repo page
-            /// </summary>
-            GitHubPage = 8,
-        }
-
         /// <summary>
         /// Bot state file for suspend/resume
         /// </summary>
@@ -56,9 +33,9 @@ namespace HadesBoonBot.Bot
         public string? ForceProcess { get; set; }
 
         /// <summary>
-        /// Which mode to process posts in
+        /// Which modes to process posts in
         /// </summary>
-        public ProcessMode Mode { get; set; }
+        public List<ProcessMode> Modes { get; set; }
 
         /// <summary>
         /// Local folder for storing post images etc
@@ -82,9 +59,21 @@ namespace HadesBoonBot.Bot
             }
         }
 
+        internal class ProcessMode
+        {
+            public string Name { get; set; }
+            public Newtonsoft.Json.Linq.JObject? Options { get; set; }
+
+            public ProcessMode()
+            {
+                Name = string.Empty;
+            }
+        }
+
         public BotConfig()
         {
             StateFile = string.Empty;
+            Modes = new();
         }
     }
 
@@ -113,7 +102,7 @@ namespace HadesBoonBot.Bot
                 userAgent: m_config["reddit-user-agent"]
                 );
 
-            var (classifier, classifierOptions) = Classifiers.ClassifierFactory.Create(
+            var (classifier, classifierOptions) = ClassifierFactory.Create(
                 m_runOptions.ClassifierOptions!.Type, m_runOptions.ClassifierOptions!.Options, codex);
 
             BotState state = File.Exists(m_runOptions.StateFile) ? BotState.FromFile(m_runOptions.StateFile) : new();
@@ -121,7 +110,7 @@ namespace HadesBoonBot.Bot
             {
                 state.ProcessedPosts.Remove(m_runOptions.ForceProcess);
             }
-            
+
             void postAction(Post post)
             {
                 if (!state.ProcessedPosts.ContainsKey(post.Id))
@@ -181,8 +170,11 @@ namespace HadesBoonBot.Bot
             return 0;
         }
 
-        BotState.ProcessedPost? ProcessPost(RedditClient client, Post post,
-            Classifiers.BaseClassifier classifier, Classifiers.BaseClassifierOptions classifierOptions, Codex codex)
+        BotState.ProcessedPost? ProcessPost(
+            RedditClient client, Post post,
+            BaseClassifier classifier, BaseClassifierOptions classifierOptions,
+            Codex codex
+            )
         {
             //is it flaired as an endgame screen?
             if (string.Compare(post.Listing.LinkFlairText, "victory screen", true) != 0)
@@ -195,9 +187,9 @@ namespace HadesBoonBot.Bot
 
                 //TODO check we definitely haven't posted in this thread/already done requested action to avoid over-reliance on the state file
                 //TODO proper logging
-
+                
                 var imageLinks = GetImageLinks(post);
-                var images = new List<Classifiers.ClassifiedScreenMeta>();
+                var images = new List<ClassifiedScreenMeta>();
 
                 if (imageLinks.Any())
                 {
@@ -217,27 +209,18 @@ namespace HadesBoonBot.Bot
 
                         images.Add(new(classifier.RunSingle(classifierOptions, targetFile, m_models, null), remotePath, targetFile));
                     }
-                    
-                    if ((m_runOptions.Mode & BotConfig.ProcessMode.LocalDebug) == BotConfig.ProcessMode.LocalDebug)
-                    {
-                        var localDebug = new Processors.LocalDebug(post.Id, m_runOptions.HoldingArea);
-                        localDebug.Run(images, codex);
-                    }
 
-                    //TODO go back through and see if any fail to find images
+                    //TODO go back through all existing posts and see if any fail to find images
 
-                    if ((m_runOptions.Mode & BotConfig.ProcessMode.PrivateMessage) == BotConfig.ProcessMode.PrivateMessage)
+                    var modes = m_runOptions.Modes.ToDictionary(x => x.Name);
+                    foreach(Type procType in new[] { typeof(Processors.LocalDebug), typeof(Processors.WebPage), typeof(Processors.PrivateMessage) })
                     {
-                        List<string> msgLines = new();
-                        foreach (var img in images.OrderBy(i => i.RemoteSource))
+                        if (modes.TryGetValue(procType.Name, out var procMode))
                         {
-                            msgLines.Add($"{img.RemoteSource}, valid: {img.Screen?.IsValid == true}");
+                            var processor = (Activator.CreateInstance(procType) as Processors.PostProcessor)!;
+                            processor.ApplySettings(procMode.Options);
+                            processor.Run(images, client, post, codex);
                         }
-
-                        client.Account.Messages.Compose(
-                            m_config["reddit-dm-user"],
-                            $"Victory screen {post.Id}",
-                            string.Join("\n\n", new[] { $"New victory screen posted by /u/{post.Author}: {post.Permalink}" }.Concat(msgLines)));
                     }
                 }
                 else

@@ -2,18 +2,11 @@
 
 namespace HadesBoonBot.Processors
 {
-    internal class LocalDebug : IProcessor
+    internal class LocalDebug : PostProcessor
     {
-        readonly string m_sourceId;
-        readonly string? m_holdingArea;
+        public string? HoldingArea { get; set; }
 
-        public LocalDebug(string sourceId, string? holdingArea)
-        {
-            m_sourceId = sourceId;
-            m_holdingArea = holdingArea;
-        }
-
-        public void Run(List<Classifiers.ClassifiedScreenMeta> screens, Codex codex)
+        public override void Run(IEnumerable<Classifiers.ClassifiedScreenMeta> screens, Reddit.RedditClient client, Reddit.Controllers.Post post, Codex codex)
         {
             int imgIdx = -1;
             foreach (var screen in screens)
@@ -24,15 +17,15 @@ namespace HadesBoonBot.Processors
                     using OCV.Mat image = OCV.Cv2.ImRead(screen.LocalSource);
 
                     string debugFolder = "local_debug";
-                    if (!string.IsNullOrEmpty(m_holdingArea))
+                    if (!string.IsNullOrEmpty(HoldingArea))
                     {
-                        debugFolder = Path.Combine(m_holdingArea, debugFolder);
+                        debugFolder = Path.Combine(HoldingArea, debugFolder);
                     }
 
-                    debugFolder = Util.CreateDir(Path.Combine(debugFolder, m_sourceId));
+                    debugFolder = Util.CreateDir(Path.Combine(debugFolder, post.Id));
 
                     string ext = Path.GetExtension(screen.LocalSource);
-                    image.SaveImage(Path.Combine(debugFolder, $"{m_sourceId}_{imgIdx}{ext}"));
+                    image.SaveImage(Path.Combine(debugFolder, $"{post.Id}_{imgIdx}{ext}"));
                     ScreenMetadata meta = new(image);
 
                     var shadowOffset = new OCV.Point(2, 2);
@@ -78,7 +71,7 @@ namespace HadesBoonBot.Processors
                         image.PutTextMultiline(pinSlot.Trait.Name, rect.Location + nameOffset, OCV.HersheyFonts.HersheyPlain, 1.25f, OCV.Scalar.White, thickness: 2, lineType: OCV.LineTypes.AntiAlias);
                     }
 
-                    image.SaveImage(Path.Combine(debugFolder, $"{m_sourceId}_{imgIdx}_debug{ext}"));
+                    image.SaveImage(Path.Combine(debugFolder, $"{post.Id}_{imgIdx}_debug{ext}"));
                     Console.WriteLine($"Ran local debug for image {screen.RemoteSource}");
                 }
                 else
