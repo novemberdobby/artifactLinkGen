@@ -1,4 +1,4 @@
-namespace HadesBoonBot.Classifiers
+﻿namespace HadesBoonBot.Classifiers
 {
     internal class ClassifiedScreenMeta
     {
@@ -45,9 +45,29 @@ namespace HadesBoonBot.Classifiers
             }
         }
 
-        public int GetColumnCount()
+        /// <summary>
+        /// Determine number of trait tray columns according to tray slot list
+        /// </summary>
+        /// <param name="includeEmpties">Include empty ('boon') slots. Depends what the caller needs this number for.</param>
+        /// <returns>Number of trait tray columns</returns>
+        public int CalculateColumnCount(bool includeEmpties)
         {
-            return Slots.Max(x => x.Col) + 1;
+            int slotsToTake = Slots.Count - (includeEmpties ? 0 : GetEmptyBoonEndCount());
+            int lastColumn = Slots.Take(slotsToTake).Max(x => x.Col);
+            return lastColumn + 1;
+        }
+
+        /// <summary>
+        /// Count the number of continuous empty slots at the end of the trait tray (which is filled out by row then column)
+        /// </summary>
+        /// <returns>Number of slots at the end of `Slots` that are empty</returns>
+        public int GetEmptyBoonEndCount()
+        {
+            return Slots
+                .AsEnumerable()
+                .Reverse()
+                .TakeWhile(s => !Codex.IsSlotFilled(s.Trait))
+                .Count();
         }
 
         /// <summary>
@@ -60,15 +80,6 @@ namespace HadesBoonBot.Classifiers
             //split into tray & pins
             Slots = inSlots.Where(s => s.Col != -1).ToList();
             PinSlots = inSlots.Where(s => s.Col == -1).ToList();
-
-            //detect when we run out of traits and trim them off
-            var backEmpties = Slots
-                .AsEnumerable()
-                .Reverse()
-                .TakeWhile(s => !Codex.IsSlotFilled(s.Trait))
-                .Count();
-
-            Slots = inSlots.Take(inSlots.Count() - backEmpties).ToList();
 
             WeaponName = Codex.DetermineWeapon(Slots.Select(s => s.Trait));
             IsValid = WeaponName != null;

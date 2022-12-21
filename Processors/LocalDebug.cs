@@ -34,11 +34,6 @@ namespace HadesBoonBot.Processors
 
                     foreach (var slot in screen.Screen.Slots)
                     {
-                        if (slot.Trait == codex.EmptyBoon)
-                        {
-                            continue;
-                        }
-
                         if (meta.TryGetTraitRect(slot.Col, slot.Row, out var getRect))
                         {
                             var rect = getRect!.Value;
@@ -56,9 +51,10 @@ namespace HadesBoonBot.Processors
                         }
                     }
 
+                    int columnCount = screen.Screen.CalculateColumnCount(true);
                     foreach (var pinSlot in screen.Screen.PinSlots)
                     {
-                        var rect = meta.GetPinRect(screen.Screen.GetColumnCount(), pinSlot.Row).iconRect;
+                        var rect = meta.GetPinRect(columnCount, pinSlot.Row).iconRect;
                         var middle = new OCV.Point(rect.Left + rect.Width / 2, rect.Top + rect.Height / 2);
 
                         image.DrawMarker(middle, OCV.Scalar.Black, OCV.MarkerTypes.Diamond, (int)meta.PinnedBoonWidth, (int)(meta.Multiplier * 5));

@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using OCV = OpenCvSharp;
 
 namespace HadesBoonBot.Processors
@@ -52,7 +52,7 @@ namespace HadesBoonBot.Processors
                     }
 
                     //add a div per pin row trait
-                    int columnCount = screen.Screen.GetColumnCount();
+                    int columnCount = screen.Screen.CalculateColumnCount(true);
                     foreach (var pinItem in screen.Screen.PinSlots)
                     {
                         string id = $"trait_pins_{pinItem.Row}";
