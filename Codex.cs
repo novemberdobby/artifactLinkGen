@@ -23,6 +23,8 @@ namespace HadesBoonBot
         public Dictionary<string, List<Provider.Trait>> ByIcon { get; } = new();
         public List<Provider> Providers { get; set; }
 
+        public Dictionary<string, OCV.Mat> TextIcons = new();
+
         public class Provider
         {
             /// <summary>
@@ -340,6 +342,14 @@ namespace HadesBoonBot
             {
                 sharers.Sort((l, r) => l.Name.CompareTo(r.Name));
             }
+
+            //load images used in trait descriptions
+            string textIconDir = "icons_text";
+            foreach (var textIcon in Directory.EnumerateFiles(textIconDir))
+            {
+                TextIcons.Add(Path.GetFileNameWithoutExtension(textIcon), OCV.Cv2.ImRead(textIcon, OCV.ImreadModes.Unchanged));
+            }
+
         }
 
         /// <summary>
@@ -451,6 +461,11 @@ namespace HadesBoonBot
             foreach (Provider.Trait trait in this)
             {
                 trait.Dispose();
+            }
+
+            foreach (var textIcon in TextIcons.Values)
+            {
+                textIcon.Dispose();
             }
         }
     }

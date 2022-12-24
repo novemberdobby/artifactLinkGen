@@ -1,4 +1,4 @@
-using System.Text;
+﻿using System.Text;
 using OCV = OpenCvSharp;
 
 namespace HadesBoonBot.Processors
@@ -6,6 +6,7 @@ namespace HadesBoonBot.Processors
     internal class WebPage : PostProcessor
     {
         public string OutputPage { get; set; }
+        private static readonly string TextIconDir = "icons_text";
 
         public override void Run(IEnumerable<Classifiers.ClassifiedScreenMeta> screens, Reddit.RedditClient client, Reddit.Controllers.Post post, Codex codex)
         {
@@ -13,6 +14,7 @@ namespace HadesBoonBot.Processors
             {
                 //TODO add is_spoiler, provider name, check all descriptions, etc
                 //TODO test in all browsers
+                //TODO todos from HVB
 
                 if (screen.LocalSource != null && screen.RemoteSource != null && screen.Screen != null)
                 {
@@ -20,6 +22,20 @@ namespace HadesBoonBot.Processors
                     ScreenMetadata meta = new(image);
 
                     using StreamWriter file = new(OutputPage);
+
+                    var outputDir = Path.GetDirectoryName(OutputPage);
+                    var textIconOutputDir = Path.Combine(outputDir!, TextIconDir);
+                    if (!Directory.Exists(textIconOutputDir))
+                    {
+                        Directory.CreateDirectory(textIconOutputDir);
+                    }
+
+                    //TODO: add "from <provider>"
+                    foreach (var textIcon in codex.TextIcons)
+                    {
+                        var iconFile = Path.Combine(textIconOutputDir, textIcon.Key + ".png");
+                        textIcon.Value.SaveImage(iconFile);
+                    }
 
                     file.WriteLine($"<!doctype html>");
                     file.WriteLine($"<html>");
@@ -80,13 +96,15 @@ namespace HadesBoonBot.Processors
                     infoBoxRect.Height = pinRect.Height + 10;
 
                     file.WriteLine($@"
-<svg id='infoBoxLink' class='zeroed' style='display: none;' width='{image.Width}' height='{image.Height}'><path id='curve' d='' stroke='white' stroke-width='3' stroke-linecap='round' fill='transparent'/>
-  <circle cx='' cy='' r='4' fill='#ffffff'>
+<svg id='infoBoxLink' class='zeroed' style='display: none;' width='{image.Width}' height='{image.Height}'>
+  <path id='link' d='' stroke='white' stroke-width='3' stroke-linecap='round' fill='transparent'/>
+  <circle r='4' fill='#ffffff'>
     <animateMotion dur='1s' repeatCount='indefinite'>
-      <mpath xlink:href='#curve'></mpath>
+      <mpath xlink:href='#link'></mpath>
     </animateMotion>
   </circle>
 </svg>
+
 <div id='infoBox' style='display: none;'>
   <div id='infoBoxTraitName'></div>
   <div id='infoBoxTraitDesc'></div>
@@ -94,7 +112,9 @@ namespace HadesBoonBot.Processors
 ");
                     //and the icon
                     file.WriteLine($@"<img id='infoBoxTraitIcon' style='display: none; position: absolute; left: {pinRect.Left}px; top: {pinRect.Top}px; width: {pinRect.Width}px; height: {pinRect.Height}px;'></img>");
-                    
+
+                    //todo text proxies for reddit comments - auto convert
+                    //TODO fix scrolling breaking the page
                     file.WriteLine($"");
                     file.WriteLine($"");
                     
@@ -110,6 +130,10 @@ namespace HadesBoonBot.Processors
   position: absolute;
   left: 0px;
   top: 0px;
+}
+
+#infoBox img {
+  vertical-align: middle;
 }
 
 #infoBox {
@@ -136,14 +160,13 @@ padding-left: {pinRect.Right - infoBoxRect.Left}px;
 }
 
 #infoBoxTraitName {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Tahoma, sans-serif;
   font-size: x-large;
   padding-bottom: 0.5em;
 }
 
 #infoBoxTraitDesc {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: large;
+  font-family: Tahoma, sans-serif;
 }
 
 </style>
@@ -213,7 +236,7 @@ traitData.ToString()
 
   //position info box
   infoBoxLink.style.display = '';
-  var line = infoBoxLink.children[0];
+  var line = infoBoxLink.children['link'];
 
   //draw curve
   var c1x = (traitBox.right - 2) + (infoBoxBox.left - traitBox.right) / 2;
@@ -245,10 +268,10 @@ document.addEventListener('mousemove', (event) => CheckTraits(event));
 
         private static string PrepareTraitInfo(Codex.Provider.Trait trait, Codex codex, string outputPage)
         {
-            string makeSafe(string input) => input.Replace("'", "\\'").Replace("\n", "\\n");
+            static string makeSafe(string input) => input.Replace("'", "\\'").Replace("\n", "\\n");
 
             string safeName = makeSafe(trait.Name);
-            string safeDesc = makeSafe(trait.Description);
+            string safeDesc = ReplaceIconText(makeSafe(trait.Description), codex);
 
             string outputFolder = Path.Combine(Path.GetDirectoryName(outputPage)!, "icons");
             string iconPath = Path.Combine(outputFolder, trait.Name + ".png");
@@ -268,6 +291,17 @@ document.addEventListener('mousemove', (event) => CheckTraits(event));
 
             string relativePath = iconInfo.FullName[pageInfo.Parent!.FullName.Length..].Replace('\\', '/');
             return $"{{ name: '{safeName}', desc: '{safeDesc}', icon: '.{makeSafe(relativePath)}' }}";
+        }
+
+        private static string ReplaceIconText(string input, Codex codex)
+        {
+            foreach (var replacement in codex.TextIcons)
+            {
+                string replaceWith = $"<img width='25px' src='./{TextIconDir}/{replacement.Key}.png'/>".Replace("'", "\\'");
+                input = input.Replace($":{replacement.Key}:", replaceWith);
+            }
+
+            return input;
         }
     }
 }
