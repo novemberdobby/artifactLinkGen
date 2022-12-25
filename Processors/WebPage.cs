@@ -216,12 +216,14 @@ function SetActiveTrait(trait) {
 
   trait.style.border = '3px solid white';
   var traitBox = trait.getBoundingClientRect();
+  traitBox = new DOMRect(traitBox.left + window.scrollX, traitBox.top + window.scrollY, traitBox.width, traitBox.height);
   
   var infoBox = document.getElementById('infoBox');
   var infoBoxLink = document.getElementById('infoBoxLink');
   
   infoBox.style.display = '';
   var infoBoxBox = infoBox.getBoundingClientRect();
+  infoBoxBox = new DOMRect(infoBoxBox.left + window.scrollX, infoBoxBox.top + window.scrollY, infoBoxBox.width, infoBoxBox.height);
 
   //data for each trait
 "
