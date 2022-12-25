@@ -84,42 +84,42 @@
 				},
 				{
 					"name": "Unhealthy Fixation",
-					"desc": "Your <b>Weak</b> effects also have a <b>+15%</b> chance to <b>Charm</b> foes.\n<b>Charm</b> Duration: <span style='color:#00ff00'>4 Sec</span>.",
+					"desc": "Your <b>Weak</b> effects also have a <b>+15%</b> chance to <b>Charm</b> foes<br><b>Charm</b> Duration: <span style='color:#00ff00'>4 Sec</span>.",
 					"icon": "icons\\Aphrodite\\Unhealthy_Fixation.png"
 				},
 				{
 					"name": "Curse of Longing",
-					"desc": "Your <b>Doom</b> effects continuously strike <b>Weak</b> foes.\nSuccessive Hit Damage: <span style='color:#00ff00'>50%</span>",
+					"desc": "Your <b>Doom</b> effects continuously strike <b>Weak</b> foes<br>Successive Hit Damage: <span style='color:#00ff00'>50%</span>",
 					"icon": "icons\\Aphrodite\\Curse_of_Longing.png"
 				},
 				{
 					"name": "Heart Rend",
-					"desc": "Your <b>Critical</b> effects deal even more damage to <b>Weak</b> foes.\nBonus <b>Critical</b> Damage vs. Weak: <span style='color:#00ff00'>+150%</span>",
+					"desc": "Your <b>Critical</b> effects deal even more damage to <b>Weak</b> foes<br>Bonus <b>Critical</b> Damage vs. Weak: <span style='color:#00ff00'>+150%</span>",
 					"icon": "icons\\Aphrodite\\Heart_Rend.png"
 				},
 				{
 					"name": "Parting Shot",
-					"desc": "Your <b>Cast</b> gains any bonuses you have for striking foes from behind.\nBonus Backstab Damage: <span style='color:#00ff00'>+35%</span>",
+					"desc": "Your <b>Cast</b> gains any bonuses you have for striking foes from behind<br>Bonus Backstab Damage: <span style='color:#00ff00'>+35%</span>",
 					"icon": "icons\\Aphrodite\\Parting_Shot.png"
 				},
 				{
 					"name": "Cold Embrace",
-					"desc": "Your <b>Cast</b> crystal fires its beam directly at you for <b>+4 Sec</b>.\nBonus <b>Cast</b> Damage: <span style='color:#00ff00'>+30%</span>",
+					"desc": "Your <b>Cast</b> crystal fires its beam directly at you for <b>+4 Sec</b><br>Bonus <b>Cast</b> Damage: <span style='color:#00ff00'>+30%</span>",
 					"icon": "icons\\Aphrodite\\Cold_Embrace.png"
 				},
 				{
 					"name": "Low Tolerance",
-					"desc": "Your <b>Hangover</b> effects can stack more times against <b>Weak</b> foes.\nMax Stacks vs. Weak: <span style='color:#00ff00'>+3</span>",
+					"desc": "Your <b>Hangover</b> effects can stack more times against <b>Weak</b> foes<br>Max Stacks vs. Weak: <span style='color:#00ff00'>+3</span>",
 					"icon": "icons\\Aphrodite\\Low_Tolerance.png"
 				},
 				{
 					"name": "Sweet Nectar",
-					"desc": "Any <b>Poms of Power</b> you find are more potent.\nBonus Lv. from Poms: <span style='color:#00ff00'>+1</span>",
+					"desc": "Any <b>Poms of Power</b> you find are more potent<br>Bonus Lv. from Poms: <span style='color:#00ff00'>+1</span>",
 					"icon": "icons\\Aphrodite\\Sweet_Nectar.png"
 				},
 				{
 					"name": "Smoldering Air",
-					"desc": "Your <b>God Gauge</b> charges up automatically, but is capped at <span style='color:#D31813'>25%</span>.\nAuto Gauge Gain: <span style='color:#00ff00'>1%</span> <i>(every 0.2 Sec.)</i>",
+					"desc": "Your <b>God Gauge</b> charges up automatically, but is capped at <span style='color:#D31813'>25%</span><br>Auto Gauge Gain: <span style='color:#00ff00'>1%</span> <i>(every 0.2 Sec.)</i>",
 					"icon": "icons\\Aphrodite\\Smoldering_Air.png"
 				}
 			]
@@ -208,42 +208,42 @@
 				},
 				{
 					"name": "Vicious Cycle",
-					"desc": "Your <b>Blade Rift</b> effects deal more damage for each consecutive hit.\nDamage Increase per Hit: <span style='color:#00ff00'>+2</span>",
+					"desc": "Your <b>Blade Rift</b> effects deal more damage for each consecutive hit<br>Damage Increase per Hit: <span style='color:#00ff00'>+2</span>",
 					"icon": "icons\\Ares\\Vicious_Cycle.png"
 				},
 				{
 					"name": "Curse of Longing",
-					"desc": "Your <b>Doom</b> effects continuously strike <b>Weak</b> foes.\nSuccessive Hit Damage: <span style='color:#00ff00'>50%</span>",
+					"desc": "Your <b>Doom</b> effects continuously strike <b>Weak</b> foes<br>Successive Hit Damage: <span style='color:#00ff00'>50%</span>",
 					"icon": "icons\\Ares\\Curse_of_Longing.png"
 				},
 				{
 					"name": "Hunting Blades",
-					"desc": "Your <b>Cast</b> creates a faster <b>Blade Rift</b> that seeks the nearest foe.\nSeek Duration: <span style='color:#00ff00'>3.3 Sec</span>.",
+					"desc": "Your <b>Cast</b> creates a faster <b>Blade Rift</b> that seeks the nearest foe<br>Seek Duration: <span style='color:#00ff00'>3.3 Sec</span>.",
 					"icon": "icons\\Ares\\Hunting_Blades.png"
 				},
 				{
 					"name": "Merciful End",
-					"desc": "Your attacks that can <b>Deflect</b> immediately activate <b>Doom</b> effects.\nDoom Combo Damage: <span style='color:#00ff00'>40</span>",
+					"desc": "Your attacks that can <b>Deflect</b> immediately activate <b>Doom</b> effects<br>Doom Combo Damage: <span style='color:#00ff00'>40</span>",
 					"icon": "icons\\Ares\\Merciful_End.png"
 				},
 				{
 					"name": "Freezing Vortex",
-					"desc": "Your <b>Cast</b> inflicts <b>Chill</b>, but is smaller and moves slower.\nBlade Rift Size: <span style='color:#D31813'>-15%</span>",
+					"desc": "Your <b>Cast</b> inflicts <b>Chill</b>, but is smaller and moves slower<br>Blade Rift Size: <span style='color:#D31813'>-15%</span>",
 					"icon": "icons\\Ares\\Freezing_Vortex.png"
 				},
 				{
 					"name": "Curse of Nausea",
-					"desc": "Your <b>Hangover</b> effects deal damage faster.\n<b>Hangover</b> Damage Rate: 0.5 Sec. -&gt; <span style='color:#00ff00'>0.35 Sec</span>.",
+					"desc": "Your <b>Hangover</b> effects deal damage faster<br><b>Hangover</b> Damage Rate: 0.5 Sec. -&gt; <span style='color:#00ff00'>0.35 Sec</span>.",
 					"icon": "icons\\Ares\\Curse_of_Nausea.png"
 				},
 				{
 					"name": "Curse of Drowning",
-					"desc": "Your <b>Flood Shot</b> becomes a pulse that damages foes around you.\nPulses per <b>Cast</b>: <span style='color:#00ff00'>3</span>",
+					"desc": "Your <b>Flood Shot</b> becomes a pulse that damages foes around you<br>Pulses per <b>Cast</b>: <span style='color:#00ff00'>3</span>",
 					"icon": "icons\\Ares\\Curse_of_Drowning.png"
 				},
 				{
 					"name": "Vengeful Mood",
-					"desc": "Your <b>Revenge</b> attacks sometimes occur without taking damage.\nAuto-Revenge Rate: <span style='color:#00ff00'>3 Sec.</span>",
+					"desc": "Your <b>Revenge</b> attacks sometimes occur without taking damage<br>Auto-Revenge Rate: <span style='color:#00ff00'>3 Sec.</span>",
 					"icon": "icons\\Ares\\Vengeful_Mood.png"
 				}
 			]
@@ -327,32 +327,32 @@
 				},
 				{
 					"name": "Fully Loaded",
-					"desc": "Gain extra :ammo: for your <b>Cast</b>.\nMax Bloodstones: <span style='color:#00ff00'>+2</span> :ammo:",
+					"desc": "Gain extra :ammo: for your <b>Cast</b><br>Max Bloodstones: <span style='color:#00ff00'>+2</span> :ammo:",
 					"icon": "icons\\Artemis\\Fully_Loaded.png"
 				},
 				{
 					"name": "Heart Rend",
-					"desc": "Your <b>Critical</b> effects deal even more damage to <b>Weak</b> foes.\nBonus <b>Critical</b> Damage vs. <b>Weak</b>: <span style='color:#00ff00'>+150%</span>",
+					"desc": "Your <b>Critical</b> effects deal even more damage to <b>Weak</b> foes<br>Bonus <b>Critical</b> Damage vs. <b>Weak</b>: <span style='color:#00ff00'>+150%</span>",
 					"icon": "icons\\Artemis\\Heart_Rend.png"
 				},
 				{
 					"name": "Hunting Blades",
-					"desc": "Your <b>Cast</b> creates a faster <b>Blade Rift</b> that seeks the nearest foe.\nSeek Duration: <span style='color:#00ff00'>3.3 Sec</span>.",
+					"desc": "Your <b>Cast</b> creates a faster <b>Blade Rift</b> that seeks the nearest foe<br>Seek Duration: <span style='color:#00ff00'>3.3 Sec</span>.",
 					"icon": "icons\\Artemis\\Hunting_Blades.png"
 				},
 				{
 					"name": "Deadly Reversal",
-					"desc": "After you <b>Deflect</b>, briefly gain <span style='color:#00ff00'>+20%</span> chance to deal <b>Critical</b> damage.\nCritical Duration: <span style='color:#00ff00'>2 Sec</span>.",
+					"desc": "After you <b>Deflect</b>, briefly gain <span style='color:#00ff00'>+20%</span> chance to deal <b>Critical</b> damage<br>Critical Duration: <span style='color:#00ff00'>2 Sec</span>.",
 					"icon": "icons\\Artemis\\Deadly_Reversal.png"
 				},
 				{
 					"name": "Crystal Clarity",
-					"desc": "Your <b>Cast</b> is stronger and tracks foes more effectively.\nBeam Damage: <span style='color:#00ff00'>+10%</span>",
+					"desc": "Your <b>Cast</b> is stronger and tracks foes more effectively<br>Beam Damage: <span style='color:#00ff00'>+10%</span>",
 					"icon": "icons\\Artemis\\Crystal_Clarity.png"
 				},
 				{
 					"name": "Splitting Headache",
-					"desc": "<b>Hangover</b>-afflicted foes are more likely to take <b>Critical</b> damage.\nBonus <b>Critical</b> Chance per <b>Hangover</b> Stack: <span style='color:#00ff00'>+1.5%</span>",
+					"desc": "<b>Hangover</b>-afflicted foes are more likely to take <b>Critical</b> damage<br>Bonus <b>Critical</b> Chance per <b>Hangover</b> Stack: <span style='color:#00ff00'>+1.5%</span>",
 					"icon": "icons\\Artemis\\Splitting_Headache.png"
 				},
 				{
@@ -451,42 +451,42 @@
 				},
 				{
 					"name": "Divine Protection",
-					"desc": "You have a barrier that negates an instance of damage.\nBarrier Refresh Time: <span style='color:#00ff00'>20 Sec</span>.",
+					"desc": "You have a barrier that negates an instance of damage<br>Barrier Refresh Time: <span style='color:#00ff00'>20 Sec</span>.",
 					"icon": "icons\\Athena\\Divine_Protection.png"
 				},
 				{
 					"name": "Parting Shot",
-					"desc": "Your <b>Cast</b> gains any bonuses you have for striking foes from behind.\nBonus Backstab Damage: <span style='color:#00ff00'>+35%</span>",
+					"desc": "Your <b>Cast</b> gains any bonuses you have for striking foes from behind<br>Bonus Backstab Damage: <span style='color:#00ff00'>+35%</span>",
 					"icon": "icons\\Athena\\Parting_Shot.png"
 				},
 				{
 					"name": "Merciful End",
-					"desc": "Your attacks that can <b>Deflect</b> immediately activate <b>Doom</b> effects.\nDoom Combo Damage: <span style='color:#00ff00'>40</span>",
+					"desc": "Your attacks that can <b>Deflect</b> immediately activate <b>Doom</b> effects<br>Doom Combo Damage: <span style='color:#00ff00'>40</span>",
 					"icon": "icons\\Athena\\Merciful_End.png"
 				},
 				{
 					"name": "Deadly Reversal",
-					"desc": "After you <b>Deflect</b>, briefly gain <span style='color:#00ff00'>+20%</span> chance to deal <b>Critical</b> damage.\n<b>Critical</b> Duration: <span style='color:#00ff00'>2 Sec</span>.",
+					"desc": "After you <b>Deflect</b>, briefly gain <span style='color:#00ff00'>+20%</span> chance to deal <b>Critical</b> damage<br><b>Critical</b> Duration: <span style='color:#00ff00'>2 Sec</span>.",
 					"icon": "icons\\Athena\\Deadly_Reversal.png"
 				},
 				{
 					"name": "Stubborn Roots",
-					"desc": "If you have no <b>Death Defiance</b> your :heart: slowly recovers.\nLife Regeneration During Battle: <span style='color:#00ff00'>1</span> :health_restore: <i>(every 0.8 Sec.)</i>",
+					"desc": "If you have no <b>Death Defiance</b> your :heart: slowly recovers<br>Life Regeneration During Battle: <span style='color:#00ff00'>1</span> :health_restore: <i>(every 0.8 Sec.)</i>",
 					"icon": "icons\\Athena\\Stubborn_Roots.png"
 				},
 				{
 					"name": "Calculated Risk",
-					"desc": "Your foes' ranged-attack projectiles are slower.\nFoe Projectile Speed Reduction: <span style='color:#00ff00'>+50%</span>",
+					"desc": "Your foes' ranged-attack projectiles are slower<br>Foe Projectile Speed Reduction: <span style='color:#00ff00'>+50%</span>",
 					"icon": "icons\\Athena\\Calculated_Risk.png"
 				},
 				{
 					"name": "Unshakable Mettle",
-					"desc": "You cannot be stunned, and resist some damage from <b>Bosses</b>.\nBoss Damage Reduction: <span style='color:#00ff00'>+10%</span>",
+					"desc": "You cannot be stunned, and resist some damage from <b>Bosses</b><br>Boss Damage Reduction: <span style='color:#00ff00'>+10%</span>",
 					"icon": "icons\\Athena\\Unshakable_Mettle.png"
 				},
 				{
 					"name": "Lightning Phalanx",
-					"desc": "Your Phalanx Shot <b>Cast</b> bounces between nearby foes.\nMax Bounces: <span style='color:#00ff00'>3</span>",
+					"desc": "Your Phalanx Shot <b>Cast</b> bounces between nearby foes<br>Max Bounces: <span style='color:#00ff00'>3</span>",
 					"icon": "icons\\Athena\\Lightning_Phalanx.png"
 				}
 			]
@@ -641,42 +641,42 @@
 				},
 				{
 					"name": "Winter Harvest",
-					"desc": "<b>Chill</b>-afflicted foes shatter at <b>10%</b> :heart:, inflicting <b>Chill</b> nearby.\nShatter Area Damage: <span style='color:#00ff00'>50</span>",
+					"desc": "<b>Chill</b>-afflicted foes shatter at <b>10%</b> :heart:, inflicting <b>Chill</b> nearby<br>Shatter Area Damage: <span style='color:#00ff00'>50</span>",
 					"icon": "icons\\Demeter\\Winter_Harvest.png"
 				},
 				{
 					"name": "Cold Embrace",
-					"desc": "Your <b>Cast</b> crystal fires its beam directly at you for <b>+4 Sec</b>.\nBonus Cast Damage: <span style='color:#00ff00'>+30%</span>",
+					"desc": "Your <b>Cast</b> crystal fires its beam directly at you for <b>+4 Sec</b><br>Bonus Cast Damage: <span style='color:#00ff00'>+30%</span>",
 					"icon": "icons\\Demeter\\Cold_Embrace.png"
 				},
 				{
 					"name": "Freezing Vortex",
-					"desc": "Your <b>Cast</b> inflicts <b>Chill</b>, but is smaller and moves slower.\nBlade Rift Size: <span style='color:#D31813'>-15%</span>",
+					"desc": "Your <b>Cast</b> inflicts <b>Chill</b>, but is smaller and moves slower<br>Blade Rift Size: <span style='color:#D31813'>-15%</span>",
 					"icon": "icons\\Demeter\\Freezing_Vortex.png"
 				},
 				{
 					"name": "Crystal Clarity",
-					"desc": "Your <b>Cast</b> is stronger and tracks foes more effectively.\nBeam Damage: <span style='color:#00ff00'>+10%</span>",
+					"desc": "Your <b>Cast</b> is stronger and tracks foes more effectively<br>Beam Damage: <span style='color:#00ff00'>+10%</span>",
 					"icon": "icons\\Demeter\\Crystal_Clarity.png"
 				},
 				{
 					"name": "Stubborn Roots",
-					"desc": "If you have no <b>Death Defiance</b> your :heart: slowly recovers.\nLife Regeneration During Battle: <span style='color:#00ff00'>1</span> :health_restore: <i>(every 0.8 Sec.)</i>",
+					"desc": "If you have no <b>Death Defiance</b> your :heart: slowly recovers<br>Life Regeneration During Battle: <span style='color:#00ff00'>1</span> :health_restore: <i>(every 0.8 Sec.)</i>",
 					"icon": "icons\\Demeter\\Stubborn_Roots.png"
 				},
 				{
 					"name": "Ice Wine",
-					"desc": "Your <b>Cast</b> blasts an area with freezing <b>Festive Fog</b> that inflicts <b>Chill</b>.\nBlast Damage: <span style='color:#00ff00'>+30%</span>",
+					"desc": "Your <b>Cast</b> blasts an area with freezing <b>Festive Fog</b> that inflicts <b>Chill</b><br>Blast Damage: <span style='color:#00ff00'>+30%</span>",
 					"icon": "icons\\Demeter\\Ice_Wine.png"
 				},
 				{
 					"name": "Blizzard Shot",
-					"desc": "Your <b>Cast</b> moves slowly, piercing foes and firing shards around it.\nShard Damage: <span style='color:#00ff00'>20</span>",
+					"desc": "Your <b>Cast</b> moves slowly, piercing foes and firing shards around it<br>Shard Damage: <span style='color:#00ff00'>20</span>",
 					"icon": "icons\\Demeter\\Blizzard_Shot.png"
 				},
 				{
 					"name": "Cold Fusion",
-					"desc": "Your <b>Jolted</b> effects do not expire when foes attack.\nJolted Duration: <span style='color:#00ff00'>10 Sec.</span>",
+					"desc": "Your <b>Jolted</b> effects do not expire when foes attack<br>Jolted Duration: <span style='color:#00ff00'>10 Sec.</span>",
 					"icon": "icons\\Demeter\\Cold_Fusion.png"
 				}
 			]
@@ -765,42 +765,42 @@
 				},
 				{
 					"name": "Black Out",
-					"desc": "<b>Hangover</b>-afflicted foes take bonus damage in <b>Festive Fog</b>.\nFog Combo Damage: <span style='color:#00ff00'>+60%</span>",
+					"desc": "<b>Hangover</b>-afflicted foes take bonus damage in <b>Festive Fog</b><br>Fog Combo Damage: <span style='color:#00ff00'>+60%</span>",
 					"icon": "icons\\Dionysus\\Black_Out.png"
 				},
 				{
 					"name": "Low Tolerance",
-					"desc": "Your <b>Hangover</b> effects can stack more times against <b>Weak</b> foes.\nMax Stacks vs. Weak: <span style='color:#00ff00'>+3</span>",
+					"desc": "Your <b>Hangover</b> effects can stack more times against <b>Weak</b> foes<br>Max Stacks vs. Weak: <span style='color:#00ff00'>+3</span>",
 					"icon": "icons\\Dionysus\\Low_Tolerance.png"
 				},
 				{
 					"name": "Curse of Nausea",
-					"desc": "Your <b>Hangover</b> effects deal damage faster.\n<b>Hangover</b> Damage Rate: 0.5 Sec. -&gt; <span style='color:#00ff00'>0.35 Sec</span>.",
+					"desc": "Your <b>Hangover</b> effects deal damage faster<br><b>Hangover</b> Damage Rate: 0.5 Sec. -&gt; <span style='color:#00ff00'>0.35 Sec</span>.",
 					"icon": "icons\\Dionysus\\Curse_of_Nausea.png"
 				},
 				{
 					"name": "Splitting Headache",
-					"desc": "<b>Hangover</b>-afflicted foes are more likely to take <b>Critical</b> damage.\nBonus <b>Critical</b> Chance per <b>Hangover</b> Stack: <span style='color:#00ff00'>+1.5%</span>",
+					"desc": "<b>Hangover</b>-afflicted foes are more likely to take <b>Critical</b> damage<br>Bonus <b>Critical</b> Chance per <b>Hangover</b> Stack: <span style='color:#00ff00'>+1.5%</span>",
 					"icon": "icons\\Dionysus\\Splitting_Headache.png"
 				},
 				{
 					"name": "Calculated Risk",
-					"desc": "Your foes' ranged-attack projectiles are slower.\nFoe Projectile Speed Reduction: <span style='color:#00ff00'>+50%</span>",
+					"desc": "Your foes' ranged-attack projectiles are slower<br>Foe Projectile Speed Reduction: <span style='color:#00ff00'>+50%</span>",
 					"icon": "icons\\Dionysus\\Calculated_Risk.png"
 				},
 				{
 					"name": "Ice Wine",
-					"desc": "Your <b>Cast</b> blasts an area with freezing <b>Festive Fog</b> that inflicts <b>Chill</b>.\nBlast Damage: <span style='color:#00ff00'>+30%</span>",
+					"desc": "Your <b>Cast</b> blasts an area with freezing <b>Festive Fog</b> that inflicts <b>Chill</b><br>Blast Damage: <span style='color:#00ff00'>+30%</span>",
 					"icon": "icons\\Dionysus\\Ice_Wine.png"
 				},
 				{
 					"name": "Exclusive Access",
-					"desc": "Any <b>Boons</b> you find are more potent.\nMinimum Boon Rarity: <span style='color:#A21AE1'>Epic</span>",
+					"desc": "Any <b>Boons</b> you find are more potent<br>Minimum Boon Rarity: <span style='color:#A21AE1'>Epic</span>",
 					"icon": "icons\\Dionysus\\Exclusive_Access.png"
 				},
 				{
 					"name": "Scintillating Feast",
-					"desc": "Your <b>Festive Fog</b> effects also deal lightning damage periodically.\nLightning Damage: <span style='color:#00ff00'>60</span>",
+					"desc": "Your <b>Festive Fog</b> effects also deal lightning damage periodically<br>Lightning Damage: <span style='color:#00ff00'>60</span>",
 					"icon": "icons\\Dionysus\\Scintillating_Feast.png"
 				}
 			]
@@ -888,7 +888,7 @@
 				},
 				{
 					"name": "Bad News",
-					"desc": "Your <b>Cast</b> deals bonus damage to foes <i>without</i> :ammo: in them.\nFirst-Shot Damage: <span style='color:#00ff00'>+50%</span>",
+					"desc": "Your <b>Cast</b> deals bonus damage to foes <i>without</i> :ammo: in them<br>First-Shot Damage: <span style='color:#00ff00'>+50%</span>",
 					"icon": "icons\\Hermes\\Bad_News__Flurry_Cast.png",
 					"requires_any": [ "Auto Reload", "Lambent Plume" ]
 				}
@@ -993,12 +993,12 @@
 				},
 				{
 					"name": "Sweet Nectar",
-					"desc": "Any <b>Poms of Power</b> you find are more potent.\nBonus Lv. from Poms: <span style='color:#00ff00'>+1</span>",
+					"desc": "Any <b>Poms of Power</b> you find are more potent<br>Bonus Lv. from Poms: <span style='color:#00ff00'>+1</span>",
 					"icon": "icons\\Poseidon\\Sweet_Nectar.png"
 				},
 				{
 					"name": "Curse of Drowning",
-					"desc": "Your <b>Flood Shot</b> becomes a pulse that damages foes around you.\nPulses per <b>Cast</b>: <span style='color:#00ff00'>3</span>",
+					"desc": "Your <b>Flood Shot</b> becomes a pulse that damages foes around you<br>Pulses per <b>Cast</b>: <span style='color:#00ff00'>3</span>",
 					"icon": "icons\\Poseidon\\Curse_of_Drowning.png"
 				},
 				{
@@ -1008,22 +1008,22 @@
 				},
 				{
 					"name": "Unshakable Mettle",
-					"desc": "You cannot be stunned, and resist some damage from <b>Bosses</b>.\nBoss Damage Reduction: <span style='color:#00ff00'>+10%</span>",
+					"desc": "You cannot be stunned, and resist some damage from <b>Bosses</b><br>Boss Damage Reduction: <span style='color:#00ff00'>+10%</span>",
 					"icon": "icons\\Poseidon\\Unshakable_Mettle.png"
 				},
 				{
 					"name": "Blizzard Shot",
-					"desc": "Your <b>Cast</b> moves slowly, piercing foes and firing shards around it.\nShard Damage: <span style='color:#00ff00'>20</span>",
+					"desc": "Your <b>Cast</b> moves slowly, piercing foes and firing shards around it<br>Shard Damage: <span style='color:#00ff00'>20</span>",
 					"icon": "icons\\Poseidon\\Blizzard_Shot.png"
 				},
 				{
 					"name": "Exclusive Access",
-					"desc": "Any <b>Boons</b> you find are more potent.\nMinimum Boon Rarity: <span style='color:#A21AE1'>Epic</span>",
+					"desc": "Any <b>Boons</b> you find are more potent<br>Minimum Boon Rarity: <span style='color:#A21AE1'>Epic</span>",
 					"icon": "icons\\Poseidon\\Exclusive_Access.png"
 				},
 				{
 					"name": "Sea Storm",
-					"desc": "When you knock foes away, they are struck by lightning.\nLightning Damage: <span style='color:#00ff00'>40</span>",
+					"desc": "When you knock foes away, they are struck by lightning<br>Lightning Damage: <span style='color:#00ff00'>40</span>",
 					"icon": "icons\\Poseidon\\Sea_Storm.png"
 				}
 			]
@@ -1117,12 +1117,12 @@
 				},
 				{
 					"name": "Smoldering Air",
-					"desc": "Your <b>God Gauge</b> charges up automatically, but is capped at <span style='color:#D31813'>25%</span>.\nAuto Gauge Gain: <span style='color:#00ff00'>1%</span> <i>(every 0.2 Sec.)</i>",
+					"desc": "Your <b>God Gauge</b> charges up automatically, but is capped at <span style='color:#D31813'>25%</span><br>Auto Gauge Gain: <span style='color:#00ff00'>1%</span> <i>(every 0.2 Sec.)</i>",
 					"icon": "icons\\Zeus\\Smoldering_Air.png"
 				},
 				{
 					"name": "Vengeful Mood",
-					"desc": "Your <b>Revenge</b> attacks sometimes occur without taking damage.\nAuto-Revenge Rate: <span style='color:#00ff00'>3 Sec.</span>",
+					"desc": "Your <b>Revenge</b> attacks sometimes occur without taking damage<br>Auto-Revenge Rate: <span style='color:#00ff00'>3 Sec.</span>",
 					"icon": "icons\\Zeus\\Vengeful_Mood.png"
 				},
 				{
@@ -1132,22 +1132,22 @@
 				},
 				{
 					"name": "Lightning Phalanx",
-					"desc": "Your Phalanx Shot <b>Cast</b> bounces between nearby foes.\nMax Bounces: <span style='color:#00ff00'>3</span>",
+					"desc": "Your Phalanx Shot <b>Cast</b> bounces between nearby foes<br>Max Bounces: <span style='color:#00ff00'>3</span>",
 					"icon": "icons\\Zeus\\Lightning_Phalanx.png"
 				},
 				{
 					"name": "Cold Fusion",
-					"desc": "Your <b>Jolted</b> effects do not expire when foes attack.\nJolted Duration: <span style='color:#00ff00'>10 Sec.</span>",
+					"desc": "Your <b>Jolted</b> effects do not expire when foes attack<br>Jolted Duration: <span style='color:#00ff00'>10 Sec.</span>",
 					"icon": "icons\\Zeus\\Cold_Fusion.png"
 				},
 				{
 					"name": "Scintillating Feast",
-					"desc": "Your <b>Festive Fog</b> effects also deal lightning damage periodically.\nLightning Damage: <span style='color:#00ff00'>60</span>",
+					"desc": "Your <b>Festive Fog</b> effects also deal lightning damage periodically<br>Lightning Damage: <span style='color:#00ff00'>60</span>",
 					"icon": "icons\\Zeus\\Scintillating_Feast.png"
 				},
 				{
 					"name": "Sea Storm",
-					"desc": "When you knock foes away, they are struck by lightning.\nLightning Damage: <span style='color:#00ff00'>40</span>",
+					"desc": "When you knock foes away, they are struck by lightning<br>Lightning Damage: <span style='color:#00ff00'>40</span>",
 					"icon": "icons\\Zeus\\Sea_Storm.png"
 				}
 			]
@@ -1175,17 +1175,17 @@
 				},
 				{
 					"name": "Aspect of Nemesis",
-					"desc": "For <b>3</b> Sec. after your <b>Special</b>, your <b>Attack</b> may deal <b>Critical</b> damage.\nBonus <b>Critical</b> Chance.",
+					"desc": "For <b>3</b> Sec. after your <b>Special</b>, your <b>Attack</b> may deal <b>Critical</b> damage<br>Bonus <b>Critical</b> Chance.",
 					"icon": "icons\\Stygian_Blade\\Aspect\\Aspect_of_Nemesis.png"
 				},
 				{
 					"name": "Aspect of Poseidon",
-					"desc": "Your <b>Special</b> dislodges :ammo: from foes.\nBonus <b>Cast</b> Damage.",
+					"desc": "Your <b>Special</b> dislodges :ammo: from foes<br>Bonus <b>Cast</b> Damage.",
 					"icon": "icons\\Stygian_Blade\\Aspect\\Aspect_of_Poseidon.png"
 				},
 				{
 					"name": "Aspect of Arthur",
-					"desc": "You have <b>Holy Excalibur</b>, and <b>+50</b> :health_up: to your Life Total.\nAura Damage Reduction.</i>",
+					"desc": "You have <b>Holy Excalibur</b>, and <b>+50</b> :health_up: to your Life Total<br>Aura Damage Reduction.</i>",
 					"icon": "icons\\Stygian_Blade\\Aspect\\Aspect_of_Arthur.png"
 				}
 			]
@@ -1272,12 +1272,12 @@
 				},
 				{
 					"name": "Aspect of Achilles",
-					"desc": "After your <b>Special</b>, you can retrieve your Spear with <b>Raging Rush</b>.\nPost-Rush Bonus Damage.",
+					"desc": "After your <b>Special</b>, you can retrieve your Spear with <b>Raging Rush</b><br>Post-Rush Bonus Damage.",
 					"icon": "icons\\Eternal_Spear\\Aspect\\Aspect_of_Achilles.png"
 				},
 				{
 					"name": "Aspect of Hades",
-					"desc": "Your <b>Spin Attack</b> becomes <b>Punishing Sweep</b>.\nBonus to <b>Punishing</b> Damage.",
+					"desc": "Your <b>Spin Attack</b> becomes <b>Punishing Sweep</b><br>Bonus to <b>Punishing</b> Damage.",
 					"icon": "icons\\Eternal_Spear\\Aspect\\Aspect_of_Hades.png"
 				},
 				{
@@ -1379,7 +1379,7 @@
 				},
 				{
 					"name": "Aspect of Beowulf",
-					"desc": "You have <b>Naegling's Board</b>, but take <span style='color:#D31813'>+10%</span> damage.\nBonus to <b>Dragon Rush</b> Damage & Area.",
+					"desc": "You have <b>Naegling's Board</b>, but take <span style='color:#D31813'>+10%</span> damage<br>Bonus to <b>Dragon Rush</b> Damage & Area.",
 					"icon": "icons\\Shield_of_Chaos\\Aspect\\Aspect_of_Beowulf.png"
 				}
 			]
@@ -1466,12 +1466,12 @@
 				},
 				{
 					"name": "Aspect of Chiron",
-					"desc": "Your <b>Special</b> automatically seeks the foe last struck by your Attack.\nBonus to Max Shots per <b>Special</b>.",
+					"desc": "Your <b>Special</b> automatically seeks the foe last struck by your Attack<br>Bonus to Max Shots per <b>Special</b>.",
 					"icon": "icons\\Heart-Seeking_Bow\\Aspect\\Aspect_of_Chiron.png"
 				},
 				{
 					"name": "Aspect of Hera",
-					"desc": "Your <b>Cast</b> loads :ammo: into your next <b>Attack</b>, firing on impact.\nBonus to Bloodstone Drop Time.",
+					"desc": "Your <b>Cast</b> loads :ammo: into your next <b>Attack</b>, firing on impact<br>Bonus to Bloodstone Drop Time.",
 					"icon": "icons\\Heart-Seeking_Bow\\Aspect\\Aspect_of_Hera.png"
 				},
 				{
@@ -1563,7 +1563,7 @@
 				},
 				{
 					"name": "Aspect of Talos",
-					"desc": "Your <b>Special</b> becomes <b>Magnetic Cutter</b>; its pull deals <b>20</b> damage.\nBonus to <b>Magnetized Attack</b> & <b>Cast</b>.",
+					"desc": "Your <b>Special</b> becomes <b>Magnetic Cutter</b>; its pull deals <b>20</b> damage<br>Bonus to <b>Magnetized Attack</b> & <b>Cast</b>.",
 					"icon": "icons\\Twin_Fists\\Aspect\\Aspect_of_Talos.png"
 				},
 				{
@@ -1573,7 +1573,7 @@
 				},
 				{
 					"name": "Aspect of Gilgamesh",
-					"desc": "You have the <b>Claws of Enkidu</b>, whose <b>Dash-Upper</b> can <b>Maim</b> foes.\nBonus Damage to <b>Maimed</b> foes.",
+					"desc": "You have the <b>Claws of Enkidu</b>, whose <b>Dash-Upper</b> can <b>Maim</b> foes<br>Bonus Damage to <b>Maimed</b> foes.",
 					"icon": "icons\\Twin_Fists\\Aspect\\Aspect_of_Gilgamesh.png"
 				}
 			]
@@ -1665,7 +1665,7 @@
 				},
 				{
 					"name": "Aspect of Hestia",
-					"desc": "After you manually <b>Reload</b>, your next shot is empowered.\nBonus Base Damage to <b>Empowered</b> Shots.",
+					"desc": "After you manually <b>Reload</b>, your next shot is empowered<br>Bonus Base Damage to <b>Empowered</b> Shots.",
 					"icon": "icons\\Adamant_Rail\\Aspect\\Aspect_of_Hestia.png"
 				},
 				{
