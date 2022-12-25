@@ -5,6 +5,7 @@ using OCV = OpenCvSharp;
 
 namespace HadesBoonBot
 {
+    [JsonObject]
     class Codex : IEnumerable<Codex.Provider.Trait>, IDisposable
     {
         public enum IconLoadMode
@@ -23,7 +24,8 @@ namespace HadesBoonBot
         public Dictionary<string, List<Provider.Trait>> ByIcon { get; } = new();
         public List<Provider> Providers { get; set; }
 
-        public Dictionary<string, OCV.Mat> TextIcons = new();
+        [JsonProperty("text_icons")]
+        public List<TextIcon> TextIcons { get; set; }
 
         public class Provider
         {
@@ -256,14 +258,25 @@ namespace HadesBoonBot
             }
         }
 
+        public class TextIcon
+        {
+            public string Name { get; set; }
+            public string Text { get; set; }
+
+            [JsonProperty("icon")]
+            public string IconPath { get; set; }
+
+            [JsonIgnore]
+            public OCV.Mat? Icon;
+        }
+
         /// <summary>
         /// Create a new codex
         /// </summary>
         /// <param name="provs">Deserialised provider data</param>
         /// <param name="loadIcons">Whether to load icon data</param>
-        private Codex(List<Provider> provs, IconLoadMode iconMode)
+        private Codex Init(IconLoadMode iconMode)
         {
-            Providers = provs;
             EmptyBoon = this.First(t => t.Name == "boon");
 
             //once loaded, do a pass and resolve duo boons (by boon name which is unique)
@@ -344,24 +357,29 @@ namespace HadesBoonBot
             }
 
             //load images used in trait descriptions
-            string textIconDir = "icons_text";
-            foreach (var textIcon in Directory.EnumerateFiles(textIconDir))
+            foreach (var textIcon in TextIcons)
             {
-                TextIcons.Add(Path.GetFileNameWithoutExtension(textIcon), OCV.Cv2.ImRead(textIcon, OCV.ImreadModes.Unchanged));
+                textIcon.Icon = OCV.Cv2.ImRead(textIcon.IconPath, OCV.ImreadModes.Unchanged);
             }
 
+            return this;
         }
 
         /// <summary>
         /// Load codex data
         /// </summary>
-        /// <param name="inputFile"></param>
-        /// <returns></returns>
         public static Codex FromFile(string inputFile, IconLoadMode iconMode)
         {
             string data = File.ReadAllText(inputFile);
-            return new(JsonConvert.DeserializeObject<List<Provider>>(data), iconMode);
+            var codex = JsonConvert.DeserializeObject<Codex>(data);
+            codex.Init(iconMode);
+            return codex;
         }
+
+        /// <summary>
+        /// For the deserialiser
+        /// </summary>
+        private Codex() { }
 
         /// <summary>
         /// Deduce the weapon being used from a list of traits on a victory screen
@@ -463,9 +481,9 @@ namespace HadesBoonBot
                 trait.Dispose();
             }
 
-            foreach (var textIcon in TextIcons.Values)
+            foreach (var textIcon in TextIcons)
             {
-                textIcon.Dispose();
+                textIcon.Icon?.Dispose();
             }
         }
     }

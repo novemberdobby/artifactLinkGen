@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using OCV = OpenCvSharp;
 
 namespace HadesBoonBot.Processors
@@ -33,8 +33,8 @@ namespace HadesBoonBot.Processors
                     //TODO: add "from <provider>"
                     foreach (var textIcon in codex.TextIcons)
                     {
-                        var iconFile = Path.Combine(textIconOutputDir, textIcon.Key + ".png");
-                        textIcon.Value.SaveImage(iconFile);
+                        var iconFile = Path.Combine(textIconOutputDir, textIcon.Name + ".png");
+                        textIcon.Icon!.SaveImage(iconFile);
                     }
 
                     file.WriteLine($"<!doctype html>");
@@ -299,8 +299,8 @@ document.addEventListener('mousemove', (event) => CheckTraits(event));
         {
             foreach (var replacement in codex.TextIcons)
             {
-                string replaceWith = $"<img width='25px' src='./{TextIconDir}/{replacement.Key}.png'/>".Replace("'", "\\'");
-                input = input.Replace($":{replacement.Key}:", replaceWith);
+                string replaceWith = $"<img width='25px' src='./{TextIconDir}/{replacement.Name}.png'/>".Replace("'", "\\'");
+                input = input.Replace($":{replacement.Name}:", replaceWith);
             }
 
             return input;

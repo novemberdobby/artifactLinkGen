@@ -1,2353 +1,2365 @@
-[
-    {
-        "category": "gods",
-        "name": "Aphrodite",
-        "traits": [
-            {
-                "name": "Heartbreak Strike",
-                "desc": "Your <b>Attack</b> deals more damage and inflicts <b>Weak</b>.",
-                "icon": "icons\\Aphrodite\\Heartbreak_Strike.png",
-                "singleton": "attack"
-            },
-            {
-                "name": "Heartbreak Flourish",
-                "desc": "Your <b>Special</b> deals more damage and inflicts <b>Weak</b>.",
-                "icon": "icons\\Aphrodite\\Heartbreak_Flourish.png",
-                "singleton": "special"
-            },
-            {
-                "name": "Crush Shot",
-                "desc": "Your <b>Cast</b> is a wide, short-range blast that inflicts <b>Weak</b>.",
-                "icon": "icons\\Aphrodite\\Crush_Shot__Passion_Flare.png",
-                "singleton": "cast",
-                "incompatible_with": [ "Aspect of Beowulf" ]
-            },
-            {
-                "name": "Passion Flare",
-                "desc": "Your <b>Cast</b> damages foes around you and inflicts <b>Weak</b>.",
-                "icon": "icons\\Aphrodite\\Crush_Shot__Passion_Flare.png",
-                "singleton": "cast",
-                "requires": [ "Aspect of Beowulf" ]
-            },
-            {
-                "name": "Passion Dash",
-                "desc": "Your <b>Dash</b> inflicts damage where you end up, inflicting <b>Weak</b>.",
-                "icon": "icons\\Aphrodite\\Passion_Dash.png",
-                "singleton": "dash"
-            },
-            {
-                "name": "Aphrodite's Aid",
-                "desc": "Your <b>Call</b> fires a seeking projectile that inflicts <b>Charm</b>.",
-                "icon": "icons\\Aphrodite\\Aphrodite's_Aid.png",
-                "singleton": "call"
-            },
-            {
-                "name": "Dying Lament",
-                "desc": "When foes are slain, they damage nearby foes and inflict <b>Weak</b>.",
-                "icon": "icons\\Aphrodite\\Dying_Lament.png"
-            },
-            {
-                "name": "Wave of Despair",
-                "desc": "After you take damage, damage foes around you and inflict <b>Weak</b>.",
-                "icon": "icons\\Aphrodite\\Wave_of_Despair.png"
-            },
-            {
-                "name": "Different League",
-                "desc": "Resist some damage from nearby foes' attacks.",
-                "icon": "icons\\Aphrodite\\Different_League.png"
-            },
-            {
-                "name": "Life Affirmation",
-                "desc": "Any :health_up: chamber rewards are worth more.",
-                "icon": "icons\\Aphrodite\\Life_Affirmation.png"
-            },
-            {
-                "name": "Empty Inside",
-                "desc": "Your <b>Weak</b> effects have a longer duration.",
-                "icon": "icons\\Aphrodite\\Empty_Inside.png"
-            },
-            {
-                "name": "Sweet Surrender",
-                "desc": "<b>Weak</b>-afflicted foes are also more susceptible to damage.",
-                "icon": "icons\\Aphrodite\\Sweet_Surrender.png"
-            },
-            {
-                "name": "Broken Resolve",
-                "desc": "Your <b>Weak</b> effects are more potent.",
-                "icon": "icons\\Aphrodite\\Broken_Resolve.png"
-            },
-            {
-                "name": "Blown Kiss",
-                "desc": "Your <b>Cast</b> shoots farther and is stronger against undamaged foes.",
-                "icon": "icons\\Aphrodite\\Blown_Kiss.png"
-            },
-            {
-                "name": "Unhealthy Fixation",
-                "desc": "Your <b>Weak</b> effects also have a <b>+15%</b> chance to <b>Charm</b> foes.\n<b>Charm</b> Duration: <span style='color:#00ff00'>4 Sec</span>.",
-                "icon": "icons\\Aphrodite\\Unhealthy_Fixation.png"
-            },
-            {
-                "name": "Curse of Longing",
-                "desc": "Your <b>Doom</b> effects continuously strike <b>Weak</b> foes.\nSuccessive Hit Damage: <span style='color:#00ff00'>50%</span>",
-                "icon": "icons\\Aphrodite\\Curse_of_Longing.png"
-            },
-            {
-                "name": "Heart Rend",
-                "desc": "Your <b>Critical</b> effects deal even more damage to <b>Weak</b> foes.\nBonus <b>Critical</b> Damage vs. Weak: <span style='color:#00ff00'>+150%</span>",
-                "icon": "icons\\Aphrodite\\Heart_Rend.png"
-            },
-            {
-                "name": "Parting Shot",
-                "desc": "Your <b>Cast</b> gains any bonuses you have for striking foes from behind.\nBonus Backstab Damage: <span style='color:#00ff00'>+35%</span>",
-                "icon": "icons\\Aphrodite\\Parting_Shot.png"
-            },
-            {
-                "name": "Cold Embrace",
-                "desc": "Your <b>Cast</b> crystal fires its beam directly at you for <b>+4 Sec</b>.\nBonus <b>Cast</b> Damage: <span style='color:#00ff00'>+30%</span>",
-                "icon": "icons\\Aphrodite\\Cold_Embrace.png"
-            },
-            {
-                "name": "Low Tolerance",
-                "desc": "Your <b>Hangover</b> effects can stack more times against <b>Weak</b> foes.\nMax Stacks vs. Weak: <span style='color:#00ff00'>+3</span>",
-                "icon": "icons\\Aphrodite\\Low_Tolerance.png"
-            },
-            {
-                "name": "Sweet Nectar",
-                "desc": "Any <b>Poms of Power</b> you find are more potent.\nBonus Lv. from Poms: <span style='color:#00ff00'>+1</span>",
-                "icon": "icons\\Aphrodite\\Sweet_Nectar.png"
-            },
-            {
-                "name": "Smoldering Air",
-                "desc": "Your <b>God Gauge</b> charges up automatically, but is capped at <span style='color:#D31813'>25%</span>.\nAuto Gauge Gain: <span style='color:#00ff00'>1%</span> <i>(every 0.2 Sec.)</i>",
-                "icon": "icons\\Aphrodite\\Smoldering_Air.png"
-            }
-        ]
-    },
-    {
-        "category": "gods",
-        "name": "Ares",
-        "traits": [
-            {
-                "name": "Curse of Agony",
-                "desc": "Your <b>Attack</b> inflicts <b>Doom</b>.",
-                "icon": "icons\\Ares\\Curse_of_Agony.png",
-                "singleton": "attack"
-            },
-            {
-                "name": "Curse of Pain",
-                "desc": "Your <b>Special</b> inflicts <b>Doom</b>.",
-                "icon": "icons\\Ares\\Curse_of_Pain.png",
-                "singleton": "special"
-            },
-            {
-                "name": "Slicing Shot",
-                "desc": "Your <b>Cast</b> sends a <b>Blade Rift</b> hurtling ahead.",
-                "icon": "icons\\Ares\\Slicing_Flare__Slicing_Shot.png",
-                "singleton": "cast",
-                "incompatible_with": [ "Aspect of Beowulf" ]
-            },
-            {
-                "name": "Slicing Flare",
-                "desc": "Your <b>Cast</b> sends a large <b>Blade Rift</b> hurtling ahead for a brief time.",
-                "icon": "icons\\Ares\\Slicing_Flare__Slicing_Shot.png",
-                "singleton": "cast",
-                "requires": [ "Aspect of Beowulf" ]
-            },
-            {
-                "name": "Blade Dash",
-                "desc": "Your <b>Dash</b> creates a <b>Blade Rift</b> where you started.",
-                "icon": "icons\\Ares\\Blade_Dash.png",
-                "singleton": "dash"
-            },
-            {
-                "name": "Ares' Aid",
-                "desc": "Your <b>Call</b> turns you into an <b>Impervious Blade Rift</b> for <b>1.2 Sec</b>.",
-                "icon": "icons\\Ares\\Ares'_Aid.png",
-                "singleton": "call"
-            },
-            {
-                "name": "Curse of Vengeance",
-                "desc": "After you take damage, inflict <b>Doom</b> foes around you.",
-                "icon": "icons\\Ares\\Curse_of_Vengeance.png"
-            },
-            {
-                "name": "Urge to Kill",
-                "desc": "Your <b>Attack</b>, <b>Special</b>, and <b>Cast</b> deal more damage.",
-                "icon": "icons\\Ares\\Urge_to_Kill.png"
-            },
-            {
-                "name": "Battle Rage",
-                "desc": "After slaying a foe, your next <b>Attack</b> or <b>Special</b> deals more damage.",
-                "icon": "icons\\Ares\\Battle_Rage.png"
-            },
-            {
-                "name": "Blood Frenzy",
-                "desc": "After using <b>Death Defiance</b>, deal more damage that <b>Encounter</b>.",
-                "icon": "icons\\Ares\\Blood_Frenzy.png"
-            },
-            {
-                "name": "Black Metal",
-                "desc": "Your <b>Blade Rift</b> effects deal damage in a wider area.",
-                "icon": "icons\\Ares\\Black_Metal.png"
-            },
-            {
-                "name": "Engulfing Vortex",
-                "desc": "Your <b>Blade Rift</b> effects last longer and pull foes in.",
-                "icon": "icons\\Ares\\Engulfing_Vortex.png"
-            },
-            {
-                "name": "Dire Misfortune",
-                "desc": "Your <b>Doom</b> effects deal more damage when applied multiple times.",
-                "icon": "icons\\Ares\\Dire_Misfortune.png"
-            },
-            {
-                "name": "Impending Doom",
-                "desc": "Your <b>Doom</b> effects deal more damage, but take <b>+0.5 Sec</b>. to activate",
-                "icon": "icons\\Ares\\Impending_Doom.png"
-            },
-            {
-                "name": "Vicious Cycle",
-                "desc": "Your <b>Blade Rift</b> effects deal more damage for each consecutive hit.\nDamage Increase per Hit: <span style='color:#00ff00'>+2</span>",
-                "icon": "icons\\Ares\\Vicious_Cycle.png"
-            },
-            {
-                "name": "Curse of Longing",
-                "desc": "Your <b>Doom</b> effects continuously strike <b>Weak</b> foes.\nSuccessive Hit Damage: <span style='color:#00ff00'>50%</span>",
-                "icon": "icons\\Ares\\Curse_of_Longing.png"
-            },
-            {
-                "name": "Hunting Blades",
-                "desc": "Your <b>Cast</b> creates a faster <b>Blade Rift</b> that seeks the nearest foe.\nSeek Duration: <span style='color:#00ff00'>3.3 Sec</span>.",
-                "icon": "icons\\Ares\\Hunting_Blades.png"
-            },
-            {
-                "name": "Merciful End",
-                "desc": "Your attacks that can <b>Deflect</b> immediately activate <b>Doom</b> effects.\nDoom Combo Damage: <span style='color:#00ff00'>40</span>",
-                "icon": "icons\\Ares\\Merciful_End.png"
-            },
-            {
-                "name": "Freezing Vortex",
-                "desc": "Your <b>Cast</b> inflicts <b>Chill</b>, but is smaller and moves slower.\nBlade Rift Size: <span style='color:#D31813'>-15%</span>",
-                "icon": "icons\\Ares\\Freezing_Vortex.png"
-            },
-            {
-                "name": "Curse of Nausea",
-                "desc": "Your <b>Hangover</b> effects deal damage faster.\n<b>Hangover</b> Damage Rate: 0.5 Sec. -&gt; <span style='color:#00ff00'>0.35 Sec</span>.",
-                "icon": "icons\\Ares\\Curse_of_Nausea.png"
-            },
-            {
-                "name": "Curse of Drowning",
-                "desc": "Your <b>Flood Shot</b> becomes a pulse that damages foes around you.\nPulses per <b>Cast</b>: <span style='color:#00ff00'>3</span>",
-                "icon": "icons\\Ares\\Curse_of_Drowning.png"
-            },
-            {
-                "name": "Vengeful Mood",
-                "desc": "Your <b>Revenge</b> attacks sometimes occur without taking damage.\nAuto-Revenge Rate: <span style='color:#00ff00'>3 Sec.</span>",
-                "icon": "icons\\Ares\\Vengeful_Mood.png"
-            }
-        ]
-    },
-    {
-        "category": "gods",
-        "name": "Artemis",
-        "traits": [
-            {
-                "name": "Deadly Strike",
-                "desc": "Your <b>Attack</b> is stronger, with <span style='color:#00ff00'>+15%</span> chance to deal <b>Critical</b> damage.",
-                "icon": "icons\\Artemis\\Deadly_Strike.png",
-                "singleton": "attack"
-            },
-            {
-                "name": "Deadly Flourish",
-                "desc": "Your <b>Special</b> is stronger, with <span style='color:#00ff00'>+20%</span> chance to deal <b>Critical</b> Damage.",
-                "icon": "icons\\Artemis\\Deadly_Flourish.png",
-                "singleton": "special"
-            },
-            {
-                "name": "True Shot",
-                "desc": "Your <b>Cast</b> seeks foes, with <span style='color:#00ff00'>+10%</span> chance to deal <b>Critical</b> damage.",
-                "icon": "icons\\Artemis\\Hunter's_Flare__True_Shot.png",
-                "singleton": "cast",
-                "incompatible_with": [ "Aspect of Beowulf" ]
-            },
-            {
-                "name": "Hunter's Flare",
-                "desc": "Your <b>Cast</b> damages foes around you, with a <span style='color:#00ff00'>+10%</span> <b>Critical</b> chance.",
-                "icon": "icons\\Artemis\\Hunter's_Flare__True_Shot.png",
-                "singleton": "cast",
-                "requires": [ "Aspect of Beowulf" ]
-            },
-            {
-                "name": "Hunter Dash",
-                "desc": "Your <b>Dash-Strike</b> deals more damage.",
-                "icon": "icons\\Artemis\\Hunter_Dash.png",
-                "singleton": "dash"
-            },
-            {
-                "name": "Artemis' Aid",
-                "desc": "Your <b>Call</b> fires a seeking arrow with <span style='color:#00ff00'>+35%</span> <b>Critical</b> chance.",
-                "icon": "icons\\Artemis\\Artemis'_Aid.png",
-                "singleton": "call"
-            },
-            {
-                "name": "Pressure Points",
-                "desc": "Any damage you deal has a chance to be <b>Critical</b>.",
-                "icon": "icons\\Artemis\\Pressure_Points.png"
-            },
-            {
-                "name": "Exit Wounds",
-                "desc": "Your foes take damage when your :ammo: stuck in them is dislodged.",
-                "icon": "icons\\Artemis\\Exit_Wounds.png"
-            },
-            {
-                "name": "Hide Breaker",
-                "desc": "Your <b>Critical</b> effects deal even more damage to <b>Armor</b>.",
-                "icon": "icons\\Artemis\\Hide_Breaker.png"
-            },
-            {
-                "name": "Clean Kill",
-                "desc": "Your <b>Critical</b> effects deal even more damage.",
-                "icon": "icons\\Artemis\\Clean_Kill.png"
-            },
-            {
-                "name": "Hunter Instinct",
-                "desc": "Your <b>God Gauge</b> charges up faster when you deal <b>Critical</b> damage.",
-                "icon": "icons\\Artemis\\Hunter_Instinct.png"
-            },
-            {
-                "name": "Hunter's Mark",
-                "desc": "After you deal <b>Critical</b> damage to a foe, a foe near it is <b>Marked</b>.",
-                "icon": "icons\\Artemis\\Hunter's_Mark.png"
-            },
-            {
-                "name": "Support Fire",
-                "desc": "After you <b>Cast</b>, or hit with an <b>Attack</b> or <b>Special</b>, fire a seeking arrow.",
-                "icon": "icons\\Artemis\\Support_Fire.png"
-            },
-            {
-                "name": "Fully Loaded",
-                "desc": "Gain extra :ammo: for your <b>Cast</b>.\nMax Bloodstones: <span style='color:#00ff00'>+2</span> :ammo:",
-                "icon": "icons\\Artemis\\Fully_Loaded.png"
-            },
-            {
-                "name": "Heart Rend",
-                "desc": "Your <b>Critical</b> effects deal even more damage to <b>Weak</b> foes.\nBonus <b>Critical</b> Damage vs. <b>Weak</b>: <span style='color:#00ff00'>+150%</span>",
-                "icon": "icons\\Artemis\\Heart_Rend.png"
-            },
-            {
-                "name": "Hunting Blades",
-                "desc": "Your <b>Cast</b> creates a faster <b>Blade Rift</b> that seeks the nearest foe.\nSeek Duration: <span style='color:#00ff00'>3.3 Sec</span>.",
-                "icon": "icons\\Artemis\\Hunting_Blades.png"
-            },
-            {
-                "name": "Deadly Reversal",
-                "desc": "After you <b>Deflect</b>, briefly gain <span style='color:#00ff00'>+20%</span> chance to deal <b>Critical</b> damage.\nCritical Duration: <span style='color:#00ff00'>2 Sec</span>.",
-                "icon": "icons\\Artemis\\Deadly_Reversal.png"
-            },
-            {
-                "name": "Crystal Clarity",
-                "desc": "Your <b>Cast</b> is stronger and tracks foes more effectively.\nBeam Damage: <span style='color:#00ff00'>+10%</span>",
-                "icon": "icons\\Artemis\\Crystal_Clarity.png"
-            },
-            {
-                "name": "Splitting Headache",
-                "desc": "<b>Hangover</b>-afflicted foes are more likely to take <b>Critical</b> damage.\nBonus <b>Critical</b> Chance per <b>Hangover</b> Stack: <span style='color:#00ff00'>+1.5%</span>",
-                "icon": "icons\\Artemis\\Splitting_Headache.png"
-            },
-            {
-                "name": "Mirage Shot",
-                "desc": "Your <b>Cast</b> fires a second projectile, which deals reduced base damage.",
-                "icon": "icons\\Artemis\\Mirage_Shot.png"
-            },
-            {
-                "name": "Lightning Rod",
-                "desc": "Your collectible :ammo: strike nearby foes with lightning every <b>1 Sec</b>.",
-                "icon": "icons\\Artemis\\Lightning_Rod.png"
-            }
-        ]
-    },
-    {
-        "category": "gods",
-        "name": "Athena",
-        "traits": [
-            {
-                "name": "Divine Strike",
-                "desc": "Your <b>Attack</b> is stronger, and can <b>Deflect</b>.",
-                "icon": "icons\\Athena\\Divine_Strike.png",
-                "singleton": "attack"
-            },
-            {
-                "name": "Divine Flourish",
-                "desc": "Your <b>Special</b> is stronger, and can <b>Deflect</b>.",
-                "icon": "icons\\Athena\\Divine_Flourish.png",
-                "singleton": "special"
-            },
-            {
-                "name": "Phalanx Shot",
-                "desc": "Your <b>Cast</b> damages foes in a small area, and can <b>Deflect</b>.",
-                "icon": "icons\\Athena\\Phalanx_Flare__Phalanx_Shot.png",
-                "singleton": "cast",
-                "incompatible_with": [ "Aspect of Beowulf" ]
-            },
-            {
-                "name": "Phalanx Flare",
-                "desc": "Your <b>Cast</b> damages foes around you, and can <b>Deflect</b>.",
-                "icon": "icons\\Athena\\Phalanx_Flare__Phalanx_Shot.png",
-                "singleton": "cast",
-                "requires": [ "Aspect of Beowulf" ]
-            },
-            {
-                "name": "Divine Dash",
-                "desc": "Your <b>Dash</b> deals damage and can <b>Deflect</b>.",
-                "icon": "icons\\Athena\\Divine_Dash.png",
-                "singleton": "dash"
-            },
-            {
-                "name": "Athena's Aid",
-                "desc": "Your <b>Call</b> briefly makes you <b>Impervious</b> and <b>Deflect</b> all attacks.",
-                "icon": "icons\\Athena\\Athena's_Aid.png",
-                "singleton": "call"
-            },
-            {
-                "name": "Holy Shield",
-                "desc": "After you take damage, damage foes around you and briefly <b>Deflect</b>.",
-                "icon": "icons\\Athena\\Holy_Shield.png"
-            },
-            {
-                "name": "Bronze Skin",
-                "desc": "Resist damage from foes' attacks.",
-                "icon": "icons\\Athena\\Bronze_Skin.png"
-            },
-            {
-                "name": "Sure Footing",
-                "desc": "Resist damage from <b>Traps</b>.",
-                "icon": "icons\\Athena\\Sure_Footing.png"
-            },
-            {
-                "name": "Proud Bearing",
-                "desc": "You begin each <b>Encounter</b> with your <b>God Gauge</b> partly full.",
-                "icon": "icons\\Athena\\Proud_Bearing.png"
-            },
-            {
-                "name": "Blinding Flash",
-                "desc": "Your abilities that can <b>Deflect</b> also make foes Exposed.",
-                "icon": "icons\\Athena\\Blinding_Flash.png"
-            },
-            {
-                "name": "Brilliant Riposte",
-                "desc": "When you <b>Deflect</b> attacks, it deals more damage.",
-                "icon": "icons\\Athena\\Brilliant_Riposte.png"
-            },
-            {
-                "name": "Deathless Stand",
-                "desc": "<b>Death Defiance</b> makes you <b>Impervious</b> longer. Replenish <b>1</b> use.",
-                "icon": "icons\\Athena\\Deathless_Stand.png"
-            },
-            {
-                "name": "Last Stand",
-                "desc": "<b>Death Defiance</b> restores more :heart: than usual. Replenish <b>1</b> use.",
-                "icon": "icons\\Athena\\Last_Stand.png"
-            },
-            {
-                "name": "Divine Protection",
-                "desc": "You have a barrier that negates an instance of damage.\nBarrier Refresh Time: <span style='color:#00ff00'>20 Sec</span>.",
-                "icon": "icons\\Athena\\Divine_Protection.png"
-            },
-            {
-                "name": "Parting Shot",
-                "desc": "Your <b>Cast</b> gains any bonuses you have for striking foes from behind.\nBonus Backstab Damage: <span style='color:#00ff00'>+35%</span>",
-                "icon": "icons\\Athena\\Parting_Shot.png"
-            },
-            {
-                "name": "Merciful End",
-                "desc": "Your attacks that can <b>Deflect</b> immediately activate <b>Doom</b> effects.\nDoom Combo Damage: <span style='color:#00ff00'>40</span>",
-                "icon": "icons\\Athena\\Merciful_End.png"
-            },
-            {
-                "name": "Deadly Reversal",
-                "desc": "After you <b>Deflect</b>, briefly gain <span style='color:#00ff00'>+20%</span> chance to deal <b>Critical</b> damage.\n<b>Critical</b> Duration: <span style='color:#00ff00'>2 Sec</span>.",
-                "icon": "icons\\Athena\\Deadly_Reversal.png"
-            },
-            {
-                "name": "Stubborn Roots",
-                "desc": "If you have no <b>Death Defiance</b> your :heart: slowly recovers.\nLife Regeneration During Battle: <span style='color:#00ff00'>1</span> :health_restore: <i>(every 0.8 Sec.)</i>",
-                "icon": "icons\\Athena\\Stubborn_Roots.png"
-            },
-            {
-                "name": "Calculated Risk",
-                "desc": "Your foes' ranged-attack projectiles are slower.\nFoe Projectile Speed Reduction: <span style='color:#00ff00'>+50%</span>",
-                "icon": "icons\\Athena\\Calculated_Risk.png"
-            },
-            {
-                "name": "Unshakable Mettle",
-                "desc": "You cannot be stunned, and resist some damage from <b>Bosses</b>.\nBoss Damage Reduction: <span style='color:#00ff00'>+10%</span>",
-                "icon": "icons\\Athena\\Unshakable_Mettle.png"
-            },
-            {
-                "name": "Lightning Phalanx",
-                "desc": "Your Phalanx Shot <b>Cast</b> bounces between nearby foes.\nMax Bounces: <span style='color:#00ff00'>3</span>",
-                "icon": "icons\\Athena\\Lightning_Phalanx.png"
-            }
-        ]
-    },
-    {
-        "category": "gods",
-        "name": "Chaos",
-        "traits": [
-            {
-                "name": "Affluence",
-                "desc": "Any :obol: you find is worth <span style='color:#00ff00'>+X%</span>.",
-                "icon": "icons\\Chaos\\Affluence.png"
-            },
-            {
-                "name": "Ambush",
-                "desc": "You deal <span style='color:#00ff00'>+X%</span> damage striking foes from behind.",
-                "icon": "icons\\Chaos\\Ambush.png"
-            },
-            {
-                "name": "Assault",
-                "desc": "You deal <span style='color:#00ff00'>+X%</span> damage striking undamaged foes.",
-                "icon": "icons\\Chaos\\Assault.png"
-            },
-            {
-                "name": "Eclipse",
-                "desc": "Any :darkness: and :gemstone: you find are worth <span style='color:#00ff00'>+X%</span>.",
-                "icon": "icons\\Chaos\\Eclipse.png"
-            },
-            {
-                "name": "Favor",
-                "desc": "<b>Boons</b> have <span style='color:#00ff00'>+X%</span> chance to be <span style='color:#1895F1'><b>Rare</b></span> or better.",
-                "icon": "icons\\Chaos\\Favor.png"
-            },
-            {
-                "name": "Flourish",
-                "desc": "Your <b>Special</b> deals <span style='color:#00ff00'>+X%</span> damage.",
-                "icon": "icons\\Chaos\\Flourish.png"
-            },
-            {
-                "name": "Grasp",
-                "desc": "You have <span style='color:#00ff00'>+X</span> :ammo:",
-                "icon": "icons\\Chaos\\Grasp.png"
-            },
-            {
-                "name": "Lunge",
-                "desc": "Your <b>Dash-Strike</b> deals <span style='color:#00ff00'>+X%</span> damage.",
-                "icon": "icons\\Chaos\\Lunge.png"
-            },
-            {
-                "name": "Shot",
-                "desc": "Your <b>Cast</b> deals <span style='color:#00ff00'>+X%</span> damage.",
-                "icon": "icons\\Chaos\\Shot.png"
-            },
-            {
-                "name": "Soul",
-                "desc": "You have +X :health_up:.",
-                "icon": "icons\\Chaos\\Soul.png"
-            },
-            {
-                "name": "Strike",
-                "desc": "Your <b>Attack</b> deals <span style='color:#00ff00'>+X%</span> damage.",
-                "icon": "icons\\Chaos\\Strike.png"
-            },
-            {
-                "name": "Defiance",
-                "desc": "You have <span style='color:#00ff00'>+1</span> use of <b>Death Defiance</b> <i>(this escape attempt)</i>.",
-                "icon": "icons\\Chaos\\Defiance.png"
-            }
-        ]
-    },
-    {
-        "category": "gods",
-        "name": "Demeter",
-        "traits": [
-            {
-                "name": "Frost Strike",
-                "desc": "Your <b>Attack</b> is stronger and inflicts <b>Chill</b>.",
-                "icon": "icons\\Demeter\\Frost_Strike.png",
-                "singleton": "attack"
-            },
-            {
-                "name": "Frost Flourish",
-                "desc": "Your <b>Special</b> is stronger and inflicts <b>Chill</b>.",
-                "icon": "icons\\Demeter\\Frost_Flourish.png",
-                "singleton": "special"
-            },
-            {
-                "name": "Crystal Beam",
-                "desc": "Your <b>Cast</b> drops a crystal that fires a beam at foes for <b>5 sec</b>.",
-                "icon": "icons\\Demeter\\Crystal_Beam__Icy_Flare.png",
-                "singleton": "cast",
-                "incompatible_with": [ "Aspect of Beowulf" ]
-            },
-            {
-                "name": "Icy Flare",
-                "desc": "Your <b>Cast</b> damages foes around you and inflicts <b>Chill</b>.",
-                "icon": "icons\\Demeter\\Crystal_Beam__Icy_Flare.png",
-                "singleton": "cast",
-                "requires": [ "Aspect of Beowulf" ]
-            },
-            {
-                "name": "Mistral Dash",
-                "desc": "Your <b>Dash</b> shoots a gust ahead that inflicts <b>Chill</b>.",
-                "icon": "icons\\Demeter\\Mistral_Dash.png",
-                "singleton": "dash"
-            },
-            {
-                "name": "Demeter's Aid",
-                "desc": "Your <b>Call</b> creates a winter vortex that grows over <b>5 Sec</b>., inflicting <b>Chill</b>.",
-                "icon": "icons\\Demeter\\Demeter's_Aid.png",
-                "singleton": "call"
-            },
-            {
-                "name": "Frozen Touch",
-                "desc": "After you take damage, damage and <i>completely</i> <b>Chill</b> your foe.",
-                "icon": "icons\\Demeter\\Frozen_Touch.png"
-            },
-            {
-                "name": "Rare Crop",
-                "desc": "Your <b>Boons</b> become <b>Common</b>, then gain <b>Rarity</b> every <b>3 Encounter(s)</b>.",
-                "icon": "icons\\Demeter\\Rare_Crop.png"
-            },
-            {
-                "name": "Ravenous Will",
-                "desc": "While you have no :ammo:, take <b>10%</b> less damage and deal more.",
-                "icon": "icons\\Demeter\\Ravenous_Will.png"
-            },
-            {
-                "name": "Nourished Soul",
-                "desc": "Any :health_restore: effects are more potent. Restore <span style='color:#00ff00'>30%</span> :heart: now.",
-                "icon": "icons\\Demeter\\Nourished_Soul.png"
-            },
-            {
-                "name": "Snow Burst",
-                "desc": "Whenever you <b>Cast</b>, damage nearby foes and inflict <b>Chill</b>.",
-                "icon": "icons\\Demeter\\Snow_Burst.png"
-            },
-            {
-                "name": "Arctic Blast",
-                "desc": "Applying <b>10</b> stacks of <b>Chill</b> causes a blast, clearing the effect.",
-                "icon": "icons\\Demeter\\Arctic_Blast.png"
-            },
-            {
-                "name": "Killing Freeze",
-                "desc": "When <i>all</i> foes are <b>Chill</b>-afflicted, they are <span style='color:#00ff00'>+10%</span> slower and decay.",
-                "icon": "icons\\Demeter\\Killing_Freeze.png"
-            },
-            {
-                "name": "Glacial Glare",
-                "desc": "Your <b>Cast</b> fires longer and inflicts <b>Chill</b>.",
-                "icon": "icons\\Demeter\\Glacial_Glare.png"
-            },
-            {
-                "name": "Winter Harvest",
-                "desc": "<b>Chill</b>-afflicted foes shatter at <b>10%</b> :heart:, inflicting <b>Chill</b> nearby.\nShatter Area Damage: <span style='color:#00ff00'>50</span>",
-                "icon": "icons\\Demeter\\Winter_Harvest.png"
-            },
-            {
-                "name": "Cold Embrace",
-                "desc": "Your <b>Cast</b> crystal fires its beam directly at you for <b>+4 Sec</b>.\nBonus Cast Damage: <span style='color:#00ff00'>+30%</span>",
-                "icon": "icons\\Demeter\\Cold_Embrace.png"
-            },
-            {
-                "name": "Freezing Vortex",
-                "desc": "Your <b>Cast</b> inflicts <b>Chill</b>, but is smaller and moves slower.\nBlade Rift Size: <span style='color:#D31813'>-15%</span>",
-                "icon": "icons\\Demeter\\Freezing_Vortex.png"
-            },
-            {
-                "name": "Crystal Clarity",
-                "desc": "Your <b>Cast</b> is stronger and tracks foes more effectively.\nBeam Damage: <span style='color:#00ff00'>+10%</span>",
-                "icon": "icons\\Demeter\\Crystal_Clarity.png"
-            },
-            {
-                "name": "Stubborn Roots",
-                "desc": "If you have no <b>Death Defiance</b> your :heart: slowly recovers.\nLife Regeneration During Battle: <span style='color:#00ff00'>1</span> :health_restore: <i>(every 0.8 Sec.)</i>",
-                "icon": "icons\\Demeter\\Stubborn_Roots.png"
-            },
-            {
-                "name": "Ice Wine",
-                "desc": "Your <b>Cast</b> blasts an area with freezing <b>Festive Fog</b> that inflicts <b>Chill</b>.\nBlast Damage: <span style='color:#00ff00'>+30%</span>",
-                "icon": "icons\\Demeter\\Ice_Wine.png"
-            },
-            {
-                "name": "Blizzard Shot",
-                "desc": "Your <b>Cast</b> moves slowly, piercing foes and firing shards around it.\nShard Damage: <span style='color:#00ff00'>20</span>",
-                "icon": "icons\\Demeter\\Blizzard_Shot.png"
-            },
-            {
-                "name": "Cold Fusion",
-                "desc": "Your <b>Jolted</b> effects do not expire when foes attack.\nJolted Duration: <span style='color:#00ff00'>10 Sec.</span>",
-                "icon": "icons\\Demeter\\Cold_Fusion.png"
-            }
-        ]
-    },
-    {
-        "category": "gods",
-        "name": "Dionysus",
-        "traits": [
-            {
-                "name": "Drunken Strike",
-                "desc": "Your <b>Attack</b> inflicts <b>Hangover</b>.",
-                "icon": "icons\\Dionysus\\Drunken_Strike.png",
-                "singleton": "attack"
-            },
-            {
-                "name": "Drunken Flourish",
-                "desc": "Your <b>Special</b> inflicts <b>Hangover</b>.",
-                "icon": "icons\\Dionysus\\Drunken_Flourish.png",
-                "singleton": "special"
-            },
-            {
-                "name": "Trippy Shot",
-                "desc": "Your <b>Cast</b> lobs a large explosive that bursts into <b>Festive Fog</b>.",
-                "icon": "icons\\Dionysus\\Trippy_Flare__Trippy_Shot.png",
-                "singleton": "cast",
-                "incompatible_with": [ "Aspect of Beowulf" ]
-            },
-            {
-                "name": "Trippy Flare",
-                "desc": "Your <b>Cast</b> damages foes around you, leaving behind <b>Festive Fog</b>.",
-                "icon": "icons\\Dionysus\\Trippy_Flare__Trippy_Shot.png",
-                "singleton": "cast",
-                "requires_any": [ "Aspect of Beowulf", "Aspect of Hera" ]
-            },
-            {
-                "name": "Drunken Dash",
-                "desc": "Your <b>Dash</b> causes <b>Hangover</b> several times near where you started.",
-                "icon": "icons\\Dionysus\\Drunken_Dash.png",
-                "singleton": "dash"
-            },
-            {
-                "name": "Dionysus' Aid",
-                "desc": "Your <b>Call</b> inflicts <b>Hangover</b> on foes all around you for <b>1.5 Sec</b>.",
-                "icon": "icons\\Dionysus\\Dionysus'_Aid.png",
-                "singleton": "call"
-            },
-            {
-                "name": "After Party",
-                "desc": "If your :heart: is low after <b>Encounters</b>, restore to the threshold.",
-                "icon": "icons\\Dionysus\\After_Party.png"
-            },
-            {
-                "name": "Positive Outlook",
-                "desc": "Take less damage while at <b>40%</b> :heart: or below.",
-                "icon": "icons\\Dionysus\\Positive_Outlook.png"
-            },
-            {
-                "name": "Premium Vintage",
-                "desc": "Gain :health_up: when you pick up :nectar:. Receive <b>1</b> :nectar: now.",
-                "icon": "icons\\Dionysus\\Premium_Vintage.png"
-            },
-            {
-                "name": "Strong Drink",
-                "desc": "Using a <b>Fountain</b> restores all :heart: and gives you bonus damage.",
-                "icon": "icons\\Dionysus\\Strong_Drink.png"
-            },
-            {
-                "name": "Bad Influence",
-                "desc": "Deal more damage while <b>3</b> foes are <b>Hangover</b>-afflicted.",
-                "icon": "icons\\Dionysus\\Bad_Influence.png"
-            },
-            {
-                "name": "Numbing Sensation",
-                "desc": "Your <b>Hangover</b> effects also make foes move slower.",
-                "icon": "icons\\Dionysus\\Numbing_Sensation.png"
-            },
-            {
-                "name": "Peer Pressure",
-                "desc": "<b>Hangover</b>-afflicted foes inflict it on other foes near them every <b>4 Sec</b>.",
-                "icon": "icons\\Dionysus\\Peer_Pressure.png"
-            },
-            {
-                "name": "High Tolerance",
-                "desc": "You take less damage while standing in <b>Festive Fog</b>.",
-                "icon": "icons\\Dionysus\\High_Tolerance.png"
-            },
-            {
-                "name": "Black Out",
-                "desc": "<b>Hangover</b>-afflicted foes take bonus damage in <b>Festive Fog</b>.\nFog Combo Damage: <span style='color:#00ff00'>+60%</span>",
-                "icon": "icons\\Dionysus\\Black_Out.png"
-            },
-            {
-                "name": "Low Tolerance",
-                "desc": "Your <b>Hangover</b> effects can stack more times against <b>Weak</b> foes.\nMax Stacks vs. Weak: <span style='color:#00ff00'>+3</span>",
-                "icon": "icons\\Dionysus\\Low_Tolerance.png"
-            },
-            {
-                "name": "Curse of Nausea",
-                "desc": "Your <b>Hangover</b> effects deal damage faster.\n<b>Hangover</b> Damage Rate: 0.5 Sec. -&gt; <span style='color:#00ff00'>0.35 Sec</span>.",
-                "icon": "icons\\Dionysus\\Curse_of_Nausea.png"
-            },
-            {
-                "name": "Splitting Headache",
-                "desc": "<b>Hangover</b>-afflicted foes are more likely to take <b>Critical</b> damage.\nBonus <b>Critical</b> Chance per <b>Hangover</b> Stack: <span style='color:#00ff00'>+1.5%</span>",
-                "icon": "icons\\Dionysus\\Splitting_Headache.png"
-            },
-            {
-                "name": "Calculated Risk",
-                "desc": "Your foes' ranged-attack projectiles are slower.\nFoe Projectile Speed Reduction: <span style='color:#00ff00'>+50%</span>",
-                "icon": "icons\\Dionysus\\Calculated_Risk.png"
-            },
-            {
-                "name": "Ice Wine",
-                "desc": "Your <b>Cast</b> blasts an area with freezing <b>Festive Fog</b> that inflicts <b>Chill</b>.\nBlast Damage: <span style='color:#00ff00'>+30%</span>",
-                "icon": "icons\\Dionysus\\Ice_Wine.png"
-            },
-            {
-                "name": "Exclusive Access",
-                "desc": "Any <b>Boons</b> you find are more potent.\nMinimum Boon Rarity: <span style='color:#A21AE1'>Epic</span>",
-                "icon": "icons\\Dionysus\\Exclusive_Access.png"
-            },
-            {
-                "name": "Scintillating Feast",
-                "desc": "Your <b>Festive Fog</b> effects also deal lightning damage periodically.\nLightning Damage: <span style='color:#00ff00'>60</span>",
-                "icon": "icons\\Dionysus\\Scintillating_Feast.png"
-            }
-        ]
-    },
-    {
-        "category": "gods",
-        "name": "Hermes",
-        "traits": [
-            {
-                "name": "Swift Strike",
-                "desc": "Your <b>Attack</b> is faster.",
-                "icon": "icons\\Hermes\\Swift_Strike.png"
-            },
-            {
-                "name": "Swift Flourish",
-                "desc": "Your <b>Special</b> is faster.",
-                "icon": "icons\\Hermes\\Swift_Flourish.png"
-            },
-            {
-                "name": "Flurry Cast",
-                "desc": "Hold <b>Cast</b> to fire in rapid succession",
-                "icon": "icons\\Hermes\\Bad_News__Flurry_Cast.png",
-                "incompatible_with": [ "Aspect of Beowulf", "Aspect of Hera" ]
-            },
-            {
-                "name": "Quick Favor",
-                "desc": "Your <b>God Gauge</b> charges up automatically.",
-                "icon": "icons\\Hermes\\Quick_Favor.png"
-            },
-            {
-                "name": "Hyper Sprint",
-                "desc": "After you <b>Dash</b>, briefly become <b>Sturdy</b> and move <b>+100%</b> faster.",
-                "icon": "icons\\Hermes\\Hyper_Sprint.png"
-            },
-            {
-                "name": "Greater Haste",
-                "desc": "You move faster.",
-                "icon": "icons\\Hermes\\Greater_Haste.png"
-            },
-            {
-                "name": "Quick Recovery",
-                "desc": "After you take damage, quickly <b>Dash</b> to recover some :heart: you just lost.",
-                "icon": "icons\\Hermes\\Quick_Recovery.png"
-            },
-            {
-                "name": "Greater Evasion",
-                "desc": "Whenever you are hit, you have a chance to <b>Dodge</b> automatically.",
-                "icon": "icons\\Hermes\\Greater_Evasion.png"
-            },
-            {
-                "name": "Greatest Reflex",
-                "desc": "You can <b>Dash</b> more times in a row.",
-                "icon": "icons\\Hermes\\Greatest_Reflex.png"
-            },
-            {
-                "name": "Second Wind",
-                "desc": "After using <b>Call</b>, gain <b>Dodge</b> chance and move speed for <b>10 Sec</b>.",
-                "icon": "icons\\Hermes\\Second_Wind.png"
-            },
-            {
-                "name": "Quick Reload",
-                "desc": "Foes drop :ammo: stuck in them faster.",
-                "icon": "icons\\Hermes\\Auto_Reload__Quick_Reload.png",
-                "incompatible_with": [ "Aspect of Beowulf", "Trippy Shot", "Crystal Beam", "Curse of Drowning", "Slicing Shot" ]
-            },
-            {
-                "name": "Side Hustle",
-                "desc": "Each time you enter a <b>Chamber</b>, gain a bit wealth.",
-                "icon": "icons\\Hermes\\Side_Hustle.png"
-            },
-            {
-                "name": "Rush Delivery",
-                "desc": "You deal bonus damage based on any bonus move speed.",
-                "icon": "icons\\Hermes\\Rush_Delivery.png"
-            },
-            {
-                "name": "Auto Reload",
-                "desc": "You regenerate :ammo: faster.",
-                "icon": "icons\\Hermes\\Auto_Reload__Quick_Reload.png"
-            },
-            {
-                "name": "Greater Recall",
-                "desc": "Your :ammo: automatically return to you.",
-                "icon": "icons\\Hermes\\Greater_Recall.png"
-            },
-            {
-                "name": "Bad News",
-                "desc": "Your <b>Cast</b> deals bonus damage to foes <i>without</i> :ammo: in them.\nFirst-Shot Damage: <span style='color:#00ff00'>+50%</span>",
-                "icon": "icons\\Hermes\\Bad_News__Flurry_Cast.png",
-                "requires_any": [ "Auto Reload", "Lambent Plume" ]
-            }
-        ]
-    },
-    {
-        "category": "gods",
-        "name": "Poseidon",
-        "traits": [
-            {
-                "name": "Tempest Strike",
-                "desc": "Your <b>Attack</b> deals more damage and knocks foes away.",
-                "icon": "icons\\Poseidon\\Tempest_Strike.png",
-                "singleton": "attack"
-            },
-            {
-                "name": "Tempest Flourish",
-                "desc": "Your <b>Special</b> deals more damage and knocks foes away.",
-                "icon": "icons\\Poseidon\\Tempest_Flourish.png",
-                "singleton": "special"
-            },
-            {
-                "name": "Flood Shot",
-                "desc": "Your <b>Cast</b> damages foes in an area and knocks them away.",
-                "icon": "icons\\Poseidon\\Flood_Flare__Flood_Shot.png",
-                "singleton": "cast",
-                "incompatible_with": [ "Aspect of Beowulf" ]
-            },
-            {
-                "name": "Flood Flare",
-                "desc": "Your <b>Cast</b> damages foes around you and knocks them away.",
-                "icon": "icons\\Poseidon\\Flood_Flare__Flood_Shot.png",
-                "singleton": "cast",
-                "requires": [ "Aspect of Beowulf" ]
-            },
-            {
-                "name": "Tidal Dash",
-                "desc": "Your <b>Dash</b> damages foes in an area and knocks them away.",
-                "icon": "icons\\Poseidon\\Tidal_Dash.png",
-                "singleton": "dash"
-            },
-            {
-                "name": "Poseidon's Aid",
-                "desc": "Your <b>Call</b> makes you surge into foes while <b>Impervious</b> for <b>1.2 Sec</b>.",
-                "icon": "icons\\Poseidon\\Poseidon's_Aid.png",
-                "singleton": "call"
-            },
-            {
-                "name": "Typhoon's Fury",
-                "desc": "You deal more damage when slamming foes into barriers.",
-                "icon": "icons\\Poseidon\\Typhoon's_Fury.png"
-            },
-            {
-                "name": "Hydraulic Might",
-                "desc": "Your <b>Attack</b> and <b>Special</b> are stronger the first <b>10 Sec</b>. in <b>Encounter(s)</b>.",
-                "icon": "icons\\Poseidon\\Hydraulic_Might.png"
-            },
-            {
-                "name": "Ocean's Bounty",
-                "desc": "Any :gemstone:, :darkness: and :obol: chamber rewards are worth more.",
-                "icon": "icons\\Poseidon\\Ocean's_Bounty.png"
-            },
-            {
-                "name": "Sunken Treasure",
-                "desc": "Gain a random assortment of :gemstone:, :darkness:, :obol:, and :health_restore:.",
-                "icon": "icons\\Poseidon\\Sunken_Treasure.png"
-            },
-            {
-                "name": "Razor Shoals",
-                "desc": "Your <b>Boons</b> with knock-away effects also <b>Rupture</b> foes.",
-                "icon": "icons\\Poseidon\\Razor_Shoals.png"
-            },
-            {
-                "name": "Boiling Point",
-                "desc": "Your <b>God Gauge</b> charges up faster when you take damage.",
-                "icon": "icons\\Poseidon\\Boiling_Point.png"
-            },
-            {
-                "name": "Breaking Wave",
-                "desc": "Slamming foes into barriers creates a watery blast in the area.",
-                "icon": "icons\\Poseidon\\Breaking_Wave.png"
-            },
-            {
-                "name": "Wave Pounding",
-                "desc": "Your <b>Boons</b> with knock-away effects deal bonus damage to <b>Bosses</b>.",
-                "icon": "icons\\Poseidon\\Wave_Pounding.png"
-            },
-            {
-                "name": "Rip Current",
-                "desc": "Your <b>Call</b> pulls in foes and the effect lasts longer.",
-                "icon": "icons\\Poseidon\\Rip_Current.png"
-            },
-            {
-                "name": "Huge Catch",
-                "desc": "You have a greater chance to find a <b>Fishing Point</b> in each <b>Chamber</b>.",
-                "icon": "icons\\Poseidon\\Huge_Catch.png"
-            },
-            {
-                "name": "Second Wave",
-                "desc": "Your <b>Boons</b> with knock-away effects shove foes multiple times.",
-                "icon": "icons\\Poseidon\\Second_Wave.png"
-            },
-            {
-                "name": "Sweet Nectar",
-                "desc": "Any <b>Poms of Power</b> you find are more potent.\nBonus Lv. from Poms: <span style='color:#00ff00'>+1</span>",
-                "icon": "icons\\Poseidon\\Sweet_Nectar.png"
-            },
-            {
-                "name": "Curse of Drowning",
-                "desc": "Your <b>Flood Shot</b> becomes a pulse that damages foes around you.\nPulses per <b>Cast</b>: <span style='color:#00ff00'>3</span>",
-                "icon": "icons\\Poseidon\\Curse_of_Drowning.png"
-            },
-            {
-                "name": "Mirage Shot",
-                "desc": "Your <b>Cast</b> fires a second projectile, which deals reduced base damage.",
-                "icon": "icons\\Poseidon\\Mirage_Shot.png"
-            },
-            {
-                "name": "Unshakable Mettle",
-                "desc": "You cannot be stunned, and resist some damage from <b>Bosses</b>.\nBoss Damage Reduction: <span style='color:#00ff00'>+10%</span>",
-                "icon": "icons\\Poseidon\\Unshakable_Mettle.png"
-            },
-            {
-                "name": "Blizzard Shot",
-                "desc": "Your <b>Cast</b> moves slowly, piercing foes and firing shards around it.\nShard Damage: <span style='color:#00ff00'>20</span>",
-                "icon": "icons\\Poseidon\\Blizzard_Shot.png"
-            },
-            {
-                "name": "Exclusive Access",
-                "desc": "Any <b>Boons</b> you find are more potent.\nMinimum Boon Rarity: <span style='color:#A21AE1'>Epic</span>",
-                "icon": "icons\\Poseidon\\Exclusive_Access.png"
-            },
-            {
-                "name": "Sea Storm",
-                "desc": "When you knock foes away, they are struck by lightning.\nLightning Damage: <span style='color:#00ff00'>40</span>",
-                "icon": "icons\\Poseidon\\Sea_Storm.png"
-            }
-        ]
-    },
-    {
-        "category": "gods",
-        "name": "Zeus",
-        "traits": [
-            {
-                "name": "Lightning Strike",
-                "desc": "Your <b>Attack</b> emits chain-lightning when you damage a foe.",
-                "icon": "icons\\Zeus\\Lightning_Strike.png",
-                "singleton": "attack"
-            },
-            {
-                "name": "Thunder Flourish",
-                "desc": "Your <b>Special</b> causes a lightning bolt to strike nearby foes.",
-                "icon": "icons\\Zeus\\Thunder_Flourish.png",
-                "singleton": "special"
-            },
-            {
-                "name": "Electric Shot",
-                "desc": "Your <b>Cast</b> is a burst of chain-lightning that bounces between foes.",
-                "icon": "icons\\Zeus\\Thunder_Flare__Electric_Shot.png",
-                "singleton": "cast",
-                "incompatible_with": [ "Aspect of Beowulf" ]
-            },
-            {
-                "name": "Thunder Flare",
-                "desc": "Your <b>Cast</b> causes a lightning bolt to strike nearby foes.",
-                "icon": "icons\\Zeus\\Thunder_Flare__Electric_Shot.png",
-                "singleton": "cast",
-                "requires": [ "Aspect of Beowulf" ]
-            },
-            {
-                "name": "Thunder Dash",
-                "desc": "Your <b>Dash</b> causes a lightning bolt to strike nearby foes.",
-                "icon": "icons\\Zeus\\Thunder_Dash.png",
-                "singleton": "dash"
-            },
-            {
-                "name": "Zeus' Aid",
-                "desc": "Your <b>Call</b> makes lightning strike nearby foes repeatedly for <b>1.5 Sec</b>.",
-                "icon": "icons\\Zeus\\Zeus'_Aid.png",
-                "singleton": "call"
-            },
-            {
-                "name": "Heaven's Vengeance",
-                "desc": "After you take damage, your foe is struck by lightning.",
-                "icon": "icons\\Zeus\\Heaven's_Vengeance.png"
-            },
-            {
-                "name": "Lightning Reflexes",
-                "desc": "After you <b>Dash</b> just before getting hit, a bolt strikes a nearby foes.",
-                "icon": "icons\\Zeus\\Lightning_Reflexes.png"
-            },
-            {
-                "name": "Storm Lightning",
-                "desc": "Your chain-lightning effects bounce more times before expiring.",
-                "icon": "icons\\Zeus\\Storm_Lightning.png"
-            },
-            {
-                "name": "High Voltage",
-                "desc": "Your lightning bolt effects deal damage in a larger area.",
-                "icon": "icons\\Zeus\\High_Voltage.png"
-            },
-            {
-                "name": "Double Strike",
-                "desc": "Your lightning bolt effects have a chance to strike twice.",
-                "icon": "icons\\Zeus\\Double_Strike.png"
-            },
-            {
-                "name": "Static Discharge",
-                "desc": "Your lightning effects also make foes <b>Jolted</b>.",
-                "icon": "icons\\Zeus\\Static_Discharge.png"
-            },
-            {
-                "name": "Clouded Judgment",
-                "desc": "Your <b>God Gauge</b> charges faster when you deal or take damage.",
-                "icon": "icons\\Zeus\\Clouded_Judgment.png"
-            },
-            {
-                "name": "Billowing Strength",
-                "desc": "After using <b>Call</b>, you deal more damage for <b>15 Sec</b>.",
-                "icon": "icons\\Zeus\\Billowing_Strength.png"
-            },
-            {
-                "name": "Splitting Bolt",
-                "desc": "Whenever you strike foes with lightning <b>Boons</b>, fire an electric bolt.",
-                "icon": "icons\\Zeus\\Splitting_Bolt.png"
-            },
-            {
-                "name": "Smoldering Air",
-                "desc": "Your <b>God Gauge</b> charges up automatically, but is capped at <span style='color:#D31813'>25%</span>.\nAuto Gauge Gain: <span style='color:#00ff00'>1%</span> <i>(every 0.2 Sec.)</i>",
-                "icon": "icons\\Zeus\\Smoldering_Air.png"
-            },
-            {
-                "name": "Vengeful Mood",
-                "desc": "Your <b>Revenge</b> attacks sometimes occur without taking damage.\nAuto-Revenge Rate: <span style='color:#00ff00'>3 Sec.</span>",
-                "icon": "icons\\Zeus\\Vengeful_Mood.png"
-            },
-            {
-                "name": "Lightning Rod",
-                "desc": "Your collectible :ammo: strike nearby foes with lightning every <b>1 Sec</b>.",
-                "icon": "icons\\Zeus\\Lightning_Rod.png"
-            },
-            {
-                "name": "Lightning Phalanx",
-                "desc": "Your Phalanx Shot <b>Cast</b> bounces between nearby foes.\nMax Bounces: <span style='color:#00ff00'>3</span>",
-                "icon": "icons\\Zeus\\Lightning_Phalanx.png"
-            },
-            {
-                "name": "Cold Fusion",
-                "desc": "Your <b>Jolted</b> effects do not expire when foes attack.\nJolted Duration: <span style='color:#00ff00'>10 Sec.</span>",
-                "icon": "icons\\Zeus\\Cold_Fusion.png"
-            },
-            {
-                "name": "Scintillating Feast",
-                "desc": "Your <b>Festive Fog</b> effects also deal lightning damage periodically.\nLightning Damage: <span style='color:#00ff00'>60</span>",
-                "icon": "icons\\Zeus\\Scintillating_Feast.png"
-            },
-            {
-                "name": "Sea Storm",
-                "desc": "When you knock foes away, they are struck by lightning.\nLightning Damage: <span style='color:#00ff00'>40</span>",
-                "icon": "icons\\Zeus\\Sea_Storm.png"
-            }
-        ]
-    },
-    {
-        "category": "gods",
-        "name": "Hades",
-        "traits": [
-            {
-                "name": "Hades' Aid",
-                "desc": "Your <b>Call</b> becomes <b>Hades' Aid</b>, which briefly makes you <b>Invisible</b>; your <b>God Gauge</b> starts 10%-30% full.",
-                "icon": "icons\\Hades\\Hades'_Aid.png",
-                "singleton": "call"
-            }
-        ]
-    },
-    {
-        "category": "arm_aspects",
-        "name": "Stygian_Blade",
-        "traits": [
-            {
-                "name": "Aspect of Zagreus (Stygian Blade)",
-                "desc": "Bonus to Attack Speed & Move Speed",
-                "icon": "icons\\Stygian_Blade\\Aspect\\Aspect_of_Zagreus.png"
-            },
-            {
-                "name": "Aspect of Nemesis",
-                "desc": "For <b>3</b> Sec. after your <b>Special</b>, your <b>Attack</b> may deal <b>Critical</b> damage.\nBonus <b>Critical</b> Chance.",
-                "icon": "icons\\Stygian_Blade\\Aspect\\Aspect_of_Nemesis.png"
-            },
-            {
-                "name": "Aspect of Poseidon",
-                "desc": "Your <b>Special</b> dislodges :ammo: from foes.\nBonus <b>Cast</b> Damage.",
-                "icon": "icons\\Stygian_Blade\\Aspect\\Aspect_of_Poseidon.png"
-            },
-            {
-                "name": "Aspect of Arthur",
-                "desc": "You have <b>Holy Excalibur</b>, and <b>+50</b> :health_up: to your Life Total.\nAura Damage Reduction.</i>",
-                "icon": "icons\\Stygian_Blade\\Aspect\\Aspect_of_Arthur.png"
-            }
-        ]
-    },
-    {
-        "category": "arm_upgrades",
-        "name": "Stygian_Blade",
-        "traits": [
-            {
-                "name": "Breaching Slash",
-                "desc": "Your <b>Attack</b> deals <span style='color:#00ff00'>+300%</span> damage to <b>Armor</b>.",
-                "icon": "icons\\Stygian_Blade\\Upgrade\\Breaching_Slash.png"
-            },
-            {
-                "name": "Cruel Thrust",
-                "desc": "Your <b>Thrust</b> deals <span style='color:#00ff00'>+200%</span> damage and has a <span style='color:#00ff00'>+40%</span> <b>Critical chance</b>.",
-                "icon": "icons\\Stygian_Blade\\Upgrade\\Cruel_Thrust.png"
-            },
-            {
-                "name": "Cursed Slash",
-                "desc": "Your <b>Attack</b> restores <span style='color:#00ff00'>2</span> :heart:, but you have <span style='color:#D31813'>-60%</span> :heart:.",
-                "icon": "icons\\Stygian_Blade\\Upgrade\\Cursed_Slash.png"
-            },
-            {
-                "name": "Dash Nova",
-                "desc": "Your <b>Special</b> makes you lunge ahead, then become <span style='color:#00ff00'>Sturdy</span> for <b>0.8 Sec</b>.",
-                "icon": "icons\\Stygian_Blade\\Upgrade\\Dash_Nova.png"
-            },
-            {
-                "name": "Double Edge",
-                "desc": "Your <b>Dash-Strike</b> hits twice and deals <span style='color:#00ff00'>+20%</span> damage.",
-                "icon": "icons\\Stygian_Blade\\Upgrade\\Double_Edge.png"
-            },
-            {
-                "name": "Double Nova",
-                "desc": "Your <b>Special</b> hits twice but no longer knocks foes away.",
-                "icon": "icons\\Stygian_Blade\\Upgrade\\Double_Nova.png"
-            },
-            {
-                "name": "Flurry Slash",
-                "desc": "Hold <b>Attack</b> to strike rapidly, dealing <span style='color:#00ff00'>25</span> base damage per hit.",
-                "icon": "icons\\Stygian_Blade\\Upgrade\\Flurry_Slash.png"
-            },
-            {
-                "name": "Hoarding Slash",
-                "desc": "Your <b>Attack</b> deals bonus damage equal to <span style='color:#00ff00'>5%</span> of your current :obol:.",
-                "icon": "icons\\Stygian_Blade\\Upgrade\\Hoarding_Slash.png"
-            },
-            {
-                "name": "Piercing Wave",
-                "desc": "Your <b>Attack</b> fires a wave that <span style='color:#00ff00'>pierces</span> foes, dealing <span style='color:#00ff00'>30</span> damage.",
-                "icon": "icons\\Stygian_Blade\\Upgrade\\Piercing_Wave.png"
-            },
-            {
-                "name": "Shadow Slash",
-                "desc": "Your <b>Attack</b> deals <span style='color:#00ff00'>+200%</span> damage when striking foes from behind.",
-                "icon": "icons\\Stygian_Blade\\Upgrade\\Shadow_Slash.png"
-            },
-            {
-                "name": "Super Nova",
-                "desc": "Your <b>Special</b> hits a wider area and deals <span style='color:#00ff00'>+20%</span> damage.",
-                "icon": "icons\\Stygian_Blade\\Upgrade\\Super_Nova.png"
-            },
-            {
-                "name": "World Splitter",
-                "desc": "Your <b>Attack</b> is replaced with a big chop that deals <span style='color:#00ff00'>90</span> base damage.",
-                "icon": "icons\\Stygian_Blade\\Upgrade\\World_Splitter.png"
-            },
-            {
-                "name": "Greater Consecration",
-                "desc": "Your <b>Holy Excalibur</b> aura is <span style='color:#00ff00'>+45%</span> larger; makes foes <span style='color:#00ff00'>+10%</span> slower",
-                "icon": "icons\\Stygian_Blade\\Upgrade\\Greater_Consecration.png"
-            }
-        ]
-    },
-    {
-        "category": "arm_aspects",
-        "name": "Eternal_Spear",
-        "traits": [
-            {
-                "name": "Aspect of Zagreus (Eternal Spear)",
-                "desc": "Bonus to <b>Special</b> Damage, Range & Speed.",
-                "icon": "icons\\Eternal_Spear\\Aspect\\Aspect_of_Zagreus.png"
-            },
-            {
-                "name": "Aspect of Achilles",
-                "desc": "After your <b>Special</b>, you can retrieve your Spear with <b>Raging Rush</b>.\nPost-Rush Bonus Damage.",
-                "icon": "icons\\Eternal_Spear\\Aspect\\Aspect_of_Achilles.png"
-            },
-            {
-                "name": "Aspect of Hades",
-                "desc": "Your <b>Spin Attack</b> becomes <b>Punishing Sweep</b>.\nBonus to <b>Punishing</b> Damage.",
-                "icon": "icons\\Eternal_Spear\\Aspect\\Aspect_of_Hades.png"
-            },
-            {
-                "name": "Aspect of Guan Yu",
-                "desc": "You have the <b>Frost Fair Blade</b>, but your :health_up: and :health_restore: are reduced.",
-                "icon": "icons\\Eternal_Spear\\Aspect\\Aspect_of_Guan_Yu.png"
-            }
-        ]
-    },
-    {
-        "category": "arm_upgrades",
-        "name": "Eternal_Spear",
-        "traits": [
-            {
-                "name": "Extending Jab",
-                "desc": "Your <b>Attack</b> has more range and deals <span style='color:#00ff00'>+40%</span> damage to distant foes.",
-                "icon": "icons\\Eternal_Spear\\Upgrade\\Extending_Jab.png"
-            },
-            {
-                "name": "Chain Skewer",
-                "desc": "Your <b>Special</b> bounces to up to <span style='color:#00ff00'>7</span> foes, dealing <span style='color:#00ff00'>+30%</span> damage for each.",
-                "icon": "icons\\Eternal_Spear\\Upgrade\\Chain_Skewer.png"
-            },
-            {
-                "name": "Breaching Skewer",
-                "desc": "Your <b>Special</b> deals <span style='color:#00ff00'>+400%</span> damage to <b>Armor</b>.",
-                "icon": "icons\\Eternal_Spear\\Upgrade\\Breaching_Skewer.png"
-            },
-            {
-                "name": "Vicious Skewer",
-                "desc": "Your <b>Special</b> deals <span style='color:#00ff00'>+50%</span> damage; <span style='color:#00ff00'>+50%</span> <b>Critical</b> chance on recovery.",
-                "icon": "icons\\Eternal_Spear\\Upgrade\\Vicious_Skewer.png"
-            },
-            {
-                "name": "Exploding Launcher",
-                "desc": "Your <b>Special</b> is replaced with a shot that deals <span style='color:#00ff00'>50</span> damage in an area.",
-                "icon": "icons\\Eternal_Spear\\Upgrade\\Exploding_Launcher.png"
-            },
-            {
-                "name": "Massive Spin",
-                "desc": "Your <b>Spin Attack</b> deals <span style='color:#00ff00'>+125%</span> damage and hits a larger area.",
-                "icon": "icons\\Eternal_Spear\\Upgrade\\Massive_Spin.png"
-            },
-            {
-                "name": "Quick Spin",
-                "desc": "Your <b>Spin Attack</b> charges and recovers much faster.",
-                "icon": "icons\\Eternal_Spear\\Upgrade\\Quick_Spin.png"
-            },
-            {
-                "name": "Flurry Jab",
-                "desc": "Hold <b>Attack</b> to strike rapidly, but you cannot <b>Spin Attack</b>.",
-                "icon": "icons\\Eternal_Spear\\Upgrade\\Flurry_Jab.png"
-            },
-            {
-                "name": "Charged Skewer",
-                "desc": "Hold <b>Special</b> to charge your skewer for up to <span style='color:#00ff00'>+200%</span> base damage. Minimum range reduced.",
-                "icon": "icons\\Eternal_Spear\\Upgrade\\Charged_Skewer.png"
-            },
-            {
-                "name": "Serrated Point",
-                "desc": "Your <b>Dash-Strike</b> hits <span style='color:#00ff00'>3</span> times, but your dash has <span style='color:#D31813'>-25%</span> range.",
-                "icon": "icons\\Eternal_Spear\\Upgrade\\Serrated_Point.png"
-            },
-            {
-                "name": "Flaring Spin",
-                "desc": "Charging your Spin Attack makes you <span style='color:#00ff00'>Sturdy</span> and pulse <span style='color:#00ff00'>40</span> damage.",
-                "icon": "icons\\Eternal_Spear\\Upgrade\\Flaring_Spin.png"
-            },
-            {
-                "name": "Triple Jab",
-                "desc": "Your <b>Attack</b> strikes <span style='color:#00ff00'>3</span> times in a spread pattern.",
-                "icon": "icons\\Eternal_Spear\\Upgrade\\Triple_Jab.png"
-            },
-            {
-                "name": "Winged Serpent",
-                "desc": "Your <b>Frost Fair Blade Spin Attack</b> travels for <span style='color:#00ff00'>+80%</span> longer.",
-                "icon": "icons\\Eternal_Spear\\Upgrade\\Winged_Serpent.png"
-            }
-        ]
-    },
-    {
-        "category": "arm_aspects",
-        "name": "Shield_of_Chaos",
-        "traits": [
-            {
-                "name": "Aspect of Zagreus (Shield of Chaos)",
-                "desc": "Bonus to <b>Attack</b> & <b>Dash-Strike</b> Damage.",
-                "icon": "icons\\Shield_of_Chaos\\Aspect\\Aspect_of_Zagreus.png"
-            },
-            {
-                "name": "Aspect of Chaos",
-                "desc": "After you <b>Bull Rush</b>, your next <b>Special</b> throws multiple shields.",
-                "icon": "icons\\Shield_of_Chaos\\Aspect\\Aspect_of_Chaos.png"
-            },
-            {
-                "name": "Aspect of Zeus",
-                "desc": "Your <b>Special</b> becomes <b>Blitz Disc</b>.",
-                "icon": "icons\\Shield_of_Chaos\\Aspect\\Aspect_of_Zeus.png"
-            },
-            {
-                "name": "Aspect of Beowulf",
-                "desc": "You have <b>Naegling's Board</b>, but take <span style='color:#D31813'>+10%</span> damage.\nBonus to <b>Dragon Rush</b> Damage & Area.",
-                "icon": "icons\\Shield_of_Chaos\\Aspect\\Aspect_of_Beowulf.png"
-            }
-        ]
-    },
-    {
-        "category": "arm_upgrades",
-        "name": "Shield_of_Chaos",
-        "traits": [
-            {
-                "name": "Dread Flight",
-                "desc": "Your <b>Special</b> can strike up to <span style='color:#00ff00'>4</span> additional foes before returning.",
-                "icon": "icons\\Shield_of_Chaos\\Upgrade\\Dread_Flight.png"
-            },
-            {
-                "name": "Sudden Rush",
-                "desc": "Your <b>Bull Rush</b> charges much faster.",
-                "icon": "icons\\Shield_of_Chaos\\Upgrade\\Sudden_Rush.png"
-            },
-            {
-                "name": "Pulverizing Blow",
-                "desc": "Your <b>Attack</b> hits twice, but does not knock foes away.",
-                "icon": "icons\\Shield_of_Chaos\\Upgrade\\Pulverizing_Blow.png"
-            },
-            {
-                "name": "Dashing Wallop",
-                "desc": "Your <b>Dash Attack</b> deals <span style='color:#00ff00'>+50%</span> damage in a larger area.",
-                "icon": "icons\\Shield_of_Chaos\\Upgrade\\Dashing_Wallop.png"
-            },
-            {
-                "name": "Explosive Return",
-                "desc": "Your <b>Special</b> deals <span style='color:#00ff00'>50</span> damage to nearby foes when you catch it.",
-                "icon": "icons\\Shield_of_Chaos\\Upgrade\\Explosive_Return.png"
-            },
-            {
-                "name": "Minotaur Rush",
-                "desc": "Your <b>Bull Rush</b> gains a <b>Power Rush</b> that does <span style='color:#00ff00'>+500%</span> damage.",
-                "icon": "icons\\Shield_of_Chaos\\Upgrade\\Minotaur_Rush.png"
-            },
-            {
-                "name": "Breaching Rush",
-                "desc": "Your <b>Bull Rush</b> deals <span style='color:#00ff00'>+400%</span> damage to <b>Armor</b>.",
-                "icon": "icons\\Shield_of_Chaos\\Upgrade\\Breaching_Rush.png"
-            },
-            {
-                "name": "Charged Shot",
-                "desc": "Your <b>Bull Rush</b> instead fires a <span style='color:#00ff00'>piercing</span> shot that deals <span style='color:#00ff00'>80</span> base damage.",
-                "icon": "icons\\Shield_of_Chaos\\Upgrade\\Charged_Shot.png"
-            },
-            {
-                "name": "Charged Flight",
-                "desc": "Hold <b>Special</b> to charge your throw for up to <span style='color:#00ff00'>+200%</span> base damage.",
-                "icon": "icons\\Shield_of_Chaos\\Upgrade\\Charged_Flight.png"
-            },
-            {
-                "name": "Empowering Flight",
-                "desc": "After your <b>Special</b> hits, your next <b>2 Attacks</b> deal <span style='color:#00ff00'>+80%</span> damage.",
-                "icon": "icons\\Shield_of_Chaos\\Upgrade\\Empowering_Flight.png"
-            },
-            {
-                "name": "Dashing Flight",
-                "desc": "While you <b>Dash</b>, your <b>Special</b> is faster and deals <span style='color:#00ff00'>+200%</span> damage.",
-                "icon": "icons\\Shield_of_Chaos\\Upgrade\\Dashing_Flight.png"
-            },
-            {
-                "name": "Ferocious Guard",
-                "desc": "After blocking a foe, gain <span style='color:#00ff00'>+20%</span> damage and move speed for <b>10</b> Sec.",
-                "icon": "icons\\Shield_of_Chaos\\Upgrade\\Ferocious_Guard.png"
-            },
-            {
-                "name": "Unyielding Defense",
-                "desc": "After using your <b>Naegling's Board Cast</b>, you are <span style='color:#00ff00'>Sturdy</span> for <span style='color:#00ff00'>3</span> Sec.",
-                "icon": "icons\\Shield_of_Chaos\\Upgrade\\Unyielding_Defense.png"
-            }
-        ]
-    },
-    {
-        "category": "arm_aspects",
-        "name": "Heart-Seeking_Bow",
-        "traits": [
-            {
-                "name": "Aspect of Zagreus (Heart Seeking Bow)",
-                "desc": "Bonus to <b>Critical Attack</b> Chance.",
-                "icon": "icons\\Heart-Seeking_Bow\\Aspect\\Aspect_of_Zagreus.png"
-            },
-            {
-                "name": "Aspect of Chiron",
-                "desc": "Your <b>Special</b> automatically seeks the foe last struck by your Attack.\nBonus to Max Shots per <b>Special</b>.",
-                "icon": "icons\\Heart-Seeking_Bow\\Aspect\\Aspect_of_Chiron.png"
-            },
-            {
-                "name": "Aspect of Hera",
-                "desc": "Your <b>Cast</b> loads :ammo: into your next <b>Attack</b>, firing on impact.\nBonus to Bloodstone Drop Time.",
-                "icon": "icons\\Heart-Seeking_Bow\\Aspect\\Aspect_of_Hera.png"
-            },
-            {
-                "name": "Aspect of Rama",
-                "desc": "You have <b>Celestial Sharanga</b>, which can cause <b>Shared Suffering</b>.",
-                "icon": "icons\\Heart-Seeking_Bow\\Aspect\\Aspect_of_Rama.png"
-            }
-        ]
-    },
-    {
-        "category": "arm_upgrades",
-        "name": "Heart-Seeking_Bow",
-        "traits": [
-            {
-                "name": "Twin Shot",
-                "desc": "Your <b>Attack</b> fires <span style='color:#00ff00'>2</span> shots side-by-side, but has reduced range.",
-                "icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Twin_Shot.png"
-            },
-            {
-                "name": "Sniper Shot",
-                "desc": "Your <b>Attack</b> deals <span style='color:#00ff00'>+200%</span> damage to distant foes.",
-                "icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Sniper_Shot.png"
-            },
-            {
-                "name": "Explosive Shot",
-                "desc": "Your <b>Attack</b> deals <span style='color:#00ff00'>+300%</span> damage in an area, but charges slower.",
-                "icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Explosive_Shot.png"
-            },
-            {
-                "name": "Flurry Shot",
-                "desc": "Hold <b>Attack</b> to shoot rapidly, but you cannot <b>Power Shot</b>.",
-                "icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Flurry_Shot.png"
-            },
-            {
-                "name": "Piercing Volley",
-                "desc": "Your <b>Special</b> <span style='color:#00ff00'>pierces</span> foes and deals <span style='color:#00ff00'>+400%</span> damage to <b>Armor</b>.",
-                "icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Piercing_Volley.png"
-            },
-            {
-                "name": "Perfect Shot",
-                "desc": "Your <b>Power Shot</b> is easier to execute and deals <span style='color:#00ff00'>+150%</span> damage.",
-                "icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Perfect_Shot.png"
-            },
-            {
-                "name": "Relentless Volley",
-                "desc": "Your <b>Special</b> shoots <span style='color:#00ff00'>+4</span> shots.",
-                "icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Relentless_Volley.png"
-            },
-            {
-                "name": "Triple Shot",
-                "desc": "Your <b>Attack</b> fires <span style='color:#00ff00'>3</span> shots in a spread pattern.",
-                "icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Triple_Shot.png"
-            },
-            {
-                "name": "Charged Volley",
-                "desc": "Hold <b>Special</b> for up to <span style='color:#00ff00'>250%</span> base damage; minimum range is reduced.",
-                "icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Charged_Volley.png"
-            },
-            {
-                "name": "Chain Shot",
-                "desc": "Your <b>Attack</b> bounces to up to 3 foes, dealing <span style='color:#00ff00'>+15%</span> damage for each.",
-                "icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Chain_Shot.png"
-            },
-            {
-                "name": "Point-Blank Shot",
-                "desc": "Your <b>Attack</b> deals <span style='color:#00ff00'>+150%</span> damage to nearby foes.",
-                "icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Point-Blank_Shot.png"
-            },
-            {
-                "name": "Concentrated Volley",
-                "desc": "Your <b>Special</b> deals <span style='color:#00ff00'>+3</span> base damage for each consecutive hit to a foe.",
-                "icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Concentrated_Volley.png"
-            },
-            {
-                "name": "Repulse Shot",
-                "desc": "Your <b>Celestial Sharanga Attack</b> creates a <b>Blast Wave</b> around you.",
-                "icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Repulse_Shot.png"
-            }
-        ]
-    },
-    {
-        "category": "arm_aspects",
-        "name": "Twin_Fists",
-        "traits": [
-            {
-                "name": "Aspect of Zagreus (Twin Fists)",
-                "desc": "Bonus to <b>Dodge</b> Chance.",
-                "icon": "icons\\Twin_Fists\\Aspect\\Aspect_of_Zagreus.png"
-            },
-            {
-                "name": "Aspect of Talos",
-                "desc": "Your <b>Special</b> becomes <b>Magnetic Cutter</b>; its pull deals <b>20</b> damage.\nBonus to <b>Magnetized Attack</b> & <b>Cast</b>.",
-                "icon": "icons\\Twin_Fists\\Aspect\\Aspect_of_Talos.png"
-            },
-            {
-                "name": "Aspect of Demeter",
-                "desc": "After landing <b>12</b> strikes, your next <b>Special</b> hits more times.",
-                "icon": "icons\\Twin_Fists\\Aspect\\Aspect_of_Demeter.png"
-            },
-            {
-                "name": "Aspect of Gilgamesh",
-                "desc": "You have the <b>Claws of Enkidu</b>, whose <b>Dash-Upper</b> can <b>Maim</b> foes.\nBonus Damage to <b>Maimed</b> foes.",
-                "icon": "icons\\Twin_Fists\\Aspect\\Aspect_of_Gilgamesh.png"
-            }
-        ]
-    },
-    {
-        "category": "arm_upgrades",
-        "name": "Twin_Fists",
-        "traits": [
-            {
-                "name": "Breaching Cross",
-                "desc": "Your <b>Dash-Strike</b> pierces foes and deals <span style='color:#00ff00'>+900%</span> damage to <b>Armor</b>",
-                "icon": "icons\\Twin_Fists\\Upgrade\\Breaching_Cross.png"
-            },
-            {
-                "name": "Rolling Knuckle",
-                "desc": "Your <b>Dash-Strike</b> deals <span style='color:#00ff00'>+60%</span> damage; added to <b>Attack</b> sequence.",
-                "icon": "icons\\Twin_Fists\\Upgrade\\Rolling_Knuckle.png"
-            },
-            {
-                "name": "Long Knuckle",
-                "desc": "Your <b>Attack</b> has more range and deals <span style='color:#00ff00'>+10%</span> damage",
-                "icon": "icons\\Twin_Fists\\Upgrade\\Long_Knuckle.png"
-            },
-            {
-                "name": "Draining Cutter",
-                "desc": "Whenever your <b>Special</b> slays foes, restore <span style='color:#00ff00'>2%</span> life",
-                "icon": "icons\\Twin_Fists\\Upgrade\\Draining_Cutter.png"
-            },
-            {
-                "name": "Concentrated Knuckle",
-                "desc": "Your <b>Attack</b> deals <span style='color:#00ff00'>+5</span> base damage for each uninterrupted hit to a foe.",
-                "icon": "icons\\Twin_Fists\\Upgrade\\Concentrated_Knuckle.png"
-            },
-            {
-                "name": "Explosive Upper",
-                "desc": "Your <b>Dash-Upper</b> deals <span style='color:#00ff00'>+100%</span> damage in an area",
-                "icon": "icons\\Twin_Fists\\Upgrade\\Explosive_Upper.png"
-            },
-            {
-                "name": "Flying Cutter",
-                "desc": "Hold <b>Special</b> for longer range and up to <span style='color:#00ff00'>+100%</span> base damage",
-                "icon": "icons\\Twin_Fists\\Upgrade\\Flying_Cutter.png"
-            },
-            {
-                "name": "Rush Kick",
-                "desc": "Your <b>Special</b> becomes an advancing kick that also deals <b>40</b> base damage twice",
-                "icon": "icons\\Twin_Fists\\Upgrade\\Rush_Kick.png"
-            },
-            {
-                "name": "Quake Cutter",
-                "desc": "After using your <b>Special</b>, deal <b>90</b> damage in an area where you land",
-                "icon": "icons\\Twin_Fists\\Upgrade\\Quake_Cutter.png"
-            },
-            {
-                "name": "Kinetic Launcher",
-                "desc": "Your <b>Special</b> becomes a charged ranged attack that deals <b>50</b> base damage.",
-                "icon": "icons\\Twin_Fists\\Upgrade\\Kinetic_Launcher.png"
-            },
-            {
-                "name": "Heavy Knuckle",
-                "desc": "Your <b>Attack</b> becomes a slower 3-hit sequence, each deals <b>40</b> base damage.",
-                "icon": "icons\\Twin_Fists\\Upgrade\\Heavy_Knuckle.png"
-            },
-            {
-                "name": "Colossus Knuckle",
-                "desc": "While using your <b>Attack</b> or <b>Special</b>, you are <b>Sturdy</b>",
-                "icon": "icons\\Twin_Fists\\Upgrade\\Colossus_Knuckle.png"
-            },
-            {
-                "name": "Rending Claws",
-                "desc": "<b>Maim</b>-afflicted foes take <span style='color:#00ff00'>+25%</span> damage and move <span style='color:#00ff00'>30%</span> slower",
-                "icon": "icons\\Twin_Fists\\Upgrade\\Rending_Claws.png"
-            }
-        ]
-    },
-    {
-        "category": "arm_aspects",
-        "name": "Adamant_Rail",
-        "traits": [
-            {
-                "name": "Aspect of Zagreus (Adamant Rail)",
-                "desc": "Bonus to Ammo Capacity.",
-                "icon": "icons\\Adamant_Rail\\Aspect\\Aspect_of_Zagreus.png"
-            },
-            {
-                "name": "Aspect of Eris",
-                "desc": "For <b>4</b> Sec. after absorbing your <b>Special</b>'s blast, deal more damage.",
-                "icon": "icons\\Adamant_Rail\\Aspect\\Aspect_of_Eris.png"
-            },
-            {
-                "name": "Aspect of Hestia",
-                "desc": "After you manually <b>Reload</b>, your next shot is empowered.\nBonus Base Damage to <b>Empowered</b> Shots.",
-                "icon": "icons\\Adamant_Rail\\Aspect\\Aspect_of_Hestia.png"
-            },
-            {
-                "name": "Aspect of Lucifer",
-                "desc": "You have <b>Igneus Eden</b>, which launches volatile <b>Hellfire</b>.",
-                "icon": "icons\\Adamant_Rail\\Aspect\\Aspect_of_Lucifer.png"
-            }
-        ]
-    },
-    {
-        "category": "arm_upgrades",
-        "name": "Adamant_Rail",
-        "traits": [
-            {
-                "name": "Flurry Fire",
-                "desc": "Your <b>Attack</b> is faster and more accurate; gain <span style='color:#00ff00'>+6</span> ammo capacity.",
-                "icon": "icons\\Adamant_Rail\\Upgrade\\Flurry_Fire.png"
-            },
-            {
-                "name": "Ricochet Fire",
-                "desc": "Your <b>Attack</b> bounces to <span style='color:#00ff00'>+1</span> other foe",
-                "icon": "icons\\Adamant_Rail\\Upgrade\\Ricochet_Fire.png"
-            },
-            {
-                "name": "Spread Fire",
-                "desc": "Your <b>Attack</b> becomes a short spread that deals <b>40</b> base damage; lose <span style='color:#D31813'>-6</span> ammo capacity.",
-                "icon": "icons\\Adamant_Rail\\Upgrade\\Spread_Fire.png"
-            },
-            {
-                "name": "Explosive Fire",
-                "desc": "Your <b>Attack</b> deals damage in an area and briefly slows foes.",
-                "icon": "icons\\Adamant_Rail\\Upgrade\\Explosive_Fire.png"
-            },
-            {
-                "name": "Delta Chamber",
-                "desc": "Your <b>Attack</b> is a 3-round burst; you never have to <b>Reload</b>.",
-                "icon": "icons\\Adamant_Rail\\Upgrade\\Delta_Chamber.png"
-            },
-            {
-                "name": "Piercing Fire",
-                "desc": "Your <b>Attack</b> pierces foes and deals <span style='color:#00ff00'>+50%</span> damage to <b>Armor</b>.",
-                "icon": "icons\\Adamant_Rail\\Upgrade\\Piercing_Fire.png"
-            },
-            {
-                "name": "Triple Bomb",
-                "desc": "You can use your <b>Special</b> <span style='color:#00ff00'>3</span> times in rapid succession.",
-                "icon": "icons\\Adamant_Rail\\Upgrade\\Triple_Bomb.png"
-            },
-            {
-                "name": "Rocket Bomb",
-                "desc": "Your <b>Special</b> is replaced with a rocket that deals <b>80</b> base damage.",
-                "icon": "icons\\Adamant_Rail\\Upgrade\\Rocket_Bomb.png"
-            },
-            {
-                "name": "Targeting System",
-                "desc": "Foes targeted by your <b>Special</b> move slower and take <span style='color:#00ff00'>+30%</span> damage.",
-                "icon": "icons\\Adamant_Rail\\Upgrade\\Targeting_System.png"
-            },
-            {
-                "name": "Hazard Bomb",
-                "desc": "Your <b>Special</b> deals <span style='color:#00ff00'>+300%</span> base damage in a large area, but can hurt <i>you</i>.",
-                "icon": "icons\\Adamant_Rail\\Upgrade\\Hazard_Bomb.png"
-            },
-            {
-                "name": "Cluster Bomb",
-                "desc": "Your <b>Special</b> fires a spread of <span style='color:#00ff00'>5</span> bombs, but each deals <span style='color:#D31813'>-30%</span> damage.",
-                "icon": "icons\\Adamant_Rail\\Upgrade\\Cluster_Bomb.png"
-            },
-            {
-                "name": "Seeking Fire",
-                "desc": "Your <b>Attack</b> seeks the nearest foe and deals <span style='color:#00ff00'>+10%</span> damage.",
-                "icon": "icons\\Adamant_Rail\\Upgrade\\Seeking_Fire.png"
-            },
-            {
-                "name": "Concentrated Beam",
-                "desc": "Your <b>Igneus Eden Attack</b> damage to a foe ramps up <span style='color:#00ff00'>+100%</span> faster.",
-                "icon": "icons\\Adamant_Rail\\Upgrade\\Concentrated_Beam.png"
-            },
-            {
-                "name": "Flash Fire",
-                "desc": "Your <b>Igneus Eden Attack</b> starts firing and fires <span style='color:#00ff00'>+50%</span> faster with <span style='color:#00ff00'>+15%</span> range.",
-                "icon": "icons\\Adamant_Rail\\Upgrade\\Flash_Fire.png"
-            },
-            {
-                "name": "Triple Beam",
-                "desc": "Your <b>Igneus Eden Attack</b> fires <span style='color:#00ff00'>3</span> beams in a spread pattern.",
-                "icon": "icons\\Adamant_Rail\\Upgrade\\Triple_Beam.png"
-            },
-            {
-                "name": "Eternal Chamber",
-                "desc": "Your <b>Igneus Eden</b> has <span style='color:#00ff00'>∞</span> ammo, but its damage no longer ramps.",
-                "icon": "icons\\Adamant_Rail\\Upgrade\\Eternal_Chamber.png"
-            },
-            {
-                "name": "Greater Inferno",
-                "desc": "Your <b>Igneus Eden Hellfire</b> radiates <span style='color:#00ff00'>+250%</span> damage in a larger area.",
-                "icon": "icons\\Adamant_Rail\\Upgrade\\Greater_Inferno.png"
-            }
-        ]
-    },
-    {
-        "category": "keepsakes",
-        "name": "Cerberus",
-        "traits": [
-            {
-                "name": "Old Spiked Collar",
-                "desc": "Increase your :health_up:.",
-                "icon": "icons\\keepsakes\\Old_Spiked_Collar.png"
-            }
-        ]
-    },
-    {
-        "category": "keepsakes",
-        "name": "Achilles",
-        "traits": [
-            {
-                "name": "Myrmidon Bracer",
-                "desc": "Take less damage from the front, but more from the back.",
-                "icon": "icons\\keepsakes\\Myrmidon_Bracer.png"
-            }
-        ]
-    },
-    {
-        "category": "keepsakes",
-        "name": "Nyx",
-        "traits": [
-            {
-                "name": "Black Shawl",
-                "desc": "Deal more damage striking undamaged foes; also by striking foes from behind.",
-                "icon": "icons\\keepsakes\\Black_Shawl.png"
-            }
-        ]
-    },
-    {
-        "category": "keepsakes",
-        "name": "Thanatos",
-        "traits": [
-            {
-                "name": "Pierced Butterfly",
-                "desc": "Gain bonus damage for each <b>Encounter</b> you clear without taking damage.",
-                "icon": "icons\\keepsakes\\Pierced_Butterfly.png"
-            }
-        ]
-    },
-    {
-        "category": "keepsakes",
-        "name": "Charon",
-        "traits": [
-            {
-                "name": "Bone Hourglass",
-                "desc": "Items from the <b>Well of Charon</b> have durations increased by X Encounters.",
-                "icon": "icons\\keepsakes\\Bone_Hourglass.png"
-            }
-        ]
-    },
-    {
-        "category": "keepsakes",
-        "name": "Hypnos",
-        "traits": [
-            {
-                "name": "Chthonic Coin Purse",
-                "desc": "Receive :obol: to spend as you please <i>(once per escape attempt)</i>.",
-                "icon": "icons\\keepsakes\\Chthonic_Coin_Purse.png"
-            }
-        ]
-    },
-    {
-        "category": "keepsakes",
-        "name": "Megaera",
-        "traits": [
-            {
-                "name": "Skull Earring",
-                "desc": "Deal more damage while at <b>35%</b> :heart: or less.",
-                "icon": "icons\\keepsakes\\Skull_Earring.png"
-            }
-        ]
-    },
-    {
-        "category": "keepsakes",
-        "name": "Orpheus",
-        "traits": [
-            {
-                "name": "Distant Memory",
-                "desc": "Deal more damage to distant foes.",
-                "icon": "icons\\keepsakes\\Distant_Memory.png"
-            }
-        ]
-    },
-    {
-        "category": "keepsakes",
-        "name": "Dusa",
-        "traits": [
-            {
-                "name": "Harpy Feather Duster",
-                "desc": "Broken urns have a chance to contain :health_restore: items.",
-                "icon": "icons\\keepsakes\\Harpy_Feather_Duster.png"
-            }
-        ]
-    },
-    {
-        "category": "keepsakes",
-        "name": "Skelly",
-        "traits": [
-            {
-                "name": "Lucky Tooth",
-                "desc": "Automatically restore an amount of :heart: when your Life Total is depleted <i>(once per escape attempt)</i>.",
-                "icon": "icons\\keepsakes\\Lucky_Tooth.png"
-            }
-        ]
-    },
-    {
-        "category": "keepsakes",
-        "name": "Zeus",
-        "traits": [
-            {
-                "name": "Thunder Signet",
-                "desc": "The next <b>Boon</b> you find will be from <b>Zeus</b>. His blessings have a higher chance to be <span style='color:#1895F1'><b>Rare</b></span> or better.",
-                "icon": "icons\\keepsakes\\Thunder_Signet.png"
-            }
-        ]
-    },
-    {
-        "category": "keepsakes",
-        "name": "Poseidon",
-        "traits": [
-            {
-                "name": "Conch Shell",
-                "desc": "The next <b>Boon</b> you find will be from <b>Poseidon</b>. His blessings have a higher chance to be chance to be <span style='color:#1895F1'><b>Rare</b></span> or better.",
-                "icon": "icons\\keepsakes\\Conch_Shell.png"
-            }
-        ]
-    },
-    {
-        "category": "keepsakes",
-        "name": "Athena",
-        "traits": [
-            {
-                "name": "Owl Pendant",
-                "desc": "The next <b>Boon</b> you find will be from <b>Athena</b>. Her blessings have a higher chance to be <span style='color:#1895F1'><b>Rare</b></span> or better.",
-                "icon": "icons\\keepsakes\\Owl_Pendant.png"
-            }
-        ]
-    },
-    {
-        "category": "keepsakes",
-        "name": "Aphrodite",
-        "traits": [
-            {
-                "name": "Eternal Rose",
-                "desc": "The next <b>Boon</b> you find will be from <b>Aphrodite</b>. Her blessings have a higher chance to be <span style='color:#1895F1'><b>Rare</b></span> or better.",
-                "icon": "icons\\keepsakes\\Eternal_Rose.png"
-            }
-        ]
-    },
-    {
-        "category": "keepsakes",
-        "name": "Ares",
-        "traits": [
-            {
-                "name": "Blood-Filled Vial",
-                "desc": "The next <b>Boon</b> you find will be from <b>Ares</b>. His blessings have a higher chance to be <span style='color:#1895F1'><b>Rare</b></span> or better.",
-                "icon": "icons\\keepsakes\\Blood-Filled_Vial.png"
-            }
-        ]
-    },
-    {
-        "category": "keepsakes",
-        "name": "Artemis",
-        "traits": [
-            {
-                "name": "Adamant Arrowhead",
-                "desc": "The next <b>Boon</b> you find will be from <b>Artemis</b>. Her blessings have a higher chance to be <span style='color:#1895F1'><b>Rare</b></span> or better.",
-                "icon": "icons\\keepsakes\\Adamant_Arrowhead.png"
-            }
-        ]
-    },
-    {
-        "category": "keepsakes",
-        "name": "Dionysus",
-        "traits": [
-            {
-                "name": "Overflowing Cup",
-                "desc": "The next <b>Boon</b> you find will be from <b>Dionysus</b>. His blessings have a higher chance to be <span style='color:#1895F1'><b>Rare</b></span> or better.",
-                "icon": "icons\\keepsakes\\Overflowing_Cup.png"
-            }
-        ]
-    },
-    {
-        "category": "keepsakes",
-        "name": "Hermes",
-        "traits": [
-            {
-                "name": "Lambent Plume",
-                "desc": "Gain <b>Dodge</b> chance and move speed each time you quickly clear an <b>Encounter</b>.",
-                "icon": "icons\\keepsakes\\Lambent_Plume.png"
-            }
-        ]
-    },
-    {
-        "category": "keepsakes",
-        "name": "Demeter",
-        "traits": [
-            {
-                "name": "Frostbitten Horn",
-                "desc": "The next <b>Boon</b> you find will be from <b>Demeter</b>. Her blessings have a higher chance to be <span style='color:#1895F1'><b>Rare</b></span> or better.",
-                "icon": "icons\\keepsakes\\Frostbitten_Horn.png"
-            }
-        ]
-    },
-    {
-        "category": "keepsakes",
-        "name": "Chaos",
-        "traits": [
-            {
-                "name": "Cosmic Egg",
-                "desc": "Enter <b>Chaos Gates</b> without losing :heart:. Blessings from <b>Chaos</b> have a higher chance to be <span style='color:#1895F1'><b>Rare</b></span> or better.",
-                "icon": "icons\\keepsakes\\Cosmic_Egg.png"
-            }
-        ]
-    },
-    {
-        "category": "keepsakes",
-        "name": "Sisyphus",
-        "traits": [
-            {
-                "name": "Shattered Shackle",
-                "desc": "Your <b>Attack</b>, <b>Special</b>, and <b>Cast</b> each deal more damage while not empowered by a <b>Boon</b>.",
-                "icon": "icons\\keepsakes\\Shattered_Shackle.png"
-            }
-        ]
-    },
-    {
-        "category": "keepsakes",
-        "name": "Eurydice",
-        "traits": [
-            {
-                "name": "Evergreen Acorn",
-                "desc": "In the final encounter in each underworld region, take <b>0</b> damage the first few times foes hit you.",
-                "icon": "icons\\keepsakes\\Evergreen_Acorn.png"
-            }
-        ]
-    },
-    {
-        "category": "keepsakes",
-        "name": "Patroclus",
-        "traits": [
-            {
-                "name": "Broken Spearpoint",
-                "desc": "After taking damage, become <b>Impervious</b> to damage for a short time. Refreshes after <b>7 Sec</b>.",
-                "icon": "icons\\keepsakes\\Broken_Spearpoint.png"
-            }
-        ]
-    },
-    {
-        "category": "keepsakes",
-        "name": "Persephone",
-        "traits": [
-            {
-                "name": "Pom Blossom",
-                "desc": "After every few <b>Encounters</b>, gain +1 Lv. <i>(a random Boon grows stronger)</i>.",
-                "icon": "icons\\keepsakes\\Pom_Blossom.png"
-            }
-        ]
-    },
-    {
-        "category": "keepsakes",
-        "name": "Hades",
-        "traits": [
-            {
-                "name": "Sigil of the Dead",
-                "desc": "Your <b>Call</b> becomes <b>Hades' Aid</b>, which briefly makes you <b>Invisible</b>; your <b>God Gauge</b> starts partially full.",
-                "icon": "icons\\keepsakes\\Sigil_of_the_Dead.png"
-            }
-        ]
-    },
-    {
-        "category": "companions",
-        "name": "Megaera",
-        "traits": [
-            {
-                "name": "Companion Battie",
-                "desc": "Your <b>Summon</b> deals <span style='color:#00ff00'>2500</span> damage in an area near your closest foe, then continually down the line.",
-                "icon": "icons\\companions\\Companion_Battie.png"
-            }
-        ]
-    },
-    {
-        "category": "companions",
-        "name": "Thanatos",
-        "traits": [
-            {
-                "name": "Companion Mort",
-                "desc": "Your <b>Summon</b> deals <span style='color:#00ff00'>3500</span> damage in an area in front of you, after a brief delay.",
-                "icon": "icons\\companions\\Companion_Mort.png"
-            }
-        ]
-    },
-    {
-        "category": "companions",
-        "name": "Skelly",
-        "traits": [
-            {
-                "name": "Companion Rib",
-                "desc": "Your <b>Summon</b> creates a distraction with <span style='color:#00ff00'>250</span> :heart:, provoking your foes to attack it until it dies.",
-                "icon": "icons\\companions\\Companion_Rib.png"
-            }
-        ]
-    },
-    {
-        "category": "companions",
-        "name": "Sisyphus",
-        "traits": [
-            {
-                "name": "Companion Shady",
-                "desc": "Your <b>Summon</b> deals <span style='color:#00ff00'>1000</span> damage in an area and drops a smattering of :health_restore:, :darkness:, and :obol:.",
-                "icon": "icons\\companions\\Companion_Shady.png"
-            }
-        ]
-    },
-    {
-        "category": "companions",
-        "name": "Dusa",
-        "traits": [
-            {
-                "name": "Companion Fidi",
-                "desc": "Your <b>Summon</b> joins you for <b>30 Sec.</b>, repeatedly firing shots that petrify foes and deal <span style='color:#00ff00'>70</span> damage.",
-                "icon": "icons\\companions\\Companion_Fidi.png"
-            }
-        ]
-    },
-    {
-        "category": "companions",
-        "name": "Achilles",
-        "traits": [
-            {
-                "name": "Companion Antos",
-                "desc": "Your <b>Summon</b> deals <span style='color:#00ff00'>1500</span> damage to <b>2</b> foes one after another.",
-                "icon": "icons\\companions\\Companion_Antos.png"
-            }
-        ]
-    },
-    {
-        "category": "empty_ability",
-        "name": "attack",
-        "traits": [
-            {
-                "name": "attack",
-                "desc": "&lt;No <b>Attack</b> boon&gt;",
-                "icon": "icons\\empty\\attack.png",
-                "singleton": "attack"
-            }
-        ]
-    },
-    {
-        "category": "empty_ability",
-        "name": "boon",
-        "traits": [
-            {
-                "name": "boon",
-                "desc": "&lt;Empty slot&gt;",
-                "icon": "icons\\empty\\boon.png"
-            }
-        ]
-    },
-    {
-        "category": "empty_ability",
-        "name": "call",
-        "traits": [
-            {
-                "name": "call",
-                "desc": "&lt;No <b>Call</b> slot boon equipped&gt;",
-                "icon": "icons\\empty\\call.png",
-                "singleton": "call"
-            }
-        ]
-    },
-    {
-        "category": "empty_ability",
-        "name": "cast",
-        "traits": [
-            {
-                "name": "cast",
-                "desc": "&lt;No <b>Cast</b> slot boon equipped&gt;",
-                "icon": "icons\\empty\\cast.png",
-                "singleton": "cast"
-            }
-        ]
-    },
-    {
-        "category": "empty_ability",
-        "name": "dash",
-        "traits": [
-            {
-                "name": "dash",
-                "desc": "&lt;No <b>Dash</b> slot boon equipped&gt;",
-                "icon": "icons\\empty\\dash.png",
-                "singleton": "dash"
-            }
-        ]
-    },
-    {
-        "category": "empty_ability",
-        "name": "special",
-        "traits": [
-            {
-                "name": "special",
-                "desc": "&lt;No <b>Special</b> slot boon equipped&gt;",
-                "icon": "icons\\empty\\special.png",
-                "singleton": "special"
-            }
-        ]
-    },
-    {
-        "category": "charons_well",
-        "name": "charon",
-        "traits": [
-            {
-                "name": "Aether Net",
-                "desc": "You start <b>Encounter(s)</b> with your <b>God Gauge</b> <span style='color:#00ff00'>15%</span> full.",
-                "icon": "icons\\charons_well\\Aether_Net.png"
-            },
-            {
-                "name": "Braid of Atlas",
-                "desc": "Your <b>Cast</b> deals <span style='color:#00ff00'>+50%</span> damage.",
-                "icon": "icons\\charons_well\\Braid_of_Atlas.png"
-            },
-            {
-                "name": "Chimaera Jerky",
-                "desc": "Your <b>Special</b> deals <span style='color:#00ff00'>+40%</span> damage.",
-                "icon": "icons\\charons_well\\Chimaera_Jerky.png"
-            },
-            {
-                "name": "Cyclops Jerky",
-                "desc": "Your <b>Attack</b> deals <span style='color:#00ff00'>+30%</span> damage.",
-                "icon": "icons\\charons_well\\Cyclops_Jerky.png"
-            },
-            {
-                "name": "Eris Bangle",
-                "desc": "You deal <span style='color:#00ff00'>+50%</span> damage striking undamaged foes.",
-                "icon": "icons\\charons_well\\Eris_Bangle.png"
-            },
-            {
-                "name": "Eye of Lamia",
-                "desc": "Slain foes have a <span style='color:#00ff00'>15%</span> chance to drop healing items.",
-                "icon": "icons\\charons_well\\Eye_of_Lamia.png"
-            },
-            {
-                "name": "Flame Wheels Release",
-                "desc": "Prevent <span style='color:#00ff00'>Flame Wheel</span> foes from appearing in <b>Encounter(s)</b>.",
-                "icon": "icons\\charons_well\\Flame_Wheels_Release.png"
-            },
-            {
-                "name": "HydraLite",
-                "desc": "You recover <span style='color:#00ff00'>10%</span> :heart: when you enter a chamber.",
-                "icon": "icons\\charons_well\\HydraLite.png"
-            },
-            {
-                "name": "Ignited Ichor",
-                "desc": "Gain <span style='color:#00ff00'>20%</span> move speed.",
-                "icon": "icons\\charons_well\\Ignited_Ichor.png"
-            },
-            {
-                "name": "Light of Ixion",
-                "desc": "Ensure a <span style='color:#00ff00'>Chaos Gate</span> will spawn ahead <i>(where possible)</i>.",
-                "icon": "icons\\charons_well\\Light_of_Ixion.png"
-            },
-            {
-                "name": "Nail of Talos",
-                "desc": "You deal <span style='color:#00ff00'>+50%</span> damage to <b>Armor</b>.",
-                "icon": "icons\\charons_well\\Nail_of_Talos.png"
-            },
-            {
-                "name": "Nemesis Crest",
-                "desc": "You deal <span style='color:#00ff00'>+50%</span> damage striking foes from behind.",
-                "icon": "icons\\charons_well\\Nemesis_Crest.png"
-            },
-            {
-                "name": "Prometheus Stone",
-                "desc": "Gain <span style='color:#00ff00'>+1</span> :ammo: for your <b>Cast</b>.",
-                "icon": "icons\\charons_well\\Prometheus_Stone.png"
-            },
-            {
-                "name": "Skeletal Lure",
-                "desc": "Ensure a <span style='color:#00ff00'>Fishing Point</span> will spawn ahead <i>(where possible)</i>.",
-                "icon": "icons\\charons_well\\Skeletal_Lure.png"
-            },
-            {
-                "name": "Stygian Shard",
-                "desc": "<b>Traps</b> deal <span style='color:#00ff00'>+500%</span> damage to your foes.",
-                "icon": "icons\\charons_well\\Stygian_Shard.png"
-            },
-            {
-                "name": "Touch of Styx",
-                "desc": "Your <span style='color:#00ff00'>Stubborn Defiance</span> restores <span style='color:#00ff00'>+10%</span> :heart:.",
-                "icon": "icons\\charons_well\\Touch_of_Styx.png"
-            },
-            {
-                "name": "Trove Tracker",
-                "desc": "Ensure a <span style='color:#00ff00'>Infernal Trove</span> will spawn ahead <i>(where possible)</i>.",
-                "icon": "icons\\charons_well\\Trove_Tracker.png"
-            },
-            {
-                "name": "Yarn of Ariadne",
-                "desc": "The next <b>Boon</b> you find has upgraded <b>Rarity</b>.",
-                "icon": "icons\\charons_well\\Yarn_of_Ariadne.png"
-            }
-        ]
-    },
-    {
-        "category": "eurydice",
-        "name": "eurydice",
-        "traits": [
-            {
-                "name": "Refreshing Nectar",
-                "desc": "A rare and fragrant beverage; the next <span style='color:#00ff00'>3</span> <b>Boons</b> you find have upgraded <b>Rarity</b>.",
-                "icon": "icons\\eurydice\\Refreshing_Nectar.png"
-            }
-        ]
-    },
-    {
-        "category": "special_item",
-        "name": "Heart of Stone",
-        "traits": [
-            {
-                "name": "Heart of Stone",
-                "desc": "You believe in Bouldy, and Bouldy believes in you. Apply a random buff.",
-                "icon": "icons_special\\bouldy_blessing.png"
-            }
-        ]
-    },
-    {
-        "category": "special_item",
-        "name": "Deus Ex Machina",
-        "traits": [
-            {
-                "name": "Deus Ex Machina",
-                "desc": "Instantly makes you tougher, more so whenever you die. Death is not a big deal in the underworld. Try this if you find you're struggling, want focus on the story, or any reason.",
-                "icon": "icons_special\\godmode.png"
-            }
-        ]
-    },
-    {
-        "category": "special_item",
-        "name": "Loyalty Card",
-        "traits": [
-            {
-                "name": "Loyalty Card",
-                "desc": "Reduce the price of <b>Charon</b>'s items by <span style='color:#00ff00'>20%</span>",
-                "icon": "icons_special\\membership_card_large.png"
-            }
-        ]
-    },
-    {
-        "category": "special_item",
-        "name": "Darker Thirst",
-        "traits": [
-            {
-                "name": "Darker Thirst",
-                "desc": "Whenever you find :darkness: or :gemstone:, gain <span style='color:#00ff00'>20%</span> extra.",
-                "icon": "icons_special\\meta_gathered_darkerness_large.png"
-            }
-        ]
-    },
-    {
-        "category": "special_item",
-        "name": "Dark Thirst",
-        "traits": [
-            {
-                "name": "Dark Thirst",
-                "desc": "Whenever you find :darkness:, gain <span style='color:#00ff00'>20%</span> extra.",
-                "icon": "icons_special\\meta_gathered_darkness_large.png"
-            }
-        ]
-    },
-    {
-        "category": "special_item",
-        "name": "meta_second_chance_large",
-        "traits": [
-            {
-                "name": "meta_second_chance_large",
-                "desc": "TODO: cut content?",
-                "icon": "icons_special\\meta_second_chance_large.png"
-            }
-        ]
-    }
-]
+{
+	"providers": [
+		{
+			"category": "gods",
+			"name": "Aphrodite",
+			"traits": [
+				{
+					"name": "Heartbreak Strike",
+					"desc": "Your <b>Attack</b> deals more damage and inflicts <b>Weak</b>.",
+					"icon": "icons\\Aphrodite\\Heartbreak_Strike.png",
+					"singleton": "attack"
+				},
+				{
+					"name": "Heartbreak Flourish",
+					"desc": "Your <b>Special</b> deals more damage and inflicts <b>Weak</b>.",
+					"icon": "icons\\Aphrodite\\Heartbreak_Flourish.png",
+					"singleton": "special"
+				},
+				{
+					"name": "Crush Shot",
+					"desc": "Your <b>Cast</b> is a wide, short-range blast that inflicts <b>Weak</b>.",
+					"icon": "icons\\Aphrodite\\Crush_Shot__Passion_Flare.png",
+					"singleton": "cast",
+					"incompatible_with": [ "Aspect of Beowulf" ]
+				},
+				{
+					"name": "Passion Flare",
+					"desc": "Your <b>Cast</b> damages foes around you and inflicts <b>Weak</b>.",
+					"icon": "icons\\Aphrodite\\Crush_Shot__Passion_Flare.png",
+					"singleton": "cast",
+					"requires": [ "Aspect of Beowulf" ]
+				},
+				{
+					"name": "Passion Dash",
+					"desc": "Your <b>Dash</b> inflicts damage where you end up, inflicting <b>Weak</b>.",
+					"icon": "icons\\Aphrodite\\Passion_Dash.png",
+					"singleton": "dash"
+				},
+				{
+					"name": "Aphrodite's Aid",
+					"desc": "Your <b>Call</b> fires a seeking projectile that inflicts <b>Charm</b>.",
+					"icon": "icons\\Aphrodite\\Aphrodite's_Aid.png",
+					"singleton": "call"
+				},
+				{
+					"name": "Dying Lament",
+					"desc": "When foes are slain, they damage nearby foes and inflict <b>Weak</b>.",
+					"icon": "icons\\Aphrodite\\Dying_Lament.png"
+				},
+				{
+					"name": "Wave of Despair",
+					"desc": "After you take damage, damage foes around you and inflict <b>Weak</b>.",
+					"icon": "icons\\Aphrodite\\Wave_of_Despair.png"
+				},
+				{
+					"name": "Different League",
+					"desc": "Resist some damage from nearby foes' attacks.",
+					"icon": "icons\\Aphrodite\\Different_League.png"
+				},
+				{
+					"name": "Life Affirmation",
+					"desc": "Any :health_up: chamber rewards are worth more.",
+					"icon": "icons\\Aphrodite\\Life_Affirmation.png"
+				},
+				{
+					"name": "Empty Inside",
+					"desc": "Your <b>Weak</b> effects have a longer duration.",
+					"icon": "icons\\Aphrodite\\Empty_Inside.png"
+				},
+				{
+					"name": "Sweet Surrender",
+					"desc": "<b>Weak</b>-afflicted foes are also more susceptible to damage.",
+					"icon": "icons\\Aphrodite\\Sweet_Surrender.png"
+				},
+				{
+					"name": "Broken Resolve",
+					"desc": "Your <b>Weak</b> effects are more potent.",
+					"icon": "icons\\Aphrodite\\Broken_Resolve.png"
+				},
+				{
+					"name": "Blown Kiss",
+					"desc": "Your <b>Cast</b> shoots farther and is stronger against undamaged foes.",
+					"icon": "icons\\Aphrodite\\Blown_Kiss.png"
+				},
+				{
+					"name": "Unhealthy Fixation",
+					"desc": "Your <b>Weak</b> effects also have a <b>+15%</b> chance to <b>Charm</b> foes.\n<b>Charm</b> Duration: <span style='color:#00ff00'>4 Sec</span>.",
+					"icon": "icons\\Aphrodite\\Unhealthy_Fixation.png"
+				},
+				{
+					"name": "Curse of Longing",
+					"desc": "Your <b>Doom</b> effects continuously strike <b>Weak</b> foes.\nSuccessive Hit Damage: <span style='color:#00ff00'>50%</span>",
+					"icon": "icons\\Aphrodite\\Curse_of_Longing.png"
+				},
+				{
+					"name": "Heart Rend",
+					"desc": "Your <b>Critical</b> effects deal even more damage to <b>Weak</b> foes.\nBonus <b>Critical</b> Damage vs. Weak: <span style='color:#00ff00'>+150%</span>",
+					"icon": "icons\\Aphrodite\\Heart_Rend.png"
+				},
+				{
+					"name": "Parting Shot",
+					"desc": "Your <b>Cast</b> gains any bonuses you have for striking foes from behind.\nBonus Backstab Damage: <span style='color:#00ff00'>+35%</span>",
+					"icon": "icons\\Aphrodite\\Parting_Shot.png"
+				},
+				{
+					"name": "Cold Embrace",
+					"desc": "Your <b>Cast</b> crystal fires its beam directly at you for <b>+4 Sec</b>.\nBonus <b>Cast</b> Damage: <span style='color:#00ff00'>+30%</span>",
+					"icon": "icons\\Aphrodite\\Cold_Embrace.png"
+				},
+				{
+					"name": "Low Tolerance",
+					"desc": "Your <b>Hangover</b> effects can stack more times against <b>Weak</b> foes.\nMax Stacks vs. Weak: <span style='color:#00ff00'>+3</span>",
+					"icon": "icons\\Aphrodite\\Low_Tolerance.png"
+				},
+				{
+					"name": "Sweet Nectar",
+					"desc": "Any <b>Poms of Power</b> you find are more potent.\nBonus Lv. from Poms: <span style='color:#00ff00'>+1</span>",
+					"icon": "icons\\Aphrodite\\Sweet_Nectar.png"
+				},
+				{
+					"name": "Smoldering Air",
+					"desc": "Your <b>God Gauge</b> charges up automatically, but is capped at <span style='color:#D31813'>25%</span>.\nAuto Gauge Gain: <span style='color:#00ff00'>1%</span> <i>(every 0.2 Sec.)</i>",
+					"icon": "icons\\Aphrodite\\Smoldering_Air.png"
+				}
+			]
+		},
+		{
+			"category": "gods",
+			"name": "Ares",
+			"traits": [
+				{
+					"name": "Curse of Agony",
+					"desc": "Your <b>Attack</b> inflicts <b>Doom</b>.",
+					"icon": "icons\\Ares\\Curse_of_Agony.png",
+					"singleton": "attack"
+				},
+				{
+					"name": "Curse of Pain",
+					"desc": "Your <b>Special</b> inflicts <b>Doom</b>.",
+					"icon": "icons\\Ares\\Curse_of_Pain.png",
+					"singleton": "special"
+				},
+				{
+					"name": "Slicing Shot",
+					"desc": "Your <b>Cast</b> sends a <b>Blade Rift</b> hurtling ahead.",
+					"icon": "icons\\Ares\\Slicing_Flare__Slicing_Shot.png",
+					"singleton": "cast",
+					"incompatible_with": [ "Aspect of Beowulf" ]
+				},
+				{
+					"name": "Slicing Flare",
+					"desc": "Your <b>Cast</b> sends a large <b>Blade Rift</b> hurtling ahead for a brief time.",
+					"icon": "icons\\Ares\\Slicing_Flare__Slicing_Shot.png",
+					"singleton": "cast",
+					"requires": [ "Aspect of Beowulf" ]
+				},
+				{
+					"name": "Blade Dash",
+					"desc": "Your <b>Dash</b> creates a <b>Blade Rift</b> where you started.",
+					"icon": "icons\\Ares\\Blade_Dash.png",
+					"singleton": "dash"
+				},
+				{
+					"name": "Ares' Aid",
+					"desc": "Your <b>Call</b> turns you into an <b>Impervious Blade Rift</b> for <b>1.2 Sec</b>.",
+					"icon": "icons\\Ares\\Ares'_Aid.png",
+					"singleton": "call"
+				},
+				{
+					"name": "Curse of Vengeance",
+					"desc": "After you take damage, inflict <b>Doom</b> foes around you.",
+					"icon": "icons\\Ares\\Curse_of_Vengeance.png"
+				},
+				{
+					"name": "Urge to Kill",
+					"desc": "Your <b>Attack</b>, <b>Special</b>, and <b>Cast</b> deal more damage.",
+					"icon": "icons\\Ares\\Urge_to_Kill.png"
+				},
+				{
+					"name": "Battle Rage",
+					"desc": "After slaying a foe, your next <b>Attack</b> or <b>Special</b> deals more damage.",
+					"icon": "icons\\Ares\\Battle_Rage.png"
+				},
+				{
+					"name": "Blood Frenzy",
+					"desc": "After using <b>Death Defiance</b>, deal more damage that <b>Encounter</b>.",
+					"icon": "icons\\Ares\\Blood_Frenzy.png"
+				},
+				{
+					"name": "Black Metal",
+					"desc": "Your <b>Blade Rift</b> effects deal damage in a wider area.",
+					"icon": "icons\\Ares\\Black_Metal.png"
+				},
+				{
+					"name": "Engulfing Vortex",
+					"desc": "Your <b>Blade Rift</b> effects last longer and pull foes in.",
+					"icon": "icons\\Ares\\Engulfing_Vortex.png"
+				},
+				{
+					"name": "Dire Misfortune",
+					"desc": "Your <b>Doom</b> effects deal more damage when applied multiple times.",
+					"icon": "icons\\Ares\\Dire_Misfortune.png"
+				},
+				{
+					"name": "Impending Doom",
+					"desc": "Your <b>Doom</b> effects deal more damage, but take <b>+0.5 Sec</b>. to activate",
+					"icon": "icons\\Ares\\Impending_Doom.png"
+				},
+				{
+					"name": "Vicious Cycle",
+					"desc": "Your <b>Blade Rift</b> effects deal more damage for each consecutive hit.\nDamage Increase per Hit: <span style='color:#00ff00'>+2</span>",
+					"icon": "icons\\Ares\\Vicious_Cycle.png"
+				},
+				{
+					"name": "Curse of Longing",
+					"desc": "Your <b>Doom</b> effects continuously strike <b>Weak</b> foes.\nSuccessive Hit Damage: <span style='color:#00ff00'>50%</span>",
+					"icon": "icons\\Ares\\Curse_of_Longing.png"
+				},
+				{
+					"name": "Hunting Blades",
+					"desc": "Your <b>Cast</b> creates a faster <b>Blade Rift</b> that seeks the nearest foe.\nSeek Duration: <span style='color:#00ff00'>3.3 Sec</span>.",
+					"icon": "icons\\Ares\\Hunting_Blades.png"
+				},
+				{
+					"name": "Merciful End",
+					"desc": "Your attacks that can <b>Deflect</b> immediately activate <b>Doom</b> effects.\nDoom Combo Damage: <span style='color:#00ff00'>40</span>",
+					"icon": "icons\\Ares\\Merciful_End.png"
+				},
+				{
+					"name": "Freezing Vortex",
+					"desc": "Your <b>Cast</b> inflicts <b>Chill</b>, but is smaller and moves slower.\nBlade Rift Size: <span style='color:#D31813'>-15%</span>",
+					"icon": "icons\\Ares\\Freezing_Vortex.png"
+				},
+				{
+					"name": "Curse of Nausea",
+					"desc": "Your <b>Hangover</b> effects deal damage faster.\n<b>Hangover</b> Damage Rate: 0.5 Sec. -&gt; <span style='color:#00ff00'>0.35 Sec</span>.",
+					"icon": "icons\\Ares\\Curse_of_Nausea.png"
+				},
+				{
+					"name": "Curse of Drowning",
+					"desc": "Your <b>Flood Shot</b> becomes a pulse that damages foes around you.\nPulses per <b>Cast</b>: <span style='color:#00ff00'>3</span>",
+					"icon": "icons\\Ares\\Curse_of_Drowning.png"
+				},
+				{
+					"name": "Vengeful Mood",
+					"desc": "Your <b>Revenge</b> attacks sometimes occur without taking damage.\nAuto-Revenge Rate: <span style='color:#00ff00'>3 Sec.</span>",
+					"icon": "icons\\Ares\\Vengeful_Mood.png"
+				}
+			]
+		},
+		{
+			"category": "gods",
+			"name": "Artemis",
+			"traits": [
+				{
+					"name": "Deadly Strike",
+					"desc": "Your <b>Attack</b> is stronger, with <span style='color:#00ff00'>+15%</span> chance to deal <b>Critical</b> damage.",
+					"icon": "icons\\Artemis\\Deadly_Strike.png",
+					"singleton": "attack"
+				},
+				{
+					"name": "Deadly Flourish",
+					"desc": "Your <b>Special</b> is stronger, with <span style='color:#00ff00'>+20%</span> chance to deal <b>Critical</b> Damage.",
+					"icon": "icons\\Artemis\\Deadly_Flourish.png",
+					"singleton": "special"
+				},
+				{
+					"name": "True Shot",
+					"desc": "Your <b>Cast</b> seeks foes, with <span style='color:#00ff00'>+10%</span> chance to deal <b>Critical</b> damage.",
+					"icon": "icons\\Artemis\\Hunter's_Flare__True_Shot.png",
+					"singleton": "cast",
+					"incompatible_with": [ "Aspect of Beowulf" ]
+				},
+				{
+					"name": "Hunter's Flare",
+					"desc": "Your <b>Cast</b> damages foes around you, with a <span style='color:#00ff00'>+10%</span> <b>Critical</b> chance.",
+					"icon": "icons\\Artemis\\Hunter's_Flare__True_Shot.png",
+					"singleton": "cast",
+					"requires": [ "Aspect of Beowulf" ]
+				},
+				{
+					"name": "Hunter Dash",
+					"desc": "Your <b>Dash-Strike</b> deals more damage.",
+					"icon": "icons\\Artemis\\Hunter_Dash.png",
+					"singleton": "dash"
+				},
+				{
+					"name": "Artemis' Aid",
+					"desc": "Your <b>Call</b> fires a seeking arrow with <span style='color:#00ff00'>+35%</span> <b>Critical</b> chance.",
+					"icon": "icons\\Artemis\\Artemis'_Aid.png",
+					"singleton": "call"
+				},
+				{
+					"name": "Pressure Points",
+					"desc": "Any damage you deal has a chance to be <b>Critical</b>.",
+					"icon": "icons\\Artemis\\Pressure_Points.png"
+				},
+				{
+					"name": "Exit Wounds",
+					"desc": "Your foes take damage when your :ammo: stuck in them is dislodged.",
+					"icon": "icons\\Artemis\\Exit_Wounds.png"
+				},
+				{
+					"name": "Hide Breaker",
+					"desc": "Your <b>Critical</b> effects deal even more damage to <b>Armor</b>.",
+					"icon": "icons\\Artemis\\Hide_Breaker.png"
+				},
+				{
+					"name": "Clean Kill",
+					"desc": "Your <b>Critical</b> effects deal even more damage.",
+					"icon": "icons\\Artemis\\Clean_Kill.png"
+				},
+				{
+					"name": "Hunter Instinct",
+					"desc": "Your <b>God Gauge</b> charges up faster when you deal <b>Critical</b> damage.",
+					"icon": "icons\\Artemis\\Hunter_Instinct.png"
+				},
+				{
+					"name": "Hunter's Mark",
+					"desc": "After you deal <b>Critical</b> damage to a foe, a foe near it is <b>Marked</b>.",
+					"icon": "icons\\Artemis\\Hunter's_Mark.png"
+				},
+				{
+					"name": "Support Fire",
+					"desc": "After you <b>Cast</b>, or hit with an <b>Attack</b> or <b>Special</b>, fire a seeking arrow.",
+					"icon": "icons\\Artemis\\Support_Fire.png"
+				},
+				{
+					"name": "Fully Loaded",
+					"desc": "Gain extra :ammo: for your <b>Cast</b>.\nMax Bloodstones: <span style='color:#00ff00'>+2</span> :ammo:",
+					"icon": "icons\\Artemis\\Fully_Loaded.png"
+				},
+				{
+					"name": "Heart Rend",
+					"desc": "Your <b>Critical</b> effects deal even more damage to <b>Weak</b> foes.\nBonus <b>Critical</b> Damage vs. <b>Weak</b>: <span style='color:#00ff00'>+150%</span>",
+					"icon": "icons\\Artemis\\Heart_Rend.png"
+				},
+				{
+					"name": "Hunting Blades",
+					"desc": "Your <b>Cast</b> creates a faster <b>Blade Rift</b> that seeks the nearest foe.\nSeek Duration: <span style='color:#00ff00'>3.3 Sec</span>.",
+					"icon": "icons\\Artemis\\Hunting_Blades.png"
+				},
+				{
+					"name": "Deadly Reversal",
+					"desc": "After you <b>Deflect</b>, briefly gain <span style='color:#00ff00'>+20%</span> chance to deal <b>Critical</b> damage.\nCritical Duration: <span style='color:#00ff00'>2 Sec</span>.",
+					"icon": "icons\\Artemis\\Deadly_Reversal.png"
+				},
+				{
+					"name": "Crystal Clarity",
+					"desc": "Your <b>Cast</b> is stronger and tracks foes more effectively.\nBeam Damage: <span style='color:#00ff00'>+10%</span>",
+					"icon": "icons\\Artemis\\Crystal_Clarity.png"
+				},
+				{
+					"name": "Splitting Headache",
+					"desc": "<b>Hangover</b>-afflicted foes are more likely to take <b>Critical</b> damage.\nBonus <b>Critical</b> Chance per <b>Hangover</b> Stack: <span style='color:#00ff00'>+1.5%</span>",
+					"icon": "icons\\Artemis\\Splitting_Headache.png"
+				},
+				{
+					"name": "Mirage Shot",
+					"desc": "Your <b>Cast</b> fires a second projectile, which deals reduced base damage.",
+					"icon": "icons\\Artemis\\Mirage_Shot.png"
+				},
+				{
+					"name": "Lightning Rod",
+					"desc": "Your collectible :ammo: strike nearby foes with lightning every <b>1 Sec</b>.",
+					"icon": "icons\\Artemis\\Lightning_Rod.png"
+				}
+			]
+		},
+		{
+			"category": "gods",
+			"name": "Athena",
+			"traits": [
+				{
+					"name": "Divine Strike",
+					"desc": "Your <b>Attack</b> is stronger, and can <b>Deflect</b>.",
+					"icon": "icons\\Athena\\Divine_Strike.png",
+					"singleton": "attack"
+				},
+				{
+					"name": "Divine Flourish",
+					"desc": "Your <b>Special</b> is stronger, and can <b>Deflect</b>.",
+					"icon": "icons\\Athena\\Divine_Flourish.png",
+					"singleton": "special"
+				},
+				{
+					"name": "Phalanx Shot",
+					"desc": "Your <b>Cast</b> damages foes in a small area, and can <b>Deflect</b>.",
+					"icon": "icons\\Athena\\Phalanx_Flare__Phalanx_Shot.png",
+					"singleton": "cast",
+					"incompatible_with": [ "Aspect of Beowulf" ]
+				},
+				{
+					"name": "Phalanx Flare",
+					"desc": "Your <b>Cast</b> damages foes around you, and can <b>Deflect</b>.",
+					"icon": "icons\\Athena\\Phalanx_Flare__Phalanx_Shot.png",
+					"singleton": "cast",
+					"requires": [ "Aspect of Beowulf" ]
+				},
+				{
+					"name": "Divine Dash",
+					"desc": "Your <b>Dash</b> deals damage and can <b>Deflect</b>.",
+					"icon": "icons\\Athena\\Divine_Dash.png",
+					"singleton": "dash"
+				},
+				{
+					"name": "Athena's Aid",
+					"desc": "Your <b>Call</b> briefly makes you <b>Impervious</b> and <b>Deflect</b> all attacks.",
+					"icon": "icons\\Athena\\Athena's_Aid.png",
+					"singleton": "call"
+				},
+				{
+					"name": "Holy Shield",
+					"desc": "After you take damage, damage foes around you and briefly <b>Deflect</b>.",
+					"icon": "icons\\Athena\\Holy_Shield.png"
+				},
+				{
+					"name": "Bronze Skin",
+					"desc": "Resist damage from foes' attacks.",
+					"icon": "icons\\Athena\\Bronze_Skin.png"
+				},
+				{
+					"name": "Sure Footing",
+					"desc": "Resist damage from <b>Traps</b>.",
+					"icon": "icons\\Athena\\Sure_Footing.png"
+				},
+				{
+					"name": "Proud Bearing",
+					"desc": "You begin each <b>Encounter</b> with your <b>God Gauge</b> partly full.",
+					"icon": "icons\\Athena\\Proud_Bearing.png"
+				},
+				{
+					"name": "Blinding Flash",
+					"desc": "Your abilities that can <b>Deflect</b> also make foes Exposed.",
+					"icon": "icons\\Athena\\Blinding_Flash.png"
+				},
+				{
+					"name": "Brilliant Riposte",
+					"desc": "When you <b>Deflect</b> attacks, it deals more damage.",
+					"icon": "icons\\Athena\\Brilliant_Riposte.png"
+				},
+				{
+					"name": "Deathless Stand",
+					"desc": "<b>Death Defiance</b> makes you <b>Impervious</b> longer. Replenish <b>1</b> use.",
+					"icon": "icons\\Athena\\Deathless_Stand.png"
+				},
+				{
+					"name": "Last Stand",
+					"desc": "<b>Death Defiance</b> restores more :heart: than usual. Replenish <b>1</b> use.",
+					"icon": "icons\\Athena\\Last_Stand.png"
+				},
+				{
+					"name": "Divine Protection",
+					"desc": "You have a barrier that negates an instance of damage.\nBarrier Refresh Time: <span style='color:#00ff00'>20 Sec</span>.",
+					"icon": "icons\\Athena\\Divine_Protection.png"
+				},
+				{
+					"name": "Parting Shot",
+					"desc": "Your <b>Cast</b> gains any bonuses you have for striking foes from behind.\nBonus Backstab Damage: <span style='color:#00ff00'>+35%</span>",
+					"icon": "icons\\Athena\\Parting_Shot.png"
+				},
+				{
+					"name": "Merciful End",
+					"desc": "Your attacks that can <b>Deflect</b> immediately activate <b>Doom</b> effects.\nDoom Combo Damage: <span style='color:#00ff00'>40</span>",
+					"icon": "icons\\Athena\\Merciful_End.png"
+				},
+				{
+					"name": "Deadly Reversal",
+					"desc": "After you <b>Deflect</b>, briefly gain <span style='color:#00ff00'>+20%</span> chance to deal <b>Critical</b> damage.\n<b>Critical</b> Duration: <span style='color:#00ff00'>2 Sec</span>.",
+					"icon": "icons\\Athena\\Deadly_Reversal.png"
+				},
+				{
+					"name": "Stubborn Roots",
+					"desc": "If you have no <b>Death Defiance</b> your :heart: slowly recovers.\nLife Regeneration During Battle: <span style='color:#00ff00'>1</span> :health_restore: <i>(every 0.8 Sec.)</i>",
+					"icon": "icons\\Athena\\Stubborn_Roots.png"
+				},
+				{
+					"name": "Calculated Risk",
+					"desc": "Your foes' ranged-attack projectiles are slower.\nFoe Projectile Speed Reduction: <span style='color:#00ff00'>+50%</span>",
+					"icon": "icons\\Athena\\Calculated_Risk.png"
+				},
+				{
+					"name": "Unshakable Mettle",
+					"desc": "You cannot be stunned, and resist some damage from <b>Bosses</b>.\nBoss Damage Reduction: <span style='color:#00ff00'>+10%</span>",
+					"icon": "icons\\Athena\\Unshakable_Mettle.png"
+				},
+				{
+					"name": "Lightning Phalanx",
+					"desc": "Your Phalanx Shot <b>Cast</b> bounces between nearby foes.\nMax Bounces: <span style='color:#00ff00'>3</span>",
+					"icon": "icons\\Athena\\Lightning_Phalanx.png"
+				}
+			]
+		},
+		{
+			"category": "gods",
+			"name": "Chaos",
+			"traits": [
+				{
+					"name": "Affluence",
+					"desc": "Any :obol: you find is worth <span style='color:#00ff00'>+X%</span>.",
+					"icon": "icons\\Chaos\\Affluence.png"
+				},
+				{
+					"name": "Ambush",
+					"desc": "You deal <span style='color:#00ff00'>+X%</span> damage striking foes from behind.",
+					"icon": "icons\\Chaos\\Ambush.png"
+				},
+				{
+					"name": "Assault",
+					"desc": "You deal <span style='color:#00ff00'>+X%</span> damage striking undamaged foes.",
+					"icon": "icons\\Chaos\\Assault.png"
+				},
+				{
+					"name": "Eclipse",
+					"desc": "Any :darkness: and :gemstone: you find are worth <span style='color:#00ff00'>+X%</span>.",
+					"icon": "icons\\Chaos\\Eclipse.png"
+				},
+				{
+					"name": "Favor",
+					"desc": "<b>Boons</b> have <span style='color:#00ff00'>+X%</span> chance to be <span style='color:#1895F1'><b>Rare</b></span> or better.",
+					"icon": "icons\\Chaos\\Favor.png"
+				},
+				{
+					"name": "Flourish",
+					"desc": "Your <b>Special</b> deals <span style='color:#00ff00'>+X%</span> damage.",
+					"icon": "icons\\Chaos\\Flourish.png"
+				},
+				{
+					"name": "Grasp",
+					"desc": "You have <span style='color:#00ff00'>+X</span> :ammo:",
+					"icon": "icons\\Chaos\\Grasp.png"
+				},
+				{
+					"name": "Lunge",
+					"desc": "Your <b>Dash-Strike</b> deals <span style='color:#00ff00'>+X%</span> damage.",
+					"icon": "icons\\Chaos\\Lunge.png"
+				},
+				{
+					"name": "Shot",
+					"desc": "Your <b>Cast</b> deals <span style='color:#00ff00'>+X%</span> damage.",
+					"icon": "icons\\Chaos\\Shot.png"
+				},
+				{
+					"name": "Soul",
+					"desc": "You have +X :health_up:.",
+					"icon": "icons\\Chaos\\Soul.png"
+				},
+				{
+					"name": "Strike",
+					"desc": "Your <b>Attack</b> deals <span style='color:#00ff00'>+X%</span> damage.",
+					"icon": "icons\\Chaos\\Strike.png"
+				},
+				{
+					"name": "Defiance",
+					"desc": "You have <span style='color:#00ff00'>+1</span> use of <b>Death Defiance</b> <i>(this escape attempt)</i>.",
+					"icon": "icons\\Chaos\\Defiance.png"
+				}
+			]
+		},
+		{
+			"category": "gods",
+			"name": "Demeter",
+			"traits": [
+				{
+					"name": "Frost Strike",
+					"desc": "Your <b>Attack</b> is stronger and inflicts <b>Chill</b>.",
+					"icon": "icons\\Demeter\\Frost_Strike.png",
+					"singleton": "attack"
+				},
+				{
+					"name": "Frost Flourish",
+					"desc": "Your <b>Special</b> is stronger and inflicts <b>Chill</b>.",
+					"icon": "icons\\Demeter\\Frost_Flourish.png",
+					"singleton": "special"
+				},
+				{
+					"name": "Crystal Beam",
+					"desc": "Your <b>Cast</b> drops a crystal that fires a beam at foes for <b>5 sec</b>.",
+					"icon": "icons\\Demeter\\Crystal_Beam__Icy_Flare.png",
+					"singleton": "cast",
+					"incompatible_with": [ "Aspect of Beowulf" ]
+				},
+				{
+					"name": "Icy Flare",
+					"desc": "Your <b>Cast</b> damages foes around you and inflicts <b>Chill</b>.",
+					"icon": "icons\\Demeter\\Crystal_Beam__Icy_Flare.png",
+					"singleton": "cast",
+					"requires": [ "Aspect of Beowulf" ]
+				},
+				{
+					"name": "Mistral Dash",
+					"desc": "Your <b>Dash</b> shoots a gust ahead that inflicts <b>Chill</b>.",
+					"icon": "icons\\Demeter\\Mistral_Dash.png",
+					"singleton": "dash"
+				},
+				{
+					"name": "Demeter's Aid",
+					"desc": "Your <b>Call</b> creates a winter vortex that grows over <b>5 Sec</b>., inflicting <b>Chill</b>.",
+					"icon": "icons\\Demeter\\Demeter's_Aid.png",
+					"singleton": "call"
+				},
+				{
+					"name": "Frozen Touch",
+					"desc": "After you take damage, damage and <i>completely</i> <b>Chill</b> your foe.",
+					"icon": "icons\\Demeter\\Frozen_Touch.png"
+				},
+				{
+					"name": "Rare Crop",
+					"desc": "Your <b>Boons</b> become <b>Common</b>, then gain <b>Rarity</b> every <b>3 Encounter(s)</b>.",
+					"icon": "icons\\Demeter\\Rare_Crop.png"
+				},
+				{
+					"name": "Ravenous Will",
+					"desc": "While you have no :ammo:, take <b>10%</b> less damage and deal more.",
+					"icon": "icons\\Demeter\\Ravenous_Will.png"
+				},
+				{
+					"name": "Nourished Soul",
+					"desc": "Any :health_restore: effects are more potent. Restore <span style='color:#00ff00'>30%</span> :heart: now.",
+					"icon": "icons\\Demeter\\Nourished_Soul.png"
+				},
+				{
+					"name": "Snow Burst",
+					"desc": "Whenever you <b>Cast</b>, damage nearby foes and inflict <b>Chill</b>.",
+					"icon": "icons\\Demeter\\Snow_Burst.png"
+				},
+				{
+					"name": "Arctic Blast",
+					"desc": "Applying <b>10</b> stacks of <b>Chill</b> causes a blast, clearing the effect.",
+					"icon": "icons\\Demeter\\Arctic_Blast.png"
+				},
+				{
+					"name": "Killing Freeze",
+					"desc": "When <i>all</i> foes are <b>Chill</b>-afflicted, they are <span style='color:#00ff00'>+10%</span> slower and decay.",
+					"icon": "icons\\Demeter\\Killing_Freeze.png"
+				},
+				{
+					"name": "Glacial Glare",
+					"desc": "Your <b>Cast</b> fires longer and inflicts <b>Chill</b>.",
+					"icon": "icons\\Demeter\\Glacial_Glare.png"
+				},
+				{
+					"name": "Winter Harvest",
+					"desc": "<b>Chill</b>-afflicted foes shatter at <b>10%</b> :heart:, inflicting <b>Chill</b> nearby.\nShatter Area Damage: <span style='color:#00ff00'>50</span>",
+					"icon": "icons\\Demeter\\Winter_Harvest.png"
+				},
+				{
+					"name": "Cold Embrace",
+					"desc": "Your <b>Cast</b> crystal fires its beam directly at you for <b>+4 Sec</b>.\nBonus Cast Damage: <span style='color:#00ff00'>+30%</span>",
+					"icon": "icons\\Demeter\\Cold_Embrace.png"
+				},
+				{
+					"name": "Freezing Vortex",
+					"desc": "Your <b>Cast</b> inflicts <b>Chill</b>, but is smaller and moves slower.\nBlade Rift Size: <span style='color:#D31813'>-15%</span>",
+					"icon": "icons\\Demeter\\Freezing_Vortex.png"
+				},
+				{
+					"name": "Crystal Clarity",
+					"desc": "Your <b>Cast</b> is stronger and tracks foes more effectively.\nBeam Damage: <span style='color:#00ff00'>+10%</span>",
+					"icon": "icons\\Demeter\\Crystal_Clarity.png"
+				},
+				{
+					"name": "Stubborn Roots",
+					"desc": "If you have no <b>Death Defiance</b> your :heart: slowly recovers.\nLife Regeneration During Battle: <span style='color:#00ff00'>1</span> :health_restore: <i>(every 0.8 Sec.)</i>",
+					"icon": "icons\\Demeter\\Stubborn_Roots.png"
+				},
+				{
+					"name": "Ice Wine",
+					"desc": "Your <b>Cast</b> blasts an area with freezing <b>Festive Fog</b> that inflicts <b>Chill</b>.\nBlast Damage: <span style='color:#00ff00'>+30%</span>",
+					"icon": "icons\\Demeter\\Ice_Wine.png"
+				},
+				{
+					"name": "Blizzard Shot",
+					"desc": "Your <b>Cast</b> moves slowly, piercing foes and firing shards around it.\nShard Damage: <span style='color:#00ff00'>20</span>",
+					"icon": "icons\\Demeter\\Blizzard_Shot.png"
+				},
+				{
+					"name": "Cold Fusion",
+					"desc": "Your <b>Jolted</b> effects do not expire when foes attack.\nJolted Duration: <span style='color:#00ff00'>10 Sec.</span>",
+					"icon": "icons\\Demeter\\Cold_Fusion.png"
+				}
+			]
+		},
+		{
+			"category": "gods",
+			"name": "Dionysus",
+			"traits": [
+				{
+					"name": "Drunken Strike",
+					"desc": "Your <b>Attack</b> inflicts <b>Hangover</b>.",
+					"icon": "icons\\Dionysus\\Drunken_Strike.png",
+					"singleton": "attack"
+				},
+				{
+					"name": "Drunken Flourish",
+					"desc": "Your <b>Special</b> inflicts <b>Hangover</b>.",
+					"icon": "icons\\Dionysus\\Drunken_Flourish.png",
+					"singleton": "special"
+				},
+				{
+					"name": "Trippy Shot",
+					"desc": "Your <b>Cast</b> lobs a large explosive that bursts into <b>Festive Fog</b>.",
+					"icon": "icons\\Dionysus\\Trippy_Flare__Trippy_Shot.png",
+					"singleton": "cast",
+					"incompatible_with": [ "Aspect of Beowulf" ]
+				},
+				{
+					"name": "Trippy Flare",
+					"desc": "Your <b>Cast</b> damages foes around you, leaving behind <b>Festive Fog</b>.",
+					"icon": "icons\\Dionysus\\Trippy_Flare__Trippy_Shot.png",
+					"singleton": "cast",
+					"requires_any": [ "Aspect of Beowulf", "Aspect of Hera" ]
+				},
+				{
+					"name": "Drunken Dash",
+					"desc": "Your <b>Dash</b> causes <b>Hangover</b> several times near where you started.",
+					"icon": "icons\\Dionysus\\Drunken_Dash.png",
+					"singleton": "dash"
+				},
+				{
+					"name": "Dionysus' Aid",
+					"desc": "Your <b>Call</b> inflicts <b>Hangover</b> on foes all around you for <b>1.5 Sec</b>.",
+					"icon": "icons\\Dionysus\\Dionysus'_Aid.png",
+					"singleton": "call"
+				},
+				{
+					"name": "After Party",
+					"desc": "If your :heart: is low after <b>Encounters</b>, restore to the threshold.",
+					"icon": "icons\\Dionysus\\After_Party.png"
+				},
+				{
+					"name": "Positive Outlook",
+					"desc": "Take less damage while at <b>40%</b> :heart: or below.",
+					"icon": "icons\\Dionysus\\Positive_Outlook.png"
+				},
+				{
+					"name": "Premium Vintage",
+					"desc": "Gain :health_up: when you pick up :nectar:. Receive <b>1</b> :nectar: now.",
+					"icon": "icons\\Dionysus\\Premium_Vintage.png"
+				},
+				{
+					"name": "Strong Drink",
+					"desc": "Using a <b>Fountain</b> restores all :heart: and gives you bonus damage.",
+					"icon": "icons\\Dionysus\\Strong_Drink.png"
+				},
+				{
+					"name": "Bad Influence",
+					"desc": "Deal more damage while <b>3</b> foes are <b>Hangover</b>-afflicted.",
+					"icon": "icons\\Dionysus\\Bad_Influence.png"
+				},
+				{
+					"name": "Numbing Sensation",
+					"desc": "Your <b>Hangover</b> effects also make foes move slower.",
+					"icon": "icons\\Dionysus\\Numbing_Sensation.png"
+				},
+				{
+					"name": "Peer Pressure",
+					"desc": "<b>Hangover</b>-afflicted foes inflict it on other foes near them every <b>4 Sec</b>.",
+					"icon": "icons\\Dionysus\\Peer_Pressure.png"
+				},
+				{
+					"name": "High Tolerance",
+					"desc": "You take less damage while standing in <b>Festive Fog</b>.",
+					"icon": "icons\\Dionysus\\High_Tolerance.png"
+				},
+				{
+					"name": "Black Out",
+					"desc": "<b>Hangover</b>-afflicted foes take bonus damage in <b>Festive Fog</b>.\nFog Combo Damage: <span style='color:#00ff00'>+60%</span>",
+					"icon": "icons\\Dionysus\\Black_Out.png"
+				},
+				{
+					"name": "Low Tolerance",
+					"desc": "Your <b>Hangover</b> effects can stack more times against <b>Weak</b> foes.\nMax Stacks vs. Weak: <span style='color:#00ff00'>+3</span>",
+					"icon": "icons\\Dionysus\\Low_Tolerance.png"
+				},
+				{
+					"name": "Curse of Nausea",
+					"desc": "Your <b>Hangover</b> effects deal damage faster.\n<b>Hangover</b> Damage Rate: 0.5 Sec. -&gt; <span style='color:#00ff00'>0.35 Sec</span>.",
+					"icon": "icons\\Dionysus\\Curse_of_Nausea.png"
+				},
+				{
+					"name": "Splitting Headache",
+					"desc": "<b>Hangover</b>-afflicted foes are more likely to take <b>Critical</b> damage.\nBonus <b>Critical</b> Chance per <b>Hangover</b> Stack: <span style='color:#00ff00'>+1.5%</span>",
+					"icon": "icons\\Dionysus\\Splitting_Headache.png"
+				},
+				{
+					"name": "Calculated Risk",
+					"desc": "Your foes' ranged-attack projectiles are slower.\nFoe Projectile Speed Reduction: <span style='color:#00ff00'>+50%</span>",
+					"icon": "icons\\Dionysus\\Calculated_Risk.png"
+				},
+				{
+					"name": "Ice Wine",
+					"desc": "Your <b>Cast</b> blasts an area with freezing <b>Festive Fog</b> that inflicts <b>Chill</b>.\nBlast Damage: <span style='color:#00ff00'>+30%</span>",
+					"icon": "icons\\Dionysus\\Ice_Wine.png"
+				},
+				{
+					"name": "Exclusive Access",
+					"desc": "Any <b>Boons</b> you find are more potent.\nMinimum Boon Rarity: <span style='color:#A21AE1'>Epic</span>",
+					"icon": "icons\\Dionysus\\Exclusive_Access.png"
+				},
+				{
+					"name": "Scintillating Feast",
+					"desc": "Your <b>Festive Fog</b> effects also deal lightning damage periodically.\nLightning Damage: <span style='color:#00ff00'>60</span>",
+					"icon": "icons\\Dionysus\\Scintillating_Feast.png"
+				}
+			]
+		},
+		{
+			"category": "gods",
+			"name": "Hermes",
+			"traits": [
+				{
+					"name": "Swift Strike",
+					"desc": "Your <b>Attack</b> is faster.",
+					"icon": "icons\\Hermes\\Swift_Strike.png"
+				},
+				{
+					"name": "Swift Flourish",
+					"desc": "Your <b>Special</b> is faster.",
+					"icon": "icons\\Hermes\\Swift_Flourish.png"
+				},
+				{
+					"name": "Flurry Cast",
+					"desc": "Hold <b>Cast</b> to fire in rapid succession",
+					"icon": "icons\\Hermes\\Bad_News__Flurry_Cast.png",
+					"incompatible_with": [ "Aspect of Beowulf", "Aspect of Hera" ]
+				},
+				{
+					"name": "Quick Favor",
+					"desc": "Your <b>God Gauge</b> charges up automatically.",
+					"icon": "icons\\Hermes\\Quick_Favor.png"
+				},
+				{
+					"name": "Hyper Sprint",
+					"desc": "After you <b>Dash</b>, briefly become <b>Sturdy</b> and move <b>+100%</b> faster.",
+					"icon": "icons\\Hermes\\Hyper_Sprint.png"
+				},
+				{
+					"name": "Greater Haste",
+					"desc": "You move faster.",
+					"icon": "icons\\Hermes\\Greater_Haste.png"
+				},
+				{
+					"name": "Quick Recovery",
+					"desc": "After you take damage, quickly <b>Dash</b> to recover some :heart: you just lost.",
+					"icon": "icons\\Hermes\\Quick_Recovery.png"
+				},
+				{
+					"name": "Greater Evasion",
+					"desc": "Whenever you are hit, you have a chance to <b>Dodge</b> automatically.",
+					"icon": "icons\\Hermes\\Greater_Evasion.png"
+				},
+				{
+					"name": "Greatest Reflex",
+					"desc": "You can <b>Dash</b> more times in a row.",
+					"icon": "icons\\Hermes\\Greatest_Reflex.png"
+				},
+				{
+					"name": "Second Wind",
+					"desc": "After using <b>Call</b>, gain <b>Dodge</b> chance and move speed for <b>10 Sec</b>.",
+					"icon": "icons\\Hermes\\Second_Wind.png"
+				},
+				{
+					"name": "Quick Reload",
+					"desc": "Foes drop :ammo: stuck in them faster.",
+					"icon": "icons\\Hermes\\Auto_Reload__Quick_Reload.png",
+					"incompatible_with": [ "Aspect of Beowulf", "Trippy Shot", "Crystal Beam", "Curse of Drowning", "Slicing Shot" ]
+				},
+				{
+					"name": "Side Hustle",
+					"desc": "Each time you enter a <b>Chamber</b>, gain a bit wealth.",
+					"icon": "icons\\Hermes\\Side_Hustle.png"
+				},
+				{
+					"name": "Rush Delivery",
+					"desc": "You deal bonus damage based on any bonus move speed.",
+					"icon": "icons\\Hermes\\Rush_Delivery.png"
+				},
+				{
+					"name": "Auto Reload",
+					"desc": "You regenerate :ammo: faster.",
+					"icon": "icons\\Hermes\\Auto_Reload__Quick_Reload.png"
+				},
+				{
+					"name": "Greater Recall",
+					"desc": "Your :ammo: automatically return to you.",
+					"icon": "icons\\Hermes\\Greater_Recall.png"
+				},
+				{
+					"name": "Bad News",
+					"desc": "Your <b>Cast</b> deals bonus damage to foes <i>without</i> :ammo: in them.\nFirst-Shot Damage: <span style='color:#00ff00'>+50%</span>",
+					"icon": "icons\\Hermes\\Bad_News__Flurry_Cast.png",
+					"requires_any": [ "Auto Reload", "Lambent Plume" ]
+				}
+			]
+		},
+		{
+			"category": "gods",
+			"name": "Poseidon",
+			"traits": [
+				{
+					"name": "Tempest Strike",
+					"desc": "Your <b>Attack</b> deals more damage and knocks foes away.",
+					"icon": "icons\\Poseidon\\Tempest_Strike.png",
+					"singleton": "attack"
+				},
+				{
+					"name": "Tempest Flourish",
+					"desc": "Your <b>Special</b> deals more damage and knocks foes away.",
+					"icon": "icons\\Poseidon\\Tempest_Flourish.png",
+					"singleton": "special"
+				},
+				{
+					"name": "Flood Shot",
+					"desc": "Your <b>Cast</b> damages foes in an area and knocks them away.",
+					"icon": "icons\\Poseidon\\Flood_Flare__Flood_Shot.png",
+					"singleton": "cast",
+					"incompatible_with": [ "Aspect of Beowulf" ]
+				},
+				{
+					"name": "Flood Flare",
+					"desc": "Your <b>Cast</b> damages foes around you and knocks them away.",
+					"icon": "icons\\Poseidon\\Flood_Flare__Flood_Shot.png",
+					"singleton": "cast",
+					"requires": [ "Aspect of Beowulf" ]
+				},
+				{
+					"name": "Tidal Dash",
+					"desc": "Your <b>Dash</b> damages foes in an area and knocks them away.",
+					"icon": "icons\\Poseidon\\Tidal_Dash.png",
+					"singleton": "dash"
+				},
+				{
+					"name": "Poseidon's Aid",
+					"desc": "Your <b>Call</b> makes you surge into foes while <b>Impervious</b> for <b>1.2 Sec</b>.",
+					"icon": "icons\\Poseidon\\Poseidon's_Aid.png",
+					"singleton": "call"
+				},
+				{
+					"name": "Typhoon's Fury",
+					"desc": "You deal more damage when slamming foes into barriers.",
+					"icon": "icons\\Poseidon\\Typhoon's_Fury.png"
+				},
+				{
+					"name": "Hydraulic Might",
+					"desc": "Your <b>Attack</b> and <b>Special</b> are stronger the first <b>10 Sec</b>. in <b>Encounter(s)</b>.",
+					"icon": "icons\\Poseidon\\Hydraulic_Might.png"
+				},
+				{
+					"name": "Ocean's Bounty",
+					"desc": "Any :gemstone:, :darkness: and :obol: chamber rewards are worth more.",
+					"icon": "icons\\Poseidon\\Ocean's_Bounty.png"
+				},
+				{
+					"name": "Sunken Treasure",
+					"desc": "Gain a random assortment of :gemstone:, :darkness:, :obol:, and :health_restore:.",
+					"icon": "icons\\Poseidon\\Sunken_Treasure.png"
+				},
+				{
+					"name": "Razor Shoals",
+					"desc": "Your <b>Boons</b> with knock-away effects also <b>Rupture</b> foes.",
+					"icon": "icons\\Poseidon\\Razor_Shoals.png"
+				},
+				{
+					"name": "Boiling Point",
+					"desc": "Your <b>God Gauge</b> charges up faster when you take damage.",
+					"icon": "icons\\Poseidon\\Boiling_Point.png"
+				},
+				{
+					"name": "Breaking Wave",
+					"desc": "Slamming foes into barriers creates a watery blast in the area.",
+					"icon": "icons\\Poseidon\\Breaking_Wave.png"
+				},
+				{
+					"name": "Wave Pounding",
+					"desc": "Your <b>Boons</b> with knock-away effects deal bonus damage to <b>Bosses</b>.",
+					"icon": "icons\\Poseidon\\Wave_Pounding.png"
+				},
+				{
+					"name": "Rip Current",
+					"desc": "Your <b>Call</b> pulls in foes and the effect lasts longer.",
+					"icon": "icons\\Poseidon\\Rip_Current.png"
+				},
+				{
+					"name": "Huge Catch",
+					"desc": "You have a greater chance to find a <b>Fishing Point</b> in each <b>Chamber</b>.",
+					"icon": "icons\\Poseidon\\Huge_Catch.png"
+				},
+				{
+					"name": "Second Wave",
+					"desc": "Your <b>Boons</b> with knock-away effects shove foes multiple times.",
+					"icon": "icons\\Poseidon\\Second_Wave.png"
+				},
+				{
+					"name": "Sweet Nectar",
+					"desc": "Any <b>Poms of Power</b> you find are more potent.\nBonus Lv. from Poms: <span style='color:#00ff00'>+1</span>",
+					"icon": "icons\\Poseidon\\Sweet_Nectar.png"
+				},
+				{
+					"name": "Curse of Drowning",
+					"desc": "Your <b>Flood Shot</b> becomes a pulse that damages foes around you.\nPulses per <b>Cast</b>: <span style='color:#00ff00'>3</span>",
+					"icon": "icons\\Poseidon\\Curse_of_Drowning.png"
+				},
+				{
+					"name": "Mirage Shot",
+					"desc": "Your <b>Cast</b> fires a second projectile, which deals reduced base damage.",
+					"icon": "icons\\Poseidon\\Mirage_Shot.png"
+				},
+				{
+					"name": "Unshakable Mettle",
+					"desc": "You cannot be stunned, and resist some damage from <b>Bosses</b>.\nBoss Damage Reduction: <span style='color:#00ff00'>+10%</span>",
+					"icon": "icons\\Poseidon\\Unshakable_Mettle.png"
+				},
+				{
+					"name": "Blizzard Shot",
+					"desc": "Your <b>Cast</b> moves slowly, piercing foes and firing shards around it.\nShard Damage: <span style='color:#00ff00'>20</span>",
+					"icon": "icons\\Poseidon\\Blizzard_Shot.png"
+				},
+				{
+					"name": "Exclusive Access",
+					"desc": "Any <b>Boons</b> you find are more potent.\nMinimum Boon Rarity: <span style='color:#A21AE1'>Epic</span>",
+					"icon": "icons\\Poseidon\\Exclusive_Access.png"
+				},
+				{
+					"name": "Sea Storm",
+					"desc": "When you knock foes away, they are struck by lightning.\nLightning Damage: <span style='color:#00ff00'>40</span>",
+					"icon": "icons\\Poseidon\\Sea_Storm.png"
+				}
+			]
+		},
+		{
+			"category": "gods",
+			"name": "Zeus",
+			"traits": [
+				{
+					"name": "Lightning Strike",
+					"desc": "Your <b>Attack</b> emits chain-lightning when you damage a foe.",
+					"icon": "icons\\Zeus\\Lightning_Strike.png",
+					"singleton": "attack"
+				},
+				{
+					"name": "Thunder Flourish",
+					"desc": "Your <b>Special</b> causes a lightning bolt to strike nearby foes.",
+					"icon": "icons\\Zeus\\Thunder_Flourish.png",
+					"singleton": "special"
+				},
+				{
+					"name": "Electric Shot",
+					"desc": "Your <b>Cast</b> is a burst of chain-lightning that bounces between foes.",
+					"icon": "icons\\Zeus\\Thunder_Flare__Electric_Shot.png",
+					"singleton": "cast",
+					"incompatible_with": [ "Aspect of Beowulf" ]
+				},
+				{
+					"name": "Thunder Flare",
+					"desc": "Your <b>Cast</b> causes a lightning bolt to strike nearby foes.",
+					"icon": "icons\\Zeus\\Thunder_Flare__Electric_Shot.png",
+					"singleton": "cast",
+					"requires": [ "Aspect of Beowulf" ]
+				},
+				{
+					"name": "Thunder Dash",
+					"desc": "Your <b>Dash</b> causes a lightning bolt to strike nearby foes.",
+					"icon": "icons\\Zeus\\Thunder_Dash.png",
+					"singleton": "dash"
+				},
+				{
+					"name": "Zeus' Aid",
+					"desc": "Your <b>Call</b> makes lightning strike nearby foes repeatedly for <b>1.5 Sec</b>.",
+					"icon": "icons\\Zeus\\Zeus'_Aid.png",
+					"singleton": "call"
+				},
+				{
+					"name": "Heaven's Vengeance",
+					"desc": "After you take damage, your foe is struck by lightning.",
+					"icon": "icons\\Zeus\\Heaven's_Vengeance.png"
+				},
+				{
+					"name": "Lightning Reflexes",
+					"desc": "After you <b>Dash</b> just before getting hit, a bolt strikes a nearby foes.",
+					"icon": "icons\\Zeus\\Lightning_Reflexes.png"
+				},
+				{
+					"name": "Storm Lightning",
+					"desc": "Your chain-lightning effects bounce more times before expiring.",
+					"icon": "icons\\Zeus\\Storm_Lightning.png"
+				},
+				{
+					"name": "High Voltage",
+					"desc": "Your lightning bolt effects deal damage in a larger area.",
+					"icon": "icons\\Zeus\\High_Voltage.png"
+				},
+				{
+					"name": "Double Strike",
+					"desc": "Your lightning bolt effects have a chance to strike twice.",
+					"icon": "icons\\Zeus\\Double_Strike.png"
+				},
+				{
+					"name": "Static Discharge",
+					"desc": "Your lightning effects also make foes <b>Jolted</b>.",
+					"icon": "icons\\Zeus\\Static_Discharge.png"
+				},
+				{
+					"name": "Clouded Judgment",
+					"desc": "Your <b>God Gauge</b> charges faster when you deal or take damage.",
+					"icon": "icons\\Zeus\\Clouded_Judgment.png"
+				},
+				{
+					"name": "Billowing Strength",
+					"desc": "After using <b>Call</b>, you deal more damage for <b>15 Sec</b>.",
+					"icon": "icons\\Zeus\\Billowing_Strength.png"
+				},
+				{
+					"name": "Splitting Bolt",
+					"desc": "Whenever you strike foes with lightning <b>Boons</b>, fire an electric bolt.",
+					"icon": "icons\\Zeus\\Splitting_Bolt.png"
+				},
+				{
+					"name": "Smoldering Air",
+					"desc": "Your <b>God Gauge</b> charges up automatically, but is capped at <span style='color:#D31813'>25%</span>.\nAuto Gauge Gain: <span style='color:#00ff00'>1%</span> <i>(every 0.2 Sec.)</i>",
+					"icon": "icons\\Zeus\\Smoldering_Air.png"
+				},
+				{
+					"name": "Vengeful Mood",
+					"desc": "Your <b>Revenge</b> attacks sometimes occur without taking damage.\nAuto-Revenge Rate: <span style='color:#00ff00'>3 Sec.</span>",
+					"icon": "icons\\Zeus\\Vengeful_Mood.png"
+				},
+				{
+					"name": "Lightning Rod",
+					"desc": "Your collectible :ammo: strike nearby foes with lightning every <b>1 Sec</b>.",
+					"icon": "icons\\Zeus\\Lightning_Rod.png"
+				},
+				{
+					"name": "Lightning Phalanx",
+					"desc": "Your Phalanx Shot <b>Cast</b> bounces between nearby foes.\nMax Bounces: <span style='color:#00ff00'>3</span>",
+					"icon": "icons\\Zeus\\Lightning_Phalanx.png"
+				},
+				{
+					"name": "Cold Fusion",
+					"desc": "Your <b>Jolted</b> effects do not expire when foes attack.\nJolted Duration: <span style='color:#00ff00'>10 Sec.</span>",
+					"icon": "icons\\Zeus\\Cold_Fusion.png"
+				},
+				{
+					"name": "Scintillating Feast",
+					"desc": "Your <b>Festive Fog</b> effects also deal lightning damage periodically.\nLightning Damage: <span style='color:#00ff00'>60</span>",
+					"icon": "icons\\Zeus\\Scintillating_Feast.png"
+				},
+				{
+					"name": "Sea Storm",
+					"desc": "When you knock foes away, they are struck by lightning.\nLightning Damage: <span style='color:#00ff00'>40</span>",
+					"icon": "icons\\Zeus\\Sea_Storm.png"
+				}
+			]
+		},
+		{
+			"category": "gods",
+			"name": "Hades",
+			"traits": [
+				{
+					"name": "Hades' Aid",
+					"desc": "Your <b>Call</b> becomes <b>Hades' Aid</b>, which briefly makes you <b>Invisible</b>; your <b>God Gauge</b> starts 10%-30% full.",
+					"icon": "icons\\Hades\\Hades'_Aid.png",
+					"singleton": "call"
+				}
+			]
+		},
+		{
+			"category": "arm_aspects",
+			"name": "Stygian_Blade",
+			"traits": [
+				{
+					"name": "Aspect of Zagreus (Stygian Blade)",
+					"desc": "Bonus to Attack Speed & Move Speed",
+					"icon": "icons\\Stygian_Blade\\Aspect\\Aspect_of_Zagreus.png"
+				},
+				{
+					"name": "Aspect of Nemesis",
+					"desc": "For <b>3</b> Sec. after your <b>Special</b>, your <b>Attack</b> may deal <b>Critical</b> damage.\nBonus <b>Critical</b> Chance.",
+					"icon": "icons\\Stygian_Blade\\Aspect\\Aspect_of_Nemesis.png"
+				},
+				{
+					"name": "Aspect of Poseidon",
+					"desc": "Your <b>Special</b> dislodges :ammo: from foes.\nBonus <b>Cast</b> Damage.",
+					"icon": "icons\\Stygian_Blade\\Aspect\\Aspect_of_Poseidon.png"
+				},
+				{
+					"name": "Aspect of Arthur",
+					"desc": "You have <b>Holy Excalibur</b>, and <b>+50</b> :health_up: to your Life Total.\nAura Damage Reduction.</i>",
+					"icon": "icons\\Stygian_Blade\\Aspect\\Aspect_of_Arthur.png"
+				}
+			]
+		},
+		{
+			"category": "arm_upgrades",
+			"name": "Stygian_Blade",
+			"traits": [
+				{
+					"name": "Breaching Slash",
+					"desc": "Your <b>Attack</b> deals <span style='color:#00ff00'>+300%</span> damage to <b>Armor</b>.",
+					"icon": "icons\\Stygian_Blade\\Upgrade\\Breaching_Slash.png"
+				},
+				{
+					"name": "Cruel Thrust",
+					"desc": "Your <b>Thrust</b> deals <span style='color:#00ff00'>+200%</span> damage and has a <span style='color:#00ff00'>+40%</span> <b>Critical chance</b>.",
+					"icon": "icons\\Stygian_Blade\\Upgrade\\Cruel_Thrust.png"
+				},
+				{
+					"name": "Cursed Slash",
+					"desc": "Your <b>Attack</b> restores <span style='color:#00ff00'>2</span> :heart:, but you have <span style='color:#D31813'>-60%</span> :heart:.",
+					"icon": "icons\\Stygian_Blade\\Upgrade\\Cursed_Slash.png"
+				},
+				{
+					"name": "Dash Nova",
+					"desc": "Your <b>Special</b> makes you lunge ahead, then become <span style='color:#00ff00'>Sturdy</span> for <b>0.8 Sec</b>.",
+					"icon": "icons\\Stygian_Blade\\Upgrade\\Dash_Nova.png"
+				},
+				{
+					"name": "Double Edge",
+					"desc": "Your <b>Dash-Strike</b> hits twice and deals <span style='color:#00ff00'>+20%</span> damage.",
+					"icon": "icons\\Stygian_Blade\\Upgrade\\Double_Edge.png"
+				},
+				{
+					"name": "Double Nova",
+					"desc": "Your <b>Special</b> hits twice but no longer knocks foes away.",
+					"icon": "icons\\Stygian_Blade\\Upgrade\\Double_Nova.png"
+				},
+				{
+					"name": "Flurry Slash",
+					"desc": "Hold <b>Attack</b> to strike rapidly, dealing <span style='color:#00ff00'>25</span> base damage per hit.",
+					"icon": "icons\\Stygian_Blade\\Upgrade\\Flurry_Slash.png"
+				},
+				{
+					"name": "Hoarding Slash",
+					"desc": "Your <b>Attack</b> deals bonus damage equal to <span style='color:#00ff00'>5%</span> of your current :obol:.",
+					"icon": "icons\\Stygian_Blade\\Upgrade\\Hoarding_Slash.png"
+				},
+				{
+					"name": "Piercing Wave",
+					"desc": "Your <b>Attack</b> fires a wave that <span style='color:#00ff00'>pierces</span> foes, dealing <span style='color:#00ff00'>30</span> damage.",
+					"icon": "icons\\Stygian_Blade\\Upgrade\\Piercing_Wave.png"
+				},
+				{
+					"name": "Shadow Slash",
+					"desc": "Your <b>Attack</b> deals <span style='color:#00ff00'>+200%</span> damage when striking foes from behind.",
+					"icon": "icons\\Stygian_Blade\\Upgrade\\Shadow_Slash.png"
+				},
+				{
+					"name": "Super Nova",
+					"desc": "Your <b>Special</b> hits a wider area and deals <span style='color:#00ff00'>+20%</span> damage.",
+					"icon": "icons\\Stygian_Blade\\Upgrade\\Super_Nova.png"
+				},
+				{
+					"name": "World Splitter",
+					"desc": "Your <b>Attack</b> is replaced with a big chop that deals <span style='color:#00ff00'>90</span> base damage.",
+					"icon": "icons\\Stygian_Blade\\Upgrade\\World_Splitter.png"
+				},
+				{
+					"name": "Greater Consecration",
+					"desc": "Your <b>Holy Excalibur</b> aura is <span style='color:#00ff00'>+45%</span> larger; makes foes <span style='color:#00ff00'>+10%</span> slower",
+					"icon": "icons\\Stygian_Blade\\Upgrade\\Greater_Consecration.png"
+				}
+			]
+		},
+		{
+			"category": "arm_aspects",
+			"name": "Eternal_Spear",
+			"traits": [
+				{
+					"name": "Aspect of Zagreus (Eternal Spear)",
+					"desc": "Bonus to <b>Special</b> Damage, Range & Speed.",
+					"icon": "icons\\Eternal_Spear\\Aspect\\Aspect_of_Zagreus.png"
+				},
+				{
+					"name": "Aspect of Achilles",
+					"desc": "After your <b>Special</b>, you can retrieve your Spear with <b>Raging Rush</b>.\nPost-Rush Bonus Damage.",
+					"icon": "icons\\Eternal_Spear\\Aspect\\Aspect_of_Achilles.png"
+				},
+				{
+					"name": "Aspect of Hades",
+					"desc": "Your <b>Spin Attack</b> becomes <b>Punishing Sweep</b>.\nBonus to <b>Punishing</b> Damage.",
+					"icon": "icons\\Eternal_Spear\\Aspect\\Aspect_of_Hades.png"
+				},
+				{
+					"name": "Aspect of Guan Yu",
+					"desc": "You have the <b>Frost Fair Blade</b>, but your :health_up: and :health_restore: are reduced.",
+					"icon": "icons\\Eternal_Spear\\Aspect\\Aspect_of_Guan_Yu.png"
+				}
+			]
+		},
+		{
+			"category": "arm_upgrades",
+			"name": "Eternal_Spear",
+			"traits": [
+				{
+					"name": "Extending Jab",
+					"desc": "Your <b>Attack</b> has more range and deals <span style='color:#00ff00'>+40%</span> damage to distant foes.",
+					"icon": "icons\\Eternal_Spear\\Upgrade\\Extending_Jab.png"
+				},
+				{
+					"name": "Chain Skewer",
+					"desc": "Your <b>Special</b> bounces to up to <span style='color:#00ff00'>7</span> foes, dealing <span style='color:#00ff00'>+30%</span> damage for each.",
+					"icon": "icons\\Eternal_Spear\\Upgrade\\Chain_Skewer.png"
+				},
+				{
+					"name": "Breaching Skewer",
+					"desc": "Your <b>Special</b> deals <span style='color:#00ff00'>+400%</span> damage to <b>Armor</b>.",
+					"icon": "icons\\Eternal_Spear\\Upgrade\\Breaching_Skewer.png"
+				},
+				{
+					"name": "Vicious Skewer",
+					"desc": "Your <b>Special</b> deals <span style='color:#00ff00'>+50%</span> damage; <span style='color:#00ff00'>+50%</span> <b>Critical</b> chance on recovery.",
+					"icon": "icons\\Eternal_Spear\\Upgrade\\Vicious_Skewer.png"
+				},
+				{
+					"name": "Exploding Launcher",
+					"desc": "Your <b>Special</b> is replaced with a shot that deals <span style='color:#00ff00'>50</span> damage in an area.",
+					"icon": "icons\\Eternal_Spear\\Upgrade\\Exploding_Launcher.png"
+				},
+				{
+					"name": "Massive Spin",
+					"desc": "Your <b>Spin Attack</b> deals <span style='color:#00ff00'>+125%</span> damage and hits a larger area.",
+					"icon": "icons\\Eternal_Spear\\Upgrade\\Massive_Spin.png"
+				},
+				{
+					"name": "Quick Spin",
+					"desc": "Your <b>Spin Attack</b> charges and recovers much faster.",
+					"icon": "icons\\Eternal_Spear\\Upgrade\\Quick_Spin.png"
+				},
+				{
+					"name": "Flurry Jab",
+					"desc": "Hold <b>Attack</b> to strike rapidly, but you cannot <b>Spin Attack</b>.",
+					"icon": "icons\\Eternal_Spear\\Upgrade\\Flurry_Jab.png"
+				},
+				{
+					"name": "Charged Skewer",
+					"desc": "Hold <b>Special</b> to charge your skewer for up to <span style='color:#00ff00'>+200%</span> base damage. Minimum range reduced.",
+					"icon": "icons\\Eternal_Spear\\Upgrade\\Charged_Skewer.png"
+				},
+				{
+					"name": "Serrated Point",
+					"desc": "Your <b>Dash-Strike</b> hits <span style='color:#00ff00'>3</span> times, but your dash has <span style='color:#D31813'>-25%</span> range.",
+					"icon": "icons\\Eternal_Spear\\Upgrade\\Serrated_Point.png"
+				},
+				{
+					"name": "Flaring Spin",
+					"desc": "Charging your Spin Attack makes you <span style='color:#00ff00'>Sturdy</span> and pulse <span style='color:#00ff00'>40</span> damage.",
+					"icon": "icons\\Eternal_Spear\\Upgrade\\Flaring_Spin.png"
+				},
+				{
+					"name": "Triple Jab",
+					"desc": "Your <b>Attack</b> strikes <span style='color:#00ff00'>3</span> times in a spread pattern.",
+					"icon": "icons\\Eternal_Spear\\Upgrade\\Triple_Jab.png"
+				},
+				{
+					"name": "Winged Serpent",
+					"desc": "Your <b>Frost Fair Blade Spin Attack</b> travels for <span style='color:#00ff00'>+80%</span> longer.",
+					"icon": "icons\\Eternal_Spear\\Upgrade\\Winged_Serpent.png"
+				}
+			]
+		},
+		{
+			"category": "arm_aspects",
+			"name": "Shield_of_Chaos",
+			"traits": [
+				{
+					"name": "Aspect of Zagreus (Shield of Chaos)",
+					"desc": "Bonus to <b>Attack</b> & <b>Dash-Strike</b> Damage.",
+					"icon": "icons\\Shield_of_Chaos\\Aspect\\Aspect_of_Zagreus.png"
+				},
+				{
+					"name": "Aspect of Chaos",
+					"desc": "After you <b>Bull Rush</b>, your next <b>Special</b> throws multiple shields.",
+					"icon": "icons\\Shield_of_Chaos\\Aspect\\Aspect_of_Chaos.png"
+				},
+				{
+					"name": "Aspect of Zeus",
+					"desc": "Your <b>Special</b> becomes <b>Blitz Disc</b>.",
+					"icon": "icons\\Shield_of_Chaos\\Aspect\\Aspect_of_Zeus.png"
+				},
+				{
+					"name": "Aspect of Beowulf",
+					"desc": "You have <b>Naegling's Board</b>, but take <span style='color:#D31813'>+10%</span> damage.\nBonus to <b>Dragon Rush</b> Damage & Area.",
+					"icon": "icons\\Shield_of_Chaos\\Aspect\\Aspect_of_Beowulf.png"
+				}
+			]
+		},
+		{
+			"category": "arm_upgrades",
+			"name": "Shield_of_Chaos",
+			"traits": [
+				{
+					"name": "Dread Flight",
+					"desc": "Your <b>Special</b> can strike up to <span style='color:#00ff00'>4</span> additional foes before returning.",
+					"icon": "icons\\Shield_of_Chaos\\Upgrade\\Dread_Flight.png"
+				},
+				{
+					"name": "Sudden Rush",
+					"desc": "Your <b>Bull Rush</b> charges much faster.",
+					"icon": "icons\\Shield_of_Chaos\\Upgrade\\Sudden_Rush.png"
+				},
+				{
+					"name": "Pulverizing Blow",
+					"desc": "Your <b>Attack</b> hits twice, but does not knock foes away.",
+					"icon": "icons\\Shield_of_Chaos\\Upgrade\\Pulverizing_Blow.png"
+				},
+				{
+					"name": "Dashing Wallop",
+					"desc": "Your <b>Dash Attack</b> deals <span style='color:#00ff00'>+50%</span> damage in a larger area.",
+					"icon": "icons\\Shield_of_Chaos\\Upgrade\\Dashing_Wallop.png"
+				},
+				{
+					"name": "Explosive Return",
+					"desc": "Your <b>Special</b> deals <span style='color:#00ff00'>50</span> damage to nearby foes when you catch it.",
+					"icon": "icons\\Shield_of_Chaos\\Upgrade\\Explosive_Return.png"
+				},
+				{
+					"name": "Minotaur Rush",
+					"desc": "Your <b>Bull Rush</b> gains a <b>Power Rush</b> that does <span style='color:#00ff00'>+500%</span> damage.",
+					"icon": "icons\\Shield_of_Chaos\\Upgrade\\Minotaur_Rush.png"
+				},
+				{
+					"name": "Breaching Rush",
+					"desc": "Your <b>Bull Rush</b> deals <span style='color:#00ff00'>+400%</span> damage to <b>Armor</b>.",
+					"icon": "icons\\Shield_of_Chaos\\Upgrade\\Breaching_Rush.png"
+				},
+				{
+					"name": "Charged Shot",
+					"desc": "Your <b>Bull Rush</b> instead fires a <span style='color:#00ff00'>piercing</span> shot that deals <span style='color:#00ff00'>80</span> base damage.",
+					"icon": "icons\\Shield_of_Chaos\\Upgrade\\Charged_Shot.png"
+				},
+				{
+					"name": "Charged Flight",
+					"desc": "Hold <b>Special</b> to charge your throw for up to <span style='color:#00ff00'>+200%</span> base damage.",
+					"icon": "icons\\Shield_of_Chaos\\Upgrade\\Charged_Flight.png"
+				},
+				{
+					"name": "Empowering Flight",
+					"desc": "After your <b>Special</b> hits, your next <b>2 Attacks</b> deal <span style='color:#00ff00'>+80%</span> damage.",
+					"icon": "icons\\Shield_of_Chaos\\Upgrade\\Empowering_Flight.png"
+				},
+				{
+					"name": "Dashing Flight",
+					"desc": "While you <b>Dash</b>, your <b>Special</b> is faster and deals <span style='color:#00ff00'>+200%</span> damage.",
+					"icon": "icons\\Shield_of_Chaos\\Upgrade\\Dashing_Flight.png"
+				},
+				{
+					"name": "Ferocious Guard",
+					"desc": "After blocking a foe, gain <span style='color:#00ff00'>+20%</span> damage and move speed for <b>10</b> Sec.",
+					"icon": "icons\\Shield_of_Chaos\\Upgrade\\Ferocious_Guard.png"
+				},
+				{
+					"name": "Unyielding Defense",
+					"desc": "After using your <b>Naegling's Board Cast</b>, you are <span style='color:#00ff00'>Sturdy</span> for <span style='color:#00ff00'>3</span> Sec.",
+					"icon": "icons\\Shield_of_Chaos\\Upgrade\\Unyielding_Defense.png"
+				}
+			]
+		},
+		{
+			"category": "arm_aspects",
+			"name": "Heart-Seeking_Bow",
+			"traits": [
+				{
+					"name": "Aspect of Zagreus (Heart Seeking Bow)",
+					"desc": "Bonus to <b>Critical Attack</b> Chance.",
+					"icon": "icons\\Heart-Seeking_Bow\\Aspect\\Aspect_of_Zagreus.png"
+				},
+				{
+					"name": "Aspect of Chiron",
+					"desc": "Your <b>Special</b> automatically seeks the foe last struck by your Attack.\nBonus to Max Shots per <b>Special</b>.",
+					"icon": "icons\\Heart-Seeking_Bow\\Aspect\\Aspect_of_Chiron.png"
+				},
+				{
+					"name": "Aspect of Hera",
+					"desc": "Your <b>Cast</b> loads :ammo: into your next <b>Attack</b>, firing on impact.\nBonus to Bloodstone Drop Time.",
+					"icon": "icons\\Heart-Seeking_Bow\\Aspect\\Aspect_of_Hera.png"
+				},
+				{
+					"name": "Aspect of Rama",
+					"desc": "You have <b>Celestial Sharanga</b>, which can cause <b>Shared Suffering</b>.",
+					"icon": "icons\\Heart-Seeking_Bow\\Aspect\\Aspect_of_Rama.png"
+				}
+			]
+		},
+		{
+			"category": "arm_upgrades",
+			"name": "Heart-Seeking_Bow",
+			"traits": [
+				{
+					"name": "Twin Shot",
+					"desc": "Your <b>Attack</b> fires <span style='color:#00ff00'>2</span> shots side-by-side, but has reduced range.",
+					"icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Twin_Shot.png"
+				},
+				{
+					"name": "Sniper Shot",
+					"desc": "Your <b>Attack</b> deals <span style='color:#00ff00'>+200%</span> damage to distant foes.",
+					"icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Sniper_Shot.png"
+				},
+				{
+					"name": "Explosive Shot",
+					"desc": "Your <b>Attack</b> deals <span style='color:#00ff00'>+300%</span> damage in an area, but charges slower.",
+					"icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Explosive_Shot.png"
+				},
+				{
+					"name": "Flurry Shot",
+					"desc": "Hold <b>Attack</b> to shoot rapidly, but you cannot <b>Power Shot</b>.",
+					"icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Flurry_Shot.png"
+				},
+				{
+					"name": "Piercing Volley",
+					"desc": "Your <b>Special</b> <span style='color:#00ff00'>pierces</span> foes and deals <span style='color:#00ff00'>+400%</span> damage to <b>Armor</b>.",
+					"icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Piercing_Volley.png"
+				},
+				{
+					"name": "Perfect Shot",
+					"desc": "Your <b>Power Shot</b> is easier to execute and deals <span style='color:#00ff00'>+150%</span> damage.",
+					"icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Perfect_Shot.png"
+				},
+				{
+					"name": "Relentless Volley",
+					"desc": "Your <b>Special</b> shoots <span style='color:#00ff00'>+4</span> shots.",
+					"icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Relentless_Volley.png"
+				},
+				{
+					"name": "Triple Shot",
+					"desc": "Your <b>Attack</b> fires <span style='color:#00ff00'>3</span> shots in a spread pattern.",
+					"icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Triple_Shot.png"
+				},
+				{
+					"name": "Charged Volley",
+					"desc": "Hold <b>Special</b> for up to <span style='color:#00ff00'>250%</span> base damage; minimum range is reduced.",
+					"icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Charged_Volley.png"
+				},
+				{
+					"name": "Chain Shot",
+					"desc": "Your <b>Attack</b> bounces to up to 3 foes, dealing <span style='color:#00ff00'>+15%</span> damage for each.",
+					"icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Chain_Shot.png"
+				},
+				{
+					"name": "Point-Blank Shot",
+					"desc": "Your <b>Attack</b> deals <span style='color:#00ff00'>+150%</span> damage to nearby foes.",
+					"icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Point-Blank_Shot.png"
+				},
+				{
+					"name": "Concentrated Volley",
+					"desc": "Your <b>Special</b> deals <span style='color:#00ff00'>+3</span> base damage for each consecutive hit to a foe.",
+					"icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Concentrated_Volley.png"
+				},
+				{
+					"name": "Repulse Shot",
+					"desc": "Your <b>Celestial Sharanga Attack</b> creates a <b>Blast Wave</b> around you.",
+					"icon": "icons\\Heart-Seeking_Bow\\Upgrade\\Repulse_Shot.png"
+				}
+			]
+		},
+		{
+			"category": "arm_aspects",
+			"name": "Twin_Fists",
+			"traits": [
+				{
+					"name": "Aspect of Zagreus (Twin Fists)",
+					"desc": "Bonus to <b>Dodge</b> Chance.",
+					"icon": "icons\\Twin_Fists\\Aspect\\Aspect_of_Zagreus.png"
+				},
+				{
+					"name": "Aspect of Talos",
+					"desc": "Your <b>Special</b> becomes <b>Magnetic Cutter</b>; its pull deals <b>20</b> damage.\nBonus to <b>Magnetized Attack</b> & <b>Cast</b>.",
+					"icon": "icons\\Twin_Fists\\Aspect\\Aspect_of_Talos.png"
+				},
+				{
+					"name": "Aspect of Demeter",
+					"desc": "After landing <b>12</b> strikes, your next <b>Special</b> hits more times.",
+					"icon": "icons\\Twin_Fists\\Aspect\\Aspect_of_Demeter.png"
+				},
+				{
+					"name": "Aspect of Gilgamesh",
+					"desc": "You have the <b>Claws of Enkidu</b>, whose <b>Dash-Upper</b> can <b>Maim</b> foes.\nBonus Damage to <b>Maimed</b> foes.",
+					"icon": "icons\\Twin_Fists\\Aspect\\Aspect_of_Gilgamesh.png"
+				}
+			]
+		},
+		{
+			"category": "arm_upgrades",
+			"name": "Twin_Fists",
+			"traits": [
+				{
+					"name": "Breaching Cross",
+					"desc": "Your <b>Dash-Strike</b> pierces foes and deals <span style='color:#00ff00'>+900%</span> damage to <b>Armor</b>",
+					"icon": "icons\\Twin_Fists\\Upgrade\\Breaching_Cross.png"
+				},
+				{
+					"name": "Rolling Knuckle",
+					"desc": "Your <b>Dash-Strike</b> deals <span style='color:#00ff00'>+60%</span> damage; added to <b>Attack</b> sequence.",
+					"icon": "icons\\Twin_Fists\\Upgrade\\Rolling_Knuckle.png"
+				},
+				{
+					"name": "Long Knuckle",
+					"desc": "Your <b>Attack</b> has more range and deals <span style='color:#00ff00'>+10%</span> damage",
+					"icon": "icons\\Twin_Fists\\Upgrade\\Long_Knuckle.png"
+				},
+				{
+					"name": "Draining Cutter",
+					"desc": "Whenever your <b>Special</b> slays foes, restore <span style='color:#00ff00'>2%</span> life",
+					"icon": "icons\\Twin_Fists\\Upgrade\\Draining_Cutter.png"
+				},
+				{
+					"name": "Concentrated Knuckle",
+					"desc": "Your <b>Attack</b> deals <span style='color:#00ff00'>+5</span> base damage for each uninterrupted hit to a foe.",
+					"icon": "icons\\Twin_Fists\\Upgrade\\Concentrated_Knuckle.png"
+				},
+				{
+					"name": "Explosive Upper",
+					"desc": "Your <b>Dash-Upper</b> deals <span style='color:#00ff00'>+100%</span> damage in an area",
+					"icon": "icons\\Twin_Fists\\Upgrade\\Explosive_Upper.png"
+				},
+				{
+					"name": "Flying Cutter",
+					"desc": "Hold <b>Special</b> for longer range and up to <span style='color:#00ff00'>+100%</span> base damage",
+					"icon": "icons\\Twin_Fists\\Upgrade\\Flying_Cutter.png"
+				},
+				{
+					"name": "Rush Kick",
+					"desc": "Your <b>Special</b> becomes an advancing kick that also deals <b>40</b> base damage twice",
+					"icon": "icons\\Twin_Fists\\Upgrade\\Rush_Kick.png"
+				},
+				{
+					"name": "Quake Cutter",
+					"desc": "After using your <b>Special</b>, deal <b>90</b> damage in an area where you land",
+					"icon": "icons\\Twin_Fists\\Upgrade\\Quake_Cutter.png"
+				},
+				{
+					"name": "Kinetic Launcher",
+					"desc": "Your <b>Special</b> becomes a charged ranged attack that deals <b>50</b> base damage.",
+					"icon": "icons\\Twin_Fists\\Upgrade\\Kinetic_Launcher.png"
+				},
+				{
+					"name": "Heavy Knuckle",
+					"desc": "Your <b>Attack</b> becomes a slower 3-hit sequence, each deals <b>40</b> base damage.",
+					"icon": "icons\\Twin_Fists\\Upgrade\\Heavy_Knuckle.png"
+				},
+				{
+					"name": "Colossus Knuckle",
+					"desc": "While using your <b>Attack</b> or <b>Special</b>, you are <b>Sturdy</b>",
+					"icon": "icons\\Twin_Fists\\Upgrade\\Colossus_Knuckle.png"
+				},
+				{
+					"name": "Rending Claws",
+					"desc": "<b>Maim</b>-afflicted foes take <span style='color:#00ff00'>+25%</span> damage and move <span style='color:#00ff00'>30%</span> slower",
+					"icon": "icons\\Twin_Fists\\Upgrade\\Rending_Claws.png"
+				}
+			]
+		},
+		{
+			"category": "arm_aspects",
+			"name": "Adamant_Rail",
+			"traits": [
+				{
+					"name": "Aspect of Zagreus (Adamant Rail)",
+					"desc": "Bonus to Ammo Capacity.",
+					"icon": "icons\\Adamant_Rail\\Aspect\\Aspect_of_Zagreus.png"
+				},
+				{
+					"name": "Aspect of Eris",
+					"desc": "For <b>4</b> Sec. after absorbing your <b>Special</b>'s blast, deal more damage.",
+					"icon": "icons\\Adamant_Rail\\Aspect\\Aspect_of_Eris.png"
+				},
+				{
+					"name": "Aspect of Hestia",
+					"desc": "After you manually <b>Reload</b>, your next shot is empowered.\nBonus Base Damage to <b>Empowered</b> Shots.",
+					"icon": "icons\\Adamant_Rail\\Aspect\\Aspect_of_Hestia.png"
+				},
+				{
+					"name": "Aspect of Lucifer",
+					"desc": "You have <b>Igneus Eden</b>, which launches volatile <b>Hellfire</b>.",
+					"icon": "icons\\Adamant_Rail\\Aspect\\Aspect_of_Lucifer.png"
+				}
+			]
+		},
+		{
+			"category": "arm_upgrades",
+			"name": "Adamant_Rail",
+			"traits": [
+				{
+					"name": "Flurry Fire",
+					"desc": "Your <b>Attack</b> is faster and more accurate; gain <span style='color:#00ff00'>+6</span> ammo capacity.",
+					"icon": "icons\\Adamant_Rail\\Upgrade\\Flurry_Fire.png"
+				},
+				{
+					"name": "Ricochet Fire",
+					"desc": "Your <b>Attack</b> bounces to <span style='color:#00ff00'>+1</span> other foe",
+					"icon": "icons\\Adamant_Rail\\Upgrade\\Ricochet_Fire.png"
+				},
+				{
+					"name": "Spread Fire",
+					"desc": "Your <b>Attack</b> becomes a short spread that deals <b>40</b> base damage; lose <span style='color:#D31813'>-6</span> ammo capacity.",
+					"icon": "icons\\Adamant_Rail\\Upgrade\\Spread_Fire.png"
+				},
+				{
+					"name": "Explosive Fire",
+					"desc": "Your <b>Attack</b> deals damage in an area and briefly slows foes.",
+					"icon": "icons\\Adamant_Rail\\Upgrade\\Explosive_Fire.png"
+				},
+				{
+					"name": "Delta Chamber",
+					"desc": "Your <b>Attack</b> is a 3-round burst; you never have to <b>Reload</b>.",
+					"icon": "icons\\Adamant_Rail\\Upgrade\\Delta_Chamber.png"
+				},
+				{
+					"name": "Piercing Fire",
+					"desc": "Your <b>Attack</b> pierces foes and deals <span style='color:#00ff00'>+50%</span> damage to <b>Armor</b>.",
+					"icon": "icons\\Adamant_Rail\\Upgrade\\Piercing_Fire.png"
+				},
+				{
+					"name": "Triple Bomb",
+					"desc": "You can use your <b>Special</b> <span style='color:#00ff00'>3</span> times in rapid succession.",
+					"icon": "icons\\Adamant_Rail\\Upgrade\\Triple_Bomb.png"
+				},
+				{
+					"name": "Rocket Bomb",
+					"desc": "Your <b>Special</b> is replaced with a rocket that deals <b>80</b> base damage.",
+					"icon": "icons\\Adamant_Rail\\Upgrade\\Rocket_Bomb.png"
+				},
+				{
+					"name": "Targeting System",
+					"desc": "Foes targeted by your <b>Special</b> move slower and take <span style='color:#00ff00'>+30%</span> damage.",
+					"icon": "icons\\Adamant_Rail\\Upgrade\\Targeting_System.png"
+				},
+				{
+					"name": "Hazard Bomb",
+					"desc": "Your <b>Special</b> deals <span style='color:#00ff00'>+300%</span> base damage in a large area, but can hurt <i>you</i>.",
+					"icon": "icons\\Adamant_Rail\\Upgrade\\Hazard_Bomb.png"
+				},
+				{
+					"name": "Cluster Bomb",
+					"desc": "Your <b>Special</b> fires a spread of <span style='color:#00ff00'>5</span> bombs, but each deals <span style='color:#D31813'>-30%</span> damage.",
+					"icon": "icons\\Adamant_Rail\\Upgrade\\Cluster_Bomb.png"
+				},
+				{
+					"name": "Seeking Fire",
+					"desc": "Your <b>Attack</b> seeks the nearest foe and deals <span style='color:#00ff00'>+10%</span> damage.",
+					"icon": "icons\\Adamant_Rail\\Upgrade\\Seeking_Fire.png"
+				},
+				{
+					"name": "Concentrated Beam",
+					"desc": "Your <b>Igneus Eden Attack</b> damage to a foe ramps up <span style='color:#00ff00'>+100%</span> faster.",
+					"icon": "icons\\Adamant_Rail\\Upgrade\\Concentrated_Beam.png"
+				},
+				{
+					"name": "Flash Fire",
+					"desc": "Your <b>Igneus Eden Attack</b> starts firing and fires <span style='color:#00ff00'>+50%</span> faster with <span style='color:#00ff00'>+15%</span> range.",
+					"icon": "icons\\Adamant_Rail\\Upgrade\\Flash_Fire.png"
+				},
+				{
+					"name": "Triple Beam",
+					"desc": "Your <b>Igneus Eden Attack</b> fires <span style='color:#00ff00'>3</span> beams in a spread pattern.",
+					"icon": "icons\\Adamant_Rail\\Upgrade\\Triple_Beam.png"
+				},
+				{
+					"name": "Eternal Chamber",
+					"desc": "Your <b>Igneus Eden</b> has <span style='color:#00ff00'>∞</span> ammo, but its damage no longer ramps.",
+					"icon": "icons\\Adamant_Rail\\Upgrade\\Eternal_Chamber.png"
+				},
+				{
+					"name": "Greater Inferno",
+					"desc": "Your <b>Igneus Eden Hellfire</b> radiates <span style='color:#00ff00'>+250%</span> damage in a larger area.",
+					"icon": "icons\\Adamant_Rail\\Upgrade\\Greater_Inferno.png"
+				}
+			]
+		},
+		{
+			"category": "keepsakes",
+			"name": "Cerberus",
+			"traits": [
+				{
+					"name": "Old Spiked Collar",
+					"desc": "Increase your :health_up:.",
+					"icon": "icons\\keepsakes\\Old_Spiked_Collar.png"
+				}
+			]
+		},
+		{
+			"category": "keepsakes",
+			"name": "Achilles",
+			"traits": [
+				{
+					"name": "Myrmidon Bracer",
+					"desc": "Take less damage from the front, but more from the back.",
+					"icon": "icons\\keepsakes\\Myrmidon_Bracer.png"
+				}
+			]
+		},
+		{
+			"category": "keepsakes",
+			"name": "Nyx",
+			"traits": [
+				{
+					"name": "Black Shawl",
+					"desc": "Deal more damage striking undamaged foes; also by striking foes from behind.",
+					"icon": "icons\\keepsakes\\Black_Shawl.png"
+				}
+			]
+		},
+		{
+			"category": "keepsakes",
+			"name": "Thanatos",
+			"traits": [
+				{
+					"name": "Pierced Butterfly",
+					"desc": "Gain bonus damage for each <b>Encounter</b> you clear without taking damage.",
+					"icon": "icons\\keepsakes\\Pierced_Butterfly.png"
+				}
+			]
+		},
+		{
+			"category": "keepsakes",
+			"name": "Charon",
+			"traits": [
+				{
+					"name": "Bone Hourglass",
+					"desc": "Items from the <b>Well of Charon</b> have durations increased by X Encounters.",
+					"icon": "icons\\keepsakes\\Bone_Hourglass.png"
+				}
+			]
+		},
+		{
+			"category": "keepsakes",
+			"name": "Hypnos",
+			"traits": [
+				{
+					"name": "Chthonic Coin Purse",
+					"desc": "Receive :obol: to spend as you please <i>(once per escape attempt)</i>.",
+					"icon": "icons\\keepsakes\\Chthonic_Coin_Purse.png"
+				}
+			]
+		},
+		{
+			"category": "keepsakes",
+			"name": "Megaera",
+			"traits": [
+				{
+					"name": "Skull Earring",
+					"desc": "Deal more damage while at <b>35%</b> :heart: or less.",
+					"icon": "icons\\keepsakes\\Skull_Earring.png"
+				}
+			]
+		},
+		{
+			"category": "keepsakes",
+			"name": "Orpheus",
+			"traits": [
+				{
+					"name": "Distant Memory",
+					"desc": "Deal more damage to distant foes.",
+					"icon": "icons\\keepsakes\\Distant_Memory.png"
+				}
+			]
+		},
+		{
+			"category": "keepsakes",
+			"name": "Dusa",
+			"traits": [
+				{
+					"name": "Harpy Feather Duster",
+					"desc": "Broken urns have a chance to contain :health_restore: items.",
+					"icon": "icons\\keepsakes\\Harpy_Feather_Duster.png"
+				}
+			]
+		},
+		{
+			"category": "keepsakes",
+			"name": "Skelly",
+			"traits": [
+				{
+					"name": "Lucky Tooth",
+					"desc": "Automatically restore an amount of :heart: when your Life Total is depleted <i>(once per escape attempt)</i>.",
+					"icon": "icons\\keepsakes\\Lucky_Tooth.png"
+				}
+			]
+		},
+		{
+			"category": "keepsakes",
+			"name": "Zeus",
+			"traits": [
+				{
+					"name": "Thunder Signet",
+					"desc": "The next <b>Boon</b> you find will be from <b>Zeus</b>. His blessings have a higher chance to be <span style='color:#1895F1'><b>Rare</b></span> or better.",
+					"icon": "icons\\keepsakes\\Thunder_Signet.png"
+				}
+			]
+		},
+		{
+			"category": "keepsakes",
+			"name": "Poseidon",
+			"traits": [
+				{
+					"name": "Conch Shell",
+					"desc": "The next <b>Boon</b> you find will be from <b>Poseidon</b>. His blessings have a higher chance to be chance to be <span style='color:#1895F1'><b>Rare</b></span> or better.",
+					"icon": "icons\\keepsakes\\Conch_Shell.png"
+				}
+			]
+		},
+		{
+			"category": "keepsakes",
+			"name": "Athena",
+			"traits": [
+				{
+					"name": "Owl Pendant",
+					"desc": "The next <b>Boon</b> you find will be from <b>Athena</b>. Her blessings have a higher chance to be <span style='color:#1895F1'><b>Rare</b></span> or better.",
+					"icon": "icons\\keepsakes\\Owl_Pendant.png"
+				}
+			]
+		},
+		{
+			"category": "keepsakes",
+			"name": "Aphrodite",
+			"traits": [
+				{
+					"name": "Eternal Rose",
+					"desc": "The next <b>Boon</b> you find will be from <b>Aphrodite</b>. Her blessings have a higher chance to be <span style='color:#1895F1'><b>Rare</b></span> or better.",
+					"icon": "icons\\keepsakes\\Eternal_Rose.png"
+				}
+			]
+		},
+		{
+			"category": "keepsakes",
+			"name": "Ares",
+			"traits": [
+				{
+					"name": "Blood-Filled Vial",
+					"desc": "The next <b>Boon</b> you find will be from <b>Ares</b>. His blessings have a higher chance to be <span style='color:#1895F1'><b>Rare</b></span> or better.",
+					"icon": "icons\\keepsakes\\Blood-Filled_Vial.png"
+				}
+			]
+		},
+		{
+			"category": "keepsakes",
+			"name": "Artemis",
+			"traits": [
+				{
+					"name": "Adamant Arrowhead",
+					"desc": "The next <b>Boon</b> you find will be from <b>Artemis</b>. Her blessings have a higher chance to be <span style='color:#1895F1'><b>Rare</b></span> or better.",
+					"icon": "icons\\keepsakes\\Adamant_Arrowhead.png"
+				}
+			]
+		},
+		{
+			"category": "keepsakes",
+			"name": "Dionysus",
+			"traits": [
+				{
+					"name": "Overflowing Cup",
+					"desc": "The next <b>Boon</b> you find will be from <b>Dionysus</b>. His blessings have a higher chance to be <span style='color:#1895F1'><b>Rare</b></span> or better.",
+					"icon": "icons\\keepsakes\\Overflowing_Cup.png"
+				}
+			]
+		},
+		{
+			"category": "keepsakes",
+			"name": "Hermes",
+			"traits": [
+				{
+					"name": "Lambent Plume",
+					"desc": "Gain <b>Dodge</b> chance and move speed each time you quickly clear an <b>Encounter</b>.",
+					"icon": "icons\\keepsakes\\Lambent_Plume.png"
+				}
+			]
+		},
+		{
+			"category": "keepsakes",
+			"name": "Demeter",
+			"traits": [
+				{
+					"name": "Frostbitten Horn",
+					"desc": "The next <b>Boon</b> you find will be from <b>Demeter</b>. Her blessings have a higher chance to be <span style='color:#1895F1'><b>Rare</b></span> or better.",
+					"icon": "icons\\keepsakes\\Frostbitten_Horn.png"
+				}
+			]
+		},
+		{
+			"category": "keepsakes",
+			"name": "Chaos",
+			"traits": [
+				{
+					"name": "Cosmic Egg",
+					"desc": "Enter <b>Chaos Gates</b> without losing :heart:. Blessings from <b>Chaos</b> have a higher chance to be <span style='color:#1895F1'><b>Rare</b></span> or better.",
+					"icon": "icons\\keepsakes\\Cosmic_Egg.png"
+				}
+			]
+		},
+		{
+			"category": "keepsakes",
+			"name": "Sisyphus",
+			"traits": [
+				{
+					"name": "Shattered Shackle",
+					"desc": "Your <b>Attack</b>, <b>Special</b>, and <b>Cast</b> each deal more damage while not empowered by a <b>Boon</b>.",
+					"icon": "icons\\keepsakes\\Shattered_Shackle.png"
+				}
+			]
+		},
+		{
+			"category": "keepsakes",
+			"name": "Eurydice",
+			"traits": [
+				{
+					"name": "Evergreen Acorn",
+					"desc": "In the final encounter in each underworld region, take <b>0</b> damage the first few times foes hit you.",
+					"icon": "icons\\keepsakes\\Evergreen_Acorn.png"
+				}
+			]
+		},
+		{
+			"category": "keepsakes",
+			"name": "Patroclus",
+			"traits": [
+				{
+					"name": "Broken Spearpoint",
+					"desc": "After taking damage, become <b>Impervious</b> to damage for a short time. Refreshes after <b>7 Sec</b>.",
+					"icon": "icons\\keepsakes\\Broken_Spearpoint.png"
+				}
+			]
+		},
+		{
+			"category": "keepsakes",
+			"name": "Persephone",
+			"traits": [
+				{
+					"name": "Pom Blossom",
+					"desc": "After every few <b>Encounters</b>, gain +1 Lv. <i>(a random Boon grows stronger)</i>.",
+					"icon": "icons\\keepsakes\\Pom_Blossom.png"
+				}
+			]
+		},
+		{
+			"category": "keepsakes",
+			"name": "Hades",
+			"traits": [
+				{
+					"name": "Sigil of the Dead",
+					"desc": "Your <b>Call</b> becomes <b>Hades' Aid</b>, which briefly makes you <b>Invisible</b>; your <b>God Gauge</b> starts partially full.",
+					"icon": "icons\\keepsakes\\Sigil_of_the_Dead.png"
+				}
+			]
+		},
+		{
+			"category": "companions",
+			"name": "Megaera",
+			"traits": [
+				{
+					"name": "Companion Battie",
+					"desc": "Your <b>Summon</b> deals <span style='color:#00ff00'>2500</span> damage in an area near your closest foe, then continually down the line.",
+					"icon": "icons\\companions\\Companion_Battie.png"
+				}
+			]
+		},
+		{
+			"category": "companions",
+			"name": "Thanatos",
+			"traits": [
+				{
+					"name": "Companion Mort",
+					"desc": "Your <b>Summon</b> deals <span style='color:#00ff00'>3500</span> damage in an area in front of you, after a brief delay.",
+					"icon": "icons\\companions\\Companion_Mort.png"
+				}
+			]
+		},
+		{
+			"category": "companions",
+			"name": "Skelly",
+			"traits": [
+				{
+					"name": "Companion Rib",
+					"desc": "Your <b>Summon</b> creates a distraction with <span style='color:#00ff00'>250</span> :heart:, provoking your foes to attack it until it dies.",
+					"icon": "icons\\companions\\Companion_Rib.png"
+				}
+			]
+		},
+		{
+			"category": "companions",
+			"name": "Sisyphus",
+			"traits": [
+				{
+					"name": "Companion Shady",
+					"desc": "Your <b>Summon</b> deals <span style='color:#00ff00'>1000</span> damage in an area and drops a smattering of :health_restore:, :darkness:, and :obol:.",
+					"icon": "icons\\companions\\Companion_Shady.png"
+				}
+			]
+		},
+		{
+			"category": "companions",
+			"name": "Dusa",
+			"traits": [
+				{
+					"name": "Companion Fidi",
+					"desc": "Your <b>Summon</b> joins you for <b>30 Sec.</b>, repeatedly firing shots that petrify foes and deal <span style='color:#00ff00'>70</span> damage.",
+					"icon": "icons\\companions\\Companion_Fidi.png"
+				}
+			]
+		},
+		{
+			"category": "companions",
+			"name": "Achilles",
+			"traits": [
+				{
+					"name": "Companion Antos",
+					"desc": "Your <b>Summon</b> deals <span style='color:#00ff00'>1500</span> damage to <b>2</b> foes one after another.",
+					"icon": "icons\\companions\\Companion_Antos.png"
+				}
+			]
+		},
+		{
+			"category": "empty_ability",
+			"name": "attack",
+			"traits": [
+				{
+					"name": "attack",
+					"desc": "&lt;No <b>Attack</b> boon&gt;",
+					"icon": "icons\\empty\\attack.png",
+					"singleton": "attack"
+				}
+			]
+		},
+		{
+			"category": "empty_ability",
+			"name": "boon",
+			"traits": [
+				{
+					"name": "boon",
+					"desc": "&lt;Empty slot&gt;",
+					"icon": "icons\\empty\\boon.png"
+				}
+			]
+		},
+		{
+			"category": "empty_ability",
+			"name": "call",
+			"traits": [
+				{
+					"name": "call",
+					"desc": "&lt;No <b>Call</b> slot boon equipped&gt;",
+					"icon": "icons\\empty\\call.png",
+					"singleton": "call"
+				}
+			]
+		},
+		{
+			"category": "empty_ability",
+			"name": "cast",
+			"traits": [
+				{
+					"name": "cast",
+					"desc": "&lt;No <b>Cast</b> slot boon equipped&gt;",
+					"icon": "icons\\empty\\cast.png",
+					"singleton": "cast"
+				}
+			]
+		},
+		{
+			"category": "empty_ability",
+			"name": "dash",
+			"traits": [
+				{
+					"name": "dash",
+					"desc": "&lt;No <b>Dash</b> slot boon equipped&gt;",
+					"icon": "icons\\empty\\dash.png",
+					"singleton": "dash"
+				}
+			]
+		},
+		{
+			"category": "empty_ability",
+			"name": "special",
+			"traits": [
+				{
+					"name": "special",
+					"desc": "&lt;No <b>Special</b> slot boon equipped&gt;",
+					"icon": "icons\\empty\\special.png",
+					"singleton": "special"
+				}
+			]
+		},
+		{
+			"category": "charons_well",
+			"name": "charon",
+			"traits": [
+				{
+					"name": "Aether Net",
+					"desc": "You start <b>Encounter(s)</b> with your <b>God Gauge</b> <span style='color:#00ff00'>15%</span> full.",
+					"icon": "icons\\charons_well\\Aether_Net.png"
+				},
+				{
+					"name": "Braid of Atlas",
+					"desc": "Your <b>Cast</b> deals <span style='color:#00ff00'>+50%</span> damage.",
+					"icon": "icons\\charons_well\\Braid_of_Atlas.png"
+				},
+				{
+					"name": "Chimaera Jerky",
+					"desc": "Your <b>Special</b> deals <span style='color:#00ff00'>+40%</span> damage.",
+					"icon": "icons\\charons_well\\Chimaera_Jerky.png"
+				},
+				{
+					"name": "Cyclops Jerky",
+					"desc": "Your <b>Attack</b> deals <span style='color:#00ff00'>+30%</span> damage.",
+					"icon": "icons\\charons_well\\Cyclops_Jerky.png"
+				},
+				{
+					"name": "Eris Bangle",
+					"desc": "You deal <span style='color:#00ff00'>+50%</span> damage striking undamaged foes.",
+					"icon": "icons\\charons_well\\Eris_Bangle.png"
+				},
+				{
+					"name": "Eye of Lamia",
+					"desc": "Slain foes have a <span style='color:#00ff00'>15%</span> chance to drop healing items.",
+					"icon": "icons\\charons_well\\Eye_of_Lamia.png"
+				},
+				{
+					"name": "Flame Wheels Release",
+					"desc": "Prevent <span style='color:#00ff00'>Flame Wheel</span> foes from appearing in <b>Encounter(s)</b>.",
+					"icon": "icons\\charons_well\\Flame_Wheels_Release.png"
+				},
+				{
+					"name": "HydraLite",
+					"desc": "You recover <span style='color:#00ff00'>10%</span> :heart: when you enter a chamber.",
+					"icon": "icons\\charons_well\\HydraLite.png"
+				},
+				{
+					"name": "Ignited Ichor",
+					"desc": "Gain <span style='color:#00ff00'>20%</span> move speed.",
+					"icon": "icons\\charons_well\\Ignited_Ichor.png"
+				},
+				{
+					"name": "Light of Ixion",
+					"desc": "Ensure a <span style='color:#00ff00'>Chaos Gate</span> will spawn ahead <i>(where possible)</i>.",
+					"icon": "icons\\charons_well\\Light_of_Ixion.png"
+				},
+				{
+					"name": "Nail of Talos",
+					"desc": "You deal <span style='color:#00ff00'>+50%</span> damage to <b>Armor</b>.",
+					"icon": "icons\\charons_well\\Nail_of_Talos.png"
+				},
+				{
+					"name": "Nemesis Crest",
+					"desc": "You deal <span style='color:#00ff00'>+50%</span> damage striking foes from behind.",
+					"icon": "icons\\charons_well\\Nemesis_Crest.png"
+				},
+				{
+					"name": "Prometheus Stone",
+					"desc": "Gain <span style='color:#00ff00'>+1</span> :ammo: for your <b>Cast</b>.",
+					"icon": "icons\\charons_well\\Prometheus_Stone.png"
+				},
+				{
+					"name": "Skeletal Lure",
+					"desc": "Ensure a <span style='color:#00ff00'>Fishing Point</span> will spawn ahead <i>(where possible)</i>.",
+					"icon": "icons\\charons_well\\Skeletal_Lure.png"
+				},
+				{
+					"name": "Stygian Shard",
+					"desc": "<b>Traps</b> deal <span style='color:#00ff00'>+500%</span> damage to your foes.",
+					"icon": "icons\\charons_well\\Stygian_Shard.png"
+				},
+				{
+					"name": "Touch of Styx",
+					"desc": "Your <span style='color:#00ff00'>Stubborn Defiance</span> restores <span style='color:#00ff00'>+10%</span> :heart:.",
+					"icon": "icons\\charons_well\\Touch_of_Styx.png"
+				},
+				{
+					"name": "Trove Tracker",
+					"desc": "Ensure a <span style='color:#00ff00'>Infernal Trove</span> will spawn ahead <i>(where possible)</i>.",
+					"icon": "icons\\charons_well\\Trove_Tracker.png"
+				},
+				{
+					"name": "Yarn of Ariadne",
+					"desc": "The next <b>Boon</b> you find has upgraded <b>Rarity</b>.",
+					"icon": "icons\\charons_well\\Yarn_of_Ariadne.png"
+				}
+			]
+		},
+		{
+			"category": "eurydice",
+			"name": "eurydice",
+			"traits": [
+				{
+					"name": "Refreshing Nectar",
+					"desc": "A rare and fragrant beverage; the next <span style='color:#00ff00'>3</span> <b>Boons</b> you find have upgraded <b>Rarity</b>.",
+					"icon": "icons\\eurydice\\Refreshing_Nectar.png"
+				}
+			]
+		},
+		{
+			"category": "special_item",
+			"name": "Heart of Stone",
+			"traits": [
+				{
+					"name": "Heart of Stone",
+					"desc": "You believe in Bouldy, and Bouldy believes in you. Apply a random buff.",
+					"icon": "icons_special\\bouldy_blessing.png"
+				}
+			]
+		},
+		{
+			"category": "special_item",
+			"name": "Deus Ex Machina",
+			"traits": [
+				{
+					"name": "Deus Ex Machina",
+					"desc": "Instantly makes you tougher, more so whenever you die. Death is not a big deal in the underworld. Try this if you find you're struggling, want focus on the story, or any reason.",
+					"icon": "icons_special\\godmode.png"
+				}
+			]
+		},
+		{
+			"category": "special_item",
+			"name": "Loyalty Card",
+			"traits": [
+				{
+					"name": "Loyalty Card",
+					"desc": "Reduce the price of <b>Charon</b>'s items by <span style='color:#00ff00'>20%</span>",
+					"icon": "icons_special\\membership_card_large.png"
+				}
+			]
+		},
+		{
+			"category": "special_item",
+			"name": "Darker Thirst",
+			"traits": [
+				{
+					"name": "Darker Thirst",
+					"desc": "Whenever you find :darkness: or :gemstone:, gain <span style='color:#00ff00'>20%</span> extra.",
+					"icon": "icons_special\\meta_gathered_darkerness_large.png"
+				}
+			]
+		},
+		{
+			"category": "special_item",
+			"name": "Dark Thirst",
+			"traits": [
+				{
+					"name": "Dark Thirst",
+					"desc": "Whenever you find :darkness:, gain <span style='color:#00ff00'>20%</span> extra.",
+					"icon": "icons_special\\meta_gathered_darkness_large.png"
+				}
+			]
+		},
+		{
+			"category": "special_item",
+			"name": "meta_second_chance_large",
+			"traits": [
+				{
+					"name": "meta_second_chance_large",
+					"desc": "TODO: cut content?",
+					"icon": "icons_special\\meta_second_chance_large.png"
+				}
+			]
+		}
+	],
+	"text_icons": [
+		{ "name": "ammo", "text": "[ammo]", "icon": "icons_text/ammo.webp" },
+		{ "name": "darkness", "text": "[darkness]", "icon": "icons_text/darkness.webp" },
+		{ "name": "gemstone", "text": "[gemstone]", "icon": "icons_text/gemstone.webp" },
+		{ "name": "health_restore", "text": "[health_restore]", "icon": "icons_text/health_restore.webp" },
+		{ "name": "health_up", "text": "[health_up]", "icon": "icons_text/health_up.webp" },
+		{ "name": "heart", "text": "[heart]", "icon": "icons_text/heart.webp" },
+		{ "name": "nectar", "text": "[nectar]", "icon": "icons_text/nectar.webp" },
+		{ "name": "obol", "text": "[obol]", "icon": "icons_text/obol.webp" }
+	]
+}
